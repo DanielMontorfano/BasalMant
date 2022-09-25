@@ -5,6 +5,9 @@ namespace Database\Seeders;
 use App\Models\Equipo;
 use App\Models\EquipoRepuesto;
 use App\Models\OrdenTrabajo;
+use App\Models\Tarea;
+use App\Models\Protocolo;
+use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -40,6 +43,9 @@ class DatabaseSeeder extends Seeder
         Equipo::factory(50)->create();
         Repuesto::factory(50)->create();
         OrdenTrabajo::factory(50)->create();
+        Tarea::factory(50)->create();
+        Protocolo::factory(50)->create();
+        Plan::factory(50)->create();
        // EquipoRepuesto::factory(50)->create();
 
     }
