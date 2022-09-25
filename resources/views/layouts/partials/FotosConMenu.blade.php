@@ -1,0 +1,9 @@
+    
+       
+      
+          @include('layouts.partials.TablaFotos')
+       
+   
+      
+    
+    
