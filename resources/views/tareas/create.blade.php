@@ -60,8 +60,8 @@
                               <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="marca">Duración:</label> 
-                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="modelo" value={{old('duracion')}}> 
-                                  @error('duracion')
+                                  <input type="number" autocomplete="off" class="form-control" name="duracion" id="duracion" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="number" name="duracion" value={{old('duracion')}}> 
+                                   @error('duracion')
                                   <small>*{{$message}}</small>
                                   @enderror
                                 </div>
@@ -69,7 +69,12 @@
                               <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="idSecc">Unidad:</label> 
-                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="idSecc" value={{old('unidad')}}> 
+                                  <select name="uniTiempoSelect" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" >
+                                  <option value="Min">Min</option> 
+                                  <option value="Hs">Hs</option> 
+                                  <option value="Dias">Dias</option> 
+                                  <option value="Meses">Mes</option> 
+                                  </select>
                                   @error('unidad')
                                   <small>*{{$message}}</small>
                                   @enderror
