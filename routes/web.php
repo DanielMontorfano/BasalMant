@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\OrdenTrabajoController;
 use App\Http\Controllers\DocumentoController;
+use App\Http\Controllers\TareaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,10 +53,11 @@ Route::get('documentos/{equipo}', [EquipoController::class, 'show'])->name('docu
 
 Route::resource('ordentrabajo', OrdenTrabajoController::class);
 Route::get('ordentrabajo/createorden/{equipo}', [OrdenTrabajoController::class, 'createorden'])->name('ordentrabajo.createorden');
-
 Route::get('ordentrabajo/show/{ordendetrabajo}', [OrdenTrabajoController::class, 'show'])->name('ordentrabajo.show');
-
 Route::get('ordentrabajo/list/{equipo}', [OrdenTrabajoController::class, 'list'])->name('ordentrabajo.list');
+
+//**************************************************************************** */
+Route::resource('tarea', TareaController::class);
 
 
 

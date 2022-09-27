@@ -15,6 +15,11 @@ class TareaController extends Controller
     public function index()
     {
         //
+        //$equipos= Equipo::all();  //Trae todos los registro
+        $tareas= Tarea::orderBy('id','desc')->paginate();
+        
+       // return $equipos;   //Sirve para ver la consulta
+        return view('tareas.index',compact('tareas')); //Envío todos los registro en cuestión.La consulta va sin simbolo de pesos
     }
 
     /**
@@ -24,7 +29,7 @@ class TareaController extends Controller
      */
     public function create()
     {
-        //
+        return view('tareas.create');
     }
 
     /**
@@ -44,9 +49,11 @@ class TareaController extends Controller
      * @param  \App\Models\Tarea  $tarea
      * @return \Illuminate\Http\Response
      */
-    public function show(Tarea $tarea)
+    public function show($id)
     {
-        //
+        $tarea= Tarea::find($id); // Ver la linea de abajo alternativa
+        
+        return view('tareas.show', compact('tarea')); //Envío todo el registro en cuestión
     }
 
     /**
@@ -55,9 +62,13 @@ class TareaController extends Controller
      * @param  \App\Models\Tarea  $tarea
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tarea $tarea)
+    public function edit($id)
     {
-        //
+       
+        
+        $tarea=Tarea::find($id);
+       
+        return view('tareas.edit');
     }
 
     /**

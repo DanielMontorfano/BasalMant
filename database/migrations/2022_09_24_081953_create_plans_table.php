@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('codigo')->nullable();
             $table->string('descripcion')->nullable();
+            $table->integer('frecuencia')->nullable();
+            $table->string('unidad')->nullable();
             $table->timestamps();
         });
     }
