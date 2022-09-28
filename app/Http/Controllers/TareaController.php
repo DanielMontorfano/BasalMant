@@ -89,8 +89,9 @@ class TareaController extends Controller
      * @param  \App\Models\Tarea  $tarea
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tarea $tarea)
+    public function destroy($id)
     {
-        //
+        $x= "borrar" . $id;
+        return $x;
     }
 }

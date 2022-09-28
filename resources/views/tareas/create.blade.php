@@ -72,7 +72,7 @@
                                   <select name="uniTiempoSelect" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" >
                                   <option value="Min">Min</option> 
                                   <option value="Hs">Hs</option> 
-                                  <option value="Dias">Dias</option> 
+                                  <option value="Días">Días</option> 
                                   <option value="Meses">Mes</option> 
                                   </select>
                                   @error('unidad')

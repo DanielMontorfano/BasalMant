@@ -22,8 +22,10 @@
               <a href="{{route('ordentrabajo.index')}}" class="{{(request()->routeIs('ordentrabajo.*')) ? 'active' : ''}}">O.d.T</a>
               {{-- @dump(request()->routeIs('equipos.index')) --}}
                                 
-                <a href="{{route('nosotros')}}" class="{{(request()->routeIs('nosotros')) ? 'active' : ''}}">Nosotros</a>
+                <a href="{{route('tarea.index')}}" class="{{(request()->routeIs('tarea')) ? 'active' : ''}}">Tareas</a>
+                {{-- <a href="{{route('protocolos.index')}}" class="{{(request()->routeIs('Protocolo')) ? 'active' : ''}}">Protocolos</a> --}}
                 
+                    <a href="{{route('nosotros')}}" class="{{(request()->routeIs('nosotros')) ? 'active' : ''}}">Nosotros</a>
                     <a href="{{route('contactanos')}}" class="{{(request()->routeIs('contactanos')) ? 'active' : ''}}">Contactanos</a>
         
             </ul>

@@ -29,7 +29,7 @@
 
 <table id="equipos" class="table table-striped table-success  table-hover border-4" >
     <thead class="table-dark" >
-        <td>Equipo</td>
+        <td>Tarea</td>
         <td>borrar</td>
         <td>editar</td>
        
@@ -37,8 +37,14 @@
       @foreach ($tareas as $tarea)
       <tr>
         <td><a href="{{route('tarea.show', $tarea->id)}}">{{$tarea->descripcion}}</a></td>
-        <td>borrar</td>
-        <td>editar</td>
+        <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">
+           <form action="{{route('tarea.destroy', $tarea->id)}}" method="POST">
+            @csrf
+            <button type="submit" class="bi bi-trash3-fill" >
+           </form>
+       </td>
+        
+        <td><a href="{{route('tarea.edit', $tarea->id)}}">Editar</a></td>
       </tr>
         @endforeach
     </tbody>

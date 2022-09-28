@@ -58,6 +58,7 @@ Route::get('ordentrabajo/list/{equipo}', [OrdenTrabajoController::class, 'list']
 
 //**************************************************************************** */
 Route::resource('tarea', TareaController::class);
+Route::get('/tarea/{tarea}/borrar', [TareaController::class, 'destroy'])->name('tarea.destroy');
 
 
 
