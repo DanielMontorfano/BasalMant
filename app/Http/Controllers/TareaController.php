@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tarea;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreTareaRequest;
 
 class TareaController extends Controller
 {
@@ -38,10 +39,28 @@ class TareaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTareaRequest $request)
     {
-        //
-    }
+      //$request->validate(['duracion'=>'required|max:60', 'descripcion'=>'required, 'codigo'=>'required']);
+        //return $request->all();  //Para probar que recibo todos losregistros del formulario
+      
+        // las siguentes lineas seria en forma manual, 
+        $tarea= new Tarea();
+        $tarea->codigo=$request->codigo;
+        $tarea->descripcion=$request->descripcion;
+        $tarea->duracion=$request->duracion;
+        $tarea->unidad=$request->unidad;
+        
+        $tarea->save();
+     
+        //Asi se realizará con Asignacion Masiva, es mas simple, pero se debe colocar 
+        //en el modelo Equipo "protected $fillable=[array que se desea]"
+        //esto asigna todo el formulario de una vez, y hace el save() automaticamente
+        //$equipo=Equipo::create($request->all());
+       //***** return redirect()->route('equipos.show', $tarea->id); //se puede omitir ->id, igual funciona
+        //return view('Equipos.store');
+       return "LISTA";
+    }  
 
     /**
      * Display the specified resource.
