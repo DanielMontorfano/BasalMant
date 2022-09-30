@@ -57,8 +57,9 @@ Route::get('ordentrabajo/show/{ordendetrabajo}', [OrdenTrabajoController::class,
 Route::get('ordentrabajo/list/{equipo}', [OrdenTrabajoController::class, 'list'])->name('ordentrabajo.list');
 
 //**************************************************************************** */
-Route::resource('tarea', TareaController::class);
-Route::get('/tarea/{tarea}/borrar', [TareaController::class, 'destroy'])->name('tarea.destroy');
+Route::resource('tareas', TareaController::class);
+Route::get('/tareas/{tareas}/borrar', [TareaController::class, 'destroy'])->name('tareas.destroy');
+//Route::get('tarea/{tarea}/edit', [TareaController::class, 'edit'])->name('tarea.edit');
 
 
 

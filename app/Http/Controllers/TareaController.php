@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tarea;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreTareaRequest;
+use Illuminate\Support\Facades\DB;
 
 class TareaController extends Controller
 {
@@ -49,7 +50,7 @@ class TareaController extends Controller
         $tarea->codigo=$request->codigo;
         $tarea->descripcion=$request->descripcion;
         $tarea->duracion=$request->duracion;
-        $tarea->unidad=$request->unidad;
+        $tarea->unidad=$request->uniTiempoSelect;
         
         $tarea->save();
      
@@ -86,8 +87,9 @@ class TareaController extends Controller
        
         
         $tarea=Tarea::find($id);
-       
-        return view('tareas.edit');
+        //dd($tarea);
+        //return;
+        return view('tareas.edit',compact('tarea'));
     }
 
     /**
@@ -97,9 +99,17 @@ class TareaController extends Controller
      * @param  \App\Models\Tarea  $tarea
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tarea $tarea)
+    public function update(Request $request, $id)
     {
-        //
+        //$request->validate(['codigo'=>'required', 'descricion'=>'required', 'modelo'=>'required']);
+        $tarea= Tarea::find($id);
+        
+        $tarea->codigo=$request->codigo;
+        $tarea->descripcion=$request->descripcion;
+        $tarea->duracion=$request->duracion;
+        $tarea->unidad=$request->uniTiempoSelect;
+        $tarea->save();
+        return view('tareas.show', compact('tarea')); //Envío show todo el registro en cuestión, sin $
     }
 
     /**

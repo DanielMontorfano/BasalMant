@@ -24,7 +24,7 @@
 
 
 <div class="text-white card-body "  style="max-width: 95;">
-<p ><a  class="text-white " href={{route('tarea.create')}}> Crear tarea</a></p> 
+<p ><a  class="text-white " href={{route('tareas.create')}}> Crear tarea</a></p> 
    
 
 <table id="equipos" class="table table-striped table-success  table-hover border-4" >
@@ -36,12 +36,14 @@
     <tbody>
       @foreach ($tareas as $tarea)
       <tr>
-        <td><a href="{{route('tarea.show', $tarea->id)}}">{{$tarea->descripcion}}</a></td>
+        <td><a href="{{route('tareas.show', $tarea->id)}}">{{$tarea->descripcion}}</a></td>
         <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">
-           <form action="{{route('tarea.edit', $tarea->id)}}" method="GET">
+          {{-- <form action="{{route('tareas.edit', $tarea->id)}}" method="POST">
             @csrf
             <button type="submit" class="bi bi-pencil-fill" >
-           </form>
+           </form> --}}
+           <a class="bi bi-pencil-fill" href="{{route('tareas.edit', $tarea->id)}}"></a> 
+           
        </td>
        <td></td>
         

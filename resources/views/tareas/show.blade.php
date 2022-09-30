@@ -29,7 +29,7 @@
                 <div class="col col-md-8">
                     {{-- columna2 --}}
                     
-                    <form id="nuevoTarea"  action="{{route('tarea.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+                    <form id="nuevoTarea"  action="{{route('tareas.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                         
                         <h6>Ver tarea</h6>
                         @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
@@ -80,7 +80,7 @@
                             <br>
                             <br>
                             <div class="form-group">
-                                <p style="text-align: right;"><a  class="text-white " href={{route('tarea.index')}}>Salir</a></p> 
+                                <p style="text-align: right;"><a  class="text-white " href={{route('tareas.index')}}>Salir</a></p> 
                             </div>
  
 

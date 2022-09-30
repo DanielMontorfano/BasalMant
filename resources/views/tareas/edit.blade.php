@@ -29,11 +29,11 @@
                 <div class="col col-md-8">
                     {{-- columna2 --}}
                     
-                    <form id="nuevoTarea"  action="{{route('tarea.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+                    <form id="nuevaTarea"  action="{{route('tareas.update', $tarea->id)}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                         
                         <h6>Editar tarea</h6>
                         @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
-                    
+                        @method('put')
                       
                         <div class="p-3 mb-2 bg-gradient-primary text-white">
                         <div class="container">
@@ -42,7 +42,7 @@
                               <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="codigo">Codigo:</label> 
-                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="codigo" value={{old('codigo')}}> 
+                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 14px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="codigo" value={{old('codigo', $tarea->codigo)}}> 
                                   @error('codigo')
                                   <small>*{{$message}}</small>
                                   @enderror
@@ -51,7 +51,8 @@
                               <div class="col col-md-6">
                                 <div class="form-group">
                                   <label class="control-label" for="marca">Descripción:</label> 
-                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="descripcion" value={{old('descripcion')}}> 
+                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 14px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="descripcion" value="{{old('descripcion', $tarea->descripcion)}}"> 
+                                 
                                   @error('descripcion')
                                  <small>*{{$message}}</small>
                                   @enderror
@@ -60,8 +61,9 @@
                               <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="marca">Duración:</label> 
-                                  <input type="number" autocomplete="off" class="form-control" name="duracion" id="duracion" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="number" name="duracion" value={{old('duracion')}}> 
-                                   @error('duracion')
+                                  <input type="number" autocomplete="off" class="form-control" name="duracion" id="duracion" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 14px; background: linear-gradient(to right,#030007, #495c5c);"  type="number" name="duracion" value="{{old('duracion', $tarea->duracion)}}"> 
+                                   
+                                  @error('duracion')
                                   <small>*{{$message}}</small>
                                   @enderror
                                 </div>
@@ -69,11 +71,11 @@
                               <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="unidad">Unidad:</label> 
-                                  <select name="uniTiempoSelect" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" >
+                                  <select name="uniTiempoSelect" class="form-control"   STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 14px; background: linear-gradient(to right,#030007, #495c5c);" value="{{$tarea->duracion}}">
                                   <option value="Min">Min</option> 
                                   <option value="Hs">Hs</option> 
                                   <option value="Días">Días</option> 
-                                  <option value="Meses">Mes</option> 
+                                  <option value="Meses">Meses</option> 
                                   </select>
                                   @error('unidad')
                                   <small>*{{$message}}</small>
@@ -87,8 +89,8 @@
                             <br>
                             <br>
                            <div class="form-group">
-                            <button form="nuevoTarea" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
-                            <p style="text-align: right;"><a  class="text-white " href={{route('tarea.index')}}>Salir</a></p> 
+                            <button form="nuevaTarea" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
+                            <p style="text-align: right;"><a  class="text-white " href={{route('tareas.index')}}>Salir</a></p> 
                           </div>
  
 
