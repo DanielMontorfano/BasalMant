@@ -103,13 +103,13 @@ class TareaController extends Controller
     {
         //$request->validate(['codigo'=>'required', 'descricion'=>'required', 'modelo'=>'required']);
         $tarea= Tarea::find($id);
-        
         $tarea->codigo=$request->codigo;
         $tarea->descripcion=$request->descripcion;
         $tarea->duracion=$request->duracion;
         $tarea->unidad=$request->uniTiempoSelect;
         $tarea->save();
-        return view('tareas.show', compact('tarea')); //Envío show todo el registro en cuestión, sin $
+        $tareas= Tarea::orderBy('id','desc')->paginate();
+        return view('tareas.index', compact('tareas')); //Envío show todo el registro en cuestión, sin $
     }
 
     /**

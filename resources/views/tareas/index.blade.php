@@ -28,24 +28,36 @@
    
 
 <table id="equipos" class="table table-striped table-success  table-hover border-4" >
-    <thead class="table-dark" >
-        <td>Tarea</td>
+    <thead class="table-dark" style="text-align: center;" >
+        
+        <td>Código</td>
+        <td>Descripción</td>
+        <td>Duración</td>
         <td></td>
         <td></td>
-       
+        <td></td> 
     <tbody>
       @foreach ($tareas as $tarea)
-      <tr>
-        <td><a href="{{route('tareas.show', $tarea->id)}}">{{$tarea->descripcion}}</a></td>
+      <tr STYLE="color: #031d07; font-family: Times New Roman;  font-size: 14px; ">
+        <td STYLE="color: #031d07; font-family: Times New Roman; font-weight:bold;  font-size: 14px; ">
+          {{$tarea->codigo}}
+        </td>
+      
+        <td >
+          {{$tarea->descripcion}}
+        </td>
+        <td STYLE="text-align:center; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
+          {{$tarea->duracion}}  {{$tarea->unidad}}
+        </td>
+        <td STYLE="color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
+          
+        </td>
         <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">
-          {{-- <form action="{{route('tareas.edit', $tarea->id)}}" method="POST">
-            @csrf
-            <button type="submit" class="bi bi-pencil-fill" >
-           </form> --}}
-           <a class="bi bi-pencil-fill" href="{{route('tareas.edit', $tarea->id)}}"></a> 
-           
+        <a class="bi bi-pencil-fill" href="{{route('tareas.edit', $tarea->id)}}"></a> 
+        </td>
+       <td>
+        <a class="bi bi-eye" href="{{route('tareas.show', $tarea->id)}}"></a>
        </td>
-       <td></td>
         
       </tr>
         @endforeach

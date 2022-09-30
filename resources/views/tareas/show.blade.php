@@ -1,7 +1,7 @@
 @extends('layouts.plantilla')
 @section('title', 'Ver ' . $tarea->descripcion)
 @section('content')
-<h1>Aqui se verá una tarea en particular {{$tarea->descripcion}}</h1>
+<h1></h1>
 <style>
     h6 {
         text-align:center; font-size: 30px;
@@ -42,7 +42,7 @@
                               <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="codigo">Codigo:</label> 
-                                  <input disabled  class="form-control" type="text" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  name="codigo" value={{old('codigo')}} > 
+                                  <input disabled  class="form-control" type="text" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  name="codigo" value={{old('codigo', $tarea->codigo)}} > 
                                   @error('codigo')
                                   <small>*{{$message}}</small>
                                   @enderror
@@ -51,7 +51,7 @@
                               <div class="col col-md-6">
                                 <div class="form-group">
                                   <label class="control-label" for="descripcion">Descripción:</label> 
-                                  <input disabled class="form-control" type="text" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"   name="descripcion" value={{old('descripcion')}} > 
+                                  <input disabled class="form-control" type="text" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"   name="descripcion" value={{old('descripcion', $tarea->descripcion)}} > 
                                   @error('descripcion')
                                  <small>*{{$message}}</small>
                                   @enderror
@@ -60,7 +60,7 @@
                               <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="duracion">Duración:</label>
-                                  <input disabled class="form-control" type="text" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" name="duracion" value={{old('duracion')}} > {{-- old() mantiene en campo con el dato--}} 
+                                  <input disabled class="form-control" type="text" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" name="duracion" value={{old('duracion', $tarea->duracion)}} > {{-- old() mantiene en campo con el dato--}} 
                                   
                                    @error('duracion')
                                   <small>*{{$message}}</small>
@@ -70,7 +70,7 @@
                               <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="unidad">Unidad:</label> 
-                                  <input disabled  class="form-control" type="text"  STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" name="unidad"   value={{old('unidad')}} >  {{-- value={{old('de', $ot->de)}} disabled --}}
+                                  <input disabled  class="form-control" type="text"  STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" name="unidad"   value={{old('unidad', $tarea->unidad)}} >  {{-- value={{old('de', $ot->de)}} disabled --}}
                                   @error('unidad')
                                   <small>*{{$message}}</small>
                                   @enderror
