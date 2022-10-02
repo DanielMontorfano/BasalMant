@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('prototareas', function (Blueprint $table) {
+        Schema::create('protocolo_tarea', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('proto_id')->nullable();
+            $table->unsignedBigInteger('protocolo_id')->nullable();
             $table->unsignedBigInteger('tarea_id')->nullable();
             $table->string('check1')->nullable(); //Indica que es un accesorio
             $table->timestamps();

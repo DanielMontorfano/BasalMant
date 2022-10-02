@@ -17,6 +17,10 @@ use App\Http\Controllers\FotoController;
 use App\Http\Controllers\OrdenTrabajoController;
 use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\TareaController;
+use App\Http\Controllers\ProtocoloController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +64,8 @@ Route::get('ordentrabajo/list/{equipo}', [OrdenTrabajoController::class, 'list']
 Route::resource('tareas', TareaController::class);
 Route::get('/tareas/{tareas}/borrar', [TareaController::class, 'destroy'])->name('tareas.destroy');
 //Route::get('tarea/{tarea}/edit', [TareaController::class, 'edit'])->name('tarea.edit');
+//**************************************************************************** */
+Route::resource('protocolos', ProtocoloController::class);
 
 
 

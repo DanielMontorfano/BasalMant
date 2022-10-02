@@ -16,4 +16,12 @@ class Protocolo extends Model
         ->withPivot('check1');
         
     } 
+
+    public function protocolosTareas()
+    {
+        return $this->belongsToMany('App\Models\Tarea')
+        ->withPivot('check1');
+        
+    } 
+
 }

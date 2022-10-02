@@ -1,0 +1,210 @@
+@extends('layouts.plantilla')
+@section('title', 'Edit')
+@section('content')
+<h1></h1>
+
+
+<section class="main row ">
+ 
+<div class="container ">
+  
+  <div class="card" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
+          <div class="card-header" STYLE="background: linear-gradient(to right,#1e2020,#030007);">
+           <ul class="nav nav-tabs card-header-tabs">
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('equipos.show', $equipo->id)}}">Ficha</a>
+              </li>
+              <li class="nav-item">
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('fotos.show', $equipo->id)}}">Fotos</a>
+              </li>
+        
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('equipos.index')}}">Historial</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('equipos.index')}}">Protocolo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('equipos.index')}}">Plan</a>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('equipos.index')}}">Documentos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active; "  style="background-color: #1e2020;" aria-current="true" href={{route('equipos.edit', $equipo->id)}}>Editar</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href={{route('ordentrabajo.list', $equipo->id)}}>OT</a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('equipos.index')}}">Descargar</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('equipos.index')}}">Imprimir</a>
+              </li>
+           </ul>
+          </div>   
+            
+          {{-- Probando Col --}}
+          <div class="container">
+            <div class="row">
+              <div class="col col-md-2">
+                Columna
+                
+              </div>
+              <div class="col col-md-8">
+                Columna2
+                <form id="encabezado" action="{{route('protocolos.update', $protocolo->id)}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+                  <h6 STYLE="text-align:center; font-size: 30px;
+                  background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
+                  -webkit-background-clip: text;
+                  -webkit-text-fill-color: transparent;">Ficha de protocolo</h6>
+                  @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
+                  @method('put') {{-- Metodo PUT no existe en html, por eso indicamos a laravel como sigue --}}
+                  
+                  <div class="p-3 mb-2 bg-gradient-primary text-white">
+      
+                    <div class="container">
+                      <div class="row">
+                        <div class="col col-md-3">
+                          <div class="form-group">
+                            <label class="control-label" for="codigo">Código:</label> 
+                            <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="marca" value={{old('codigo', $protocolo->codigo)}}> 
+                            @error('codigo')
+                            <small>*{{$message}}</small>
+                            @enderror
+                          </div>
+                        </div>
+                        <div class="col col-md-9">
+                          <div class="form-group">
+                            <label class="control-label " for="descripcion">Descripción:</label>
+                            <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="codEquipo" value={{old('descripcion', $protocolo->descripcion)}} placeholder="Código de equipo"> {{-- old() mantiene en campo con el dato--}}
+                            @error('descripcion') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
+                            <small class="help-block">*{{$message}}</small>
+                            @enderror
+                          </div>
+                        </div>
+      
+                        
+                    </div> {{-- cierra row 1--}}
+                          
+                  </form >  {{-- Cierra Formulario Nº1 --}} 
+                  <br>
+                  {{--INICIO DE SEGUNDO FORMULARIO --}}
+                  <div class="card " STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+                    <div class="card-header " STYLE="background: linear-gradient(to right,#495c5c,#030007);">            
+                                 {{-- MUESTRA REPUESTOS --}} 
+                          <table class="table" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+                                 <thead>
+                                    <tr>
+                                      <th style="text-align: center; color: #ffffff;" scope="col">Código</th>
+                                      <th style="text-align: center; color: #ffffff;" scope="col">Descripción</th>
+                                      <th style="text-align: center; color: #ffffff;" scope="col"></th>
+                                      <th style="text-align: center; color: #ffffff;" scope="col"></th>
+                                    </tr>
+                                  </thead>
+                                  @foreach($tareas as $tarea)
+                                    <form action="{{route('equipoRepuesto.store')}}" method="POST">
+                                      @csrf
+                                       
+                                        <tbody>
+                                              <tr>
+                                                <input type="hidden" name="Selector" value="BorrarTar" readonly >
+                                                <input type="hidden" name="tarea_id" value={{$tarea->id}} readonly >
+                                                <input type="hidden" name="tareaBorrar_id" value={{$tarea->id}} readonly >
+                                                <th STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "scope="row">{{ $tarea->codigo }}</th>
+                                                <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{ $tarea->descripcion}}</td>
+                                                <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{$tarea->pivot->check1}}</td>
+                                                <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "> <button type="submit" class="bi bi-trash3-fill"></button></td>
+                                              </tr>
+                                        </tbody>
+                                    </form>
+                                    @endforeach
+                          </table>
+                      </div> {{-- div del card3 --}}
+                      </div> {{-- div del card4 --}}
+                      <br>
+                       
+                      
+                  
+
+
+
+
+
+
+              <div class="col col-md-2">
+                Columna
+              </div>
+            </div>
+          </div>
+
+
+          
+        <br>
+                   
+        
+
+            <br>
+               <div class="form-group">
+                   <button form="encabezado" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
+               </div>
+               <br>   
+              </div>             
+</section>
+   
+</div>
+</div>
+
+{{-- $$$$$$$$$$$$$$$$$$$$$$  Segundo grupo de  formularios $$$$$$$$$$$$$$$ --}}
+<br>
+
+
+
+
+
+
+
+
+<script>
+      $( "#search" ).autocomplete({
+      source: function(request, response){
+        
+              $.ajax({
+              url:"{{route('search.repuestos')}}",
+               dataType: 'json',
+              data:{
+                     term: request.term
+                    },
+                    success: function(data) {
+                    response(data)  
+            }
+
+        });
+      }
+    });
+  </script> 
+
+   {{-- Este es el script de la pagian oficial
+     <script>
+    $( function() {
+      var availableTags = [
+        "ActionScript",
+        "AppleScript",
+        "Asp",
+        "BASIC",
+        "C",
+       
+      ];
+      $( "#search" ).autocomplete({
+        source: availableTags
+      });
+    } );
+    </script>  --}}
+
+@endsection
+
+
