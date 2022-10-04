@@ -96,7 +96,7 @@
                   {{--INICIO DE SEGUNDO FORMULARIO --}}
                   <div class="card " STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                     <div class="card-header " STYLE="background: linear-gradient(to right,#495c5c,#030007);">            
-                                 {{-- MUESTRA REPUESTOS --}} 
+                                 {{-- MUESTRA PROTOCOLOS --}} 
                           <table class="table" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                                  <thead>
                                     <tr>
@@ -107,13 +107,13 @@
                                     </tr>
                                   </thead>
                                   @foreach($tareas as $tarea)
-                                    <form action="{{route('equipoRepuesto.store')}}" method="POST">
+                                    <form action="{{route('prototarea.store')}}" method="POST">
                                       @csrf
                                        
                                         <tbody>
                                               <tr>
                                                 <input type="hidden" name="Selector" value="BorrarTar" readonly >
-                                                <input type="hidden" name="tarea_id" value={{$tarea->id}} readonly >
+                                                <input type="hidden" name="protocolo_id" value={{$protocolo->id}} readonly >
                                                 <input type="hidden" name="tareaBorrar_id" value={{$tarea->id}} readonly >
                                                 <th STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "scope="row">{{ $tarea->codigo }}</th>
                                                 <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{ $tarea->descripcion}}</td>
@@ -127,15 +127,7 @@
                       </div> {{-- div del card3 --}}
                       </div> {{-- div del card4 --}}
                       <br>
-                       
-                      
-                  
-
-
-
-
-
-
+                   
               <div class="col col-md-2">
                 Columna
               </div>
@@ -155,14 +147,41 @@
                <br>   
               </div>             
 </section>
-   
-</div>
-</div>
-
+ 
 {{-- $$$$$$$$$$$$$$$$$$$$$$  Segundo grupo de  formularios $$$$$$$$$$$$$$$ --}}
 <br>
-
-
+<section class="main row ">
+    <div class="container">
+      <div class="col col-md-12">
+       <div class="container ">
+        <div class="card" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
+          <div class="card-header" STYLE="background: linear-gradient(to right,#1e2020,#030007);">
+      
+            <h6 STYLE="text-align:center; font-size: 30px;
+                        background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;">Adjuntar</h6>
+      
+        <br>
+              <form action="{{route('prototarea.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+                @csrf
+                <input type="hidden" name="Selector" value="AgregarTarea" readonly >
+                <input type="hidden" name="protocolo_id" value={{$protocolo->id}} readonly >
+                    <table class="table table-sm" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
+                      <tr>
+                          <td><input type="text" class='form-control' name="search" id="search" autocomplete="off" placeholder="Buscar Ttarea"class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
+                          
+                          <td style="text-align: right;"><button class="btn btn-primary" type="submit" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Agregar</button> </td>
+                          
+                        </tr>
+                  </table>
+              </form>
+          </div> 
+        </div> 
+      </div> 
+      </div>
+    </div>
+</section>
 
 
 
@@ -174,7 +193,7 @@
       source: function(request, response){
         
               $.ajax({
-              url:"{{route('search.repuestos')}}",
+              url:"{{route('search.tareas')}}",
                dataType: 'json',
               data:{
                      term: request.term

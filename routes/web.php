@@ -17,8 +17,9 @@ use App\Http\Controllers\FotoController;
 use App\Http\Controllers\OrdenTrabajoController;
 use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\TareaController;
-use App\Http\Controllers\ProtocoloController;
-
+use App\Http\Controllers\ProtocoloController; 
+use App\Http\Controllers\PrototareaController;
+use App\Http\Controllers\SearchTareasController;
 
 
 
@@ -66,6 +67,8 @@ Route::get('/tareas/{tareas}/borrar', [TareaController::class, 'destroy'])->name
 //Route::get('tarea/{tarea}/edit', [TareaController::class, 'edit'])->name('tarea.edit');
 //**************************************************************************** */
 Route::resource('protocolos', ProtocoloController::class);
+Route::resource('prototarea', PrototareaController::class);
+Route::get('search/tareas', [SearchTareasController::class,'tareas'])->name('search.tareas');
 
 
 
