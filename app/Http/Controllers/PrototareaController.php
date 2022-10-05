@@ -48,7 +48,7 @@ class PrototareaController extends Controller
         
        // $repuesto_id=$request->get('repuestosSelect'); //repuesto  a agregar
       // goto salir;
-        $protocolo_id=$request->get('protocolo_id'); //toma del formulario
+        $proto_id=$request->get('proto_id'); //toma del formulario
        // $check1=$request->get('check1');
        // if($check1){
        //    $check1="on";
@@ -57,7 +57,7 @@ class PrototareaController extends Controller
        //echo "ddd:" . $check1;
        
         //$descripcion= substr("$search", 10, 50);
-        $protocolo=Protocolo::find($protocolo_id);
+        $protocolo=Protocolo::find($proto_id);
         // $repuesto_id2=Repuesto::where('');
         //echo $search;
         //$querys=Repuesto::where('descripcion','LIKE','%'.$descripcion.'%')->get();
@@ -68,9 +68,11 @@ class PrototareaController extends Controller
         if ($Selector=="AgregarTarea"){  
         $search=$request->get('search'); //toma cadena completa del formulario
         $tareaCodigo = substr("$search", 0, 11); //Extrae solo la descripcion
-        $tarea_id=Tarea::where('codigo',$tareaCodigo)->first()->id;        
+        $tarea_id=Tarea::where('codigo',$tareaCodigo)->first()->id;       
+        //goto salir; 
         //$equipo=Equipo::find($equipo_id); //de la tabla equipos**Puede andar pero no graba con time at 
-        // $equipo->equiposRepuestos()->attach($repuesto_id); //**Puede andar pero no graba con time at 
+        // $equipo->equiposRepuestos()->attach($repuesto_id); //**Puede andar pero no graba con time at
+
         $existeVinculo = $protocolo->ProtocolosTareas()->where('tarea_id', $tarea_id)->exists();
         if($existeVinculo){
         echo "existe el Vinculo";  
@@ -79,7 +81,7 @@ class PrototareaController extends Controller
         }
         $mensaje='';
         $P_T= new Prototarea();
-        $P_T->protocolo_id=$protocolo_id;
+        $P_T->proto_id=$proto_id;
         $P_T->tarea_id=$tarea_id;
               
         // $equipo=Equipo::find($equipo_id); // Solo leo este registro para poder retornar correctamente
@@ -99,10 +101,12 @@ class PrototareaController extends Controller
         //return $par ; 
         salir:
         return redirect()->route('protocolos.edit', $protocolo->id); //Buenisimo, de una clase a otra clase
-       // echo  $repuesto_id;
-       // echo $Selector;
-        //echo $repuestoBorrar_id;
-       // return ;
+       //echo  $tareaCodigo ;
+        echo $Selector;
+       // echo $tarea_id;
+        echo  $tareaBorrar_id;
+        echo $proto_id;
+        return ;
     }
 
     /**

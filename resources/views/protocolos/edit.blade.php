@@ -112,8 +112,8 @@
                                        
                                         <tbody>
                                               <tr>
-                                                <input type="hidden" name="Selector" value="BorrarTar" readonly >
-                                                <input type="hidden" name="protocolo_id" value={{$protocolo->id}} readonly >
+                                                <input type="hidden" name="Selector" value="BorrarTarea" readonly >
+                                                <input type="hidden" name="proto_id" value={{$protocolo->id}} readonly >
                                                 <input type="hidden" name="tareaBorrar_id" value={{$tarea->id}} readonly >
                                                 <th STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "scope="row">{{ $tarea->codigo }}</th>
                                                 <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{ $tarea->descripcion}}</td>
@@ -166,7 +166,7 @@
               <form action="{{route('prototarea.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                 @csrf
                 <input type="hidden" name="Selector" value="AgregarTarea" readonly >
-                <input type="hidden" name="protocolo_id" value={{$protocolo->id}} readonly >
+                <input type="hidden" name="proto_id" value={{$protocolo->id}} readonly >
                     <table class="table table-sm" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
                       <tr>
                           <td><input type="text" class='form-control' name="search" id="search" autocomplete="off" placeholder="Buscar Ttarea"class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
