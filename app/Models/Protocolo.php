@@ -19,7 +19,7 @@ class Protocolo extends Model
 
     public function protocolosTareas()
     {
-        return $this->belongsToMany('App\Models\Tarea','prototarea','proto_id')
+        return $this->belongsToMany('App\Models\Tarea','prototarea','proto_id') //Personalizo nombre la tabla  pivot  y el campo clave primaria
         ->withPivot('check1');
         
     } 

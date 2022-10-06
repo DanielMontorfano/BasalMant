@@ -103,7 +103,7 @@
                                       <th style="text-align: center; color: #ffffff;" scope="col">Código</th>
                                       <th style="text-align: center; color: #ffffff;" scope="col">Descripción</th>
                                       <th style="text-align: center; color: #ffffff;" scope="col"></th>
-                                      <th style="text-align: center; color: #ffffff;" scope="col"></th>
+                                      
                                     </tr>
                                   </thead>
                                   @foreach($tareas as $tarea)
@@ -117,8 +117,8 @@
                                                 <input type="hidden" name="tareaBorrar_id" value={{$tarea->id}} readonly >
                                                 <th STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "scope="row">{{ $tarea->codigo }}</th>
                                                 <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{ $tarea->descripcion}}</td>
-                                                <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{$tarea->pivot->check1}}</td>
-                                                <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "> <button type="submit" class="bi bi-trash3-fill"></button></td>
+                                                                                              
+                                                <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">  <button class="bi bi-trash3-fill btn btn-link"  type="submit" ></button></td>
                                               </tr>
                                         </tbody>
                                     </form>
