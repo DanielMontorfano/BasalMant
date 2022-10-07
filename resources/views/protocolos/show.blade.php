@@ -1,187 +1,117 @@
 @extends('layouts.plantilla')
-@section('title', 'Ver ' . $equipo->marca)
+@section('title', 'Ver ' . $protocolo->codigo)
 @section('content')
 <h1></h1>
-{{-- ESTO ES UN COMENTARIO <h1>Aqui podras ver el equipo: <?php echo $variable;?></h1> --}}
-{{-- <h1>Aqui podras ver el equipo: {{ $variable}}</h1> --}}
-<div class="card" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
-  <div class="card-header" STYLE="background: linear-gradient(to right,#1e2020,#030007);">
-    <ul class="nav nav-tabs card-header-tabs">
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="true"  style="background-color: #1e2020;" href="{{route('equipos.show', $equipo->id)}}">Ficha</a>
-       
-      </li>
-     
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('fotos.show', $equipo->id)}}">Fotos</a>
-      </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Historial</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Protocolo</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Plan</a>
+  <section class="main row ">
+ 
+    <div class="container ">
       
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('documentos.show', $equipo->id)}}">Documentos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href={{route('equipos.edit', $equipo->id)}}>Editar</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href={{route('ordentrabajo.list', $equipo->id)}}>OT</a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Descargar</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Imprimir</a>
-      </li>
-      
-
-    </ul>
-  </div>
-  <div class="card-body">
-    <h6 STYLE="text-align:center; font-size: 30px;
-                background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;">Datos técnicos</h6>
-    <p class="card-text"></p>
-    <div class="card border-primary bg-secondary ">
-    <div class="card-body "  style="max-width: 85;">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Equipo: </th>
-            <td>{{ $equipo->codEquipo}}</td>
-            <td></td>
-            
-          </tr>
-          <tr>
-            <th scope="row">Marca: </th>
-            <td>{{$equipo->marca}}</td>
-            <td></td>
-            
-            
-          </tr>
-          <tr>
-            <th scope="row">Modelo: </th>
-            <td>{{$equipo->modelo}}</td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">Sección: </th>
-            <td>{{$equipo->idSecc}}</td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">Subsección: </th>
-            <td>{{$equipo->idSubSecc}}</td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">Caractrística Nº1: </th>
-            <td>{{$equipo->det1}}</td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">Caractrística Nº2: </th>
-            <td>{{$equipo->det2}}</td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">Caractrística Nº3: </th>
-            <td>{{$equipo->det3}}</td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">Caractrística Nº4: </th>
-            <td>{{$equipo->det4}}</td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">Caractrística Nº5: </th>
-            <td>{{$equipo->det5}}</td>
-            <td></td>
-          </tr>
-
+      <div class="card" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
+              
+               <br>
+               <br> 
+              {{-- Probando Col --}}
+              <div class="container">
+                <div class="row">
+                  <div class="col col-md-2">
+                    {{-- Columna 1 --}}
+                    
+                  </div>
+                  <div class="col col-md-8">
+                    {{-- Columna2 --}}
+                    <form id="encabezado" action="{{route('protocolos.update', $protocolo->id)}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+                      <h6 STYLE="text-align:center; font-size: 30px;
+                      background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
+                      -webkit-background-clip: text;
+                      -webkit-text-fill-color: transparent;">Ficha de protocolo</h6>
+                      @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
+                      @method('put') {{-- Metodo PUT no existe en html, por eso indicamos a laravel como sigue --}}
+                      
+                      <div class="p-3 mb-2 bg-gradient-primary text-white">
           
-        <thead>
-          <tr>
-            <th scope="col" class="text-center"></th>
-            <th scope="col" class="text-center">Repuestos</th>
-            <th scope="col" class="text-center"></th>
-          </tr>
-        </thead>
-        <thead>
-          <tr>
-            <th scope="col" class="text-center">Código</th>
-            <th scope="col" class="text-center">Descripción</th>
-            <th scope="col" class="text-center">Cantidad</th>
-          </tr>
-        </thead>
-        @foreach($repuestos as $repuesto)
-        @if(!$repuesto->pivot->check1 =='on') {{-- Para saber si es repuesto o no --}}
-        <tr>
-          <th scope="row" class="text-center">{{ $repuesto->codigo }}</th>
-          <td>{{ $repuesto->descripcion}} </td>
-          <td class="text-center">{{$repuesto->pivot->cant}}</td>
-        </tr>
-        @endif
-        @endforeach
-        
-
-
-       {{-- ACESORIOS --}}
-        <thead>
-          <tr>
-            <th scope="col" class="text-center"></th>
-            <th scope="col" class="text-center">Acesorios</th>
-            <th scope="col" class="text-center"></th>
-          </tr>
-        </thead>
-        <thead>
-          <tr>
-            <th scope="col" class="text-center">Código</th>
-            <th scope="col" class="text-center">Descripción</th>
-            <th scope="col" class="text-center">Cantidad</th>
-           
-          </tr>
-        </thead>
-        @foreach($repuestos as $repuesto)
-        @if($repuesto->pivot->check1 =='on') {{-- Para saber si es accesorio o no --}}
-        <tr>
-          <th scope="row" class="text-center">{{ $repuesto->codigo }}</th>
-          <td>{{ $repuesto->descripcion}} </td>
-          <td class="text-center">{{$repuesto->pivot->cant}}</td>
-         
-        </tr>
-        @endif
-        @endforeach
-       
-
-
-      </table>
-      
-    </table>
-    </div>
-    </div>
+                        <div class="container">
+                          <div class="row">
+                            <div class="col col-md-3">
+                              <div class="form-group">
+                                <label class="control-label" for="codigo">Código:</label> 
+                                <input readonly autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="marca" value="{{old('codigo', $protocolo->codigo)}}"> 
+                                @error('codigo')
+                                <small>*{{$message}}</small>
+                                @enderror
+                              </div>
+                            </div>
+                            <div class="col col-md-9">
+                              <div class="form-group">
+                                <label class="control-label " for="descripcion">Descripción:</label>
+                                <input readonly autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="codEquipo" value="{{old('descripcion', $protocolo->descripcion)}}" placeholder="Código de equipo"> {{-- old() mantiene en campo con el dato--}}
+                                @error('descripcion') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
+                                <small class="help-block">*{{$message}}</small>
+                                @enderror
+                              </div>
+                            </div>
+          
+                            
+                        </div> {{-- cierra row 1--}}
+                              
+                      </form >  {{-- Cierra Formulario Nº1 --}} 
+                      <br>
+                      {{--INICIO DE SEGUNDO FORMULARIO --}}
+                      <div class="card " STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+                        <div class="card-header " STYLE="background: linear-gradient(to right,#495c5c,#030007);">            
+                                     {{-- MUESTRA PROTOCOLOS --}} 
+                              <table class="table" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+                                     <thead>
+                                        <tr>
+                                          <th style="text-align: center; color: #ffffff;" scope="col">Código</th>
+                                          <th style="text-align: center; color: #ffffff;" scope="col">Descripción</th>
+                                          
+                                          
+                                        </tr>
+                                      </thead>
+                                      @foreach($tareas as $tarea)
+                                        <form action="{{route('prototarea.store')}}" method="POST">
+                                          @csrf
+                                           
+                                            <tbody>
+                                                  <tr>
+                                                    <input type="hidden" name="Selector" value="BorrarTarea" readonly >
+                                                    <input type="hidden" name="proto_id" value={{$protocolo->id}} readonly >
+                                                    <input type="hidden" name="tareaBorrar_id" value={{$tarea->id}} readonly >
+                                                    <th STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "scope="row">{{ $tarea->codigo }}</th>
+                                                    <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{ $tarea->descripcion}}</td>
+                                                                                                  
+                                                    
+                                                  </tr>
+                                            </tbody>
+                                        </form>
+                                        @endforeach
+                              </table>
+                          </div> {{-- div del card3 --}}
+                          </div> {{-- div del card4 --}}
+                          <br>
+                       
+                  <div class="col col-md-2">
+                    {{-- Columna --}}
+                  </div>
+                  <p style="text-align: right;"><a  class="text-white " href={{route('protocolos.index')}}>Salir</a></p> 
+                </div>
+              </div>
     
-  </div>
-</div>
-
+    
+              
+            <br>
+                       
+            
+    
+                <br>
+                   <div class="form-group">
+                    {{--   <button form="encabezado" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button> --}}
+                    
+                   </div>
+                   <br>   
+                  </div>             
+    </section>
 
 
 

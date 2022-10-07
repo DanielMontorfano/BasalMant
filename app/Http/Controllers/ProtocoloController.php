@@ -71,9 +71,18 @@ class ProtocoloController extends Controller
      * @param  \App\Models\Protocolo  $protocolo
      * @return \Illuminate\Http\Response
      */
-    public function show(Protocolo $protocolo)
+    public function show($id)
     {
-        //
+        $protocolo= Protocolo::find($id); // Ver la linea de abajo alternativa
+        $tareas=$protocolo->protocolosTareas; // otra alternativa: $repuestos= Equipo::find($id)->equiposRepuestos; en una sola linea. 
+        
+        //return $equipo;
+        //return 'hhhhhhhhhhhhhhhh' . $repuestos;
+        //return view('Equipos.show', ['variable'=>$equipo]); video anterior
+
+       return view('protocolos.show', compact('protocolo','tareas')); //Envío todo el registro en cuestión
+
+       // return view('Equipos.show');
     }
 
     /**
