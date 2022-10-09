@@ -6,6 +6,8 @@ use App\Models\Protocolo;
 use App\Models\Tarea;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreProtocoloRequest;
+
 
 class ProtocoloController extends Controller
 {
@@ -43,11 +45,11 @@ class ProtocoloController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProtocoloRequest $request)
     {
       //$request->validate(['duracion'=>'required|max:60', 'descripcion'=>'required, 'codigo'=>'required']);
         //return $request->all();  //Para probar que recibo todos losregistros del formulario
-      
+        // return "Sali";
         // las siguentes lineas seria en forma manual, 
         $protocolo= new Protocolo();
         $protocolo->codigo=$request->codigo;

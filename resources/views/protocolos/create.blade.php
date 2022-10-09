@@ -31,7 +31,7 @@
                     
                     <form id="nuevoProtocolo"  action="{{route('protocolos.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                         
-                        <h6>Nuevo Protocolo</h6>
+                        <h6>Nuevo procedimiento</h6>
                         @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
                     
                       

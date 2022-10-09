@@ -21,7 +21,7 @@
                   <h6 STYLE="text-align:center; font-size: 30px;
                   background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                   -webkit-background-clip: text;
-                  -webkit-text-fill-color: transparent;">Editar de protocolo</h6>
+                  -webkit-text-fill-color: transparent;">Editar de procedimiento</h6>
                   @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
                   @method('put') {{-- Metodo PUT no existe en html, por eso indicamos a laravel como sigue --}}
                   

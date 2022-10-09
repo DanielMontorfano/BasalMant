@@ -13,7 +13,7 @@ class StoreProtocoloRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,31 @@ class StoreProtocoloRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
+        return ['codigo'=>'required |min:11|max:11',
+                'descripcion'=>'required|min:10',
+           
         ];
     }
+
+    public function attributes() //Fabuloso!! personalizar mensaje
+    {
+        return[
+            'codigo'=>'el código',
+            'descripcion'=>'la descripción',
+           
+
+        ];
+    }
+
+    public function messages() //Mejor Aun, personalizar!!
+    {
+        return[
+            'codigo.required'=>'el codigo debe tener 11 caracteres',
+            'descripcion.required'=>'debe tener mínimo 10 caracteres',
+          
+           
+                       
+        ];
+    }
+
 }
