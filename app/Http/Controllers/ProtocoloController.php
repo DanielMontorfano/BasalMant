@@ -60,9 +60,9 @@ class ProtocoloController extends Controller
         //en el modelo Equipo "protected $fillable=[array que se desea]"
         //esto asigna todo el formulario de una vez, y hace el save() automaticamente
         //$equipo=Equipo::create($request->all());
-       //***** return redirect()->route('equipos.show', $tarea->id); //se puede omitir ->id, igual funciona
+       return redirect()->route('protocolos.show', $protocolo->id); //se puede omitir ->id, igual funciona
         //return view('Equipos.store');
-       return "LISTA";
+      // return "LISTA";
     }  
 
     /**
@@ -119,9 +119,18 @@ class ProtocoloController extends Controller
      * @param  \App\Models\Protocolo  $protocolo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Protocolo $protocolo)
-    {
-        //
+    public function update(Request $request, $id)
+    { //$request trae lo del formulario, $id el id de equipo, trae lo que tengo en el registro sin modificar                                  
+       // $request->validate(['codigo'=>'required', 'descripcion'=>'required']);
+        $protocolo= Protocolo::find($id);
+        //$d=$request->descripcion;
+        //return $request;
+        $tareas=$protocolo->protocolosTareas;
+        $protocolo->codigo=$request->codigo;
+        $protocolo->descripcion=$request->descripcion;
+        $protocolo->save();      
+        
+        return view('protocolos.show', compact('protocolo','tareas')); //Envío show todo el registro en cuestión, sin $
     }
 
     /**

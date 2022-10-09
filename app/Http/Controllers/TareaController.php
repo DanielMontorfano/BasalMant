@@ -32,6 +32,7 @@ class TareaController extends Controller
     public function create()
     {
         return view('tareas.create');
+        //return;
     }
 
     /**

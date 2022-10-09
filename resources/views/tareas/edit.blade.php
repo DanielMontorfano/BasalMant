@@ -22,11 +22,11 @@
 <br>    
 <div class="container"> {{-- container principal --}}
     <div class="row"> {{-- row principal --}}
-                <div class="col col-md-2">
+                <div class="col col-md-1">
                     {{-- columna1 --}}
                 </div>
 
-                <div class="col col-md-8">
+                <div class="col col-md-10">
                     {{-- columna2 --}}
                     
                     <form id="nuevaTarea"  action="{{route('tareas.update', $tarea->id)}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
@@ -42,7 +42,7 @@
                               <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="codigo">Codigo:</label> 
-                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 14px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="codigo" value={{old('codigo', $tarea->codigo)}}> 
+                                  <input maxlength="11" minlength="11" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 14px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="codigo" value={{old('codigo', $tarea->codigo)}}> 
                                   @error('codigo')
                                   <small>*{{$message}}</small>
                                   @enderror
@@ -61,7 +61,7 @@
                               <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="marca">Duración:</label> 
-                                  <input type="number" autocomplete="off" class="form-control" name="duracion" id="duracion" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 14px; background: linear-gradient(to right,#030007, #495c5c);"  type="number" name="duracion" value="{{old('duracion', $tarea->duracion)}}"> 
+                                  <input type="number" min="1" max="999" autocomplete="off" class="form-control" name="duracion" id="duracion" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 14px; background: linear-gradient(to right,#030007, #495c5c);"  name="duracion" value="{{old('duracion', $tarea->duracion)}}"> 
                                    
                                   @error('duracion')
                                   <small>*{{$message}}</small>
@@ -98,7 +98,7 @@
                         </div>{{-- div del Letra blanca --}}
                     </form>
                     </div>
-                <div class="col col-md-2">
+                <div class="col col-md-1">
                     {{-- columna 3 --}}
                 </div>
     </div>  {{-- div del row1 Principal --}}

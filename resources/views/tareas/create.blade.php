@@ -88,7 +88,7 @@
                             <br>
                            <div class="form-group">
                             <button form="nuevoTarea" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
-                            <p style="text-align: right;"><a  class="text-white " href={{route('tarea.index')}}>Salir</a></p> 
+                            <p style="text-align: right;"><a  class="text-white " href={{route('tareas.index')}}>Salir</a></p> 
                           </div>
  
 

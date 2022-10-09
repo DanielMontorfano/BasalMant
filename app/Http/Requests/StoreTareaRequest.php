@@ -24,8 +24,8 @@ class StoreTareaRequest extends FormRequest
      */
     public function rules()
     {
-        return ['codigo'=>'required|max:15',
-                'descripcion'=>'required|min:30',
+        return ['codigo'=>'required|min:11|max:11',
+                'descripcion'=>'required|min:5',
                 'duracion'=>'required|min:1|max:2',
                 
                                            
@@ -46,8 +46,8 @@ class StoreTareaRequest extends FormRequest
     public function messages() //Mejor Aun, personalizar!!
     {
         return[
-            'codigo.required'=>'el codigo debe tener máx 15 caracteres',
-            'descripcion.required'=>'debe tener mínomo 30 caracteres',
+            'codigo.required'=>'el codigo debe tener 11 caracteres',
+            'descripcion.required'=>'debe tener mínimo 30 caracteres',
             'duracion.required'=>'Se necesita ingresar la duración',
            
                        

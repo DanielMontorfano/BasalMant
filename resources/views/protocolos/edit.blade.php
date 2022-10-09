@@ -5,63 +5,23 @@
 
 
 <section class="main row ">
- 
-<div class="container ">
-  
+ <div class="container ">
   <div class="card" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
-          <div class="card-header" STYLE="background: linear-gradient(to right,#1e2020,#030007);">
-           <ul class="nav nav-tabs card-header-tabs">
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('equipos.show', $equipo->id)}}">Ficha</a>
-              </li>
-              <li class="nav-item">
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('fotos.show', $equipo->id)}}">Fotos</a>
-              </li>
-        
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('equipos.index')}}">Historial</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('equipos.index')}}">Protocolo</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('equipos.index')}}">Plan</a>
-              
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('equipos.index')}}">Documentos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active; "  style="background-color: #1e2020;" aria-current="true" href={{route('equipos.edit', $equipo->id)}}>Editar</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href={{route('ordentrabajo.list', $equipo->id)}}>OT</a>
-              </li>
-              
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('equipos.index')}}">Descargar</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('equipos.index')}}">Imprimir</a>
-              </li>
-           </ul>
-          </div>   
-            
+            <br>
+            <br>
           {{-- Probando Col --}}
           <div class="container">
             <div class="row">
               <div class="col col-md-2">
-                Columna
-                
+                {{-- Columna 1 --}}
               </div>
               <div class="col col-md-8">
-                Columna2
+                {{-- Columna2 --}}
                 <form id="encabezado" action="{{route('protocolos.update', $protocolo->id)}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                   <h6 STYLE="text-align:center; font-size: 30px;
                   background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                   -webkit-background-clip: text;
-                  -webkit-text-fill-color: transparent;">Ficha de protocolo</h6>
+                  -webkit-text-fill-color: transparent;">Editar de protocolo</h6>
                   @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
                   @method('put') {{-- Metodo PUT no existe en html, por eso indicamos a laravel como sigue --}}
                   
@@ -72,7 +32,7 @@
                         <div class="col col-md-3">
                           <div class="form-group">
                             <label class="control-label" for="codigo">Código:</label> 
-                            <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="marca" value={{old('codigo', $protocolo->codigo)}}> 
+                            <input maxlength="11" minlength="11" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="codigo" value="{{old('codigo', $protocolo->codigo)}}"> 
                             @error('codigo')
                             <small>*{{$message}}</small>
                             @enderror
@@ -81,7 +41,7 @@
                         <div class="col col-md-9">
                           <div class="form-group">
                             <label class="control-label " for="descripcion">Descripción:</label>
-                            <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="codEquipo" value={{old('descripcion', $protocolo->descripcion)}} placeholder="Código de equipo"> {{-- old() mantiene en campo con el dato--}}
+                            <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="descripcion" value="{{old('descripcion', $protocolo->descripcion)}}" placeholder="Código de equipo"> {{-- old() mantiene en campo con el dato--}}
                             @error('descripcion') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
                             <small class="help-block">*{{$message}}</small>
                             @enderror
@@ -92,7 +52,7 @@
                     </div> {{-- cierra row 1--}}
                           
                   </form >  {{-- Cierra Formulario Nº1 --}} 
-                  <br>
+                 
                   {{--INICIO DE SEGUNDO FORMULARIO --}}
                   <div class="card " STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                     <div class="card-header " STYLE="background: linear-gradient(to right,#495c5c,#030007);">            
@@ -129,17 +89,10 @@
                       <br>
                    
               <div class="col col-md-2">
-                Columna
+                {{-- Columna --}}
               </div>
             </div>
           </div>
-
-
-          
-        <br>
-                   
-        
-
             <br>
                <div class="form-group">
                    <button form="encabezado" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
@@ -150,38 +103,42 @@
  
 {{-- $$$$$$$$$$$$$$$$$$$$$$  Segundo grupo de  formularios $$$$$$$$$$$$$$$ --}}
 <br>
+
 <section class="main row ">
-    <div class="container">
-      <div class="col col-md-12">
-       <div class="container ">
-        <div class="card" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
-          <div class="card-header" STYLE="background: linear-gradient(to right,#1e2020,#030007);">
+  <div class="container">
+    <div class="card" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
+     <br>
+     <br>
+     <div class="container ">
       
-            <h6 STYLE="text-align:center; font-size: 30px;
-                        background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
-                        -webkit-background-clip: text;
-                        -webkit-text-fill-color: transparent;">Adjuntar</h6>
-      
-        <br>
-              <form action="{{route('prototarea.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
-                @csrf
-                <input type="hidden" name="Selector" value="AgregarTarea" readonly >
-                <input type="hidden" name="proto_id" value={{$protocolo->id}} readonly >
-                    <table class="table table-sm" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
-                      <tr>
-                          <td><input type="text" class='form-control' name="search" id="search" autocomplete="off" placeholder="Buscar Ttarea"class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
-                          
-                          <td style="text-align: right;"><button class="btn btn-primary" type="submit" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Agregar</button> </td>
-                          
-                        </tr>
-                  </table>
-              </form>
-          </div> 
+        <div class="card-header" STYLE="background: linear-gradient(to right,#1e2020,#030007);">
+    
+          <h6 STYLE="text-align:center; font-size: 30px;
+                      background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
+                      -webkit-background-clip: text;
+                      -webkit-text-fill-color: transparent;">Adjuntar</h6>
+    
+      <br>
+            <form action="{{route('prototarea.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+              @csrf
+              <input type="hidden" name="Selector" value="AgregarTarea" readonly >
+              <input type="hidden" name="proto_id" value={{$protocolo->id}} readonly >
+                  <table class="table table-sm" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
+                    <tr>
+                        <td><input class='form-control' name="search" id="search" autocomplete="off" placeholder="Buscar Tarea"class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
+                        
+                        <td style="text-align: right;"><button class="btn btn-primary" type="submit" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Agregar</button> </td>
+                        
+                      </tr>
+                </table>
+            </form>
         </div> 
       </div> 
-      </div>
+    </div> 
     </div>
+  
 </section>
+
 
 
 

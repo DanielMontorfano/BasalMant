@@ -38,8 +38,8 @@
       @foreach ($protocolos as $protocolo)
       <tr>
        
-        <td><a href="{{route('protocolos.show', $protocolo->id)}}">{{$protocolo->codigo}}</a></td>
-        <td>{{$protocolo->descripcion}}</td>
+        <td STYLE="font-weight:bold; text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">{{$protocolo->codigo}}</td>
+        <td STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">{{$protocolo->descripcion}}</td>
         <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">
           <a class="bi bi-pencil-fill" href="{{route('protocolos.edit', $protocolo->id)}}"></a> 
         </td>

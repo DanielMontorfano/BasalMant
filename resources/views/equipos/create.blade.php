@@ -145,7 +145,7 @@
                             <br>
                            <div class="form-group">
                             <button form="nuevoEquipo" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
-                            <p style="text-align: right;"><a  class="text-white " href={{route('equipo.index')}}>Salir</a></p> 
+                            <p style="text-align: right;"><a  class="text-white " href={{route('equipos.index')}}>Salir</a></p> 
                           </div>
  
 

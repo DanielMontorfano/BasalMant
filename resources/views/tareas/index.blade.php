@@ -28,18 +28,18 @@
    
 
 <table id="equipos" class="table table-striped table-success  table-hover border-4" >
-    <thead class="table-dark" style="text-align: center;" >
+    <thead class="table-dark" style="text-align: left;" >
         
         <td>Código</td>
-        <td>Descripción</td>
-        <td>Duración</td>
+        <td style="text-align: center;">Descripción</td>
+        <td style="text-align: center;">Duración</td>
         <td></td>
         <td></td>
         <td></td> 
     <tbody>
       @foreach ($tareas as $tarea)
-      <tr STYLE="color: #031d07; font-family: Times New Roman;  font-size: 14px; ">
-        <td STYLE="color: #031d07; font-family: Times New Roman; font-weight:bold;  font-size: 14px; ">
+      <tr STYLE="color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
+        <td STYLE="font-weight:bold; color: #090a0a; font-family: Times New Roman;   font-size: 14px; ">
           {{$tarea->codigo}}
         </td>
       
