@@ -206,7 +206,8 @@ class EquipoController extends Controller
         //en el modelo Equipo "protected $fillable=[array que se desea]"
         //esto asigna todo el formulario de una vez, y hace el save() automaticamente
        // $equipo->update($request->all()); //lo suspendi porque dejo de funcionar 
-        return view('equipos.show', compact('equipo','repuestos')); //Envío show todo el registro en cuestión, sin $
+       return view('equipos.show', compact('equipo','repuestos')); //Envío show todo el registro en cuestión, sin $
+       //return $repuestos;
     }
 
     /**

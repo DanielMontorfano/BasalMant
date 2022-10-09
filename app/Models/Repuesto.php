@@ -18,7 +18,8 @@ class Repuesto extends Model
        public function repuestosEquipos()
     {
         return $this->belongsToMany('App\Models\Equipo')
-        ->withPivot('cant');
+        ->withPivot('cant','unidad');
+        
         
     } 
 }

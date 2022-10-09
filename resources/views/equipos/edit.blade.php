@@ -72,7 +72,7 @@
                         <div class="col col-md-4">
                           <div class="form-group">
                             <label class="control-label" for="marca">Marca:</label> 
-                            <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="marca" value={{old('marca', $equipo->marca)}}> 
+                            <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="marca" value="{{old('marca', $equipo->marca)}}"> 
                             @error('marca')
                             <small>*{{$message}}</small>
                             @enderror
@@ -81,7 +81,7 @@
                         <div class="col col-md-4">
                           <div class="form-group">
                             <label class="control-label " for="codEquipo">Código:</label>
-                            <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="codEquipo" value={{old('codEquipo', $equipo->codEquipo)}} placeholder="Código de equipo"> {{-- old() mantiene en campo con el dato--}}
+                            <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="codEquipo" value="{{old('codEquipo', $equipo->codEquipo)}}" placeholder="Código de equipo"> {{-- old() mantiene en campo con el dato--}}
                             @error('codEquipo') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
                             <small class="help-block">*{{$message}}</small>
                             @enderror
@@ -91,7 +91,7 @@
                         <div class="col col-md-4">
                           <div class="form-group">
                             <label class="control-label" for="modelo">Modelo:</label>  
-                            <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="modelo" value={{old('modelo', $equipo->modelo)}}>
+                            <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="modelo" value="{{old('modelo', $equipo->modelo)}}">
                             @error('modelo') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
                             <small class="help-block">*{{$message}}</small>
                             @enderror
@@ -103,7 +103,7 @@
                       <div class="col col-md-6">
                         <div class="form-group">
                           <label class="control-label" for="idSecc">Sección:</label>  
-                          <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"type="text" name="idSecc" value={{old('idSecc', $equipo->idSecc)}}>  {{-- old() mantiene en campo con el dato--}}
+                          <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"type="text" name="idSecc" value="{{old('idSecc', $equipo->idSecc)}}">  {{-- old() mantiene en campo con el dato--}}
                           @error('idSecc')
                           <small>*{{$message}}</small>
                           @enderror
@@ -113,7 +113,7 @@
                       <div class="col col-md-6">
                         <div class="form-group">
                           <label class="control-label" for="idSubSecc">Subsección:</label> 
-                          <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" class="form-control" name="idSubSecc" value={{old('idSubSecc', $equipo->idSubSecc)}}>   {{-- old() mantiene en campo con el dato--}}
+                          <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" class="form-control" name="idSubSecc" value="{{old('idSubSecc', $equipo->idSubSecc)}}">   {{-- old() mantiene en campo con el dato--}}
                           @error('idSubSecc') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
                           <small class="help-block">*{{$message}}</small>
                           @enderror
@@ -125,7 +125,7 @@
                       <div class="col col-md-6">
                         <div class="form-group">
                           <label class="control-label" for="det1">Característica Nº1:</label> 
-                          <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det1" value={{old('det1', $equipo->det1)}}>   {{-- old() mantiene en campo con el dato--}}
+                          <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det1" value="{{old('det1', $equipo->det1)}}">   {{-- old() mantiene en campo con el dato--}}
                           @error('det1')
                           <small>*{{$message}}</small>
                           @enderror
@@ -135,7 +135,7 @@
                       <div class="col col-md-6">
                         <div class="form-group">
                           <label class="control-label" for="det2">Característica Nº2:</label> 
-                          <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det2" value={{old('det2', $equipo->det2)}}>   {{-- old() mantiene en campo con el dato--}}
+                          <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det2" value="{{old('det2', $equipo->det2)}}">   {{-- old() mantiene en campo con el dato--}}
                           @error('det2') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
                           <small class="help-block">*{{$message}}</small>
                           @enderror
@@ -147,7 +147,7 @@
                       <div class="col col-md-6">
                         <div class="form-group">
                           <label class="control-label" for="det3"> Característica Nº3:</label> 
-                          <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" "type="text" name="det3" value={{old('det3', $equipo->det3)}}>   {{-- old() mantiene en campo con el dato--}}
+                          <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det3" value="{{old('det3', $equipo->det3)}}">   {{-- old() mantiene en campo con el dato--}}
                           @error('det3')
                           <small>*{{$message}}</small>
                           @enderror
@@ -157,7 +157,7 @@
                       <div class="col col-md-6">
                         <div class="form-group">
                           <label class="control-label" for="det4">   Característica Nº4:</label> 
-                          <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det4" value={{old('det4', $equipo->det4)}}>   {{-- old() mantiene en campo con el dato--}}
+                          <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det4" value="{{old('det4', $equipo->det4)}}">   {{-- old() mantiene en campo con el dato--}}
                           @error('det4') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
                           <small class="help-block">*{{$message}}</small>
                           @enderror
@@ -170,7 +170,7 @@
                       <div class="col col-md-12">
                         <div class="form-group">
                           <label class="control-label" for="det5"> Detalle:</label> 
-                          <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det5" value={{old('det5', $equipo->det5)}}>   {{-- old() mantiene en campo con el dato--}}
+                          <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det5" value="{{old('det5', $equipo->det5)}}">   {{-- old() mantiene en campo con el dato--}}
                           @error('det5')
                           <small>*{{$message}}</small>
                           @enderror
@@ -206,8 +206,8 @@
                                                 <input type="hidden" name="repuestoBorrar_id" value={{$repuesto->id}} readonly >
                                                 <th STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "scope="row">{{ $repuesto->codigo }}</th>
                                                 <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{ $repuesto->descripcion}}</td>
-                                                <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{$repuesto->pivot->cant}}</td>
-                                                <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "> <button type="submit" class="bi bi-trash3-fill"></button></td>
+                                                <td STYLE="text-align: center; color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{$repuesto->pivot->cant }} {{$repuesto->pivot->unidad}}</td>
+                                                <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">  <button class="bi bi-trash3-fill btn btn-link"  type="submit" ></button></td>
                                               </tr>
                                         </tbody>
                                     </form>
@@ -322,9 +322,9 @@
 <div class="container">
     <div class="col col-md-12">
       
-      <div class="container ">
+      
         <div class="card" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
-          <div class="card-header" STYLE="background: linear-gradient(to right,#1e2020,#030007);">
+          <div class="card-header " STYLE="background: linear-gradient(to left,#1e2020,#030007);"> 
       
             <h6 STYLE="text-align:center; font-size: 30px;
                         background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
@@ -343,19 +343,21 @@
                         <input class="form-check-input" type="checkbox" name="check1"  id="check1">
                         <label class="form-check-label text-white" for="check1">Accesorio</label>
                         </div></td>
-                    <td > <input type="number" class='form-control' name="cant" id="cant" value="1" min="1" max="99" placeholder="Cantidad" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"></td>
+                    <td > <input type="number" class='form-control' name="cant" id="cant" value="" min="1" max="9999" placeholder="Cantidad" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);width: 80%;"></td>
+                    <td > <input maxlength=4 type="text" class='form-control' name="unidad" id="unidad" placeholder="Unidad" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);width: 25%;"></td>
+
                     <td style="text-align: right;"><button class="btn btn-primary" type="submit" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Agregar</button> </td>
                     
                   </tr>
             </table>
         </form>
          {{-- *****************Inicio tercer formulario******************************************* --}}  
-        <h5>Hola mundo1</h5>
+        <h5></h5>
         <form id="formImagenes" action="{{route('fotos.store', $equipo->id)}}" enctype="multipart/form-data" method="POST" class="form-horizontal ">
           @csrf
               <input type="hidden" name="Selector" value="AgregarFoto" readonly >
               <input type="hidden" name="equipo_id" value={{$equipo->id}} readonly >
-              <label for="imagen">Buscar imagen:</label> 
+             
             <table class="table table-sm" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
               <tr>
                 <td style="text-align: right;"><input type="text" class='form-control' name="nombreFoto" id="" accept="" autocomplete="off" placeholder="Nombre de imagen" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" >
@@ -371,12 +373,12 @@
             </table>
         </form>
          
-        <h5>Hola mundo2</h5>
+        <h5></h5>
         <form id="formDocumentos" action="{{route('documentos.store', $equipo->id)}}" enctype="multipart/form-data" method="POST" class="form-horizontal ">
           @csrf
           <input type="hidden" name="Selector" value="AgregarDocu" readonly >
           <input type="hidden" name="equipo_id" value={{$equipo->id}} readonly >
-              <label for="imagen">Buscar Documento:</label> 
+              
             <table class="table table-sm" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
               <tr>
                 <td style="text-align: right;"><input type="text" class='form-control' name="nombreDocu" id="" accept="" autocomplete="off" placeholder="Nombre de documento" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" >
@@ -394,8 +396,8 @@
 
       </div> 
      </div> 
-    </div> 
     </div>
+    
   
 </div>
 </section>

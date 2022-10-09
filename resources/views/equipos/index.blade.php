@@ -29,16 +29,26 @@
 
 <table id="equipos" class="table table-striped table-success  table-hover border-4" >
     <thead class="table-dark" >
+        
         <td>Equipo</td>
         <td>Marca</td>
         <td>Modelo</td>
+        <td></td>
+        <td></td>
        
     <tbody>
       @foreach ($equipos as $equipo)
-      <tr>
-        <td><a href="{{route('equipos.show', $equipo->id)}}">{{$equipo->codEquipo }}</a></td>
+      <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
+        
+        <td STYLE="font-weight:bold; text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">{{$equipo->codEquipo }}</td>
         <td>{{$equipo->marca}}</td>
         <td>{{$equipo->modelo}}</td>
+        <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">
+          <a class="bi bi-pencil-fill" href="{{route('equipos.edit', $equipo->id)}}"></a> 
+        </td>
+        <td>
+          <a class="bi bi-eye" href="{{route('equipos.show', $equipo->id)}}"></a>
+        </td>
       </tr>
         @endforeach
     </tbody>

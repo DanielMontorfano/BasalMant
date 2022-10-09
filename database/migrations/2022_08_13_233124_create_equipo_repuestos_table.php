@@ -19,6 +19,7 @@ return new class extends Migration
                 $table->unsignedBigInteger('equipo_id')->nullable();
                 $table->unsignedBigInteger('repuesto_id')->nullable();
                 $table->integer('cant')->nullable();
+                $table->string('unidad')->nullable(); //unidad de medida
                 $table->string('check1')->nullable(); //Indica que es un accesorio
                 $table->timestamps();
                 $table->foreign('equipo_id')->references('id')->on('equipos')->onDelete('cascade');

@@ -51,7 +51,9 @@ class EquipoRepuestoController extends Controller
        // $repuesto_id=$request->get('repuestosSelect'); //repuesto  a agregar
       // goto salir;
         $equipo_id=$request->get('equipo_id'); //toma del formulario
+        $unidad=$request->get('unidad');
         $check1=$request->get('check1');
+
        // if($check1){
        //    $check1="on";
        // }
@@ -84,6 +86,7 @@ class EquipoRepuestoController extends Controller
         $E_R= new EquipoRepuesto();
         $E_R->equipo_id=$equipo_id;
         $E_R->repuesto_id=$repuesto_id;
+        $E_R->unidad=$unidad;
         $E_R->cant=$cant;
         $E_R->check1=$check1;
         

@@ -32,7 +32,7 @@ class Equipo extends Model
     public function equiposRepuestos()
     {
         return $this->belongsToMany('App\Models\Repuesto')
-        ->withPivot('cant','check1');
+        ->withPivot('cant','unidad','check1');
         //->withTimestamps();
        // return $this->belongsToMany('App\Models\Repuesto', 'equipo_repuestos', 'equipo_id', 'repuesto_id');
     }
