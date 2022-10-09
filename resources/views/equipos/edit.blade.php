@@ -344,7 +344,7 @@
                         <label class="form-check-label text-white" for="check1">Accesorio</label>
                         </div></td>
                     <td > <input type="number" class='form-control' name="cant" id="cant" value="" min="1" max="9999" placeholder="Cantidad" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);width: 80%;"></td>
-                    <td > <input maxlength=4 type="text" class='form-control' name="unidad" id="unidad" placeholder="Unidad" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);width: 25%;"></td>
+                    <td > <input maxlength=6 type="text" class='form-control' name="unidad" id="unidad" placeholder="Unidad" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);width: 25%;"></td>
 
                     <td style="text-align: right;"><button class="btn btn-primary" type="submit" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Agregar</button> </td>
                     

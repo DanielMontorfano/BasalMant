@@ -137,7 +137,7 @@
         <tr>
           <th scope="row" class="text-center">{{ $repuesto->codigo }}</th>
           <td>{{ $repuesto->descripcion}} </td>
-          <td class="text-center">{{$repuesto->pivot->cant}}</td>
+          <td class="text-center">{{$repuesto->pivot->cant}} {{$repuesto->pivot->unidad}} </td>
         </tr>
         @endif
         @endforeach
@@ -165,7 +165,7 @@
         <tr>
           <th scope="row" class="text-center">{{ $repuesto->codigo }}</th>
           <td>{{ $repuesto->descripcion}} </td>
-          <td class="text-center">{{$repuesto->pivot->cant}}</td>
+          <td class="text-center">{{$repuesto->pivot->cant}} {{$repuesto->pivot->unidad}} </td>
          
         </tr>
         @endif
