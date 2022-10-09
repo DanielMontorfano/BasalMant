@@ -19,11 +19,11 @@
                     {{-- @dump(request()->routeIs('equipos.index')) --}}
                     
                 {{-- en la siguiente linea el * es para que aplique  clase a toda dir que empieza con equipos --}}
-              <a href="{{route('ordentrabajo.index')}}" class="{{(request()->routeIs('ordentrabajo.*')) ? 'active' : ''}}">O.d.T</a>
+              <a abbr title="Oden de trabajo" href="{{route('ordentrabajo.index')}}" class="{{(request()->routeIs('ordentrabajo.*')) ? 'active' : ''}}">O.d.T</a>
               {{-- @dump(request()->routeIs('equipos.index')) --}}
                                 
-                <a href="{{route('tareas.index')}}" class="{{(request()->routeIs('tareas.*')) ? 'active' : ''}}">Tareas</a>
-                <a href="{{route('protocolos.index')}}" class="{{(request()->routeIs('Protocolo')) ? 'active' : ''}}">Protocolos</a>                 
+                <a  href="{{route('tareas.index')}}" class="{{(request()->routeIs('tareas.*')) ? 'active' : ''}}">Tareas</a>
+                <a abbr title="Procedimiento de mantenimiento" href="{{route('protocolos.index')}}" class="{{(request()->routeIs('Protocolo')) ? 'active' : ''}}">P.d.M</a>                 
                     <a href="{{route('nosotros')}}" class="{{(request()->routeIs('nosotros')) ? 'active' : ''}}">Nosotros</a>
                     <a href="{{route('contactanos')}}" class="{{(request()->routeIs('contactanos')) ? 'active' : ''}}">Contactanos</a>
         

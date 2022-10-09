@@ -20,7 +20,7 @@
   <h6 STYLE="text-align:center; font-size: 30px;
   background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;">Listado de todos las tareas</h6>
+  -webkit-text-fill-color: transparent;">Tareas</h6>
 
 
 <div class="text-white card-body "  style="max-width: 95;">

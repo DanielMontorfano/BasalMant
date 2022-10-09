@@ -20,11 +20,11 @@
   <h6 STYLE="text-align:center; font-size: 30px;
   background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;">Listado de todos los protocolos</h6>
+  -webkit-text-fill-color: transparent;">Procedimientos de mantenimiento</h6>
 
 
 <div class="text-white card-body "  style="max-width: 95;">
-<p ><a  class="text-white " href={{route('protocolos.create')}}> Crear protocolo</a></p> 
+<p ><a  class="text-white " href={{route('protocolos.create')}}> Crear Procedimiento</a></p> 
    
 
 <table id="equipos" class="table table-striped table-success  table-hover border-4" >
