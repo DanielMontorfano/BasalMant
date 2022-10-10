@@ -17,7 +17,8 @@
                 {{-- en la siguiente linea el * es para que aplique  clase a toda dir que empieza con equipos --}}
               <a href="{{route('equipos.index')}}" class="{{(request()->routeIs('equipos.*')) ? 'active' : ''}}">Equipos</a>
                     {{-- @dump(request()->routeIs('equipos.index')) --}}
-                    
+              <a href="{{route('plans.index')}}" class="{{(request()->routeIs('plans.*')) ? 'active' : ''}}">Planes</a>
+                    {{-- @dump(request()->routeIs('equipos.index')) --}}      
                 {{-- en la siguiente linea el * es para que aplique  clase a toda dir que empieza con equipos --}}
               <a abbr title="Oden de trabajo" href="{{route('ordentrabajo.index')}}" class="{{(request()->routeIs('ordentrabajo.*')) ? 'active' : ''}}">O.d.T</a>
               {{-- @dump(request()->routeIs('equipos.index')) --}}

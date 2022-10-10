@@ -19,6 +19,11 @@ use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\TareaController;
 use App\Http\Controllers\ProtocoloController; 
 use App\Http\Controllers\PrototareaController;
+use App\Http\Controllers\PlanController;
+use App\Http\Controllers\PlanprotoController;
+
+
+
 use App\Http\Controllers\SearchTareasController;
 
 
@@ -68,6 +73,10 @@ Route::get('/tareas/{tareas}/borrar', [TareaController::class, 'destroy'])->name
 //**************************************************************************** */
 Route::resource('protocolos', ProtocoloController::class);
 Route::resource('prototarea', PrototareaController::class);
+//**************************************************************************** */
+Route::resource('plans', PlanController::class);
+Route::resource('planproto', PlanprotoController::class);
+//**************************************************************************** */
 Route::get('search/tareas', [SearchTareasController::class,'tareas'])->name('search.tareas');
 
 

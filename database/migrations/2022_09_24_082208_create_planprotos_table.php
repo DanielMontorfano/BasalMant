@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('plan_id')->nullable();
             $table->unsignedBigInteger('proto_id')->nullable();
-            $table->string('check1')->nullable(); //Indica que es un accesorio
+            $table->string('detalle')->nullable(); //Detalle de aplicacion
+            $table->string('check1')->nullable(); //por si ..
             $table->timestamps();
             $table->foreign('plan_id')->references('id')->on('plans')->onDelete('cascade');
             $table->foreign('proto_id')->references('id')->on('protocolos')->onDelete('cascade');

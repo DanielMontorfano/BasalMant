@@ -15,6 +15,11 @@ class PlanController extends Controller
     public function index()
     {
         //
+        //$equipos= Equipo::all();  //Trae todos los registro
+        $plans= Plan::orderBy('id','desc')->paginate();
+        
+       // return $equipos;   //Sirve para ver la consulta
+        return view('plans.index',compact('plans')); //Envío todos los registro en cuestión.La consulta va sin simbolo de pesos
     }
 
     /**

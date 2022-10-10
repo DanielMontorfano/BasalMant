@@ -12,7 +12,7 @@ class Plan extends Model
     public function plansEquipos()
     {
         return $this->belongsToMany('App\Models\Equipo')
-        ->withPivot('check1');
+        ->withPivot('check1','detalle');
         
     } 
     

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
             $table->string('codigo')->nullable();
+            $table->string('nombre')->nullable(); //Nombre descriptivo
             $table->string('descripcion')->nullable();
             $table->integer('frecuencia')->nullable();
             $table->string('unidad')->nullable();
