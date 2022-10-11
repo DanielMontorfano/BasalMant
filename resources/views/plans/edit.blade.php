@@ -72,7 +72,7 @@
                                        
                                         <tbody>
                                               <tr>
-                                                <input type="hidden" name="Selector" value="BorrarTarea" readonly >
+                                                <input type="hidden" name="Selector" value="BorrarProto" readonly >
                                                 <input type="hidden" name="plan_id" value={{$plan->id}} readonly >
                                                 <input type="hidden" name="protoBorrar_id" value={{$protocolo->id}} readonly >
                                                 <th STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "scope="row">{{ $protocolo->codigo }}</th>
