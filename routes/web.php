@@ -21,11 +21,8 @@ use App\Http\Controllers\ProtocoloController;
 use App\Http\Controllers\PrototareaController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\PlanprotoController;
-
-
-
 use App\Http\Controllers\SearchTareasController;
-
+use App\Http\Controllers\SearchProtocolosController;
 
 
 /*
@@ -77,8 +74,8 @@ Route::resource('prototarea', PrototareaController::class);
 Route::resource('plans', PlanController::class);
 Route::resource('planproto', PlanprotoController::class);
 //**************************************************************************** */
-Route::get('search/tareas', [SearchTareasController::class,'tareas'])->name('search.tareas');
-
+Route::get('search/tareas', [SearchTareasController::class,'tareas'])->name('search.tareas'); //esta ruta permite hacer las busqudas asicrónicas AJAX
+Route::get('search/protocolos', [SearchProtocolosController::class,'protocolos'])->name('search.protocolos'); //esta ruta permite hacer las busqudas asicrónicas AJAX
 
 
 

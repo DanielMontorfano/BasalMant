@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Plan;
+use App\Models\Protocolo;
+use App\Models\Equipo;
 use Illuminate\Http\Request;
 
 class PlanController extends Controller
@@ -49,10 +51,20 @@ class PlanController extends Controller
      * @param  \App\Models\Plan  $plan
      * @return \Illuminate\Http\Response
      */
-    public function show(Plan $plan)
+    public function show($id)
     {
-        //
+        $plan= Plan::find($id); // Ver la linea de abajo alternativa
+        $protocolos=$plan->planProtocolos; // otra alternativa: $repuestos= Equipo::find($id)->equiposRepuestos; en una sola linea. 
+        
+        //return $equipo;
+        //return 'hhhhhhhhhhhhhhhh' . $repuestos;
+        //return view('Equipos.show', ['variable'=>$equipo]); video anterior
+
+       return view('plans.show', compact('plan','protocolos')); //Envío todo el registro en cuestión
+
+       // return view('Equipos.show');
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -60,9 +72,24 @@ class PlanController extends Controller
      * @param  \App\Models\Plan  $plan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Plan $plan)
-    {
-        //
+    public function edit($id)
+    {    $equipo=Equipo::find($id);
+        $protosTodos=Protocolo::all();
+        
+        $plan=Plan::find($id);
+        $protocolos= Plan::find($id)->plansProtocolos; //"plansProtocolos" Metodo perteneciente al modelo Plan
+       // $fotosTodos=Equipo::find($id)->fotos; //Aqui hago referencia al Metodo fotos perteneciente al modelo Equipo que trae los registro del modelo fotos vinculados a este equipo
+        //$repuesto=$equipo->equiposRepuestos;
+        //foreach($repuestos as $repuesto){
+            //<p>factura: {{ $entrada->factura }}</p>
+            //<p>fecha entrada: {{ $entrada->fecha }}</p>
+            //if($repuesto->pivot->cant )
+           // if(!is_null($repuesto->pivot->cant)){
+            //echo  $repuesto->pivot->cant . '***' .$repuesto->codigo . '<br>';
+            //}
+      //  }
+        //return $tareas;
+        return view('plans.edit', compact('equipo','plan','protocolos', 'protosTodos'));
     }
 
     /**

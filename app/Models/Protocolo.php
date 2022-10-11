@@ -10,12 +10,12 @@ class Protocolo extends Model
     use HasFactory;
 
     //relacion de muchos a muchos
-    public function protocolosPlans()
+   /* public function protocolosPlans()
     {
         return $this->belongsToMany('App\Models\Plan')
         ->withPivot('check1');
         
-    } 
+    } */
 
     public function protocolosTareas()
     {
@@ -23,5 +23,7 @@ class Protocolo extends Model
         ->withPivot('check1');
         
     } 
+     
+    
 
 }

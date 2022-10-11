@@ -9,12 +9,21 @@ class Plan extends Model
 {
     use HasFactory;
     //relacion de muchos a muchos
-    public function plansEquipos()
+   /* public function plansEquipos()
     {
         return $this->belongsToMany('App\Models\Equipo')
         ->withPivot('check1','detalle');
         
+    } */
+
+    public function plansProtocolos()
+    {
+        return $this->belongsToMany('App\Models\Protocolo','planprotos','plan_id','proto_id')
+        ->withPivot('check1');
+        
     } 
+
+
     
 
 }
