@@ -125,7 +125,7 @@
               <input type="hidden" name="plan_id" value={{$plan->id}} readonly >
                   <table class="table table-sm" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
                     <tr>
-                        <td><input class='form-control' name="search" id="search" autocomplete="off" placeholder="Buscar plan" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
+                        <td><input class='form-control' name="search" id="search" autocomplete="off" placeholder="Buscar procedimiento de mantenimiento" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
                         
                         <td style="text-align: right;"><button class="btn btn-primary" type="submit" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Agregar</button> </td>
                         
