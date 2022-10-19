@@ -18,7 +18,7 @@ class PlanController extends Controller
     {
         //
         //$equipos= Equipo::all();  //Trae todos los registro
-        $plans= Plan::orderBy('id','desc')->paginate();
+        $plans= Plan::orderBy('id','desc')->get();//paginate();
         
        // return $equipos;   //Sirve para ver la consulta
         return view('plans.index',compact('plans')); //Envío todos los registro en cuestión.La consulta va sin simbolo de pesos
@@ -54,13 +54,28 @@ class PlanController extends Controller
     public function show($id)
     {
         $plan= Plan::find($id); // Ver la linea de abajo alternativa
-        $protocolos=$plan->planProtocolos; // otra alternativa: $repuestos= Equipo::find($id)->equiposRepuestos; en una sola linea. 
+        $protocolos= Plan::find($id)->plansProtocolos; // otra alternativa: $repuestos= Equipo::find($id)->equiposRepuestos; en una sola linea. 
+        foreach($protocolos as $protocolo){
+            $proto_id= $protocolo->pivot->proto_id; //busco el od del protocolo relacionado
+            $protocolosParciales= Protocolo::find( $proto_id); // traigo la coleccion de ese protocolo
+            //echo   $proto_id;
+            $tareas=$protocolosParciales->protocolosTareas; // traigo todas las tareas de ese protocolo
+            foreach($tareas as $tarea){
+                echo $plan->id . "*" . $protocolo->codigo . "*" . $tarea->codigo .  "*" .  $tarea->descripcion . "<br>";
+            }
+            //echo $tareas . "<br>"; //return $tareas;
+            //***$tareasPlan=["$protocolosParciales" =>$tareas];
+        }
         
-        //return $equipo;
+
+
+        return;
+        return  $proto_id; //$tareasPlan; //$tareas; //$protocolos;
+        //return $protTarea_id;
         //return 'hhhhhhhhhhhhhhhh' . $repuestos;
         //return view('Equipos.show', ['variable'=>$equipo]); video anterior
 
-       return view('plans.show', compact('plan','protocolos')); //Envío todo el registro en cuestión
+       //return view('plans.show', compact('plan','protocolos')); //Envío todo el registro en cuestión
 
        // return view('Equipos.show');
     }
