@@ -55,22 +55,24 @@ class PlanController extends Controller
     {
         $plan= Plan::find($id); // Ver la linea de abajo alternativa
         $protocolos= Plan::find($id)->plansProtocolos; // otra alternativa: $repuestos= Equipo::find($id)->equiposRepuestos; en una sola linea. 
-        foreach($protocolos as $protocolo){
-            $proto_id= $protocolo->pivot->proto_id; //busco el od del protocolo relacionado
+         foreach($protocolos as $protocolo){
+            $proto_id= $protocolo->pivot->proto_id; //busco el id del protocolo relacionado
             $protocolosParciales= Protocolo::find( $proto_id); // traigo la coleccion de ese protocolo
             //echo   $proto_id;
             $tareas=$protocolosParciales->protocolosTareas; // traigo todas las tareas de ese protocolo
             foreach($tareas as $tarea){
-                echo $plan->id . "*" . $protocolo->codigo . "*" . $tarea->codigo .  "*" .  $tarea->descripcion . "<br>";
+               // echo $plan->id . "*" . $protocolo->codigo . "*" . $tarea->codigo .  "*" .  $tarea->descripcion . "<br>";
+                $Tareas[] = array($tarea->codigo, $tarea->descripcion);
             }
+            $ProtocoloA[ $protocolo->codigo]=array($Tareas);
+
+
             //echo $tareas . "<br>"; //return $tareas;
             //***$tareasPlan=["$protocolosParciales" =>$tareas];
         }
         
-
-
-        return;
-        return  $proto_id; //$tareasPlan; //$tareas; //$protocolos;
+          return $protocolos;
+       // **** return  $proto_id; //$tareasPlan; //$tareas; //$protocolos;
         //return $protTarea_id;
         //return 'hhhhhhhhhhhhhhhh' . $repuestos;
         //return view('Equipos.show', ['variable'=>$equipo]); video anterior
