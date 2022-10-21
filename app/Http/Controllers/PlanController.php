@@ -6,6 +6,7 @@ use App\Models\Plan;
 use App\Models\Protocolo;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PlanController extends Controller
 {
@@ -55,23 +56,26 @@ class PlanController extends Controller
     {
         $plan= Plan::find($id); // Ver la linea de abajo alternativa
         $protocolos= Plan::find($id)->plansProtocolos; // otra alternativa: $repuestos= Equipo::find($id)->equiposRepuestos; en una sola linea. 
-         foreach($protocolos as $protocolo){
+         /* *******foreach($protocolos as $protocolo){
             $proto_id= $protocolo->pivot->proto_id; //busco el id del protocolo relacionado
             $protocolosParciales= Protocolo::find( $proto_id); // traigo la coleccion de ese protocolo
             //echo   $proto_id;
             $tareas=$protocolosParciales->protocolosTareas; // traigo todas las tareas de ese protocolo
             foreach($tareas as $tarea){
                // echo $plan->id . "*" . $protocolo->codigo . "*" . $tarea->codigo .  "*" .  $tarea->descripcion . "<br>";
-                $Tareas[] = array($tarea->codigo, $tarea->descripcion);
+                $Tareas[] =array($tarea->codigo, $tarea->descripcion, $tarea->duracion);
+                $b=response()->json($Tareas);
+                $a=response()->json([$protocolo->codigo =>$b]);
             }
             $ProtocoloA[ $protocolo->codigo]=array($Tareas);
-
-
+            $ProtocoloB=json_encode($ProtocoloA);
+            
             //echo $tareas . "<br>"; //return $tareas;
             //***$tareasPlan=["$protocolosParciales" =>$tareas];
         }
-        
-          return $protocolos;
+          
+          //return $ProtocoloA;
+          return $a;***** */
        // **** return  $proto_id; //$tareasPlan; //$tareas; //$protocolos;
         //return $protTarea_id;
         //return 'hhhhhhhhhhhhhhhh' . $repuestos;
@@ -80,6 +84,21 @@ class PlanController extends Controller
        //return view('plans.show', compact('plan','protocolos')); //Envío todo el registro en cuestión
 
        // return view('Equipos.show');
+
+      /* ** $resultado = Protocolo::join("tareas", "tareas.id", "=", "protocolos.id")
+->select("*")
+->where("protocolos.codigo", "=", "PROT-200-033")
+->get(); */
+$Tareas = DB::table('tareas')
+            ->join('protocolos', 'tareas.id', '=', 'protocolos.id')
+            //->join('plans','plans.id', '=',  'protocolos.id')
+            //->select('tareas.*', 'protocolos.codigo', 'plans.id')
+            //->where("plans.id", "=", "46")
+            ->get();
+ return $Tareas;
+
+
+
     }
 
 
