@@ -60,7 +60,7 @@ class PlanController extends Controller
             $proto_id= $protocolo->pivot->proto_id; //busco el id del protocolo relacionado
             $protocolosParciales= Protocolo::find( $proto_id); // traigo la coleccion de ese protocolo
             
-            echo   $protocolosParciales->codigo;
+            //echo   $protocolosParciales->codigo;
             $tareas=$protocolosParciales->protocolosTareas; // traigo todas las tareas de ese protocolo
             $matriz2[$protocolosParciales->codigo]=$tareas;
             
@@ -81,16 +81,16 @@ class PlanController extends Controller
             //echo $tareas . "<br>"; //return $tareas;
             //***$tareasPlan=["$protocolosParciales" =>$tareas];
         }  
-              
-        foreach($matriz2 as $matriz3){
-        echo $matriz3;
+      /*  $users = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->join('orders', 'users.id', '=', 'orders.user_id')
+            ->select('users.*', 'contacts.phone', 'orders.price')
+            ->get();*/
+        
 
+          return $Tareas;// $matriz2;
 
-        }
-           
-       
-
-          return;// $matriz2;
+          //return view('plan.show',compact('protocolos', $protocolos  ));
          // return $a;***** */
        // **** return  $proto_id; //$tareasPlan; //$tareas; //$protocolos;
         //return $protTarea_id;
