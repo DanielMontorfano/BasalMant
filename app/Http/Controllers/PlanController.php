@@ -55,7 +55,7 @@ class PlanController extends Controller
     public function show($id)
     {
         $plan= Plan::find($id); // Ver la linea de abajo alternativa
-        $protocolos= Plan::find($id)->plansProtocolos; // otra alternativa: $repuestos= Equipo::find($id)->equiposRepuestos; en una sola linea. 
+        $protocolos= Plan::find($id)->plansProtocolosss; // otra alternativa: $repuestos= Equipo::find($id)->equiposRepuestos; en una sola linea. 
          /* *******foreach($protocolos as $protocolo){
             $proto_id= $protocolo->pivot->proto_id; //busco el id del protocolo relacionado
             $protocolosParciales= Protocolo::find( $proto_id); // traigo la coleccion de ese protocolo
@@ -89,7 +89,7 @@ class PlanController extends Controller
 ->select("*")
 ->where("protocolos.codigo", "=", "PROT-200-033")
 ->get(); */
-$Tareas = DB::table('tareas')
+$Tareas = DB::table('tareass')
             ->join('protocolos', 'tareas.id', '=', 'protocolos.id')
             //->join('plans','plans.id', '=',  'protocolos.id')
             //->select('tareas.*', 'protocolos.codigo', 'plans.id')
