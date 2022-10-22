@@ -55,27 +55,43 @@ class PlanController extends Controller
     public function show($id)
     {
         $plan= Plan::find($id); // Ver la linea de abajo alternativa
-        $protocolos= Plan::find($id)->plansProtocolosss; // otra alternativa: $repuestos= Equipo::find($id)->equiposRepuestos; en una sola linea. 
-         /* *******foreach($protocolos as $protocolo){
+        $protocolos= Plan::find($id)->plansProtocolos; // otra alternativa: $repuestos= Equipo::find($id)->equiposRepuestos; en una sola linea. 
+         foreach($protocolos as $protocolo){
             $proto_id= $protocolo->pivot->proto_id; //busco el id del protocolo relacionado
             $protocolosParciales= Protocolo::find( $proto_id); // traigo la coleccion de ese protocolo
-            //echo   $proto_id;
+            
+            echo   $protocolosParciales->codigo;
             $tareas=$protocolosParciales->protocolosTareas; // traigo todas las tareas de ese protocolo
+            $matriz2[$protocolosParciales->codigo]=$tareas;
+            
             foreach($tareas as $tarea){
                // echo $plan->id . "*" . $protocolo->codigo . "*" . $tarea->codigo .  "*" .  $tarea->descripcion . "<br>";
-                $Tareas[] =array($tarea->codigo, $tarea->descripcion, $tarea->duracion);
-                $b=response()->json($Tareas);
-                $a=response()->json([$protocolo->codigo =>$b]);
+                $Tareas[$protocolosParciales->codigo] =array( $tarea->codigo, $tarea->descripcion, $tarea->duracion);
+                $matriz[$protocolosParciales->codigo][$tarea->id]=$tarea->codigo;
+
+                //$b=response()->json($Tareas);
+               // $a=response()->json([$protocolo->codigo =>$b]);
+               //$a=response()->json([$protocolo->id=> $Tareas]);
             }
-            $ProtocoloA[ $protocolo->codigo]=array($Tareas);
-            $ProtocoloB=json_encode($ProtocoloA);
+            //$ProtocolosA[ $protocolo->codigo]=array($Tareas);
+
+            //unset($Tareas);
+            //$ProtocoloB=json_encode($ProtocolosA);
             
             //echo $tareas . "<br>"; //return $tareas;
             //***$tareasPlan=["$protocolosParciales" =>$tareas];
+        }  
+              
+        foreach($matriz2 as $matriz3){
+        echo $matriz3;
+
+
         }
-          
-          //return $ProtocoloA;
-          return $a;***** */
+           
+       
+
+          return;// $matriz2;
+         // return $a;***** */
        // **** return  $proto_id; //$tareasPlan; //$tareas; //$protocolos;
         //return $protTarea_id;
         //return 'hhhhhhhhhhhhhhhh' . $repuestos;
@@ -89,13 +105,14 @@ class PlanController extends Controller
 ->select("*")
 ->where("protocolos.codigo", "=", "PROT-200-033")
 ->get(); */
-$Tareas = DB::table('tareass')
+
+/* *****$Tareas = DB::table('tareass')
             ->join('protocolos', 'tareas.id', '=', 'protocolos.id')
             //->join('plans','plans.id', '=',  'protocolos.id')
             //->select('tareas.*', 'protocolos.codigo', 'plans.id')
             //->where("plans.id", "=", "46")
             ->get();
- return $Tareas;
+ return $Tareas; */
 
 
 
