@@ -53,66 +53,52 @@ class PlanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   
+        //$equipo=Equipo::find($id);
         $plan= Plan::find($id); // Ver la linea de abajo alternativa
         $protocolos= Plan::find($id)->plansProtocolos; // otra alternativa: $repuestos= Equipo::find($id)->equiposRepuestos; en una sola linea. 
          foreach($protocolos as $protocolo){
-            $proto_id= $protocolo->pivot->proto_id; //busco el id del protocolo relacionado
-            $protocolosParciales= Protocolo::find( $proto_id); // traigo la coleccion de ese protocolo
-            
-            //echo   $protocolosParciales->codigo;
-            $tareas=$protocolosParciales->protocolosTareas; // traigo todas las tareas de ese protocolo
-            $matriz2[$protocolosParciales->codigo]=$tareas;
-            
+                $proto_id= $protocolo->pivot->proto_id; //busco el id del protocolo relacionado
+                $protocolosParciales= Protocolo::find( $proto_id); // traigo la coleccion de ese protocolo
+                $ProtocoloP[]=array('codProto'=> $protocolosParciales->codigo, 'descripcion'=> $protocolosParciales->descripcion);
+                // $protocolosParciales= Protocolo::find(1);
+                //echo "este protocolo es:" .  $protocolosParciales->codigo;
+                $tareas=$protocolosParciales->protocolosTareas; // traigo todas las tareas de ese protocolo
             foreach($tareas as $tarea){
-               // echo $plan->id . "*" . $protocolo->codigo . "*" . $tarea->codigo .  "*" .  $tarea->descripcion . "<br>";
-                $Tareas[$protocolosParciales->codigo] =array( $tarea->codigo, $tarea->descripcion, $tarea->duracion);
-                $matriz[$protocolosParciales->codigo][$tarea->id]=$tarea->codigo;
-
-                //$b=response()->json($Tareas);
-               // $a=response()->json([$protocolo->codigo =>$b]);
-               //$a=response()->json([$protocolo->id=> $Tareas]);
+                // echo $plan->id . "*" . $protocolo->codigo . "*" . $tarea->codigo .  "*" .  $tarea->descripcion . "<br>";
+                    
+                  $Tareas[] =array('cod'=>$protocolosParciales->codigo, 'codigoTar' => $tarea->codigo, 'descripcion' => $tarea->descripcion, $tarea->duracion);
+               
             }
-            //$ProtocolosA[ $protocolo->codigo]=array($Tareas);
-
-            //unset($Tareas);
-            //$ProtocoloB=json_encode($ProtocolosA);
+           
+         }  
+           // LAs lineas siguientes fueron de practica arrays//
+           /*
+           var_export ($ProtocoloP);
+            echo "<br>";
+            echo "<br>";
+           var_export ($Tareas);
+           echo "<br>";
+           echo "<br>";
+           
+           foreach($ProtocoloP as $protocolo){
+           //echo key($P);
+           echo $protocolo['codProto'];
+           $Proto=$protocolo['codProto'];
+           echo "<br>";
+           foreach($Tareas as $Tarea){
+            if($Proto==$Tarea['cod']){   
+            echo $Tarea['cod'] . $Tarea['codigoTar'];
+            echo "<br>";
+            }
+            } 
+                  
+            }*/
             
-            //echo $tareas . "<br>"; //return $tareas;
-            //***$tareasPlan=["$protocolosParciales" =>$tareas];
-        }  
-      /*  $users = DB::table('users')
-            ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->join('orders', 'users.id', '=', 'orders.user_id')
-            ->select('users.*', 'contacts.phone', 'orders.price')
-            ->get();*/
-        
 
-          return $Tareas;// $matriz2;
-
-          //return view('plan.show',compact('protocolos', $protocolos  ));
-         // return $a;***** */
-       // **** return  $proto_id; //$tareasPlan; //$tareas; //$protocolos;
-        //return $protTarea_id;
-        //return 'hhhhhhhhhhhhhhhh' . $repuestos;
-        //return view('Equipos.show', ['variable'=>$equipo]); video anterior
-
-       //return view('plans.show', compact('plan','protocolos')); //Envío todo el registro en cuestión
-
-       // return view('Equipos.show');
-
-      /* ** $resultado = Protocolo::join("tareas", "tareas.id", "=", "protocolos.id")
-->select("*")
-->where("protocolos.codigo", "=", "PROT-200-033")
-->get(); */
-
-/* *****$Tareas = DB::table('tareass')
-            ->join('protocolos', 'tareas.id', '=', 'protocolos.id')
-            //->join('plans','plans.id', '=',  'protocolos.id')
-            //->select('tareas.*', 'protocolos.codigo', 'plans.id')
-            //->where("plans.id", "=", "46")
-            ->get();
- return $Tareas; */
+           
+          return view('plans.show', compact('plan','ProtocoloP', 'Tareas'));  
+          return ; //$Tareas ;// $matriz2;
 
 
 

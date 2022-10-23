@@ -69,20 +69,23 @@
                                           
                                         </tr>
                                       </thead>
-                                      @foreach($protocolos as $protocolo)
+                                      @foreach($ProtocoloP as $protocolo)
                                         <form action="{{route('planproto.store')}}" method="POST">
                                           @csrf
                                            
                                             <tbody>
                                                   <tr>
-                                                    <input type="hidden" name="Selector" value="BorrarPlan" readonly >
-                                                    <input type="hidden" name="plan_id" value={{$plan->id}} readonly >
-                                                    <input type="hidden" name="protoBorrar_id" value={{$protocolo->id}} readonly >
-                                                    <th STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "scope="row">{{ $protocolo->codigo }}</th>
-                                                    <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{ $protocolo->descripcion}}</td>
-                                                                                                  
-                                                    
+                                                    <th STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "scope="row">{{$protocolo['codProto']}}</th>
+                                                    <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{$protocolo['descripcion']}}</td>
                                                   </tr>
+                                                  @foreach($Tareas as $tarea) 
+                                                  @if($protocolo['codProto'] ==$tarea['cod'])
+                                                  <tr>
+                                                  <th STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "scope="row">{{$tarea['codigoTar']}}</th>
+                                                  <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{$tarea['descripcion']}}</td>
+                                                  </tr>
+                                                  @endif
+                                                  @endforeach
                                             </tbody>
                                         </form>
                                         @endforeach
