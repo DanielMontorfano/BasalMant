@@ -29,9 +29,9 @@
                 <div class="col col-md-8">
                     {{-- columna2 --}}
                     
-                    <form id="nuevoEquipo"  action="{{route('equipos.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+                    <form id="nuevoPlan"  action="{{route('plans.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                         
-                        <h6>Nueva Equipo</h6>
+                        <h6>Nuevo Plan</h6>
                         @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
                     
                       
@@ -39,113 +39,72 @@
                         <div class="container">
                             
                             <div class="row"> {{-- ***** div de la primera fila --}}
-                              <div class="col col-md-4">
+                              <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="codigo">Codigo:</label> 
-                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="codEquipo" value={{old('codEquipo')}}> 
+                                  <input maxlength="11" minlength="11" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="codigo" value={{old('codigo')}}> 
                                   @error('codigo')
                                   <small>*{{$message}}</small>
                                   @enderror
                                 </div>
                               </div> 
-                              <div class="col col-md-4">
+
+                              <div class="col col-md-10">
                                 <div class="form-group">
-                                  <label class="control-label" for="marca">Marca:</label> 
-                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="marca" value={{old('marca')}}> 
-                                  @error('marca')
+                                  <label class="control-label" for="descripcion">Nombre:</label> 
+                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="nombre" value={{old('nombre')}}> 
+                                  @error('nombre')
+                                 <small>*{{$message}}</small>
+                                  @enderror
+                                </div>
+                              </div>
+
+                              <div class="col col-md-12">
+                                <div class="form-group">
+                                  <label class="control-label" for="descripcion">Descripción:</label> 
+                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="descripcion" value={{old('descripcion')}}> 
+                                  @error('descripcion')
                                  <small>*{{$message}}</small>
                                   @enderror
                                 </div>
                               </div> 
-                              <div class="col col-md-4">
+                               
+                              <div class="col col-md-2">
                                 <div class="form-group">
-                                  <label class="control-label" for="marca">Modelo:</label> 
-                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="modelo" value={{old('modelo')}}> 
-                                  @error('modelo')
-                                  <small>*{{$message}}</small>
+                                  <label class="control-label" for="frcuencia">Frecuencia:</label> 
+                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="frecuencia" value={{old('frecuencia')}}> 
+                                  @error('frecuencia')
+                                 <small>*{{$message}}</small>
                                   @enderror
                                 </div>
                               </div> 
+ 
+                              <div class="col col-md-2">
+                                <div class="form-group">
+                                  <label class="control-label" for="unidad">Unidad:</label> 
+                                  <select name="frecuenciaSelect" class="form-control"   STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 14px; background: linear-gradient(to right,#030007, #495c5c);" value="{{old('frecuencia')}}">
+                                  <option value="Días">Días</option> 
+                                  <option value="Meses">Meses</option> 
+                                  <option value="Anual">Anual</option> 
+                                   
+                                  </select>
+                                  @error('unidad')
+                                  <small>*{{$message}}</small>
+                                  @enderror
+                                </div>
+
+
+                              
                             </div> {{-- ***** div de la primera fila --}}
-                            <div class="row"> {{-- ****** div de la segunda fila --}}
-                                <div class="col col-md-6">
-                                    <div class="form-group">
-                                      <label class="control-label" for="idSecc">Sección:</label> 
-                                      <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="idSecc" value={{old('idSecc')}}> 
-                                      @error('idSecc')
-                                      <small>*{{$message}}</small>
-                                      @enderror
-                                    </div>
-                                </div>
-                                <div class="col col-md-6">
-                                    <div class="form-group">
-                                      <label class="control-label" for="idSubSecc">Subsección:</label> 
-                                      <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="idSubSecc" value={{old('idSubSecc')}}> 
-                                      @error('idSubSecc')
-                                      <small>*{{$message}}</small>
-                                      @enderror
-                                    </div>
-                                </div>
-                            </div> {{-- ****** div de la segunda fila --}}
-                            <div class="row"> {{-- ****** div de la tercera fila --}}
-                                <div class="col col-md-6">
-                                    <div class="form-group">
-                                      <label class="control-label" for="det1">Característica Nº1:</label> 
-                                      <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det1" value={{old('det1')}}>   {{-- old() mantiene en campo con el dato--}}
-                                      @error('det1')
-                                      <small>*{{$message}}</small>
-                                      @enderror
-                                    </div>
-                                  </div>
-                  
-                                  <div class="col col-md-6">
-                                    <div class="form-group">
-                                      <label class="control-label" for="det2">Característica Nº2:</label> 
-                                      <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det2" value={{old('det2')}}>   {{-- old() mantiene en campo con el dato--}}
-                                      @error('det2') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
-                                      <small class="help-block">*{{$message}}</small>
-                                      @enderror
-                                      </div>
-                                  </div>
-                            </div> {{-- ****** div de la tercera fila --}}
-                            <div class="row"> {{-- ****** div de la 4ta fila   --}}  
-                                <div class="col col-md-6">
-                                    <div class="form-group">
-                                      <label class="control-label" for="det3"> Característica Nº3:</label> 
-                                      <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det3" value={{old('det3')}}>   {{-- old() mantiene en campo con el dato--}}
-                                      @error('det3')
-                                      <small>*{{$message}}</small>
-                                      @enderror
-                                    </div>
-                                  </div>
-                  
-                                  <div class="col col-md-6">
-                                    <div class="form-group">
-                                      <label class="control-label" for="det4">   Característica Nº4:</label> 
-                                      <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det4" value={{old('det4')}}>   {{-- old() mantiene en campo con el dato--}}
-                                      @error('det4') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
-                                      <small class="help-block">*{{$message}}</small>
-                                      @enderror
-                                      </div>
-                                  </div>
-                           </div> {{-- ****** div de la 4ta fila --}}    
-                           <div class="row"> {{-- ****** div de la 5ta fila   --}}    
                             
-                                <div class="col col-md-12">
-                                  <div class="form-group">
-                                    <label class="control-label" for="det5"> Detalle:</label> 
-                                    <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det5" value={{old('det5')}}>   {{-- old() mantiene en campo con el dato--}}
-                                    @error('marca')
-                                    <small>*{{$message}}</small>
-                                    @enderror
-                                  </div>
-                                </div>
-                           </div> {{-- ****** div de la 5ta fila --}}    
+                            
+                            
+                              
                             <br>
                             <br>
                            <div class="form-group">
-                            <button form="nuevoEquipo" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
-                            <p style="text-align: right;"><a  class="text-white " href={{route('equipos.index')}}>Salir</a></p> 
+                            <button form="nuevoPlan" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
+                            <p style="text-align: right;"><a  class="text-white " href={{route('protocolos.index')}}>Salir</a></p> 
                           </div>
  
 

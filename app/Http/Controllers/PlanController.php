@@ -32,7 +32,7 @@ class PlanController extends Controller
      */
     public function create()
     {
-        //
+        return view('plans.create');
     }
 
     /**
@@ -55,14 +55,22 @@ class PlanController extends Controller
     public function show($id)
     {   
         //$equipo=Equipo::find($id);
+        $ProtocoloP = [];
+        $Tareas=[];
+
         $plan= Plan::find($id); // Ver la linea de abajo alternativa
         $protocolos= Plan::find($id)->plansProtocolos; // otra alternativa: $repuestos= Equipo::find($id)->equiposRepuestos; en una sola linea. 
-         foreach($protocolos as $protocolo){
+        if ($protocolos->isEmpty()) {
+            $ProtocoloP[]=array('codProto'=> '', 'descripcion'=> 'Este plan no tiene protocolos vinculados');
+            $Tareas[] =array('cod'=>'', 'codigoTar' => '', 'descripcion' => '', '');
+            //return $protocolos;
+            goto salir;
+         }
+         
+        foreach($protocolos as $protocolo){
                 $proto_id= $protocolo->pivot->proto_id; //busco el id del protocolo relacionado
                 $protocolosParciales= Protocolo::find( $proto_id); // traigo la coleccion de ese protocolo
                 $ProtocoloP[]=array('codProto'=> $protocolosParciales->codigo, 'descripcion'=> $protocolosParciales->descripcion);
-                // $protocolosParciales= Protocolo::find(1);
-                //echo "este protocolo es:" .  $protocolosParciales->codigo;
                 $tareas=$protocolosParciales->protocolosTareas; // traigo todas las tareas de ese protocolo
             foreach($tareas as $tarea){
                 // echo $plan->id . "*" . $protocolo->codigo . "*" . $tarea->codigo .  "*" .  $tarea->descripcion . "<br>";
@@ -95,10 +103,10 @@ class PlanController extends Controller
                   
             }*/
             
-
-           
+        
+          salir: 
           return view('plans.show', compact('plan','ProtocoloP', 'Tareas'));  
-          return ; //$Tareas ;// $matriz2;
+         // return ; //$Tareas ;// $matriz2;
 
 
 
@@ -138,9 +146,33 @@ class PlanController extends Controller
      * @param  \App\Models\Plan  $plan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Plan $plan)
-    {
-        //
+    public function update(Request $request, $id)
+    { //$request trae lo del formulario, $id el id de equipo, trae lo que tengo en el registro sin modificar                                  
+        $request->validate(['codEquipo'=>'required', 'marca'=>'required', 'modelo'=>'required']);
+        $equipo= Equipo::find($id);
+        $repuestos=$equipo->equiposRepuestos;
+        $equipo->codEquipo=$request->codEquipo;
+        $equipo->marca=$request->marca;
+        $equipo->modelo=$request->modelo;
+        $equipo->idSecc=$request->idSecc;
+        $equipo->idSubSecc=$request->idSubSecc;
+        $equipo->det1=$request->det1;
+        $equipo->det2=$request->det2;
+        $equipo->det3=$request->det3;
+        $equipo->det4=$request->det4;
+        $equipo->det5=$request->det5;
+        $equipo->save();
+       
+
+        //return $equipo;
+        //return view('Equipos.update');;
+        /************************************** */
+        //Asi se realizará con Asignacion Masiva, es mas simple, pero se debe colocar 
+        //en el modelo Equipo "protected $fillable=[array que se desea]"
+        //esto asigna todo el formulario de una vez, y hace el save() automaticamente
+       // $equipo->update($request->all()); //lo suspendi porque dejo de funcionar 
+       return view('equipos.show', compact('equipo','repuestos')); //Envío show todo el registro en cuestión, sin $
+       //return $repuestos;
     }
 
     /**

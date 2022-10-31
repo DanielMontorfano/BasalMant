@@ -69,6 +69,7 @@
                                           
                                         </tr>
                                       </thead>
+                                      @if(isset($ProtocoloP))
                                       @foreach($ProtocoloP as $protocolo)
                                         <form action="{{route('planproto.store')}}" method="POST">
                                           @csrf
@@ -89,6 +90,7 @@
                                             </tbody>
                                         </form>
                                         @endforeach
+                                        @endif
                               </table>
                           </div> {{-- div del card3 --}}
                           </div> {{-- div del card4 --}}
