@@ -49,7 +49,7 @@
                                 </div>
                               </div> 
 
-                              <div class="col col-md-10">
+                              <div class="col col-md-6">
                                 <div class="form-group">
                                   <label class="control-label" for="descripcion">Nombre:</label> 
                                   <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="nombre" value={{old('nombre')}}> 
@@ -59,16 +59,6 @@
                                 </div>
                               </div>
 
-                              <div class="col col-md-12">
-                                <div class="form-group">
-                                  <label class="control-label" for="descripcion">Descripción:</label> 
-                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="descripcion" value={{old('descripcion')}}> 
-                                  @error('descripcion')
-                                 <small>*{{$message}}</small>
-                                  @enderror
-                                </div>
-                              </div> 
-                               
                               <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="frcuencia">Frecuencia:</label> 
@@ -82,7 +72,7 @@
                               <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="unidad">Unidad:</label> 
-                                  <select name="frecuenciaSelect" class="form-control"   STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 14px; background: linear-gradient(to right,#030007, #495c5c);" value="{{old('frecuencia')}}">
+                                  <select name="unidadSelect" class="form-control"   STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 14px; background: linear-gradient(to right,#030007, #495c5c);" value="{{old('unidad')}}">
                                   <option value="Días">Días</option> 
                                   <option value="Meses">Meses</option> 
                                   <option value="Anual">Anual</option> 
@@ -92,20 +82,28 @@
                                   <small>*{{$message}}</small>
                                   @enderror
                                 </div>
-
-
-                              
+                               </div>
                             </div> {{-- ***** div de la primera fila --}}
-                            
-                            
-                            
+
+                            <div class="row"> {{-- ***** div de la segunda fila --}}
+                              <div class="col col-md-12">
+                                <div class="form-group">
+                                  <label class="control-label" for="descripcion">Descripción:</label> 
+                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="descripcion" value={{old('descripcion')}}> 
+                                  @error('descripcion')
+                                 <small>*{{$message}}</small>
+                                  @enderror
+                                </div>
+                              </div> 
+                            </div> {{-- ***** div de la segunda fila --}}  
+                              
                               
                             <br>
                             <br>
                            <div class="form-group">
                             <button form="nuevoPlan" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
                             <p style="text-align: right;"><a  class="text-white " href={{route('protocolos.index')}}>Salir</a></p> 
-                          </div>
+                           </div>
  
 
                         </div>{{-- div del container dentro de columna 2 --}}    

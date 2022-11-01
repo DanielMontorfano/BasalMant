@@ -37,7 +37,7 @@ class PlanprotoController extends Controller
      * @return \Illuminate\Http\Response
      */
     // public function store(StorePlanProtoRequest $request) //esto funciona una vez creado StoreEquipo de Request
-    public function store(StorePlanProtoRequest $request) //esto funciona una vez creado StoreEquipo de Request
+    public function store(Request $request) //esto funciona una vez creado StoreEquipo de Request
     {
         
        // dd(request()->all());
