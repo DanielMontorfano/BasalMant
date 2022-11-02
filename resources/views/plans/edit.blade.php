@@ -2,6 +2,22 @@
 @section('title', 'Edit')
 @section('content')
 <h1></h1>
+<style>
+  h6 {
+      text-align:center; font-size: 30px;
+                      background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
+                      -webkit-background-clip: text;
+                      -webkit-text-fill-color: transparent;
+
+  }
+
+  .input { color: #f2baa2;
+       font-family: Times New Roman;
+       font-size: 18px;
+       background: linear-gradient(to right,#030007, #495c5c);
+
+  }
+</style>
 
 
 <section class="main row ">
@@ -18,10 +34,7 @@
               <div class="col col-md-8">
                 {{-- Columna2 --}}
                 <form id="encabezado" action="{{route('plans.update', $plan->id)}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
-                  <h6 STYLE="text-align:center; font-size: 30px;
-                  background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
-                  -webkit-background-clip: text;
-                  -webkit-text-fill-color: transparent;">Editar plan</h6>
+                  <h6>Editar plan</h6>
                   @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
                   @method('put') {{-- Metodo PUT no existe en html, por eso indicamos a laravel como sigue --}}
                   
@@ -38,7 +51,44 @@
                             @enderror
                           </div>
                         </div>
-                        <div class="col col-md-9">
+
+                        <div class="col col-md-5">
+                          <div class="form-group">
+                            <label class="control-label" for="descripcion">Nombre:</label> 
+                            <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="nombre" value={{old('nombre', $plan->nombre)}}> 
+                            @error('nombre')
+                           <small>*{{$message}}</small>
+                            @enderror
+                          </div>
+                        </div>
+
+                        <div class="col col-md-2">
+                          <div class="form-group">
+                            <label class="control-label" for="frcuencia">Frecuencia:</label> 
+                            <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="frecuencia" value={{old('frecuencia', $plan->frecuencia)}}> 
+                            @error('frecuencia')
+                           <small>*{{$message}}</small>
+                            @enderror
+                          </div>
+                        </div> 
+
+                        <div class="col col-md-2">
+                          <div class="form-group">
+                            <label class="control-label" for="unidad">Unidad:</label> 
+                            <select name="unidadSelect" class="form-control"   STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" value="{{old('unidad', $plan->unidad)}}">
+                            <option value="{{$plan->unidad}}">{{$plan->unidad}}</option> 
+                            <option value="Días">Días</option> 
+                            <option value="Meses">Meses</option> 
+                            <option value="Años">Año</option> 
+                             
+                            </select>
+                            @error('unidad')
+                            <small>*{{$message}}</small>
+                            @enderror
+                          </div>
+                         </div>
+                      </div> {{-- ***** div de la primera fila --}}
+                        <div class="col col-md-12">
                           <div class="form-group">
                             <label class="control-label " for="descripcion">Descripción:</label>
                             <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="descripcion" value="{{old('descripcion', $plan->descripcion)}}" placeholder="Código de plan"> {{-- old() mantiene en campo con el dato--}}

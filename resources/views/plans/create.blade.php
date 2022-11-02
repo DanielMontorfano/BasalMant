@@ -30,26 +30,22 @@
                     {{-- columna2 --}}
                     
                     <form id="nuevoPlan"  action="{{route('plans.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
-                        
-                        <h6>Nuevo Plan</h6>
-                        @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
-                    
-                      
-                        <div class="p-3 mb-2 bg-gradient-primary text-white">
+                    <h6>Nuevo Plan</h6>
+                    @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
+                    <div class="p-3 mb-2 bg-gradient-primary text-white">
                         <div class="container">
-                            
-                            <div class="row"> {{-- ***** div de la primera fila --}}
-                              <div class="col col-md-2">
+                              <div class="row"> {{-- ***** div de la primera fila --}}
+                              <div class="col col-md-3">
                                 <div class="form-group">
                                   <label class="control-label" for="codigo">Codigo:</label> 
-                                  <input maxlength="11" minlength="11" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="codigo" value={{old('codigo')}}> 
+                                  <input maxlength="10" minlength="10" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="codigo" value={{old('codigo')}}> 
                                   @error('codigo')
                                   <small>*{{$message}}</small>
                                   @enderror
                                 </div>
                               </div> 
 
-                              <div class="col col-md-6">
+                              <div class="col col-md-5">
                                 <div class="form-group">
                                   <label class="control-label" for="descripcion">Nombre:</label> 
                                   <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="nombre" value={{old('nombre')}}> 
@@ -72,10 +68,11 @@
                               <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="unidad">Unidad:</label> 
-                                  <select name="unidadSelect" class="form-control"   STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 14px; background: linear-gradient(to right,#030007, #495c5c);" value="{{old('unidad')}}">
+                                  <select name="unidadSelect" class="form-control"   STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" value="{{old('unidad')}}">
+                                    <option value=""></option> 
                                   <option value="Días">Días</option> 
                                   <option value="Meses">Meses</option> 
-                                  <option value="Anual">Anual</option> 
+                                  <option value="Años">Años</option> 
                                    
                                   </select>
                                   @error('unidad')
@@ -102,7 +99,7 @@
                             <br>
                            <div class="form-group">
                             <button form="nuevoPlan" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
-                            <p style="text-align: right;"><a  class="text-white " href={{route('protocolos.index')}}>Salir</a></p> 
+                            <p style="text-align: right;"><a  class="text-white " href={{route('plans.index')}}>Salir</a></p> 
                            </div>
  
 

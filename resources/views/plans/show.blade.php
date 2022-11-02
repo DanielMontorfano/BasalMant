@@ -29,8 +29,7 @@
                       @method('put') {{-- Metodo PUT no existe en html, por eso indicamos a laravel como sigue --}}
                       
                       <div class="p-3 mb-2 bg-gradient-primary text-white">
-          
-                        <div class="container">
+                      <div class="container">
                           <div class="row">
                             <div class="col col-md-3">
                               <div class="form-group">
@@ -41,18 +40,47 @@
                                 @enderror
                               </div>
                             </div>
-                            <div class="col col-md-9">
+                            <div class="col col-md-5">
                               <div class="form-group">
-                                <label class="control-label " for="descripcion">Descripción:</label>
-                                <input readonly autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="codEquipo" value="{{old('descripcion', $plan->descripcion)}}" placeholder="Código de plan"> {{-- old() mantiene en campo con el dato--}}
-                                @error('descripcion') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
-                                <small class="help-block">*{{$message}}</small>
+                                <label class="control-label" for="nombre">Nombre:</label> 
+                                <input readonly autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="nombre" value="{{old('nombre', $plan->nombre)}}" placeholder="nombre"> {{-- old() mantiene en campo con el dato--}}
+                                 @error('nombre')
+                               <small>*{{$message}}</small>
                                 @enderror
                               </div>
                             </div>
-          
                             
-                        </div> {{-- cierra row 1--}}
+                           
+                            <div class="col col-md-2">
+                              <div class="form-group">
+                                <label class="control-label" for="frcuencia">Frecuencia:</label> 
+                                <input readonly autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="frecuencia" value="{{old('frecuencia', $plan->frecuencia)}}" placeholder="Frecuencia"> {{-- old() mantiene en campo con el dato--}}
+                                @error('frecuencia')
+                               <small>*{{$message}}</small>
+                                @enderror
+                              </div>
+                            </div> 
+                            <div class="col col-md-2">
+                              <div class="form-group">
+                                <label class="control-label" for="unidad">Unidad:</label> 
+                                <input readonly autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="unidad" value="{{old('unidad', $plan->unidad)}}" placeholder="Unidad"> {{-- old() mantiene en campo con el dato--}}
+                                @error('unidad')
+                                <small>*{{$message}}</small>
+                                @enderror
+                              </div>
+                             </div>
+
+                            </div> {{-- cierra row 1--}}
+                             <div class="col col-md-12">
+                              <div class="form-group">
+                                <label class="control-label " for="descripcion">Descripción:</label>
+                                <input readonly autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="descripcion" value="{{old('descripcion', $plan->descripcion)}}" placeholder="Descripcion"> {{-- old() mantiene en campo con el dato--}}
+                                @error('descripcion') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
+                                <small class="help-block">*{{$message}}</small>
+                                @enderror
+                             </div>
+                            
+                        
                               
                       </form >  {{-- Cierra Formulario Nº1 --}} 
                       <br>

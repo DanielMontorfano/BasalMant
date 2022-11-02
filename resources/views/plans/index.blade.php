@@ -31,8 +31,8 @@
     <thead class="table-dark" >
         
         <td>Plan</td>
+        <td>Nombre</td>
         <td>Detalle</td>
-        <td></td>
         <td></td>
         <td></td>
        
@@ -41,8 +41,8 @@
       <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
         
         <td STYLE="font-weight:bold; text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">{{$plan->codigo}}</td>
+        <td>{{$plan->nombre}}</td>
         <td>{{$plan->descripcion}}</td>
-        <td></td>
         <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">
           <a class="bi bi-pencil-fill" href="{{route('plans.edit', $plan->id)}}"></a> 
         </td>
