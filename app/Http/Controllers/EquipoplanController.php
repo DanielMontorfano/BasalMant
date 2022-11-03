@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Equipoplan;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePlanProtoRequest;
+use App\Models\Equipo;
+use App\Models\Plan;
+use App\Models\Protocolo;
 
-class EquipoplanController extends Controller
+class PlanprotoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -33,21 +37,23 @@ class EquipoplanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreEquipoRepuestoRequest $request) //esto funciona una vez creado StoreEquipo de Request
+    // public function store(StorePlanProtoRequest $request) //esto funciona una vez creado StoreEquipo de Request
+    public function store(Request $request) //esto funciona una vez creado StoreEquipo de Request
     {
         
-        //dd(request()->all());
-        //return;
+       // dd(request()->all());
+       // return;
+
         //$request->validate(['codEquipo'=>'required|max:8', 'marca'=>'required|min:3', 'modelo'=>'required']);
         //return $request->all();  //Para probar que recibo todos losregistros del formulario
         $Selector=$request->get('Selector'); //toma del formulario
         
        // $repuesto_id=$request->get('repuestosSelect'); //repuesto  a agregar
       // goto salir;
-        $equipo_id=$request->get('equipo_id'); //toma del formulario
-        $unidad=$request->get('unidad');
-        $check1=$request->get('check1');
+       //**************** $proto_id=$request->get('proto_id'); //toma del formulario
+       $equipo_id=$request->get('equipo_id'); //toma del formulario
 
+       // $check1=$request->get('check1');
        // if($check1){
        //    $check1="on";
        // }
@@ -55,6 +61,7 @@ class EquipoplanController extends Controller
        //echo "ddd:" . $check1;
        
         //$descripcion= substr("$search", 10, 50);
+        // *********************$protocolo=Protocolo::find($proto_id);
         $equipo=Equipo::find($equipo_id);
         // $repuesto_id2=Repuesto::where('');
         //echo $search;
@@ -63,35 +70,33 @@ class EquipoplanController extends Controller
         //$descripcion =$query->descripcion;   //Ojo el simbolo => es para arrays
         //}
         //echo"----- $Selector";
-        if ($Selector=="AgregarRep"){  
-        $cant=$request->get('cant'); //toma del formulario
+        if ($Selector=="AgregarPlan"){  
         $search=$request->get('search'); //toma cadena completa del formulario
-        $repuestoCodigo = substr("$search", 0, 9); //Extrae solo la descripcion
-        $repuesto_id=Repuesto::where('codigo',$repuestoCodigo)->first()->id;        
+        $planCodigo = substr("$search", 0, 10); //Extrae solo la descripcion
+        $plan_id=Plan::where('codigo',$planCodigo)->first()->id;       
+        //goto salir; 
         //$equipo=Equipo::find($equipo_id); //de la tabla equipos**Puede andar pero no graba con time at 
-        // $equipo->equiposRepuestos()->attach($repuesto_id); //**Puede andar pero no graba con time at 
-        $existeVinculo = $equipo->equiposRepuestos()->where('repuesto_id', $repuesto_id)->exists();
+        // $equipo->equiposRepuestos()->attach($repuesto_id); //**Puede andar pero no graba con time at
+
+        $existeVinculo = $equipo->equiposPlans()->where('plan_id', $plan_id)->exists();
         if($existeVinculo){
         echo "existe el Vinculo";  
         $mensaje='existe el Vinculo'; 
         goto salir;
         }
         $mensaje='';
-        $E_R= new EquipoRepuesto();
-        $E_R->equipo_id=$equipo_id;
-        $E_R->repuesto_id=$repuesto_id;
-        $E_R->unidad=$unidad;
-        $E_R->cant=$cant;
-        $E_R->check1=$check1;
-        
+        $E_P= new EquipoPlan();
+        $E_P->equipo_id=$equipo_id;
+        $E_P->plan_id=$plan_id;
+              
         // $equipo=Equipo::find($equipo_id); // Solo leo este registro para poder retornar correctamente
-        $E_R->save();
+        $E_P->save();
         goto salir; }
          
-         if ($Selector=="BorrarRep"){  
-         $repuestoBorrar_id=$request->get('repuestoBorrar_id');   //toma del formulario
+         if ($Selector=="BorrarPlan"){  
+         $planBorrar_id=$request->get('planBorrar_id');   //toma del formulario
          //$equipo=Equipo::find($equipo_id);   
-         $equipo->equiposRepuestos()->detach( $repuestoBorrar_id); //de la tabla equipo_repuesto   
+         $equipo->equipoPlans()->detach( $planBorrar_id); //de la tabla equipo_repuesto   
         // echo " Debemos Borrar";   
          goto salir;
         }
@@ -101,19 +106,22 @@ class EquipoplanController extends Controller
         //return $par ; 
         salir:
         return redirect()->route('equipos.edit', $equipo->id); //Buenisimo, de una clase a otra clase
-       // echo  $repuesto_id;
-       // echo $Selector;
-        //echo $repuestoBorrar_id;
-       // return ;
+       //echo  $tareaCodigo ;
+        echo $Selector;
+       // echo $tarea_id;
+        echo  $tareaBorrar_id;
+        echo $proto_id;
+        return ;
     }
+
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Equipoplan  $equipoplan
+     * @param  \App\Models\Planproto  $planproto
      * @return \Illuminate\Http\Response
      */
-    public function show(Equipoplan $equipoplan)
+    public function show(Planproto $planproto)
     {
         //
     }
@@ -121,10 +129,10 @@ class EquipoplanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Equipoplan  $equipoplan
+     * @param  \App\Models\Planproto  $planproto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Equipoplan $equipoplan)
+    public function edit(Planproto $planproto)
     {
         //
     }
@@ -133,10 +141,10 @@ class EquipoplanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Equipoplan  $equipoplan
+     * @param  \App\Models\Planproto  $planproto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Equipoplan $equipoplan)
+    public function update(Request $request, Planproto $planproto)
     {
         //
     }
@@ -144,10 +152,10 @@ class EquipoplanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Equipoplan  $equipoplan
+     * @param  \App\Models\Planproto  $planproto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Equipoplan $equipoplan)
+    public function destroy(Planproto $planproto)
     {
         //
     }

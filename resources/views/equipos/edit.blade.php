@@ -393,6 +393,32 @@
               </tr>
             </table>
         </form>
+        {{-- Formulario agregar Plan --}}
+        <form action="{{route('planproto.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+          @csrf
+          <input type="hidden" name="Selector" value="AgregarPlan" readonly >
+          <input type="hidden" name="equipo_id" value={{$equipo->id}} readonly >
+               <table class="table table-sm" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
+                 <tr>
+                    <td><input type="text" class='form-control' name="search" id="search" autocomplete="off" placeholder="Buscar plan"class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
+                                    
+
+                    <td style="text-align: right;"><button class="btn btn-primary" type="submit" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Agregar</button> </td>
+                    
+                  </tr>
+            </table>
+        </form>
+
+
+
+
+
+
+
+
+
+
+        
 
       </div> 
      </div> 

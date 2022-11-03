@@ -76,7 +76,7 @@ Route::resource('planproto', PlanprotoController::class);
 //**************************************************************************** */
 Route::get('search/tareas', [SearchTareasController::class,'tareas'])->name('search.tareas'); //esta ruta permite hacer las busqudas asicrónicas AJAX
 Route::get('search/protocolos', [SearchProtocolosController::class,'protocolos'])->name('search.protocolos'); //esta ruta permite hacer las busqudas asicrónicas AJAX
-
+Route::get('search/plan', [SearchPlanController::class,'plan'])->name('search.plan'); //esta ruta permite hacer las busqudas asicrónicas AJAX
 
 
 

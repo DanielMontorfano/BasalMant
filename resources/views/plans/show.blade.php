@@ -104,8 +104,8 @@
                                            
                                             <tbody>
                                                   <tr>
-                                                    <th STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "scope="row">{{$protocolo['codProto']}}</th>
-                                                    <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{$protocolo['descripcion']}}</td>
+                                                    <th STYLE="color: #3ef10d; font-family: Times New Roman;  font-size: 14px; "scope="row">{{$protocolo['codProto']}}</th>
+                                                    <td STYLE="color: #3ef10d; font-family: Times New Roman;  font-size: 14px; ">{{$protocolo['descripcion']}}</td>
                                                   </tr>
                                                   @foreach($Tareas as $tarea) 
                                                   @if($protocolo['codProto'] ==$tarea['cod'])

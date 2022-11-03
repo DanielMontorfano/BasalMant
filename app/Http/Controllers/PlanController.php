@@ -189,7 +189,8 @@ class PlanController extends Controller
         //en el modelo Equipo "protected $fillable=[array que se desea]"
         //esto asigna todo el formulario de una vez, y hace el save() automaticamente
        // $equipo->update($request->all()); //lo suspendi porque dejo de funcionar 
-       return view('plans.show', compact('plan')); //Envío show todo el registro en cuestión, sin $
+      // return view('plans.show', compact('plan')); //Envío show todo el registro en cuestión, sin $
+       return redirect()->route('plans.show', $plan->id);
        //return $repuestos;
     }
 
