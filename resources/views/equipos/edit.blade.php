@@ -453,6 +453,24 @@
       }
     });
   </script> 
+  <script>
+    $( "#search" ).autocomplete({
+    source: function(request, response){
+      
+            $.ajax({
+            url:"{{route('search.plans')}}",   //ruta que se debe definir en web
+             dataType: 'json',
+            data:{
+                   term: request.term
+                  },
+                  success: function(data) {
+                  response(data)  
+          }
+
+      });
+    }
+  });
+</script> 
 
    {{-- Este es el script de la pagian oficial
      <script>

@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Plan;
 
 
-class SearchPlanController extends Controller
+class SearchPlansController extends Controller
 {  
-    public function repuestos(request $request){
+   public function plans(request $request){
+        return $request;
         $term = $request->get('term');
         $length = strlen($term);  //PAra que empiece a buscar a partir de determinada longitud
         if($length>3){
