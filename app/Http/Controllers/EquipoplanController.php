@@ -9,7 +9,7 @@ use App\Models\Equipo;
 use App\Models\Plan;
 use App\Models\Protocolo;
 
-class PlanprotoController extends Controller
+class Equipoplancontroller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -70,9 +70,11 @@ class PlanprotoController extends Controller
         //$descripcion =$query->descripcion;   //Ojo el simbolo => es para arrays
         //}
         //echo"----- $Selector";
+        $mensaje='Antes de preguntar'; 
         if ($Selector=="AgregarPlan"){  
-        $search=$request->get('search'); //toma cadena completa del formulario
+        $search=$request->get('BuscaPlan'); //toma cadena completa del formulario
         $planCodigo = substr("$search", 0, 10); //Extrae solo la descripcion
+       
         $plan_id=Plan::where('codigo',$planCodigo)->first()->id;       
         //goto salir; 
         //$equipo=Equipo::find($equipo_id); //de la tabla equipos**Puede andar pero no graba con time at 
@@ -84,8 +86,9 @@ class PlanprotoController extends Controller
         $mensaje='existe el Vinculo'; 
         goto salir;
         }
-        $mensaje='';
-        $E_P= new EquipoPlan();
+       // $mensaje='ENTRE A GRABAR';
+       // goto salir;
+        $E_P= new Equipoplan();
         $E_P->equipo_id=$equipo_id;
         $E_P->plan_id=$plan_id;
               
@@ -96,7 +99,7 @@ class PlanprotoController extends Controller
          if ($Selector=="BorrarPlan"){  
          $planBorrar_id=$request->get('planBorrar_id');   //toma del formulario
          //$equipo=Equipo::find($equipo_id);   
-         $equipo->equipoPlans()->detach( $planBorrar_id); //de la tabla equipo_repuesto   
+         $equipo->equiposPlans()->detach( $planBorrar_id); //de la tabla equipoplans  
         // echo " Debemos Borrar";   
          goto salir;
         }
@@ -105,8 +108,11 @@ class PlanprotoController extends Controller
         // salir:  $par="$Selector,$repuesto_id,$equipo_id";
         //return $par ; 
         salir:
-        return redirect()->route('equipos.edit', $equipo->id); //Buenisimo, de una clase a otra clase
-       //echo  $tareaCodigo ;
+        
+       return redirect()->route('equipos.edit', $equipo->id); //Buenisimo, de una clase a otra clase
+        // return $mensaje;
+       
+        //echo  $tareaCodigo ;
         echo $Selector;
        // echo $tarea_id;
         echo  $tareaBorrar_id;

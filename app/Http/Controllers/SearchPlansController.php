@@ -9,7 +9,7 @@ use App\Models\Plan;
 class SearchPlansController extends Controller
 {  
    public function plans(request $request){
-        return $request;
+        
         $term = $request->get('term');
         $length = strlen($term);  //PAra que empiece a buscar a partir de determinada longitud
         if($length>3){

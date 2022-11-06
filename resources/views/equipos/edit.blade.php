@@ -286,15 +286,52 @@
                       </table>
                     </div> {{-- div del card7 --}} 
                     </div>   {{-- div del card8 --}}
+                    <br>
+                    
 
 
+
+                    {{--MUESTRA PLANES ASOCIADOS --}}
+                  <div class="card " STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+                    <div class="card-header " STYLE="background: linear-gradient(to right,#495c5c,#030007);">            
+                                 {{-- MUESTRA PLANES --}} 
+                          <table class="table" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+                                 <thead>
+                                    <tr>
+                                      <th style="text-align: center; color: #ffffff;" scope="col">Código</th>
+                                      <th style="text-align: center; color: #ffffff;" scope="col">Nombre</th>
+                                      <th style="text-align: center; color: #ffffff;" scope="col">Descripción</th>
+                                      <th style="text-align: center; color: #ffffff;" scope="col"></th>
+                                    </tr>
+                                  </thead>
+                                  @foreach($planes as $plan)
+                                    <form action="{{route('equipoPlan.store')}}" method="POST">
+                                      @csrf
+                                       
+                                        <tbody>
+                                              <tr>
+                                                <input type="hidden" name="Selector" value="BorrarPlan" readonly >
+                                                <input type="hidden" name="equipo_id" value={{$equipo->id}} readonly >
+                                                <input type="hidden" name="planBorrar_id" value={{$plan->id}} readonly >
+                                                <th STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "scope="row">{{ $plan->codigo }}</th>
+                                                <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{ $plan->nombre}}</td>
+                                                <td STYLE="text-align: center; color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{$plan->descripcion}}</td>
+                                                <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">  <button class="bi bi-trash3-fill btn btn-link"  type="submit" ></button></td>
+                                              </tr>
+                                        </tbody>
+                                    </form>
+                                    @endforeach
+                          </table>
+                      </div> {{-- div del card9 --}}
+                      </div> {{-- div del card10 --}}
+                      <br>
 
 
 
 
 
               <div class="col col-md-2">
-                Columna
+                {{-- Columna --}}
               </div>
             </div>
           </div>
@@ -394,31 +431,18 @@
             </table>
         </form>
         {{-- Formulario agregar Plan --}}
-        <form action="{{route('planproto.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+        <form action="{{route('equipoPlan.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
           @csrf
           <input type="hidden" name="Selector" value="AgregarPlan" readonly >
           <input type="hidden" name="equipo_id" value={{$equipo->id}} readonly >
                <table class="table table-sm" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
                  <tr>
-                    <td><input type="text" class='form-control' name="search" id="search" autocomplete="off" placeholder="Buscar plan"class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
-                                    
-
+                    <td><input type="text" class='form-control' name="BuscaPlan" id="BuscaPlan" autocomplete="off" placeholder="Buscar plan"class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
                     <td style="text-align: right;"><button class="btn btn-primary" type="submit" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Agregar</button> </td>
-                    
-                  </tr>
-            </table>
+                 </tr>
+               </table>
         </form>
 
-
-
-
-
-
-
-
-
-
-        
 
       </div> 
      </div> 
@@ -436,7 +460,25 @@
 
 
 <script>
-      $( "#search" ).autocomplete({
+    
+    $( "#BuscaPlan" ).autocomplete({
+      source: function(request, response){
+        
+              $.ajax({
+              url:"{{route('search.plans')}}",
+               dataType: 'json',
+              data:{
+                     term: request.term
+                    },
+                    success: function(data) {
+                    response(data)  
+            }
+
+        });
+      }
+    });
+
+    $( "#search" ).autocomplete({
       source: function(request, response){
         
               $.ajax({
@@ -452,25 +494,10 @@
         });
       }
     });
-  </script> 
-  <script>
-    $( "#search" ).autocomplete({
-    source: function(request, response){
-      
-            $.ajax({
-            url:"{{route('search.plans')}}",   //ruta que se debe definir en web
-             dataType: 'json',
-            data:{
-                   term: request.term
-                  },
-                  success: function(data) {
-                  response(data)  
-          }
+    
 
-      });
-    }
-  });
-</script> 
+  </script> 
+   
 
    {{-- Este es el script de la pagian oficial
      <script>

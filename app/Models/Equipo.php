@@ -54,8 +54,14 @@ class Equipo extends Model
     {
         return $this->hasMany('App\Models\Documento'); //Por ahora no cambio conveniccion de nombres
     }
-    
-
+    // **********************************************Ultimo para PLAN
+    public function equiposPlans()
+    {
+        return $this->belongsToMany('App\Models\Plan', 'equipoplans','equipo_id','plan_id'); //Personalizo nombre la tabla  pivot  y el campo clave primaria
+       // ->withPivot('cant','unidad','check1');
+        //->withTimestamps();
+       // return $this->belongsToMany('App\Models\Repuesto', 'equipo_repuestos', 'equipo_id', 'repuesto_id');
+    }
 
  //   public function products()
 //{

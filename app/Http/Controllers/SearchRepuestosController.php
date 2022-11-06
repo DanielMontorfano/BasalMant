@@ -9,6 +9,8 @@ use App\Models\Repuesto;
 class SearchRepuestosController extends Controller
 {  
     public function repuestos(request $request){
+        //$aux="adentro";
+       // return $aux; //$request;
         $term = $request->get('term');
         $length = strlen($term);  //PAra que empiece a buscar a partir de determinada longitud
         if($length>3){

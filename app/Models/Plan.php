@@ -22,7 +22,15 @@ class Plan extends Model
         ->withPivot('check1');
         
     } 
-
+    
+    //relacion de muchos a muchos
+    public function plansEquipos()
+    {
+        return $this->belongsToMany('App\Models\Equipo','equipoplans','equipo_id','plan_id');
+       // ->withPivot('cant','unidad');
+        
+        
+    } 
 
     
 
