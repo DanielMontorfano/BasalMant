@@ -94,9 +94,8 @@ class ProtocoloController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {    $equipo=Equipo::find($id);
+    {   $equipo=Equipo::find($id);
         $tareasTodos=Tarea::all();
-        
         $protocolo=Protocolo::find($id);
         $tareas= Protocolo::find($id)->protocolosTareas; //"protocolosTareas" Metodo perteneciente al modelo Protocolo
        // $fotosTodos=Equipo::find($id)->fotos; //Aqui hago referencia al Metodo fotos perteneciente al modelo Equipo que trae los registro del modelo fotos vinculados a este equipo

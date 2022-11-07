@@ -141,9 +141,8 @@ class PlanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {    $equipo=Equipo::find($id);
+    {   $equipo=Equipo::find($id);
         $protosTodos=Protocolo::all();
-        
         $plan=Plan::find($id);
         $protocolos= Plan::find($id)->plansProtocolos; //"plansProtocolos" Metodo perteneciente al modelo Plan
        // $fotosTodos=Equipo::find($id)->fotos; //Aqui hago referencia al Metodo fotos perteneciente al modelo Equipo que trae los registro del modelo fotos vinculados a este equipo

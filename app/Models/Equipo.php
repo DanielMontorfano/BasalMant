@@ -62,6 +62,25 @@ class Equipo extends Model
         //->withTimestamps();
        // return $this->belongsToMany('App\Models\Repuesto', 'equipo_repuestos', 'equipo_id', 'repuesto_id');
     }
+    
+    public function equiposAEquiposB()
+    {
+        return $this->belongsToMany('App\Models\Equipo', 'equipo_equipos','equipo_id','vinc_id'); //Personalizo nombre la tabla  pivot  y el campo clave primaria
+       // ->withPivot('cant','unidad','check1');
+        //->withTimestamps();
+       // return $this->belongsToMany('App\Models\Repuesto', 'equipo_repuestos', 'equipo_id', 'repuesto_id');
+    }
+     
+    public function equiposBEquiposA()
+    {
+        return $this->belongsToMany('App\Models\Equipo','equipo_equipos','equipo_id','vinc_id'); //Caso particular
+       // ->withPivot('cant','unidad');
+        
+        
+    } 
+
+
+
 
  //   public function products()
 //{

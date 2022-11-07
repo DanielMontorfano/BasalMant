@@ -9,7 +9,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\EquipoRepuestoController; 
-use App\Http\Controllers\EquipoplanController;
+use App\Http\Controllers\EquipoplanController; 
+use App\Http\Controllers\EquipoEquipoController;
 use App\Http\Controllers\SearchRepuestosController;
 use App\Http\Controllers\ImagenController;
 use App\Mail\ContactanosMailable;
@@ -25,7 +26,7 @@ use App\Http\Controllers\PlanprotoController;
 use App\Http\Controllers\SearchTareasController;
 use App\Http\Controllers\SearchProtocolosController; 
 use App\Http\Controllers\SearchPlansController;
-
+use App\Http\Controllers\SearchEquipoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,6 +50,7 @@ Route::delete('/equipos/{equipo}/borrar', [EquipoController::class, 'destroy'])-
 Route::resource('equipoRepuesto', EquipoRepuestoController::class);
 Route::get('search/repuestos', [SearchRepuestosController::class,'repuestos'])->name('search.repuestos');
 Route::resource('equipoPlan', EquipoplanController::class);
+Route::resource('equipoEquipo', EquipoEquipoController::class);
 //************************************************************************** */
 Route::resource('fotos', FotoController::class);
 Route::get('fotos/{equipo}', [EquipoController::class, 'show'])->name('fotos.show');
@@ -79,7 +81,7 @@ Route::resource('planproto', PlanprotoController::class);
 Route::get('search/tareas', [SearchTareasController::class,'tareas'])->name('search.tareas'); //esta ruta permite hacer las busqudas asicrónicas AJAX
 Route::get('search/protocolos', [SearchProtocolosController::class,'protocolos'])->name('search.protocolos'); //esta ruta permite hacer las busqudas asicrónicas AJAX
 Route::get('search/plans', [SearchPlansController::class,'plans'])->name('search.plans'); //NO Olvidar poner use!!!! esta ruta permite hacer las busqudas asicrónicas AJAX
-
+Route::get('search/equipos', [SearchEquipoController::class,'equipos'])->name('search.equipos'); //NO Olvidar poner use!!!! esta ruta permite hacer las busqudas asicrónicas AJAX
 
 
 

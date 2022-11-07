@@ -200,7 +200,7 @@
       source: function(request, response){
         
               $.ajax({
-              url:"{{route('search.plan')}}",   //ruta que se debe definir en web
+              url:"{{route('search.plans')}}",   //ruta que se debe definir en web
                dataType: 'json',
               data:{
                      term: request.term
