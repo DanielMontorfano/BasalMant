@@ -170,6 +170,36 @@
         </tr>
         @endif
         @endforeach
+
+
+        
+       {{-- ACESORIOS --}}
+       <thead>
+        <tr>
+          <th scope="col" class="text-center"></th>
+          <th scope="col" class="text-center">Plan</th>
+          <th scope="col" class="text-center"></th>
+        </tr>
+      </thead>
+      <thead>
+        <tr>
+          <th scope="col" class="text-center">Código</th>
+          <th scope="col" class="text-center">Descripción</th>
+          <th scope="col" class="text-center"></th>
+         
+        </tr>
+      </thead>
+      @foreach($plans as $plan)
+     
+      <tr>
+        <th scope="row" class="text-center">{{ $plan->codigo }}</th>
+        <td>{{ $plan->descripcion}} </td>
+        <td class="text-center"></td>
+       
+      </tr>
+     
+      @endforeach
+
        
 
 

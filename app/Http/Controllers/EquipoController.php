@@ -91,12 +91,12 @@ class EquipoController extends Controller
         {
         $equipo= Equipo::find($id); // Ver la linea de abajo alternativa
         $repuestos=$equipo->equiposRepuestos; // otra alternativa: $repuestos= Equipo::find($id)->equiposRepuestos; en una sola linea. 
-        
+        $plans=$equipo->equiposPlans;
         //return $equipo;
         //return 'hhhhhhhhhhhhhhhh' . $repuestos;
         //return view('Equipos.show', ['variable'=>$equipo]); video anterior
 
-       return view('equipos.show', compact('equipo','repuestos')); //Envío todo el registro en cuestión
+       return view('equipos.show', compact('equipo','repuestos', 'plans')); //Envío todo el registro en cuestión
 
        // return view('Equipos.show');
     }
