@@ -80,6 +80,14 @@ class Equipo extends Model
     } 
 
 
+    public function equiposTareash()
+    {
+        return $this->belongsToMany('App\Models\Tareash')
+        ->withPivot('plan_id','tcheck','detalleh', 'operario');
+        //->withTimestamps();
+       // return $this->belongsToMany('App\Models\Repuesto', 'equipo_repuestos', 'equipo_id', 'repuesto_id');
+    }
+
 
 
  //   public function products()

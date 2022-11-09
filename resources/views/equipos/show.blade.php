@@ -51,7 +51,7 @@
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;">Datos técnicos</h6>
     <p class="card-text"></p>
-    <div class="card border-primary bg-secondary ">
+    <div class="card border-primary .text-black-50 ">
     <div class="card-body "  style="max-width: 85;">
       <table class="table table-striped">
         <thead>
@@ -194,7 +194,9 @@
       <tr>
         <th scope="row" class="text-center">{{ $plan->codigo }}</th>
         <td>{{ $plan->descripcion}} </td>
-        <td class="text-center"></td>
+        <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">
+          <a class="bi bi-check2-square" href="{{route('equipos.edit', $equipo->id)}}"></a> 
+        </td>
        
       </tr>
      

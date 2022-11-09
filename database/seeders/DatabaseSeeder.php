@@ -6,6 +6,7 @@ use App\Models\Equipo;
 use App\Models\EquipoRepuesto;
 use App\Models\OrdenTrabajo;
 use App\Models\Tarea;
+use App\Models\Tareash;
 use App\Models\Protocolo;
 use App\Models\Plan;
 use App\Models\User;
@@ -46,6 +47,7 @@ class DatabaseSeeder extends Seeder
         Tarea::factory(50)->create();
         Protocolo::factory(50)->create();
         Plan::factory(50)->create();
+        Tareash::factory(50)->create();
        // EquipoRepuesto::factory(50)->create();
 
     }

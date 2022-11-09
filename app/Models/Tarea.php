@@ -15,5 +15,13 @@ class Tarea extends Model
         ->withPivot('check1');
         
     } 
+
+    public function tareasEquipos()
+    {
+        return $this->belongsToMany('App\Models\Equipo')
+        ->withPivot('plan_id','tcheck','detalleh', 'operario');
+        
+        
+    } 
         
 }
