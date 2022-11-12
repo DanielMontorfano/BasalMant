@@ -173,7 +173,7 @@
 
 
         
-       {{-- ACESORIOS --}}
+       {{-- PLAN VINCULADOS --}}
        <thead>
         <tr>
           <th scope="col" class="text-center"></th>
@@ -201,7 +201,36 @@
       </tr>
      
       @endforeach
+      
+      {{-- Equipos Vinculados --}}
+      <thead>
+        <tr>
+          <th scope="col" class="text-center"></th>
+          <th scope="col" class="text-center">Equipos</th>
+          <th scope="col" class="text-center"></th>
+        </tr>
+      </thead>
 
+      <thead>
+        <tr>
+          <th scope="col" class="text-center">Código</th>
+          <th scope="col" class="text-center">Marca</th>
+          <th scope="col" class="text-center">Modelo</th>
+          <th scope="col" class="text-center"></th>
+        </tr>
+      </thead>
+      @foreach($equiposB as $equipoB)
+      <tr>
+        <th scope="row" class="text-center">{{ $equipoB->codEquipo }}</th>
+        <td>{{ $equipoB->marca}} </td>
+        <td>{{ $equipoB->modelo}} </td>
+        <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">
+          <a class="bi bi-check2-square" href="{{route('equipos.edit', $equipoB->id)}}"></a> 
+        </td>
+       
+      </tr>
+     
+      @endforeach
        
 
 

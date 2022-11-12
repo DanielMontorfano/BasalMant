@@ -91,12 +91,14 @@ class EquipoController extends Controller
         {
         $equipo= Equipo::find($id); // Ver la linea de abajo alternativa
         $repuestos=$equipo->equiposRepuestos; // otra alternativa: $repuestos= Equipo::find($id)->equiposRepuestos; en una sola linea. 
-        $plans=$equipo->equiposPlans;
+        //$plans=$equipo->equiposPlans; //Igual se puede porque ya tengo el registro
+        $plans=Equipo::find($id)->equiposPlans; 
+        $equiposB=Equipo::find($id)->equiposAEquiposB; 
         //return $equipo;
         //return 'hhhhhhhhhhhhhhhh' . $repuestos;
         //return view('Equipos.show', ['variable'=>$equipo]); video anterior
 
-       return view('equipos.show', compact('equipo','repuestos', 'plans')); //Envío todo el registro en cuestión
+       return view('equipos.show', compact('equipo','repuestos', 'plans','equiposB')); //Envío todo el registro en cuestión
 
        // return view('Equipos.show');
     }
@@ -188,6 +190,8 @@ class EquipoController extends Controller
         $request->validate(['codEquipo'=>'required', 'marca'=>'required', 'modelo'=>'required']);
         $equipo= Equipo::find($id);
         $repuestos=$equipo->equiposRepuestos;
+        $plans=$equipo->equiposPlans;
+        $equiposB=$equipo->equiposAEquiposB;
         $equipo->codEquipo=$request->codEquipo;
         $equipo->marca=$request->marca;
         $equipo->modelo=$request->modelo;
@@ -208,7 +212,7 @@ class EquipoController extends Controller
         //en el modelo Equipo "protected $fillable=[array que se desea]"
         //esto asigna todo el formulario de una vez, y hace el save() automaticamente
        // $equipo->update($request->all()); //lo suspendi porque dejo de funcionar 
-       return view('equipos.show', compact('equipo','repuestos')); //Envío show todo el registro en cuestión, sin $
+       return view('equipos.show', compact('equipo','repuestos', 'plans','equiposB')); //Envío show todo el registro en cuestión, sin $
        //return $repuestos;
     }
 

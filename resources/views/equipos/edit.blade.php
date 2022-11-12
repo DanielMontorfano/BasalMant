@@ -340,12 +340,12 @@
                                     </tr>
                                   </thead>
                                   @foreach($equiposB as $equipoB)
-                                    <form action="{{route('equipoEquipos.store')}}" method="POST">
+                                    <form action="{{route('equipoEquipo.store')}}" method="POST">
                                       @csrf
                                        
                                         <tbody>
                                               <tr>
-                                                <input type="hidden" name="Selector" value="BorrarPlan" readonly >
+                                                <input type="hidden" name="Selector" value="BorrarEquipo" readonly >
                                                 <input type="hidden" name="equipo_id" value={{$equipo->id}} readonly >
                                                 <input type="hidden" name="equipoBBorrar_id" value={{$equipoB->id}} readonly >
                                                 <th STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "scope="row">{{ $equipoB->codEquipo }}</th>
