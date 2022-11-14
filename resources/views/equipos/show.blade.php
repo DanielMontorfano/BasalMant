@@ -1,6 +1,8 @@
 @extends('layouts.plantilla')
 @section('title', 'Ver ' . $equipo->marca)
+
 @section('content')
+
 <h1></h1>
 {{-- ESTO ES UN COMENTARIO <h1>Aqui podras ver el equipo: <?php echo $variable;?></h1> --}}
 {{-- <h1>Aqui podras ver el equipo: {{ $variable}}</h1> --}}
@@ -172,8 +174,10 @@
         @endforeach
 
 
-        
+        {{-- Prueba --}}
+
        {{-- PLAN VINCULADOS --}}
+
        <thead>
         <tr>
           <th scope="col" class="text-center"></th>
