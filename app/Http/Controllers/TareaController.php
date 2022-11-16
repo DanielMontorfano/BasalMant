@@ -48,12 +48,16 @@ class TareaController extends Controller
       
         // las siguentes lineas seria en forma manual, 
         $tarea= new Tarea();
-        $tarea->codigo=$request->codigo;
+        //$tarea->codigo=$request->codigo;
         $tarea->descripcion=$request->descripcion;
         $tarea->duracion=$request->duracion;
         $tarea->unidad=$request->uniTiempoSelect;
-        
         $tarea->save();
+        $id_ultimo= "TAR-" . str_pad($tarea->id,"8","0", STR_PAD_LEFT); //Formato para codigo
+        $tarea= Tarea::find($tarea->id);
+        $tarea->codigo= $id_ultimo;
+        $tarea->save();
+
      
         //Asi se realizará con Asignacion Masiva, es mas simple, pero se debe colocar 
         //en el modelo Equipo "protected $fillable=[array que se desea]"
@@ -61,7 +65,7 @@ class TareaController extends Controller
         //$equipo=Equipo::create($request->all());
        //***** return redirect()->route('equipos.show', $tarea->id); //se puede omitir ->id, igual funciona
         //return view('Equipos.store');
-       return "LISTA";
+        return redirect()->route('tareas.show', $tarea->id);
     }  
 
     /**
@@ -109,6 +113,9 @@ class TareaController extends Controller
         $tarea->duracion=$request->duracion;
         $tarea->unidad=$request->uniTiempoSelect;
         $tarea->save();
+        
+
+
         $tareas= Tarea::orderBy('id','desc')->paginate();
         return view('tareas.index', compact('tareas')); //Envío show todo el registro en cuestión, sin $
     }

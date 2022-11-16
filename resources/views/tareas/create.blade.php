@@ -39,16 +39,8 @@
                         <div class="container">
                             
                             <div class="row"> {{-- ***** div de la primera fila --}}
-                              <div class="col col-md-2">
-                                <div class="form-group">
-                                  <label class="control-label" for="codigo">Codigo:</label> 
-                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="codigo" value={{old('codigo')}}> 
-                                  @error('codigo')
-                                  <small>*{{$message}}</small>
-                                  @enderror
-                                </div>
-                              </div> 
-                              <div class="col col-md-6">
+                              
+                              <div class="col col-md-8"> {{-- ***** div de la primera fila --}}
                                 <div class="form-group">
                                   <label class="control-label" for="descripcion">Descripción:</label> 
                                   <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="descripcion" value={{old('descripcion')}}> 

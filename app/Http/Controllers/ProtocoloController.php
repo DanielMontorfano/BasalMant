@@ -52,11 +52,16 @@ class ProtocoloController extends Controller
         // return "Sali";
         // las siguentes lineas seria en forma manual, 
         $protocolo= new Protocolo();
-        $protocolo->codigo=$request->codigo;
+       // $protocolo->codigo=$request->codigo;
         $protocolo->descripcion=$request->descripcion;
-        
-        
         $protocolo->save();
+        $id_ultimo= "PDM-" . str_pad($protocolo->id,"8","0", STR_PAD_LEFT); //Formato para codigo
+        $tarea= Protocolo::find($protocolo->id);
+        $protocolo->codigo= $id_ultimo;
+        $protocolo->save();
+
+
+
      
         //Asi se realizará con Asignacion Masiva, es mas simple, pero se debe colocar 
         //en el modelo Equipo "protected $fillable=[array que se desea]"

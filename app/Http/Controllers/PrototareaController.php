@@ -58,6 +58,7 @@ class PrototareaController extends Controller
        
         //$descripcion= substr("$search", 10, 50);
         $protocolo=Protocolo::find($proto_id);
+        //return $protocolo;
         // $repuesto_id2=Repuesto::where('');
         //echo $search;
         //$querys=Repuesto::where('descripcion','LIKE','%'.$descripcion.'%')->get();
@@ -67,7 +68,8 @@ class PrototareaController extends Controller
         //echo"----- $Selector";
         if ($Selector=="AgregarTarea"){  
         $search=$request->get('search'); //toma cadena completa del formulario
-        $tareaCodigo = substr("$search", 0, 11); //Extrae solo la descripcion
+        $tareaCodigo = substr("$search", 0, 12); //Extrae solo la descripcion
+       // return $tareaCodigo;
         $tarea_id=Tarea::where('codigo',$tareaCodigo)->first()->id;       
         //goto salir; 
         //$equipo=Equipo::find($equipo_id); //de la tabla equipos**Puede andar pero no graba con time at 

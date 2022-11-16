@@ -23,7 +23,7 @@ class StoreProtocoloRequest extends FormRequest
      */
     public function rules()
     {
-        return ['codigo'=>'required |min:11|max:11',
+        return [
                 'descripcion'=>'required|min:10',
            
         ];
@@ -32,7 +32,7 @@ class StoreProtocoloRequest extends FormRequest
     public function attributes() //Fabuloso!! personalizar mensaje
     {
         return[
-            'codigo'=>'el código',
+           
             'descripcion'=>'la descripción',
            
 
@@ -42,7 +42,7 @@ class StoreProtocoloRequest extends FormRequest
     public function messages() //Mejor Aun, personalizar!!
     {
         return[
-            'codigo.required'=>'el codigo debe tener 11 caracteres',
+            
             'descripcion.required'=>'debe tener mínimo 10 caracteres',
           
            

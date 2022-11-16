@@ -32,6 +32,7 @@
                     <form id="nuevoProtocolo"  action="{{route('protocolos.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                         
                         <h6>Nuevo procedimiento</h6>
+                        
                         @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
                     
                       
@@ -39,16 +40,8 @@
                         <div class="container">
                             
                             <div class="row"> {{-- ***** div de la primera fila --}}
-                              <div class="col col-md-2">
-                                <div class="form-group">
-                                  <label class="control-label" for="codigo">Codigo:</label> 
-                                  <input maxlength="11" minlength="11" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="codigo" value={{old('codigo')}}> 
-                                  @error('codigo')
-                                  <small>*{{$message}}</small>
-                                  @enderror
-                                </div>
-                              </div> 
-                              <div class="col col-md-10">
+                               
+                              <div class="col col-md-12">
                                 <div class="form-group">
                                   <label class="control-label" for="descripcion">Descripción:</label> 
                                   <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="descripcion" value={{old('descripcion')}}> 

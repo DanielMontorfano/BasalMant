@@ -1,5 +1,12 @@
 @extends('layouts.plantilla')
 @section('title', 'Edit')
+@section('css')
+{{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
+{{-- Para que sea responsive se agraga la tercer libreria --}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap5.min.css">
+@endsection
 @section('content')
 <h1></h1>
 
@@ -57,8 +64,8 @@
                   <div class="card " STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                     <div class="card-header " STYLE="background: linear-gradient(to right,#495c5c,#030007);">            
                                  {{-- MUESTRA PROTOCOLOS --}} 
-                          <table class="table" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
-                                 <thead>
+                          <table  class="table table-striped table-success  table-hover border-4">
+                                 <thead >
                                     <tr>
                                       <th style="text-align: center; color: #ffffff;" scope="col">Código</th>
                                       <th style="text-align: center; color: #ffffff;" scope="col">Descripción</th>
@@ -71,14 +78,13 @@
                                       @csrf
                                        
                                         <tbody>
-                                              <tr>
+                                              <tr STYLE="color: #c12a2a; font-family: Times New Roman;  font-size: 14px; ">
                                                 <input type="hidden" name="Selector" value="BorrarTarea" readonly >
                                                 <input type="hidden" name="proto_id" value={{$protocolo->id}} readonly >
                                                 <input type="hidden" name="tareaBorrar_id" value={{$tarea->id}} readonly >
-                                                <th STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "scope="row">{{ $tarea->codigo }}</th>
-                                                <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{ $tarea->descripcion}}</td>
-                                                                                              
-                                                <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">  <button class="bi bi-trash3-fill btn btn-link"  type="submit" ></button></td>
+                                                <th>{{ $tarea->codigo }}</th>
+                                                <td>{{ $tarea->descripcion}}</td>
+                                                <td> <button class="bi bi-trash3-fill btn btn-link"  type="submit" ></button></td>
                                               </tr>
                                         </tbody>
                                     </form>
