@@ -17,6 +17,14 @@ $(document).ready(function() {
             },
         //para usar los botones   
         responsive: "true",
+		//"ordering": false,  //Funciona bien, desactiva los botones  de orden de toda las columnas
+        
+		 columnDefs: [
+			{ orderable: false, targets: [3,4] } //desactiva boton de ordenar en las columnas
+		  ],
+		 // order: [[1, 'asc']]
+
+
         dom: 'Brftilp',       
         buttons:[ 
 			{
@@ -37,6 +45,15 @@ $(document).ready(function() {
 				titleAttr: 'Imprimir',
 				className: 'btn btn-info'
 			},
-		]	        
+		],	
+		
+		//"columnDefs": [ {
+		//	"targets": 2,
+		//	"orderable": false
+			//} ],
+			
+
+
+
     });     
 });

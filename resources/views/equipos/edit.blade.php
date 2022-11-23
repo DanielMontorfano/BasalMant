@@ -1,4 +1,4 @@
-@extends('layouts.plantilla')
+@extends('layouts.plantilla1')
 @section('title', 'Edit')
 @section('content')
 <h1></h1>

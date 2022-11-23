@@ -7,10 +7,14 @@ header {
 
 /*estilos para la tabla*/
 table th {
-    background-color: #1d3d02 !important;
-    color: white;
+    background-color: #c5dac9 !important;
+    
+    color: rgb(11, 10, 10);
 }
 table>tbody>tr>td {
+    /* background: linear-gradient(to right,#0f0914,#d9c5ec) !important; */
+    
+    background-color: #c9e8ce !important;
     vertical-align: middle !important;
 }
 
