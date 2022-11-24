@@ -60,8 +60,15 @@
                 background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;">Datos técnicos</h6>
-    
-    
+                <div class="row align-items-end">
+                  <div class="col-4">Columna 1</div>
+                  <div class="col-4">Columna 2</div>
+                  <div class="col-4">Columna 3</div>
+              </div>
+      
+
+
+
       <table id="listado" class="table table-striped table-success  table-hover border-4" >
         <thead>
           <tr>
@@ -125,186 +132,82 @@
             <td>{{$equipo->det5}}</td>
             <td></td>
           </tr>
+        </table>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <thead>
-          <tr>
-            <th scope="col" class="text-center"></th>
-            <th scope="col" class="text-center">Repuestos</th>
-            <th scope="col" class="text-center"></th>
-          </tr>
-        </thead>
-        <thead>
-          <tr>
-            <th scope="col" class="text-center">Código</th>
-            <th scope="col" class="text-center">Descripción</th>
-            <th scope="col" class="text-center">Cantidad</th>
-          </tr>
-        </thead>
-        @foreach($repuestos as $repuesto)
-        @if(!$repuesto->pivot->check1 =='on') {{-- Para saber si es repuesto o no --}}
-        <tr>
-          <th scope="row" class="text-center">{{ $repuesto->codigo }}</th>
-          <td>{{ $repuesto->descripcion}} </td>
-          <td class="text-center">{{$repuesto->pivot->cant}} {{$repuesto->pivot->unidad}} </td>
-        </tr>
-        @endif
-        @endforeach
-        
-
-
-       {{-- ACESORIOS --}}
-        <thead>
-          <tr>
-            <th scope="col" class="text-center"></th>
-            <th scope="col" class="text-center">Acesorios</th>
-            <th scope="col" class="text-center"></th>
-          </tr>
-        </thead>
-        <thead>
-          <tr>
-            <th scope="col" class="text-center">Código</th>
-            <th scope="col" class="text-center">Descripción</th>
-            <th scope="col" class="text-center">Cantidad</th>
-           
-          </tr>
-        </thead>
-        @foreach($repuestos as $repuesto)
-        @if($repuesto->pivot->check1 =='on') {{-- Para saber si es accesorio o no --}}
-        <tr>
-          <th scope="row" class="text-center">{{ $repuesto->codigo }}</th>
-          <td>{{ $repuesto->descripcion}} </td>
-          <td class="text-center">{{$repuesto->pivot->cant}} {{$repuesto->pivot->unidad}} </td>
-         
-        </tr>
-        @endif
-        @endforeach
-
-
-        {{-- Prueba --}}
-
-       {{-- PLAN VINCULADOS --}}
-
-       <thead>
-        <tr>
-          <th scope="col" class="text-center"></th>
-          <th scope="col" class="text-center">Plan</th>
-          <th scope="col" class="text-center"></th>
-        </tr>
-      </thead>
-      <thead>
-        <tr>
-          <th scope="col" class="text-center">Código</th>
-          <th scope="col" class="text-center">Descripción</th>
-          <th scope="col" class="text-center"></th>
-         
-        </tr>
-      </thead>
-      @foreach($plans as $plan)
-     
-      <tr>
-        <th scope="row" class="text-center">{{ $plan->codigo }}</th>
-        <td>{{ $plan->descripcion}} </td>
-        <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">
-          <a class="bi bi-check2-square" href="{{route('equipos.edit', $equipo->id)}}"></a> 
-        </td>
-       
-      </tr>
-     
-      @endforeach
-      
-      {{-- Equipos Vinculados --}}
-      <thead>
-        <tr>
-          <th scope="col" class="text-center"></th>
-          <th scope="col" class="text-center">Equipos</th>
-          <th scope="col" class="text-center"></th>
-        </tr>
-      </thead>
-
-      <thead>
-        <tr>
-          <th scope="col" class="text-center">Código</th>
-          <th scope="col" class="text-center">Marca</th>
-          <th scope="col" class="text-center">Modelo</th>
-          <th scope="col" class="text-center"></th>
-        </tr>
-      </thead>
-      @foreach($equiposB as $equipoB)
-      <tr>
-        <th scope="row" class="text-center">{{ $equipoB->codEquipo }}</th>
-        <td>{{ $equipoB->marca}} </td>
-        <td>{{ $equipoB->modelo}} </td>
-        <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">
-          <a class="bi bi-check2-square" href="{{route('equipos.edit', $equipoB->id)}}"></a> 
-        </td>
-       
-      </tr>
-     
-      @endforeach
-        </tbody>
-    </table>
 
     {{-- *******************************************INicio Probando acordion --}}
     <div class="accordion" id="accordionPanelsStayOpenExample">
+       {{-- 1er item --}}
       <div class="accordion-item">
         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-            Accordion Item #1
+            <strong>Repuestos</strong>
           </button>
         </h2>
-        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingOne">
           <div class="accordion-body">
-            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            @foreach($repuestos as $repuesto)
+                 @if(!$repuesto->pivot->check1 =='on') {{-- Para saber si es repuesto o no --}}
+                    <ol style="list-style: none;"><li><strong>{{ $repuesto->codigo }}</strong> {{ $repuesto->descripcion}} {{$repuesto->pivot->cant}} {{$repuesto->pivot->unidad}} </li></ol>  
+                 @endif
+            @endforeach
           </div>
         </div>
       </div>
+       {{-- 2do item --}} 
       <div class="accordion-item">
         <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-            Accordion Item #2
+            <strong>Acesorios</strong>
           </button>
         </h2>
         <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
           <div class="accordion-body">
-            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            @foreach($repuestos as $repuesto)
+               @if($repuesto->pivot->check1 =='on') {{-- Para saber si es repuesto o no --}}
+                  <ol style="list-style: none;"><li><strong>{{ $repuesto->codigo }}</strong> {{ $repuesto->descripcion}} {{$repuesto->pivot->cant}} {{$repuesto->pivot->unidad}} </li></ol>  
+               @endif
+            @endforeach
           </div>
         </div>
       </div>
+       {{-- 3er item --}}
       <div class="accordion-item">
         <h2 class="accordion-header" id="panelsStayOpen-headingThree">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-            Accordion Item #3
+            <strong>Planes asociados</strong>
           </button>
         </h2>
         <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
           <div class="accordion-body">
-            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+              @foreach($plans as $plan)
+                <ol style="list-style: none;"><li><strong>{{ $plan->codigo }}</strong>{{ $plan->descripcion}}<a class="bi bi-check2-square" href="{{route('equipos.edit', $equipo->id)}}"></a>  </li></ol>
+              @endforeach
           </div>
         </div>
       </div>
-    </div>
+
+       {{-- 4to item --}}
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+            <strong>Equipos vinculados</strong>
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+          <div class="accordion-body">
+             @foreach($equiposB as $equipoB)
+              <ol style="list-style: none;"><li><strong>{{ $equipoB->codEquipo }}</strong>{{ $equipoB->marca}} {{ $equipoB->modelo}} <a class="bi bi-check2-square" href="{{route('equipos.edit', $equipoB->id)}}"></a> </li></ol>
+             @endforeach
+          </div>
+        </div>
+      </div>
+        {{-- 5to item  vacio--}}
+
+    </div>  {{-- DIV DE ACCORDION FINAL --}}
 {{-- *******************************************FIN Probando acordion --}}        
         
-</div>
+
 
 
 
