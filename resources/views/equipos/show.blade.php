@@ -68,7 +68,8 @@
       
 
 
-
+       <p ><a  class="text-white " href={{route('equipos.showtareas', $equipo->id)}}>Ver tareas</a></p> 
+   
       <table id="listado" class="table table-striped table-success  table-hover border-4" >
         <thead>
           <tr>

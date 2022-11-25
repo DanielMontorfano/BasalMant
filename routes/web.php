@@ -45,6 +45,7 @@ Route::view('contactanos','contactanos')->name('contactanos');
 
 Route::resource('equipos', EquipoController::class);
 //Route::get('equipos/{equipo}/showphoto', [EquipoController::class, 'showphoto'])->name('equipos.showphoto');
+Route::get('equipos/{equipo}/equipoTareasShow', [EquipoController::class, 'equipoTareasShow'])->name('equipos.showtareas');
 
 Route::delete('/equipos/{equipo}/borrar', [EquipoController::class, 'destroy'])->name('equipos.destroy');
 Route::resource('equipoRepuesto', EquipoRepuestoController::class);
