@@ -33,7 +33,7 @@
         <a class="nav-link" href="{{route('equipos.index')}}">Protocolo</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Plan</a>
+        <a class="nav-link" href={{route('equipoTareash.show', $equipo->id)}}>Plan</a>
       
       <li class="nav-item">
         <a class="nav-link" href="{{route('documentos.show', $equipo->id)}}">Documentos</a>

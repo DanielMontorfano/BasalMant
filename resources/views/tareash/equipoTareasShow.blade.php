@@ -11,7 +11,7 @@
 
 @section('content')
 
-<h1></h1>
+<h1>Ahora eatas en tareash Ver tareas</h1>
 {{-- ESTO ES UN COMENTARIO <h1>Aqui podras ver el equipo: <?php echo $variable;?></h1> --}}
 {{-- <h1>Aqui podras ver el equipo: {{ $variable}}</h1> --}}
 <div class="card" STYLE="background: linear-gradient(to right,#5c5649,#030007);" >
@@ -33,7 +33,7 @@
         <a class="nav-link" href="{{route('equipos.index')}}">Protocolo</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Plan</a>
+        <a class="nav-link" href={{route('equipoTareash.show', $equipo->id)}}>Plan</a>
       
       <li class="nav-item">
         <a class="nav-link" href="{{route('documentos.show', $equipo->id)}}">Documentos</a>
@@ -69,15 +69,14 @@
 
 
 
-        <p ><a  class="text-white " href={{route('equipoTareash.show', $equipo->id)}}>editar tareas de este equipo</a></p>
+        <p ><a  class="text-white " href={{route('equipoTareash.edit', $equipo->id)}}>Cargar tareas</a></p>
         <table class="table" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
           <thead>
              <tr>
-               <th style="text-align: center; color: #ffffff;" scope="col">Estado</th>
-               <th style="text-align: center; color: #ffffff;" scope="col">id_tarea</th>
+               
                <th style="text-align: center; color: #ffffff;" scope="col">Código</th>
                <th style="text-align: center; color: #ffffff;" scope="col">Descripción</th>
-               <th style="text-align: center; color: #ffffff;" scope="col">Observación</th>
+               
                
              </tr>
            </thead>
@@ -85,38 +84,29 @@
         @if(isset($PlanP))
           @foreach($PlanP as $plan)
            <tr>
-            <th></th>
-            <th></th>
+          
             <th STYLE="color: #9f2206; font-family: Times New Roman;  font-size: 14px; "scope="row">{{$plan['codigo']}}</th>
             <td STYLE="color: #9f2206; font-family: Times New Roman;  font-size: 14px; ">{{$plan['descripcion']}}</td>
-            <td></td>
+           
           </tr>
            
            @if(isset($ProtocoloP))
            @foreach($ProtocoloP as $protocolo)
                 <tbody>
                        <tr>
-                         <th></th>
-                         <th></th>
+                        
                          <th STYLE="color: #1c0df1; font-family: Times New Roman;  font-size: 14px; "scope="row">{{$protocolo['codProto']}}</th>
                          <td STYLE="color: #1c0df1; font-family: Times New Roman;  font-size: 14px; ">{{$protocolo['descripcion']}}</td>
-                         <td></td>
+                        
                         </tr>
                        @foreach($Tareas as $tarea) 
                        @if($protocolo['codProto'] ==$tarea['cod'])
                        <tr>
-                       <th>
-
-                        <select name="estado" id="estado">
-                          <option value="R">OP</option>
-                          <option value="NR">NR</option>
-                          <option value="INC">INC</option>
-                          <option value="OP">R</option>
-                        </select></th> 
-                       <td STYLE="color: #0f0e0e; font-family: Times New Roman;  font-size: 14px; "scope="row">{{$tarea['tarea_id']}}</td> 
+                       
+                       
                        <td STYLE="color: #0f0e0e; font-family: Times New Roman;  font-size: 14px; "scope="row">{{$tarea['codigoTar']}}</td>
                        <td STYLE="color: #0f0f0f; font-family: Times New Roman;  font-size: 14px; ">{{$tarea['descripcion']}}</td>
-                       <td></td>
+                     
                       </tr>
                        @endif
                        @endforeach

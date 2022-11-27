@@ -252,18 +252,18 @@ class EquipoController extends Controller
         foreach($plans as $plan){
         $plan_id=$plan->pivot->plan_id;
         $planParciales= Plan::find( $plan_id); 
-        $PlanP[]=array('codigo'=>$planParciales->codigo, 'nombre'=> $planParciales->nombre, 'descripcion'=> $planParciales->descripcion, 'frecuencia'=> $planParciales->frecuencia, 'unidad'=> $planParciales->unidad);
+        $PlanP[]=array('id'=>$planParciales->id, 'codigo'=>$planParciales->codigo, 'nombre'=> $planParciales->nombre, 'descripcion'=> $planParciales->descripcion, 'frecuencia'=> $planParciales->frecuencia, 'unidad'=> $planParciales->unidad);
         $protocolos=$planParciales->plansProtocolos;
 
         foreach($protocolos as $protocolo){
             $proto_id= $protocolo->pivot->proto_id; //busco el id del protocolo relacionado
             $protocolosParciales= Protocolo::find( $proto_id); // traigo la coleccion de ese protocolo
-            $ProtocoloP[]=array('codProto'=> $protocolosParciales->codigo, 'descripcion'=> $protocolosParciales->descripcion);
+            $ProtocoloP[]=array('id'=>$protocolosParciales->id,'codProto'=> $protocolosParciales->codigo, 'descripcion'=> $protocolosParciales->descripcion);
             $tareas=$protocolosParciales->protocolosTareas; // traigo todas las tareas de ese protocolo
         foreach($tareas as $tarea){
             // echo $plan->id . "*" . $protocolo->codigo . "*" . $tarea->codigo .  "*" .  $tarea->descripcion . "<br>";
                 
-              $Tareas[] =array('cod'=>$protocolosParciales->codigo, 'codigoTar' => $tarea->codigo, 'descripcion' => $tarea->descripcion, $tarea->duracion);
+              $Tareas[] =array('tarea_id'=>$tarea->id, 'cod'=>$protocolosParciales->codigo, 'codigoTar' => $tarea->codigo, 'descripcion' => $tarea->descripcion, $tarea->duracion);
            
         }
       }  
