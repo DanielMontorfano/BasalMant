@@ -20,8 +20,8 @@ class PlanController extends Controller
     {
         //
         //$equipos= Equipo::all();  //Trae todos los registro
-        $plans= Plan::orderBy('id','desc')->get();//paginate();
-        
+        //$plans= Plan::orderBy('id','desc')->get();//paginate();
+        $plans= Plan::all();
        // return $equipos;   //Sirve para ver la consulta
         return view('plans.index',compact('plans')); //Envío todos los registro en cuestión.La consulta va sin simbolo de pesos
     }

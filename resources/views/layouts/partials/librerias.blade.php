@@ -3,7 +3,7 @@
 <!-- código JS propìo -->    
 <script type="text/javascript" src="{{asset('dataprint/main.js')}}"></script>  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js" crossorigin="anonymous"></script>  
-<script>
+
  
 <!-- jQuery, Popper.js, Bootstrap JS -->
 <script src="{{asset('dataprint/jquery/jquery-3.3.1.min.js')}}"></script>

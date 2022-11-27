@@ -26,12 +26,12 @@ class EquipoController extends Controller
      */
     public function index()
     {
-        //
-        //$equipos= Equipo::all();  //Trae todos los registro
-        $equipos= Equipo::orderBy('id','desc')->paginate();
-        
+        //$equipos= Equipo::orderBy('id','desc')->paginate(); //NO le GUSTA con el PLUG IN datatable;!!!!
+        $equipos= Equipo::all(); //Trae todos los registros
        // return $equipos;   //Sirve para ver la consulta
-        return view('equipos.index',compact('equipos')); //Envío todos los registro en cuestión.La consulta va sin simbolo de pesos
+       return view('equipos.index',compact('equipos')); //Envío todos los registro en cuestión.La consulta va sin simbolo de pesos
+       // dd ($equipos->all());
+       //return;
     }
 
 

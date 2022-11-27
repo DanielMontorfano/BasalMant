@@ -19,8 +19,8 @@ class OrdenTrabajoController extends Controller
         //
        // $equipos= Equipo::all();  //Trae todos los registro
         
-        $ots= OrdenTrabajo::orderBy('id','desc')->paginate();
-       
+      //  $ots= OrdenTrabajo::orderBy('id','desc')->paginate();
+        $ots= OrdenTrabajo::all();
         //$odenesDeEsteEquipo=Equipo::find($id)->ordentrabajo;
        // $equipos= Equipo::orderBy('id','desc')->paginate();
        // return $equipos;   //Sirve para ver la consulta

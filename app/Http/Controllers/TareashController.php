@@ -108,12 +108,18 @@ class TareashController extends Controller
             // echo $plan->id . "*" . $protocolo->codigo . "*" . $tarea->codigo .  "*" .  $tarea->descripcion . "<br>";
                 
               $Tareas[] =array('tarea_id'=>$tarea->id, 'cod'=>$protocolosParciales->codigo, 'codigoTar' => $tarea->codigo, 'descripcion' => $tarea->descripcion, $tarea->duracion);
-           
+             // echo "bb" . $protocolosParciales->codigo;
         }
       }  
     }
 
-       return view('tareash.equipoTareasShow', compact('equipo','PlanP', 'ProtocoloP','Tareas')); //Envío todo el registro en cuestión
+      return view('tareash.equipoTareasShow', compact('equipo','PlanP', 'ProtocoloP','Tareas')); //Envío todo el registro en cuestión
+    
+     // echo "FIN";  
+      //   return;
+      
+
+
 
        // return view('Equipos.show');
     }

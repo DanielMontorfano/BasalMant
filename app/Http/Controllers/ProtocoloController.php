@@ -20,10 +20,12 @@ class ProtocoloController extends Controller
     {
         //
         //$equipos= Equipo::all();  //Trae todos los registro
-        $protocolos= Protocolo::orderBy('id','desc')->get();//->paginate();
-        
+        //$protocolos= Protocolo::orderBy('id','desc')->paginate();//->paginate();
+        $protocolos= Protocolo::all();
        // return $protocolos;   //Sirve para ver la consulta
         return view('protocolos.index',compact('protocolos')); //Envío todos los registro en cuestión.La consulta va sin simbolo de pesos
+      // dd($protocolos->all());
+      // return;
     }
 
     /**

@@ -35,7 +35,7 @@
         <td>Detalle</td>
         <td></td>
         <td></td>
-       
+    </thead>
     <tbody>
       @foreach ($plans as $plan)
       <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
