@@ -1,5 +1,5 @@
 @extends('layouts.plantilla')
-@section('title', 'indice')
+@section('title', 'Procedimientos de mantenimiento')
 @section('css')
 {{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
 {{-- Para que sea responsive se agraga la tercer libreria --}}
@@ -39,7 +39,7 @@
      
       <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
         
-        <td>{{$protocolo->codigo}}</td>
+        <td STYLE="font-weight:bold; text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">{{$protocolo->codigo}}</td>
         <td>{{$protocolo->descripcion}}</td>
         <td></td>
         <td >

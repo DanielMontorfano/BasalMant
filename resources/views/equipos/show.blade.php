@@ -64,7 +64,7 @@
                   <div class="col-4">Columna 1</div>
                   <div class="col-4">Columna 2</div>
                   <div class="col-4">Columna 3</div>
-              </div>
+               </div>
       
 
 
@@ -149,7 +149,12 @@
           <div class="accordion-body">
             @foreach($repuestos as $repuesto)
                  @if(!$repuesto->pivot->check1 =='on') {{-- Para saber si es repuesto o no --}}
-                    <ol style="list-style: none;"><li><strong>{{ $repuesto->codigo }}</strong> {{ $repuesto->descripcion}} {{$repuesto->pivot->cant}} {{$repuesto->pivot->unidad}} </li></ol>  
+                 <div class="row align-items-end">
+                  <div class="col-2"><strong>{{ $repuesto->codigo }}</strong></div>
+                  <div class="col-4">{{ $repuesto->descripcion}} </div>
+                  <div class="col-3">{{$repuesto->pivot->cant}}{{" "}}  {{$repuesto->pivot->unidad}}</div>
+                  <div class="col-3"></div>
+                </div>
                  @endif
             @endforeach
           </div>
@@ -166,7 +171,14 @@
           <div class="accordion-body">
             @foreach($repuestos as $repuesto)
                @if($repuesto->pivot->check1 =='on') {{-- Para saber si es repuesto o no --}}
-                  <ol style="list-style: none;"><li><strong>{{ $repuesto->codigo }}</strong> {{ $repuesto->descripcion}} {{$repuesto->pivot->cant}} {{$repuesto->pivot->unidad}} </li></ol>  
+               <div class="row align-items-end">
+                <div class="col-2"><strong>{{ $repuesto->codigo }}</strong></div>
+                <div class="col-4">{{ $repuesto->descripcion}} </div>
+                <div class="col-3">{{$repuesto->pivot->cant}}{{" "}}  {{$repuesto->pivot->unidad}}</div>
+                <div class="col-3"></div>
+              </div>  
+
+               {{-- <ol style="list-style: none;"><li><strong>{{ $repuesto->codigo }}</strong> {{ $repuesto->descripcion}} {{$repuesto->pivot->cant}} {{$repuesto->pivot->unidad}} </li></ol>   --}}
                @endif
             @endforeach
           </div>
@@ -182,7 +194,12 @@
         <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
           <div class="accordion-body">
               @foreach($plans as $plan)
-                <ol style="list-style: none;"><li><strong>{{ $plan->codigo }}</strong>{{ $plan->descripcion}}<a class="bi bi-check2-square" href="{{route('equipos.edit', $equipo->id)}}"></a>  </li></ol>
+              <div class="row align-items-end">
+                <div class="col-2"><strong>{{ $plan->codigo }}</strong></div>
+                <div class="col-4">{{ $plan->descripcion}}</div>
+                <div class="col-3">{{ $plan->frecuencia}}{{" "}}{{ $plan->unidad}} </div>
+                <div class="col-3"><a class="bi bi-eye" href="{{route('plans.show', $plan->id)}}"></a></div>
+              </div>
               @endforeach
           </div>
         </div>
@@ -198,8 +215,14 @@
         <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
           <div class="accordion-body">
              @foreach($equiposB as $equipoB)
-              <ol style="list-style: none;"><li><strong>{{ $equipoB->codEquipo }}</strong>{{ $equipoB->marca}} {{ $equipoB->modelo}} <a class="bi bi-check2-square" href="{{route('equipos.edit', $equipoB->id)}}"></a> </li></ol>
-             @endforeach
+             <div class="row align-items-end">
+              <div class="col-2"><strong>{{ $equipoB->codEquipo }}</strong></div>
+              <div class="col-4">{{ $equipoB->marca}}</div>
+              <div class="col-3">{{ $equipoB->modelo}} </div>
+              <div class="col-3"><a class="bi bi-eye" href="{{route('equipos.show', $equipoB->id)}}"></a></div>
+            </div>
+             {{--  <ol style="list-style: none;"><li><strong>{{ $equipoB->codEquipo }}</strong>{{ $equipoB->marca}} {{ $equipoB->modelo}} <a class="bi bi-check2-square" href="{{route('equipos.edit', $equipoB->id)}}"></a> </li></ol> --}} 
+              @endforeach
           </div>
         </div>
       </div>

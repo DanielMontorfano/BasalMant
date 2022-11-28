@@ -1,5 +1,5 @@
 @extends('layouts.plantilla')
-@section('title', 'indice')
+@section('title', 'Planes')
 @section('css')
 {{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
 {{-- Para que sea responsive se agraga la tercer libreria --}}

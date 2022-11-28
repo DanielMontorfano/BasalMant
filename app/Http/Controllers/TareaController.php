@@ -18,8 +18,8 @@ class TareaController extends Controller
     {
         //
         //$equipos= Equipo::all();  //Trae todos los registro
-        $tareas= Tarea::orderBy('id','desc')->paginate();
-        
+       // $tareas= Tarea::orderBy('id','desc')->paginate();
+        $tareas= Tarea::all();
        // return $equipos;   //Sirve para ver la consulta
         return view('tareas.index',compact('tareas')); //Envío todos los registro en cuestión.La consulta va sin simbolo de pesos
     }

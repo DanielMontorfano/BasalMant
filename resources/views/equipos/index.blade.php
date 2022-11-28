@@ -1,5 +1,5 @@
 @extends('layouts.plantilla')
-@section('title', 'indice')
+@section('title', 'Equipos')
 @section('css')
 {{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
 {{-- Para que sea responsive se agraga la tercer libreria --}}
@@ -23,6 +23,7 @@
 
 <div class="text-white card-body "  style="max-width: 95;">
 <p ><a  class="text-white " href={{route('equipos.create')}}> Crear equipo</a></p> 
+<p><a href="{{ route('imprimir') }}">Imprime el archivo</a>
    
 
 <table id="listado" class="table table-striped table-success  table-hover border-4" >

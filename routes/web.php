@@ -28,6 +28,7 @@ use App\Http\Controllers\SearchProtocolosController;
 use App\Http\Controllers\SearchPlansController;
 use App\Http\Controllers\SearchEquipoController;
 use App\Http\Controllers\TareashController;
+use App\Http\Controllers\imprimirController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -87,8 +88,8 @@ Route::get('search/tareas', [SearchTareasController::class,'tareas'])->name('sea
 Route::get('search/protocolos', [SearchProtocolosController::class,'protocolos'])->name('search.protocolos'); //esta ruta permite hacer las busqudas asicrónicas AJAX
 Route::get('search/plans', [SearchPlansController::class,'plans'])->name('search.plans'); //NO Olvidar poner use!!!! esta ruta permite hacer las busqudas asicrónicas AJAX
 Route::get('search/equipos', [SearchEquipoController::class,'equipos'])->name('search.equipos'); //NO Olvidar poner use!!!! esta ruta permite hacer las busqudas asicrónicas AJAX
-
-
+//****************************IMPRIMIR*********************** */
+Route::get('/imprimir', [imprimirController::class,'imprimir'])->name('imprimir');
 
 
 //route::post('imagen/store', [ImagenController::class,'store'])->name('imagen.store');
