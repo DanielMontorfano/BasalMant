@@ -64,12 +64,49 @@
                   <div class="col-4">Columna 1</div>
                   <div class="col-4">Columna 2</div>
                   <div class="col-4">Columna 3</div>
-              </div>
+               </div>
       
-
-
-
         <p ><a  class="text-white " href={{route('equipoTareash.edit', $equipo->id)}}>Cargar tareas</a></p>
+        
+        @if(isset($PlanP))
+        @foreach($PlanP as $plan)
+        <table  class="table-bordered" >
+          <tr >
+              <td >{{$plan['codigo']}}</td>
+        
+              <td>Protocolo
+                @if(isset($ProtocoloP))
+                @foreach($ProtocoloP as $protocolo)
+                <div class="row align-items-end">
+                  
+                  @foreach($Tareas as $tarea) 
+                  @if($protocolo['codProto'] ==$tarea['cod'])
+                  <div class="col-4">{{$tarea['descripcion']}}</div>
+                  <div class="col-4">{{$tarea['codigoTar']}}</div>
+                  <div class="col-4">Columna 3</div>
+                  @endif 
+                  @endforeach  
+                  
+               </div>
+              
+               @endforeach  
+               @endif
+
+               
+              </td>
+          </tr>
+         
+      </table>
+      @endforeach
+      @endif 
+       
+       
+       
+       
+       
+       
+       
+       
         <table class="table" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
           <thead>
              <tr>

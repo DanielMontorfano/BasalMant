@@ -60,15 +60,11 @@
                 background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;">Datos técnicos</h6>
-                <div class="row align-items-end">
-                  <div class="col-4">Columna 1</div>
-                  <div class="col-4">Columna 2</div>
-                  <div class="col-4">Columna 3</div>
-               </div>
+                
       
 
 
-       <p ><a  class="text-white " href={{route('equipos.showtareas', $equipo->id)}}>Ver tareas</a></p> 
+       <p ><a  class="text-white " href={{route('equipoTareash.show', $equipo->id)}}>Ver tareas</a></p> 
    
       <table id="listado" class="table table-striped table-success  table-hover border-4" >
         <thead>

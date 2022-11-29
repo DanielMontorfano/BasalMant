@@ -8,6 +8,7 @@ header {
 /*estilos para la tabla*/
 table th {
     background-color: #c5dac9 !important;
+    border-color: #043216!important;
     
     color: rgb(11, 10, 10);
 }
@@ -16,6 +17,7 @@ table>tbody>tr>td {
     
     background-color: #c9e8ce !important;
     vertical-align: middle !important;
+    border-color:  #043216!important;
 }
 
 /*para alinear los botones y cuadro de busqueda*/
