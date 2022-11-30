@@ -57,11 +57,12 @@ class TareashController extends Controller
       $tareash->tarea_id=$tareas[$i];
       $tareash->equipo_id=$equipo_id[$i];
       //$tareash->plan_id=$plans[$i];   //Por  ahora no lo usamos
+      if($tcheck[$i]<>"NR"){
       $tareash->tcheck=$tcheck[$i]; 
       //echo $i; 
       //echo $tareas[$i] . "<br>"; 
       //echo $plans[$i] . "<br>";
-      $tareash->save();  
+      $tareash->save(); } 
       }   
       echo "FIN";  
          return;
@@ -156,7 +157,7 @@ class TareashController extends Controller
         foreach($tareas as $tarea){
             // echo $plan->id . "*" . $protocolo->codigo . "*" . $tarea->codigo .  "*" .  $tarea->descripcion . "<br>";
                 
-              $Tareas[] =array('tarea_id'=>$tarea->id, 'cod'=>$protocolosParciales->codigo, 'codigoTar' => $tarea->codigo, 'descripcion' => $tarea->descripcion, $tarea->duracion);
+              $Tareas[] =array('tarea_id'=>$tarea->id, 'cod'=>$protocolosParciales->codigo, 'codigoTar' => $tarea->codigo, 'descripcion' => $tarea->descripcion, 'duracion' =>$tarea->duracion, 'unidad' =>$tarea->unidad);
            
         }
       }  
@@ -165,6 +166,7 @@ class TareashController extends Controller
        return view('tareash.equipoTareasEdit', compact('equipo','PlanP', 'ProtocoloP','Tareas')); //Envío todo el registro en cuestión
 
        // return view('Equipos.show');
+      // return;
     }
 
 

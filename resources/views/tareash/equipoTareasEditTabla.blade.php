@@ -71,70 +71,70 @@
 
         <p ><a  class="text-white " href={{route('equipoTareash.show', $equipo->id)}}>editar tareas de este equipo</a></p>
         
+        
         <form id="cargaPlan" action="{{route('equipoTareash.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
-          @csrf
+         @csrf
+        <table class="table" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+          <thead>
+             <tr>
+               <th style="text-align: center; color: #ffffff;" scope="col">Estado</th>
+               <th style="text-align: center; color: #ffffff;" scope="col">id_tarea</th>
+               <th style="text-align: center; color: #ffffff;" scope="col">Código</th>
+               <th style="text-align: center; color: #ffffff;" scope="col">Descripción</th>
+               <th style="text-align: center; color: #ffffff;" scope="col">Observación</th>
+               
+             </tr>
+           </thead>
+
         @if(isset($PlanP))
-        @foreach($PlanP as $plan)
-        <table  class="table-bordered" >
-          <tr >
-              <td class="col-2" align="left"><strong>{{$plan['codigo']}}</strong></td>
-
-              <td class="col-8" align="center" >
-                      @if(isset($ProtocoloP))
-                      @foreach($ProtocoloP as $protocolo)
-                      <div class="col-12" align="left"><strong>{{$protocolo['codProto']}}</strong>  ( {{$protocolo['descripcion']}} )</div>
-                      <div class="row align-items-end">
-                        @foreach($Tareas as $tarea) 
-                        @if($protocolo['codProto'] ==$tarea['cod'])
-                        <div class="col-2" align="left">
-                          
-                            <input type="hidden" name="equipo_id[]" value="{{$equipo->id}}" readonly > 
-                            <input type="hidden" name="plans[]" value="{{$plan['codigo']}}" readonly > 
-                            <input type="hidden" name="protocolos[]" value="{{$protocolo['codProto']}}" readonly >  
-                            <input type="hidden" name="tareas[]" value="{{$tarea['tarea_id']}}" readonly > 
-                            <select name="estados[]" id="estado">
-                              <option value="NR">NR</option>
-                              <option value="R">R</option>
-                              <option value="INC">INC</option>
-                              <option value="OP">OP</option>
-                             </select>
-                          
-                        </div>
-                        <div class="col-5" align="left"><li>{{$tarea['descripcion']}}</li></div>
-                        <div class="col-5" align="left">{{$tarea['duracion']}} {{$tarea['unidad']}}</div>
-                        
-                        
-                       
-                        @endif 
-                        @endforeach  
-                        <div>&nbsp;</div>
-                      </div>
-                      @endforeach  
-                      @endif
-              </td>
-
-              
+          @foreach($PlanP as $plan)
+           <tr>
+            <th></th>
+            <th></th>
+            <th STYLE="color: #9f2206; font-family: Times New Roman;  font-size: 14px; "scope="row">{{$plan['codigo']}}</th>
+            <td STYLE="color: #9f2206; font-family: Times New Roman;  font-size: 14px; ">{{$plan['descripcion']}}</td>
+            <td></td>
           </tr>
-         
-      </table>
-      @endforeach
-      @endif
+           
+           @if(isset($ProtocoloP))
+           @foreach($ProtocoloP as $protocolo)
+                <tbody>
+                       <tr>
+                         <th></th>
+                         <th></th>
+                         <th STYLE="color: #1c0df1; font-family: Times New Roman;  font-size: 14px; "scope="row">{{$protocolo['codProto']}}</th>
+                         <td STYLE="color: #1c0df1; font-family: Times New Roman;  font-size: 14px; ">{{$protocolo['descripcion']}}</td>
+                         <td></td>
+                        </tr>
+                       @foreach($Tareas as $tarea) 
+                       @if($protocolo['codProto'] ==$tarea['cod'])
+                       <tr>
+                       <th>
+                       <input type="hidden" name="equipo_id[]" value="{{$equipo->id}}" readonly > 
+                       <input type="hidden" name="plans[]" value="{{$plan['codigo']}}" readonly > 
+                       <input type="hidden" name="protocolos[]" value="{{$protocolo['codProto']}}" readonly >  
+                       <input type="hidden" name="tareas[]" value="{{$tarea['tarea_id']}}" readonly > 
+                       <select name="estados[]" id="estado">
+                          <option value="R">R</option>
+                          <option value="NR">NR</option>
+                          <option value="INC">INC</option>
+                          <option value="OP">OP</option>
+                        </select>
+                       </th>
+                       <td STYLE="color: #0f0e0e; font-family: Times New Roman;  font-size: 14px; "scope="row">{{$tarea['tarea_id']}}</td> 
+                       <td STYLE="color: #0f0e0e; font-family: Times New Roman;  font-size: 14px; "scope="row">{{$tarea['codigoTar']}}</td>
+                       <td STYLE="color: #0f0f0f; font-family: Times New Roman;  font-size: 14px; ">{{$tarea['descripcion']}}</td>
+                       <td></td>
+                      </tr>
+                       @endif
+                       @endforeach
+                 </tbody>
+               @endforeach
+             @endif
+          @endforeach {{-- Para Plans --}}
+        @endif {{-- Para Plans --}}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   </table>
    <br>
                <div class="form-group">
                    <button form="cargaPlan" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
