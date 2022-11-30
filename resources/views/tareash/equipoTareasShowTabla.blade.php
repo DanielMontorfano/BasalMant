@@ -11,7 +11,7 @@
 
 @section('content')
 
-{{-- <h1>Ahora eatas en tareash Ver plan</h1> --}}
+<h1>Ahora eatas en tareash Ver tareas</h1>
 {{-- ESTO ES UN COMENTARIO <h1>Aqui podras ver el equipo: <?php echo $variable;?></h1> --}}
 {{-- <h1>Aqui podras ver el equipo: {{ $variable}}</h1> --}}
 <div class="card" STYLE="background: linear-gradient(to right,#5c5649,#030007);" >
@@ -59,53 +59,64 @@
     <h6 STYLE="text-align:center; font-size: 30px;
                 background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                 -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;">Plan de mantenimiento: {{$equipo->codEquipo}} </h6>
-                
+                -webkit-text-fill-color: transparent;">Datos técnicos</h6>
+                <div class="row align-items-end">
+                  <div class="col-4">Columna 1</div>
+                  <div class="col-4">Columna 2</div>
+                  <div class="col-4">Columna 3</div>
+               </div>
       
         <p ><a  class="text-white " href={{route('equipoTareash.edit', $equipo->id)}}>Cargar tareas</a></p>
         
-        @if(isset($PlanP))
-        @foreach($PlanP as $plan)
-        <table  class="table-bordered" >
-          <tr >
-              <td class="col-2" align="left"><strong>{{$plan['codigo']}}</strong></td>
-
-              <td class="col-8" align="center" >
-                      @if(isset($ProtocoloP))
-                      @foreach($ProtocoloP as $protocolo)
-                      <div class="col-12" align="left"><strong>{{$protocolo['codProto']}}</strong>  ( {{$protocolo['descripcion']}} )</div>
-                      <div class="row align-items-end">
-                        @foreach($Tareas as $tarea) 
-                        @if($protocolo['codProto'] ==$tarea['cod'])
-                       
-                        <div class="col-6" align="left"><li>{{$tarea['descripcion']}}</li></div>
-                        <div class="col-6" align="left">{{$tarea['duracion']}} {{$tarea['unidad']}}</div>
-                        
-                        
-                       
-                        @endif 
-                        @endforeach  
-                        <div>&nbsp;</div>
-                      </div>
-                      @endforeach  
-                      @endif
-              </td>
-
-              
-          </tr>
-         
-      </table>
-      @endforeach
-      @endif 
-       
-       
-       
-       
-       
-       
-       
-       
         
+        <table class="table" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+          <thead>
+             <tr>
+               
+               <th style="text-align: center; color: #ffffff;" scope="col">Código</th>
+               <th style="text-align: center; color: #ffffff;" scope="col">Descripción</th>
+               
+               
+             </tr>
+           </thead>
+
+        @if(isset($PlanP))
+          @foreach($PlanP as $plan)
+           <tr>
+          
+            <th STYLE="color: #9f2206; font-family: Times New Roman;  font-size: 14px; "scope="row">{{$plan['codigo']}}</th>
+            <td STYLE="color: #9f2206; font-family: Times New Roman;  font-size: 14px; ">{{$plan['descripcion']}}</td>
+           
+          </tr>
+           
+           @if(isset($ProtocoloP))
+           @foreach($ProtocoloP as $protocolo)
+                <tbody>
+                       <tr>
+                        
+                         <th STYLE="color: #1c0df1; font-family: Times New Roman;  font-size: 14px; "scope="row">{{$protocolo['codProto']}}</th>
+                         <td STYLE="color: #1c0df1; font-family: Times New Roman;  font-size: 14px; ">{{$protocolo['descripcion']}}</td>
+                        
+                        </tr>
+                       @foreach($Tareas as $tarea) 
+                       @if($protocolo['codProto'] ==$tarea['cod'])
+                       <tr>
+                       
+                       
+                       <td STYLE="color: #0f0e0e; font-family: Times New Roman;  font-size: 14px; "scope="row">{{$tarea['codigoTar']}}</td>
+                       <td STYLE="color: #0f0f0f; font-family: Times New Roman;  font-size: 14px; ">{{$tarea['descripcion']}}</td>
+                     
+                      </tr>
+                       @endif
+                       @endforeach
+                 </tbody>
+               @endforeach
+             @endif
+          @endforeach {{-- Para Plans --}}
+        @endif {{-- Para Plans --}}
+
+   </table>
+      
 
 
     
