@@ -90,6 +90,7 @@ Route::get('search/plans', [SearchPlansController::class,'plans'])->name('search
 Route::get('search/equipos', [SearchEquipoController::class,'equipos'])->name('search.equipos'); //NO Olvidar poner use!!!! esta ruta permite hacer las busqudas asicrónicas AJAX
 //****************************IMPRIMIR*********************** */
 Route::get('/imprimir', [imprimirController::class,'imprimir'])->name('imprimir');
+Route::get('/imprimirEquipo/{equipo}', [imprimirController::class,'imprimirEquipo'])->name('imprimirEquipo');
 
 
 //route::post('imagen/store', [ImagenController::class,'store'])->name('imagen.store');
