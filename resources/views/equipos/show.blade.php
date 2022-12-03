@@ -27,7 +27,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Historial</a>
+        <a class="nav-link" href="{{route('historialList', $equipo->id)}}">Historial</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{route('equipos.index')}}">Protocolo</a>
@@ -49,7 +49,7 @@
         <a class="nav-link" href="{{route('equipos.index')}}">Descargar</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Imprimir</a>
+        <a class="nav-link" href="{{route('imprimirEquipo',$equipo->id )}}">Imprimir</a>
       </li>
       
 

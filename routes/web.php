@@ -29,6 +29,7 @@ use App\Http\Controllers\SearchPlansController;
 use App\Http\Controllers\SearchEquipoController;
 use App\Http\Controllers\TareashController;
 use App\Http\Controllers\imprimirController;
+use App\Http\Controllers\HistorialController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -78,12 +79,20 @@ Route::resource('tareas', TareaController::class);
 Route::get('/tareas/{tareas}/borrar', [TareaController::class, 'destroy'])->name('tareas.destroy');
 //Route::get('tarea/{tarea}/edit', [TareaController::class, 'edit'])->name('tarea.edit');
 //**************************************************************************** */
+Route::get('/historialList/{equipo}', [HistorialController::class,'historialList'])->name('historialList');
+
+
+
+//**************************************************************************** */
 Route::resource('protocolos', ProtocoloController::class);
 Route::resource('prototarea', PrototareaController::class);
 //**************************************************************************** */
 Route::resource('plans', PlanController::class);
 Route::resource('planproto', PlanprotoController::class);
 //**************************************************************************** */
+
+
+
 Route::get('search/tareas', [SearchTareasController::class,'tareas'])->name('search.tareas'); //esta ruta permite hacer las busqudas asicrónicas AJAX
 Route::get('search/protocolos', [SearchProtocolosController::class,'protocolos'])->name('search.protocolos'); //esta ruta permite hacer las busqudas asicrónicas AJAX
 Route::get('search/plans', [SearchPlansController::class,'plans'])->name('search.plans'); //NO Olvidar poner use!!!! esta ruta permite hacer las busqudas asicrónicas AJAX

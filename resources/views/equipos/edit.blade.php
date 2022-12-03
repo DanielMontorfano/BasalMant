@@ -9,54 +9,55 @@
 <div class="container ">
   
   <div class="card" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
-          <div class="card-header" STYLE="background: linear-gradient(to right,#1e2020,#030007);">
-           <ul class="nav nav-tabs card-header-tabs">
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('equipos.show', $equipo->id)}}">Ficha</a>
-              </li>
-              <li class="nav-item">
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('fotos.show', $equipo->id)}}">Fotos</a>
-              </li>
+    <div class="card-header" STYLE="background: linear-gradient(to right,#201f1e,#030007);">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="true"  style="background-color: #1e2020;" href="{{route('equipos.show', $equipo->id)}}">Ficha</a>
+         
+        </li>
+       
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('fotos.show', $equipo->id)}}">Fotos</a>
+        </li>
+  
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('equipos.index')}}">Historial</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('equipos.index')}}">Protocolo</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href={{route('equipoTareash.show', $equipo->id)}}>Plan</a>
         
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('equipos.index')}}">Historial</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('equipos.index')}}">Protocolo</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('equipos.index')}}">Plan</a>
-              
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('equipos.index')}}">Documentos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active; "  style="background-color: #1e2020;" aria-current="true" href={{route('equipos.edit', $equipo->id)}}>Editar</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href={{route('ordentrabajo.list', $equipo->id)}}>OT</a>
-              </li>
-              
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('equipos.index')}}">Descargar</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('equipos.index')}}">Imprimir</a>
-              </li>
-           </ul>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('documentos.show', $equipo->id)}}">Documentos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href={{route('equipos.edit', $equipo->id)}}>Editar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href={{route('ordentrabajo.list', $equipo->id)}}>OT</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('equipos.index')}}">Descargar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('imprimirEquipo',$equipo->id )}}">Imprimir</a>
+        </li>
+      </ul>
+    </div>
           </div>   
             
           {{-- Probando Col --}}
           <div class="container">
             <div class="row">
               <div class="col col-md-2">
-                Columna
+               {{--  Columna --}}
                 
               </div>
               <div class="col col-md-8">
-                Columna2
+                {{--  Columna2 --}}
                 <form id="encabezado" action="{{route('equipos.update', $equipo->id)}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                   <h6 STYLE="text-align:center; font-size: 30px;
                   background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));

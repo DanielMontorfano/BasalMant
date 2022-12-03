@@ -24,7 +24,7 @@ class StoreEquipo extends FormRequest
      */
     public function rules()
     {
-        return ['codEquipo'=>'required|max:11',
+        return ['codEquipo'=>'required|max:12',
                 'marca'=>'required|min:3',
                 'modelo'=>'required',
                 'det1'=>'required',

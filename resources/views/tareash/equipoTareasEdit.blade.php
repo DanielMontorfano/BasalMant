@@ -93,6 +93,7 @@
                             <input type="hidden" name="protocolos[]" value="{{$protocolo['codProto']}}" readonly >  
                             <input type="hidden" name="tareas[]" value="{{$tarea['tarea_id']}}" readonly > 
                             <select name="estados[]" id="estado">
+                              <option value=""></option>
                               <option value="NR">NR</option>
                               <option value="R">R</option>
                               <option value="INC">INC</option>

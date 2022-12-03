@@ -43,7 +43,7 @@ class TareashController extends Controller
        // echo"Hasta aqui llegamos";
         //dd(request()->all());
         $equipo_id=$request->equipo_id;
-        $plans=$request->plans;
+        $plans=$request->plans;  //codigo de plan
         $protocolos=$request->protocolos;
         $tareas=$request->tareas;
         $tcheck=$request->estados;
@@ -56,8 +56,9 @@ class TareashController extends Controller
       $tareash= new Tareash();  
       $tareash->tarea_id=$tareas[$i];
       $tareash->equipo_id=$equipo_id[$i];
+      $tareash->plan_id= $plans[$i]; //guarda codigo deolan en pivot
       //$tareash->plan_id=$plans[$i];   //Por  ahora no lo usamos
-      if($tcheck[$i]<>"NR"){
+      if($tcheck[$i]<>""){
       $tareash->tcheck=$tcheck[$i]; 
       //echo $i; 
       //echo $tareas[$i] . "<br>"; 
