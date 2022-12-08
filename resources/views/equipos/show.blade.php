@@ -27,7 +27,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="{{route('historialList', $equipo->id)}}">Historial</a>
+        <a class="nav-link" href="{{route('historialPreventivo', $equipo->id)}}">Historial</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{route('equipos.index')}}">Protocolo</a>

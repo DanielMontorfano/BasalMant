@@ -79,8 +79,9 @@ Route::resource('tareas', TareaController::class);
 Route::get('/tareas/{tareas}/borrar', [TareaController::class, 'destroy'])->name('tareas.destroy');
 //Route::get('tarea/{tarea}/edit', [TareaController::class, 'edit'])->name('tarea.edit');
 //**************************************************************************** */
-Route::get('/historialList/{equipo}', [HistorialController::class,'historialList'])->name('historialList');
-
+Route::get('/historialTodos/{equipo}', [HistorialController::class,'historialTodos'])->name('historialTodos');
+Route::get('/historialPreventivo/{equipo}', [HistorialController::class,'historialPreventivo'])->name('historialPreventivo');
+Route::get('/historialCorrectivo/{equipo}', [HistorialController::class,'historialCorrectivo'])->name('historialCorrectivo');
 
 
 //**************************************************************************** */

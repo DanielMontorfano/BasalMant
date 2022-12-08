@@ -84,9 +84,9 @@
         <td>{{$ot->de}}</td>
         <td>{{$ot->para}}</td>
         <td>{{$ot->estado}}</td>
-        <td>{{$ot->created_at}}</td>
+        <td>{{substr($ot->created_at, 0, 10);}}</td>
         @if ($ot->created_at<>$ot->updated_at)
-        <td>{{$ot->updated_at}}</td>
+        <td>{{substr($ot->updated_at, 0, 10);}}</td>
         @elseif($ot->created_at===$ot->updated_at)
         <td>{{'***'}}</td>
         @endif

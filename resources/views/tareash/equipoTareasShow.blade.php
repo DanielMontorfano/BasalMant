@@ -18,7 +18,7 @@
   <div class="card-header" STYLE="background: linear-gradient(to right,#201f1e,#030007);">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item">
-        <a class="nav-link active" aria-current="true"  style="background-color: #1e2020;" href="{{route('equipos.show', $equipo->id)}}">Ficha</a>
+        <a class="nav-link" href="{{route('equipos.show', $equipo->id)}}">Ficha</a>
        
       </li>
      
@@ -27,7 +27,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Historial</a>
+        <a class="nav-link active" aria-current="true"  style="background-color: #1e2020;"  href="{{route('historialPreventivo', $equipo->id)}}">Historial</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{route('equipos.index')}}">Protocolo</a>
@@ -49,7 +49,7 @@
         <a class="nav-link" href="{{route('equipos.index')}}">Descargar</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Imprimir</a>
+        <a class="nav-link" href="{{route('imprimirEquipo',$equipo->id )}}">Imprimir</a>
       </li>
       
 

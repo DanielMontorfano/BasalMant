@@ -50,60 +50,56 @@
       <li class="nav-item">
         <a class="nav-link" href="{{route('imprimirEquipo',$equipo->id )}}">Imprimir</a>
       </li>
-      
-
     </ul>
   </div>
+  <div>
 
-
-  <div class="card-body "  style="max-width: 95;">
-  <h6 STYLE="text-align:center; font-size: 30px;
-  background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;">Tipo de mantenimiento</h6>
+  <div class="card-body "  style="max-width: 95;">  
   
+  <div class="dropdown">
+    <a class=" fa-solid fa-screwdriver-wrench btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="{{ route('historialPreventivo', $equipo->id) }}">Sólo planes</a>
+          <a class="dropdown-item" href="{{ route('historialCorrectivo', $equipo->id) }}">Sólo ordenes</a>
+          <a class="dropdown-item" href="{{ route('historialTodos', $equipo->id) }}">Ambos</a>
+        </div>
+  </div>
+  <br>
 
-
-
-
-
-
-
-<div class="text-white card-body "  style="max-width: 95;">
-<p><a href="{{ route('historialPreventivo', $equipo->id) }}">Por mantenimiento Preventivo</a>
-<p><a href="{{ route('historialCorrectivo', $equipo->id) }}">Por mantenimiento correctivo</a>
-  
-
-<table id="listado" class="table table-striped table-success  table-hover border-4" >
-    <thead class="table-dark" >
+    
+         <table id="listado" class="table table-striped table-success  table-hover border-4" >
+          <thead class="table-dark" >
         
-        <td>Estado</td>
-        <td>Descripción</td>
-        <td>Fecha</td>
-        <td>Realizó</td>
-        <td></td>
-       
-    <tbody>
-      @foreach ($tareas as $tarea)
-      <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
-        
-        <td STYLE="font-weight:bold; text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">{{$tarea->pivot->tcheck}}</td> 
-        <td>{{$tarea->descripcion}}</td>
-        <td>{{$tarea->pivot->updated_at}}</td>
-        <td>{{$tarea->pivot->operario}}</td> 
+            <td>Tarea</td>
+            <td>Check</td>
+            <td>Fecha</td>
+            <td>Plan</td>
+            <td></td>
+         </thead> 
+           <tbody> 
+              @foreach($tareas as $tarea) 
+                  <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
+                      <td STYLE="font-weight:bold; text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">{{$tarea->descripcion}} </td> 
+                      <td>{{$tarea->pivot->tcheck}} &nbsp;</td>
+                      <td>{{$tarea->updated_at}}  &nbsp; </td>
+                      <td>{{$tarea->pivot->plan_id}}  &nbsp;</td> 
+                      <td></td>
+                  </tr>
+              @endforeach
+      
+         </tbody>
+         </table>
+    
+   
+  {{-- aqui Todos los script ver plantilla--}}
+  </div>
+</div>
+</div>
 
-        <td>
-          <a class="bi bi-eye" href="{{route('equipos.show', $equipo->id)}}"></a>
-        </td>
-      </tr>
-        @endforeach
-    </tbody>
-</table>
-</div>
-</div>
-</div>
-{{-- aqui Todos los script ver plantilla--}}
-@endsection
+  @endsection
+   
+
+
 
 
 

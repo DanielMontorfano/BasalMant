@@ -17,7 +17,7 @@
   <div class="card-header" STYLE="background: linear-gradient(to right,#201f1e,#030007);">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item">
-        <a class="nav-link active" aria-current="true"  style="background-color: #1e2020;" href="{{route('equipos.show', $equipo->id)}}">Ficha</a>
+        <a class="nav-link" href="{{route('equipos.show', $equipo->id)}}">Ficha</a>
        
       </li>
      
@@ -26,7 +26,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="{{route('historialPreventivo', $equipo->id)}}">Historial</a>
+        <a class="nav-link active" aria-current="true"  style="background-color: #1e2020;" href="{{route('historialPreventivo', $equipo->id)}}">Historial</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{route('equipos.index')}}">Protocolo</a>
@@ -55,56 +55,47 @@
     </ul>
   </div>
 
-
-  <div class="card-body "  style="max-width: 95;">
+  
   <h6 STYLE="text-align:center; font-size: 30px;
   background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;">Tipo de mantenimiento</h6>
-  
 
+  <div class="dropdown">
+    <a title="Reportes" class=" fa-solid fa-screwdriver-wrench btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="{{ route('historialPreventivo', $equipo->id) }}">Sólo planes</a>
+          <a class="dropdown-item" href="{{ route('historialCorrectivo', $equipo->id) }}">Sólo ordenes</a>
+          <a class="dropdown-item" href="{{ route('historialTodos', $equipo->id) }}">Ambos</a>
+        </div>
+  </div>
+  <br>
 
-
-
-
-
-
-<div class="text-white card-body "  style="max-width: 95;">
-<p><a href="{{ route('historialPreventivo', $equipo->id) }}">Por mantenimiento Preventivo</a>
-<p><a href="{{ route('historialCorrectivo', $equipo->id) }}">Por mantenimiento correctivo</a>
-  
-
-<table id="listado" class="table table-striped table-success  table-hover border-4" >
-    <thead class="table-dark" >
-        
-        <td>Estado</td>
-        <td>Descripción</td>
+    <table id="listado" class="table table-striped table-success  table-hover border-4" >
+      <thead class="table-dark" >
+          
+        <td>Tarea</td>
+        <td>Origen</td>
         <td>Fecha</td>
-        <td>Realizó</td>
+        <td>Realizado por</td>
         <td></td>
-       
-    <tbody>
-      @foreach ($tareas as $tarea)
-      <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
-        
-        <td STYLE="font-weight:bold; text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">{{$tarea->pivot->tcheck}}</td> 
-        <td>{{$tarea->descripcion}}</td>
-        <td>{{$tarea->pivot->updated_at}}</td>
-        <td>{{$tarea->pivot->operario}}</td> 
+          
+      </thead>   
+      <tbody>
+       {{--  @foreach ($tareas as $tarea) --}}
+       @foreach($registros as $registro) 
+       <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
+           <td STYLE="font-weight:bold; text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">{{$registro['detalle']}} </td> 
+           <td>{{$registro['origen']}}</td>
+           <td>{{$registro['fecha']}}</td> 
+           <td>{{$registro['operario']}}</td>
+           <td></td>
+       </tr>
+      @endforeach
 
-        <td>
-          <a class="bi bi-eye" href="{{route('equipos.show', $equipo->id)}}"></a>
-        </td>
-      </tr>
-        @endforeach
-    </tbody>
-</table>
-</div>
-</div>
-</div>
-{{-- aqui Todos los script ver plantilla--}}
+      </tbody>
+  </table>
+
 @endsection
-
-
 
 
