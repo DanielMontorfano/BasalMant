@@ -72,11 +72,13 @@
                 <div class="col col-md-8">
                     {{-- columna2 --}}
                     
-                    <form id="nuevaOrden"  action="{{route('ordentrabajo.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+                    <form id="cerrarOrden"  action="{{route('ordentrabajo.update', $ot->id)}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                         <br>
                         <h6>O.d.T para:  {{$equipo->codEquipo}}</h6>
                         @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
-                        
+                        {{-- Metodo PUT no existe en html, por eso indicamos a laravel como sigue --}}
+                        @method('put')
+
                       
                         <div class="p-3 mb-2 bg-gradient-primary text-white">
                         <div class="container">
@@ -85,7 +87,8 @@
                               <div class="col col-md-6">
                                 <div class="form-group">
                                   <label class="control-label" for="solicitante">Solicitante:</label> 
-                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="solicitante" value={{old('solicitante')}}> 
+                                  <input autocomplete="off" class="form-control" readonly disabled="true" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="solicitante" placeholder="{{$ot->solicitante}}" value=""> 
+                                  
                                   @error('solicitante')
                                   <small>*{{$message}}</small>
                                   @enderror
@@ -95,7 +98,12 @@
                               <div class="col col-md-6">
                                 <div class="form-group">
                                   <label class="control-label" for="aprobadoPor">Aprobado por:</label> 
-                                  <input Style="background-color: rgb(137, 138, 140);" readonly disabled="true" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="aprobadoPor" value={{old('aprobadoPor')}}> 
+                                  @if ($ot->estado=='Abierta')
+                                  <input   autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="aprobadoPor" value={{$ot->aprobadoPor}}> 
+                                  @else 
+                                  <input   autocomplete="off" class="form-control" readonly disabled="true" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="aprobadoPor" value={{$ot->aprobadoPor}}> 
+                                  @endif
+
                                   @error('aprobadoPor')
                                   <small>*{{$message}}</small>
                                   @enderror
@@ -106,7 +114,7 @@
                                 <div class="col col-md-6">
                                     <div class="form-group">
                                       <label class="control-label" for="fechaNecesidad	">Fecha de necesidad:</label> 
-                                      <input autocomplete="off" class="form-control datepicker" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="date" name="fechaNecesidad" value={{old('fechaNecesidad')}}> 
+                                      <input autocomplete="off" class="form-control datepicker" readonly disabled="true" STYLE="color: #878585; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="date" name="fechaNecesidad" value={{$ot->fechaNecesidad}}> 
                                       @error('fechaNecesidad	')
                                       <small>*{{$message}}</small>
                                       @enderror
@@ -115,7 +123,11 @@
                                 <div class="col col-md-6">
                                     <div class="form-group">
                                       <label class="control-label" for="fechaEntrega">Fecha de entrega:</label> 
-                                      <input  Style="background-color: rgb(137, 138, 140);" readonly disabled="true" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="date" name="fechaEntrega" value={{old('fechaEntrega')}}> 
+                                      @if ($ot->estado=='Abierta')
+                                      <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="date" name="fechaEntrega" value="{{$ot->fechaEntrega}}"> 
+                                      @else
+                                      <input autocomplete="off" class="form-control" readonly disabled="true" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="date" name="fechaEntrega" value="{{$ot->fechaEntrega}}"> 
+                                      @endif
                                       @error('fechaEntrega')
                                       <small>*{{$message}}</small>
                                       @enderror
@@ -126,7 +138,7 @@
                                 <div class="col col-md-6">
                                     <div class="form-group">
                                       <label class="control-label" for="asignadoA">Trabajo asignado a:</label> 
-                                      <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="asignadoA" value={{old('asignadoA')}}>   {{-- old() mantiene en campo con el dato--}}
+                                      <input autocomplete="off" class="form-control" readonly disabled="true" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="asignadoA" placeholder="{{$ot->asignadoA}}" value="">   {{-- old() mantiene en campo con el dato--}}
                                       @error('asignadoA')
                                       <small>*{{$message}}</small>
                                       @enderror
@@ -136,7 +148,11 @@
                                   <div class="col col-md-6">
                                     <div class="form-group">
                                       <label class="control-label" for="realizadoPor	">Realizado por:</label> 
-                                      <input Style="background-color: rgb(137, 138, 140);" readonly disabled="true" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="realizadoPor	" value={{old('realizadoPor	')}}>   {{-- old() mantiene en campo con el dato--}}
+                                      @if ($ot->estado=='Abierta')
+                                      <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="realizadoPor" value={{$ot->realizadoPor}}>   {{-- old() mantiene en campo con el dato--}}
+                                      @else
+                                      <input autocomplete="off" class="form-control" readonly disabled="true" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="realizadoPor" value={{$ot->realizadoPor}}>   {{-- old() mantiene en campo con el dato--}}
+                                      @endif
                                       @error('realizadoPor	') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
                                       <small class="help-block">*{{$message}}</small>
                                       @enderror
@@ -146,13 +162,8 @@
                             <div class="row"> {{-- ****** div de la 4ta fila   --}}  
                               <div class="col col-md-6">
                                 <div class="form-group">
-                                  <label class="control-label" for="prioridad">Prioridad:</label> 
-                                    <select name="prioridad" class="form-select" aria-label="Default select example" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);">
-                                    <option selected>Sin prioridad</option>
-                                    <option value="Alta">Alta</option>
-                                    <option value="Muy alta">Muy alta</option>
-                                    <option value="Baja">Baja</option>
-                                    </select>
+                                  <label class="control-label" for="realizadoPor	">Prioridad:</label> 
+                                  <input readonly disabled="true" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="prioridad" placeholder="{{$ot->prioridad}}" value="">   {{-- old() mantiene en campo con el dato--}}
                                   @error('prioridad')
                                   <small>*{{$message}}</small>
                                   @enderror
@@ -162,7 +173,11 @@
                                   <div class="col col-md-6">
                                     <div class="form-group">
                                       <label class="control-label" for="fechaAprobado"> Fecha de aprobado:</label> 
-                                      <input Style="background-color: rgb(137, 138, 140);" readonly disabled="true" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="date" name="fechaAprobado" value={{old('fechaAprobado')}}>   {{-- old() mantiene en campo con el dato--}}
+                                      @if ($ot->estado=='Abierta')
+                                      <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="date" name="fechaAprobado" value={{$ot->fechaAprobado}}>   {{-- old() mantiene en campo con el dato--}}
+                                      @else
+                                      <input autocomplete="off" class="form-control" readonly disabled="true" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="date" name="fechaAprobado" value={{$ot->fechaAprobado}}>   {{-- old() mantiene en campo con el dato--}}
+                                      @endif
                                       @error('fechaAprobado') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
                                       <small class="help-block">*{{$message}}</small>
                                       @enderror
@@ -173,9 +188,8 @@
                                 <div class="col col-md-12">
                                   <div class="form-group">
                                     <label class="control-label" for="det1"> Descripción de la solicitud:</label> 
-                                    <textarea  class="form-control" name="det1" id="det1" rows="3" value={{old('det1')}} ></textarea> 
+                                    <textarea  disabled class="form-control" name="det1" id="det1" rows="3" value="">{{$ot->det1}}</textarea> 
                                     @error('det1')
-                                  
                                     <small class="help-block">***{{$message}}</small>
                                     <br>
                                     <br>
@@ -188,7 +202,11 @@
                             <div class="col col-md-12">
                               <div class="form-group">
                                 <label class="control-label" for="det2"> Descripción del trabajo realizado:</label> 
-                                <textarea Style="background-color: rgb(137, 138, 140);" readonly disabled="true" class="form-control" name="det2" id="exampleFormControlTextarea1" rows="3"></textarea> 
+                                @if ($ot->estado=='Abierta')
+                                <textarea   class="form-control" name="det2" id="det2" rows="3">{{$ot->det2}}</textarea> 
+                                @else
+                                <textarea disabled class="form-control" name="det2" id="det2" rows="3">{{$ot->det2}}</textarea> 
+                                @endif
                                 @error('det2')
                                 <small class="text-danger"> {{$message}}</small>
                                 @enderror
@@ -200,7 +218,11 @@
                             <div class="col col-md-12">
                               <div class="form-group">
                                 <label class="control-label" for="det3"> Explicación del trabajo incompleto:</label> 
-                                <textarea Style="background-color: rgb(137, 138, 140);" readonly  disabled="true" class="form-control" name="det3" id="exampleFormControlTextarea1" rows="3"></textarea> 
+                                @if ($ot->estado=='Abierta')
+                                <textarea class="form-control" name="det3" id="det3" rows="3">{{$ot->det3}}</textarea> 
+                                @else
+                                <textarea disabled class="form-control" name="det3" id="det3" rows="3">{{$ot->det3}}</textarea>
+                                @endif
                                 @error('det3')
                                 <small class="text-danger"> {{$message}}</small>
                                 @enderror
@@ -213,16 +235,34 @@
 
                             <br>
                             <br>
-                           <div class="form-group">
-                            <input type="hidden" name="equipo_id" value={{$equipo->id}} readonly >
-                            <button form="nuevaOrden" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Crear orden</button>
-                            <p style="text-align: right;"><a  class="text-white " href={{route('equipos.index')}}>Salir</a></p> 
-                          </div>
-                          
+                           
+                          <div class="row">
+                                  <div class="col-sm-4">
+                                  </div>
+                                  <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <input type="hidden" name="ot_id" value={{$ot->id}} readonly >
+                                          <input type="hidden" name="equipo_id" value={{$equipo->id}} readonly >
+                                          @if ($ot->estado=='Abierta')
+                                          <button form="cerrarOrden" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">cerrar orden</button>
+                                          </button>
+                                          @else
+                                        
+                                          <small class="text-danger">Esta orden ya fue cerrada</small>
+                                          @endif
+
+                                        </div>
+                                  </div>  
+                                  <div class="col-sm-4">
+                                        <p style="text-align: right;"><a  class="text-white " href ='{{route('ordentrabajo.list', $equipo->id)}}'> Salir >></a></p>
+                                  </div>
+                            </div> {{-- div de ROw --}} 
 
                         </div>{{-- div del container dentro de columna 2 --}}    
                         </div>{{-- div del Letra blanca --}}
+                              
                     </form>
+                    
                     </div>
                 <div class="col col-md-2">
                     {{-- columna 3 --}}

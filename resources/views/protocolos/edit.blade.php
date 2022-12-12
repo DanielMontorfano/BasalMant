@@ -39,7 +39,7 @@
                         <div class="col col-md-3">
                           <div class="form-group">
                             <label class="control-label" for="codigo">Código:</label> 
-                            <input maxlength="11" minlength="11" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="codigo" value="{{old('codigo', $protocolo->codigo)}}"> 
+                            <input readonly maxlength="11" minlength="11" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="codigo" value="{{old('codigo', $protocolo->codigo)}}"> 
                             @error('codigo')
                             <small>*{{$message}}</small>
                             @enderror

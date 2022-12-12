@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\OrdenTrabajo;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreOrdenRequest;
+use App\Http\Requests\StoreOrdenRequest; 
+use App\Http\Requests\StoreOrdenCerrarRequest; 
 
 class OrdenTrabajoController extends Controller
 {
@@ -68,7 +69,7 @@ class OrdenTrabajoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreOrdenRequest $request) //esto funciona una vez creado StoreEquipo de Request
+    public function store(StoreOrdenRequest $request) //(StoreOrdenRequest $request) esto funciona una vez creado StoreEquipo de Request
     //public function store(Request $request) //Antes de usar archivo StoreEquipo en Request
     {
         //$request->validate(['codEquipo'=>'required|max:8', 'marca'=>'required|min:3', 'modelo'=>'required']);
@@ -76,15 +77,20 @@ class OrdenTrabajoController extends Controller
        // echo "codigo de equipo:" . $request->equipo_id;
          //goto salir;
         // las siguentes lineas seria en forma manual, 
+        //dd($request->all());
+       // goto salir;
         $orden= new OrdenTrabajo();
         $id=$request->equipo_id;
         $orden->equipo_id=$request->equipo_id; //Ojo con las variables recibidas
-        $orden->de=$request->de;
-        $orden->para=$request->para;
+
+        $orden->solicitante=$request->solicitante;
+        $orden->fechaNecesidad=$request->input('fechaNecesidad');// Para que reconozca la fecha
+        $orden->asignadoA=$request->asignadoA;
+        $orden->prioridad=$request->prioridad;
         $orden->det1=$request->det1;
         $orden->estado="Abierta"; //si viene de abrir siempre será abieta
-        $orden->per_abre=$request->per_abre;
-        $orden->fecha1=$request->created_at;
+         
+       
         //$id=$request->equiposSelect;
         //$equipo=new Equipo();
         $equipo= Equipo::find($id);
@@ -101,7 +107,10 @@ class OrdenTrabajoController extends Controller
         //return view('ordentrabajo.index');
         //return $request->all();
         //return $orden;
-        //return;
+        salir:
+       // date_default_timezone_set('America/Argentina/Salta');
+        phpinfo();
+        return;
 
     }
 
@@ -123,7 +132,22 @@ class OrdenTrabajoController extends Controller
         //return view('ordentrabajo.show', compact('equipo', 'consulta','estado', 'id_orden'));
        return view('ordentrabajo.show', compact('equipo', 'ot' ));
 
-      // return  $equipo;
+       // return  $ot;
+    } 
+
+    public function showCerrar($id)  //entro con id de orden de trabajo
+    {   //$equipo= OrdenTrabajo::find($id);
+      //  $odenesTodos=Equipo::find($id)->fotos;
+          //$odenesTodos=Equipo::find($id)->ordentrabajo;
+
+          $ot=OrdenTrabajo::find($id);
+          $aux=$ot->equipo_id; //con id de orden recupero el equipo comoleto
+          $equipo= Equipo::find($aux);
+        // return $id_orden ;
+        //return view('ordentrabajo.show', compact('equipo', 'consulta','estado', 'id_orden'));
+          return view('ordentrabajo.showCerrar', compact('equipo', 'ot' ));
+
+       // return  $ot;
     } 
 
     /**
@@ -148,52 +172,29 @@ class OrdenTrabajoController extends Controller
      * @param  \App\Models\OrdenTrabajo  $ordenTrabajo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    { //$request trae lo del formulario, $id el id de equipo, trae lo que tengo en el registro sin modificar                                  
-       /* $request->validate(['codEquipo'=>'required', 'marca'=>'required', 'modelo'=>'required']);
-        $ot= OrdenTrabajo::find($id);
-        $repuestos=$equipo->equiposRepuestos;
-        $equipo->codEquipo=$request->codEquipo;
-        $equipo->marca=$request->marca;
-        $equipo->modelo=$request->modelo;
-        $equipo->idSecc=$request->idSecc;
-        $equipo->idSubSecc=$request->idSubSecc;
-        $equipo->det1=$request->det1;
-        $equipo->det2=$request->det2;
-        $equipo->det3=$request->det3;
-        $equipo->det4=$request->det4;
-        $equipo->det5=$request->det5;
-        $equipo->save();
-       
-        
-        return view('equipos.show', compact('equipo','repuestos')); //Envío show todo el registro en cuestión, sin $
-        */
-       // return view('equipos.show', compact('equipo','repuestos'));
+    public function update(StoreOrdenCerrarRequest $request, $id)
+    {  
+       //dd($request->all());
+       //goto salir;
+       // $ot_id=$request->ot_id;
        $ot= OrdenTrabajo::find($id);
        $equipo_id=$ot->equipo_id;
+       $ot->aprobadoPor=$request->aprobadoPor;
+       $ot->realizadoPor=$request->realizadoPor;
+       $ot->fechaEntrega=$request->input('fechaEntrega');
+       $ot->fechaAprobado=$request->input('fechaAprobado');
        $ot->det2=$request->det2;
-       $ot->per_cierra=$request->per_cierra;
-       $ot->estado=$request->estado;
-       $ot->fecha2=$request->updated_at;
-       $vars= getdate();
-       
-        /*foreach ($vars as $var) {
-            if($ot->created_at == $ot->updated_at){
-                $ot->fecha2='---';
-            }*/
-            
-        
-        
-       //$ot->fecha2='hola';
+       $ot->det3=$request->det3;
+    
+      // $ot->estado=$request->estado;
+       $ot->estado="Cerrada"; //si viene de abrir siempre será abieta
        $ot->save();
-      
-        // return $request;
-       
        $equipo=Equipo::find($equipo_id);
        $ots_e=Equipo::find($equipo_id)->ordentrabajo; 
        return view('ordentrabajo.list',compact('ots_e','equipo'));
        //return redirect()->route('ordentrabajo.list', $equipo->id);
-       //return $vars;
+       salir:
+       return $ot;
     }
 
 

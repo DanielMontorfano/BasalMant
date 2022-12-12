@@ -17,21 +17,17 @@ return new class extends Migration
             $table->id();
             $table->string('slug')->nullable();
             $table->unsignedBigInteger('equipo_id')->nullable();
-            $table->string('solicitante')->nullable();
-            $table->string('fechaNecesidad')->nullable();
-            $table->string('asignadoA')->nullable();
-            $table->string('prioridad')->nullable();
-            
-            $table->string('aprobadoPor')->nullable();
-            $table->string('fechaEntrega')->nullable();
-            $table->string('realizadoPor', 500)->nullable();
-            $table->string('fechaAprobado')->nullable();
-            
+            $table->string('de')->nullable();
+            $table->string('para')->nullable();
+            $table->string('per_abre')->nullable();
+            $table->string('fecha1')->nullable();
             $table->string('det1', 500)->nullable();
+            
+            $table->string('per_cierra')->nullable();
+            $table->string('fecha2')->nullable();
             $table->string('det2', 500)->nullable();
-            $table->string('det3', 500)->nullable();
             $table->string('estado')->nullable();
-          
+            $table->string('creador')->nullable();
             $table->timestamps();
             $table->foreign('equipo_id')->references('id')->on('equipos')->onDelete('cascade');
         });

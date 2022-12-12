@@ -1,5 +1,5 @@
 @extends('layouts.plantilla')
-@section('title', 'Ordenes sobre' . " " . $equipo->codEquipo)
+@section('title', 'OT')
 @section('css')
 {{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
 {{-- Para que sea responsive se agraga la tercer libreria --}}
@@ -64,41 +64,32 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;">Listado de ordenes de {{$equipo->codEquipo}}</h6>
 
-  
 
 <div class="card-body "  style="max-width: 95;">
 <div class="text-white card-body "  style="max-width: 95;">
 <p ><a  class="text-white " href={{route('ordentrabajo.createorden', $equipo->id)}}> Crear Orden de trabajo</a></p> 
-<div class="dropdown">
-  <a title="Reportes" class=" fa-solid fa-screwdriver-wrench btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" href="{{ route('ordentrabajo.createorden', $equipo->id) }}">Crear una orden</a>
-        <a class="dropdown-item" href="{{ route('ordentrabajo.edit', $equipo->id) }}">Cerrar una orden</a>
-        <a class="dropdown-item" href="{{ route('historialTodos', $equipo->id) }}">Ambos</a>
-      </div>
-</div>
-<br>
-
-
-
-<table id="listado" class="table table-striped table-success  table-hover border-4" >
+<table id="equipos" class="table table-striped table-success  table-hover border-4" >
     <thead class="table-dark" >
-        <td>Nº de Orden</td>
-        <td>Solicitante/Receptor</td>
-        <td>Fecha de apertura</td>
-        <td>Estado</td>
-        <td>Fecha de cierre</td>
-        
+        <td>Nº de Orden:</td>
+        <td>Solicitante:</td>
+        <td>Receptor:</td>
+        <td>Estado:</td>
+        <td>Fecha:</td>
+        <td>Cierre:</td>
        
     <tbody>
       @foreach ($ots_e as $ot)
       <tr>
-        <td><a title="{{$ot->det1}}" href="{{route('ordentrabajo.show', $ot->id)}}">{{$ot->id}}</a></td>
-        <td>{{$ot->solicitante}}/{{$ot->asignadoA}}</td>
-        <td>{{$ot->created_at}}</td>
-        <td> <a href="{{route('ordentrabajo.showCerrar', $ot->id)}}">{{$ot->estado}}</a></td>
-        <td>{{$ot->updated_at}}</td>
-    
+        <td><a href="{{route('ordentrabajo.show', $ot->id)}}">{{$ot->id}}</a></td>
+        <td>{{$ot->de}}</td>
+        <td>{{$ot->para}}</td>
+        <td>{{$ot->estado}}</td>
+        <td>{{substr($ot->created_at, 0, 10);}}</td>
+        @if ($ot->created_at<>$ot->updated_at)
+        <td>{{substr($ot->updated_at, 0, 10);}}</td>
+        @elseif($ot->created_at===$ot->updated_at)
+        <td>{{'***'}}</td>
+        @endif
       </tr>
         @endforeach
     </tbody>

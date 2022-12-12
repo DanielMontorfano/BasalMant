@@ -1,237 +1,248 @@
 @extends('layouts.plantilla')
-@section('title', 'Ver ' . $equipo->marca)
+@section('title', 'create')
 @section('content')
 
-
-{{-- ESTO ES UN COMENTARIO <h1>Aqui podras ver el equipo: <?php echo $variable;?></h1> --}}
-{{-- <h1>Aqui podras ver el equipo: {{ $variable}}</h1> --}}
-<div class="card" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
-  <div class="card-header" STYLE="background: linear-gradient(to right,#201f1e,#030007);">
-    <ul class="nav nav-tabs card-header-tabs">
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="true"  style="background-color: #1e2020;" href="{{route('equipos.show', $equipo->id)}}">Ficha</a>
-       
-      </li>
-     
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('fotos.show', $equipo->id)}}">Fotos</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Historial</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Protocolo</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href={{route('equipoTareash.show', $equipo->id)}}>Plan</a>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('documentos.show', $equipo->id)}}">Documentos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href={{route('equipos.edit', $equipo->id)}}>Editar</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href={{route('ordentrabajo.list', $equipo->id)}}>OT</a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Descargar</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Imprimir</a>
-      </li>
-      
-
-    </ul>
-  </div> 
- 
-
-
-
-
-
-
-
-  <div class="card-body" STYLE="background: linear-gradient(to right,#030007,#495c5c);">
-    <h6 STYLE="text-align:center; font-size: 30px;
+<style>
+    h6 {
+        text-align:center; font-size: 30px;
                         background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                         -webkit-background-clip: text;
-                        -webkit-text-fill-color: transparent;">Ver orden de trabajo</h6>
-    <p class="card-text"></p>
-    <div class="card" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
-    <div class="card-body "  style="max-width: 85;">
+                        -webkit-text-fill-color: transparent;
+
+    }
+
+    .input { color: #f2baa2;
+         font-family: Times New Roman;
+         font-size: 18px;
+         background: linear-gradient(to right,#030007, #495c5c);
+
+    }
+</style>
+<div class="card-header" STYLE="background: linear-gradient(to right,#201f1e,#030007);">
+  <ul class="nav nav-tabs card-header-tabs">
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('equipos.show', $equipo->id)}}">Ficha</a>
      
-     
-    
-    
-     <div class="container">
-      <div class="row">
-        <div class="col">
-          {{--  Column 1 --}}
-            </div>
-        <div class="col">
-          {{-- Column 2 --}}
-            <div class="card border-primary" style="background: linear-gradient(to left,#495c5c,#030007);">
-            <div class="card-body "  style="max-width: 85;">
-          <form action="{{route('ordentrabajo.store')}}" method="POST">
-            {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
-            @csrf
-           
-            <div class="p-3 mb-2 bg-gradient-primary text-white">
-            <div class="form-group">
-              <h6>Equipo:  {{$equipo->modelo}}</h6> 
-              <h6>Orden Nº:{{$ot->id}}</h6>
-            
-            </div>
-            
-             <div class="form-group">
-           <label class="sr-only" for="codEquipo">De:</label> 
-           <input class="form-control" type="text" name="de" value={{old('de', $ot->de)}} disabled> {{-- old() mantiene en campo con el dato--}}
-           @error('de')                                          {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
-           <small class="help-block">*{{$message}}</small>
-           @enderror
-           </div>
-          
-           <div class="form-group">
-           <label class="sr-only" for="para"> Para:</label> 
-           <input class="form-control" type="text" name="para" value={{old('para', $ot->para)}} disabled> 
-           @error('para')
-           <small>*{{$message}}</small>
-           @enderror
-           </div>
-           
-            
-           <div class="form-group">
-           <label class="sr-only" for="det1">Detalle:</label> 
-            {{-- <input class="form-control" type="text" name="det1" value={{old('det1')}}>  --}}
-           <textarea class="form-control" name="det1" id="exampleFormControlTextarea1" rows="4" disabled>{{$ot->det1}}</textarea> 
-          
-           @error('det1')
-           <small>*{{$message}}</small>
-           @enderror
-           </div>
-           <br>
-           
-       
-           <div class="form-group">
-           {{-- <label class="float-left" for="estado">Estado:</label> --}}
-             
-           {{--<input class="form-control" type="text" name="estado" value={{old('estado')}}>  --}}
-           <input class="form-control" type="hidden" name="estado" value="Abierto" style="font-size: 14px; width:100px; height: 30px" readonly> 
-           
-           @error('estado')
-           <small>*{{$message}}</small>
-           @enderror
-           </div>
-                     
-           <div class="form-group ">
-           <label class="sr-only" for="per_abre"> Firma:</label> 
-           <input class="col-xs-2"  type="text" name="per_abre" value={{old('per_abre', $ot->per_abre)}} disabled> 
-           @error('per_abre')
-           <small>*{{$message}}</small>
-           @enderror
-           </div>
-           <br>
-    
-           @if ($ot->estado=='Abierta')
-           <p style="text-align: center;" >
-           <a class="text-white" href="{{route('ordentrabajo.edit', $ot->id)}}">Cerrar esta orden</a>
-           </p>
-          
-           @endif
+    </li>
+   
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('fotos.show', $equipo->id)}}">Fotos</a>
+    </li>
 
-
-                      
-      </div> {{-- div del color de texto blanco --}}
-      </form>
-      </div> 
-      </div>
-          <p style="text-align: right;"><a  class="text-blue" href={{route('ordentrabajo.list', $equipo->id)}}>Salir</a></p>
-         </div>
-        <div class="col">
-         
-          {{--  Column 3 --}}
-        </div>
-
-
-      </div>
-    </div> 
-  </div>
-    </div>
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('historialPreventivo', $equipo->id)}}">Historial</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('equipos.index')}}">Protocolo</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href={{route('equipoTareash.show', $equipo->id)}}>Plan</a>
     
-  </div>
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('documentos.show', $equipo->id)}}">Documentos</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href={{route('equipos.edit', $equipo->id)}}>Editar</a>
+    </li>
+    <li class="nav-item">
+      <a  class="nav-link active" aria-current="true"  style="background-color: #1e2020;" href={{route('ordentrabajo.list', $equipo->id)}}>OT</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('equipos.index')}}">Descargar</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('imprimirEquipo',$equipo->id )}}">Imprimir</a>
+    </li>
+    
+
+  </ul>
 </div>
 
 
 
 
-{{-- ************************************************************************************** --}}
-{{-- ****LAS SIGUIENTES LINEAS SE COMENTAN POR RAZONES DE SER CODIGO MAESTRO --}}
-{{-- <p><strong>Marca:</strong>{{$equipo->marca}}</p>
-<p><strong>Modelo:</strong>{{$equipo->modelo}}</p>
-<p><strong>Seccion:</strong>{{$equipo->idSecc}}</p>
-<p><strong>Subsección:</strong>{{$equipo->idSubSecc}}</p>
-<p><strong>Caractrística 1:</strong>{{$equipo->det1}}</p>
-<p><strong>Caractrística 2:</strong>{{$equipo->det2}}</p>
-<p><strong>Caractrística 3:</strong>{{$equipo->det3}}</p>
-<p><strong>Caractrística 4:</strong>{{$equipo->det4}}</p>
-<p><strong>Caractrística 5:</strong>{{$equipo->det5}}</p>
-<p><strong>Repuestos:</strong></p>
- 
-<h3>Listado de repuestos</h3>
+<br>    
+<div class="container"> {{-- container principal --}}
+    <div class="row"> {{-- row principal --}}
+                <div class="col col-md-2">
+                    {{-- columna1 --}}
+                </div>
 
-@foreach($repuestos as $repuesto)
-<table>
-   <tr>
-    
-    <td><li>*{{$repuesto->pivot->cant}}* - - {{ $repuesto->codigo }} - {{ $repuesto->descripcion}} </li> </td>
-      
-  </tr>
+                <div class="col col-md-8">
+                    {{-- columna2 --}}
+                    
+                    <form id="cerrarOrden"  action="{{route('ordentrabajo.update', $ot->id)}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+                        <br>
+                        <h6>O.d.T para:  {{$equipo->codEquipo}}</h6>
+                        @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
+                        {{-- Metodo PUT no existe en html, por eso indicamos a laravel como sigue --}}
+                        @method('put')
 
-</table>
-         
-@endforeach --}}
-{{-- ************************************************************************************** --}}
+                      
+                        <div class="p-3 mb-2 bg-gradient-primary text-white">
+                        <div class="container">
+                            
+                            <div class="row"> {{-- ***** div de la primera fila --}}
+                              <div class="col col-md-6">
+                                <div class="form-group ">
+                                  <label class="control-label" for="solicitante">Solicitante:</label> 
+                                  <input autocomplete="off" class="form-control " readonly disabled="true" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="solicitante" placeholder="{{$ot->solicitante}}" value=""> 
+                                  @error('solicitante')
+                                  <small>*{{$message}}</small>
+                                  @enderror
+                                </div>
+                              </div> 
+                              
+                              <div class="col col-md-6">
+                                <div class="form-group">
+                                  <label class="control-label" for="aprobadoPor">Aprobado por:</label> 
+                                  <input   autocomplete="off" class="form-control" readonly disabled="true"  STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="aprobadoPor" placeholder="{{$ot->aprobadoPor}}" value=""> 
+                                  @error('aprobadoPor')
+                                  <small>*{{$message}}</small>
+                                  @enderror
+                                </div>
+                            </div>
+                            </div> {{-- ***** div de la primera fila --}}
+                            <div class="row"> {{-- ****** div de la segunda fila --}}
+                                <div class="col col-md-6">
+                                    <div class="form-group">
+                                      <label class="control-label" for="fechaNecesidad	">Fecha de necesidad:</label> 
+                                      <input autocomplete="off" class="form-control datepicker" readonly disabled="true" STYLE="color: #7a7979; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="date" name="fechaNecesidad" value={{$ot->fechaNecesidad}}> 
+                                      @error('fechaNecesidad	')
+                                      <small>*{{$message}}</small>
+                                      @enderror
+                                    </div>
+                                </div>
+                                <div class="col col-md-6">
+                                    <div class="form-group">
+                                      <label class="control-label" for="fechaEntrega">Fecha de entrega:</label> 
+                                      <input autocomplete="off" class="form-control" readonly disabled="true" STYLE="color: #7a7979; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="date" name="fechaEntrega" placeholder="{{$ot->fechaEntrega}}" value=""> 
+                                      @error('fechaEntrega')
+                                      <small>*{{$message}}</small>
+                                      @enderror
+                                    </div>
+                                </div>
+                            </div> {{-- ****** div de la segunda fila --}}
+                            <div class="row"> {{-- ****** div de la tercera fila --}}
+                                <div class="col col-md-6">
+                                    <div class="form-group">
+                                      <label class="control-label" for="asignadoA">Trabajo asignado a:</label> 
+                                      <input autocomplete="off" class="form-control" readonly disabled="true" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="asignadoA" placeholder="{{$ot->asignadoA}}" value="">   {{-- old() mantiene en campo con el dato--}}
+                                      @error('asignadoA')
+                                      <small>*{{$message}}</small>
+                                      @enderror
+                                    </div>
+                                  </div>
+                  
+                                  <div class="col col-md-6">
+                                    <div class="form-group">
+                                      <label class="control-label" for="realizadoPor	">Realizado por:</label> 
+                                      <input autocomplete="off" class="form-control" readonly disabled="true"  STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="realizadoPor" placeholder="{{$ot->realizadoPor}}" value="">   {{-- old() mantiene en campo con el dato--}}
+                                      @error('realizadoPor	') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
+                                      <small class="help-block">*{{$message}}</small>
+                                      @enderror
+                                      </div>
+                                  </div>
+                            </div> {{-- ****** div de la tercera fila --}}
+                            <div class="row"> {{-- ****** div de la 4ta fila   --}}  
+                              <div class="col col-md-6">
+                                <div class="form-group">
+                                  <label class="control-label" for="realizadoPor	">Prioridad:</label> 
+                                  <input   autocomplete="off" class="form-control" readonly disabled="true" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="prioridad" placeholder="{{$ot->prioridad}}" value="">   {{-- old() mantiene en campo con el dato--}}
+                                  @error('prioridad')
+                                  <small>*{{$message}}</small>
+                                  @enderror
+                                </div>
+                              </div> 
+                  
+                                  <div class="col col-md-6">
+                                    <div class="form-group">
+                                      <label class="control-label" for="fechaAprobado"> Fecha de aprobado:</label> 
+                                      <input autocomplete="off" class="form-control" readonly disabled="true" STYLE="color: #7a7979; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="date" name="fechaAprobado" placeholder="{{$ot->fechaAprobado}}" value="">   {{-- old() mantiene en campo con el dato--}}
+                                      @error('fechaAprobado') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
+                                      <small class="help-block">*{{$message}}</small>
+                                      @enderror
+                                      </div>
+                                  </div>
+                           </div> {{-- ****** div de la 4ta fila --}}    
+                           <div class="row"> {{-- ****** div de la 5ta fila   --}}    
+                                <div class="col col-md-12">
+                                  <div class="form-group">
+                                    <label class="control-label" for="det1"> Descripción de la solicitud:</label> 
+                                    <textarea  disabled class="form-control" name="det1" id="det1" rows="3" value="">{{$ot->det1}}</textarea> 
+                                    @error('det1')
+                                  
+                                    <small class="help-block">***{{$message}}</small>
+                                    <br>
+                                    <br>
+                                    @enderror
+                                  </div>
+                                </div>
+                           </div> {{-- ****** div de la 5ta fila --}}    
+                           
+                           <div class="row"> {{-- ****** div de la 6ta fila   --}}    
+                            <div class="col col-md-12">
+                              <div class="form-group">
+                                <label class="control-label" for="det2"> Descripción del trabajo realizado:</label> 
+                                <textarea  disabled class="form-control" name="det2" id="det2" rows="3">{{$ot->det2}}</textarea> 
+                                @error('det2')
+                                <small class="text-danger"> {{$message}}</small>
+                                @enderror
+                              </div>
+                            </div>
+                           </div> {{-- ****** div de la 6ta fila --}}    
+                           
+                           <div class="row"> {{-- ****** div de la 7ma fila   --}}    
+                            <div class="col col-md-12">
+                              <div class="form-group">
+                                <label class="control-label" for="det3"> Explicación del trabajo incompleto:</label> 
+                                <textarea disabled class="form-control" name="det3" id="det3" rows="3">{{$ot->det3}}</textarea> 
+                                @error('det3')
+                                <small class="text-danger"> {{$message}}</small>
+                                @enderror
+                              </div>
+                            </div>
+                           </div> {{-- ****** div de la 7ma fila --}}    
 
-{{-- <h3>Estoy en equipos.show.blade </h3> --}}
- 
-
-
-{{-- Para hacer resposive necesito agregar las 2 ultimas librerias --}}
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-<script>src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"</script>
-<script>src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"</script>
 
 
 
+                            <br>
+                            <br>
+                           
+                          <div class="row">
+                                  <div class="col-sm-4">
+                                  </div>
+                                  <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <input type="hidden" name="ot_id" value={{$ot->id}} readonly >
+                                          <input type="hidden" name="equipo_id" value={{$equipo->id}} readonly >
+                                          @if ($ot->estado=='Abierta')
+                                          {{--  <button form="cerrarOrden" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">cerrar orden</button> --}}
+                                         
+                                          </button>
+                                          @endif
 
-<script>
-    $(document).ready(function () {
-    $('#equipo').DataTable({
-      
-      reponsive: true,
-      autoWidth: false,
-      
-      "language": {
-            "lengthMenu": "Mostrar _MENU_",
-            "zeroRecords": "No se encontró ningún registro - disculpe",
-            "info": "Viendo _PAGE_ de _PAGES_",
-            "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(filtrados desde _MAX_ total registros)",
-            "search":"Buscar:",
-            "paginate":{
-            "next":"Siguiente",
-            "previous":"Anterior"
-          }
+                                        </div>
+                                  </div>  
+                                  <div class="col-sm-4">
+                                        <p style="text-align: right;"><a  class="text-white " href ='{{route('ordentrabajo.list', $equipo->id)}}'> Salir >></a></p>
+                                  </div>
+                            </div> {{-- div de ROw --}} 
 
-        }
-    });
-});
-</script>
+                        </div>{{-- div del container dentro de columna 2 --}}    
+                        </div>{{-- div del Letra blanca --}}
+                              
+                    </form>
+                    
+                    </div>
+                <div class="col col-md-2">
+                    {{-- columna 3 --}}
+                </div>
+    </div>  {{-- div del row1 Principal --}}
+</div> {{-- div del container Principal--}}
+
 @endsection
 
 

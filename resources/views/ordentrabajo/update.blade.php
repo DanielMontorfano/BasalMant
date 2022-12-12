@@ -2,7 +2,7 @@
 @section('title', 'actualizar')
 @section('content')
 <h1>Aqui podras actualizar el equipo</h1>
-<form action="{{route('equipos.update', $equipo)}}" method="POST">
+<form action="{{route('equipos.update', $equipo->id)}}" method="POST">
     {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
     @csrf
     {{-- Metodo PUT no existe en html, por eso indicamos a laravel como sigue --}}

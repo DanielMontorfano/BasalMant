@@ -10,12 +10,12 @@
       <div class="card-header" STYLE="background: linear-gradient(to right,#201f1e,#030007);">
         <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="true"  style="background-color: #1e2020;" href="{{route('equipos.show', $equipo->id)}}">Ficha</a>
+            <a class="nav-link"  href="{{route('equipos.show', $equipo->id)}}">Ficha</a>
            
           </li>
          
           <li class="nav-item">
-            <a class="nav-link" href="{{route('fotos.show', $equipo->id)}}">Fotos</a>
+            <a class="nav-link active" aria-current="true"  style="background-color: #1e2020;" href="{{route('fotos.show', $equipo->id)}}">Fotos</a>
           </li>
     
           <li class="nav-item">

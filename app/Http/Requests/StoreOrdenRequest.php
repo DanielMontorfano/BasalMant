@@ -24,12 +24,12 @@ class StoreOrdenRequest extends FormRequest
      */
     public function rules()
     {
-        return ['equipo_id'=>'required|max:15',
-                'de'=>'required|min:1',
-                'para'=>'required',
-                'det1'=>'required',
-                'per_abre' =>'required',
-                
+        return ['equipo_id'=>'required|numeric',
+                'solicitante'=>'required|min:5',
+               // 'fechaNecesidad'=>'required',
+                'asignadoA'=>'required',
+                'prioridad' =>'required',
+                'det1'=>'required|min:10|max:500',
 
 
             
@@ -38,11 +38,12 @@ class StoreOrdenRequest extends FormRequest
     public function attributes() //Fabuloso!! personalizar mensaje
     {
         return[
-            'equipo_id'=>'Codigo de equipo',
-            'de'=>'Sector que emite la O.T.',
-            'para'=>'A quien va dirigida la O.T.',
-            'per_abre'=>'Quien firma la O.T.',
-            
+          
+            'solicitante'=>'Sector o persona que emite la O.T.',
+            'fechaNecesidad'=>'Fecha que se requiere el trabajo',
+            'asignadoA'=>'Quien recibe',
+            'prioridad' =>'Nivel de prioridad',
+            'det1' =>'descripcion de la orden',
 
 
 
@@ -52,11 +53,12 @@ class StoreOrdenRequest extends FormRequest
     public function messages() //Mejor Aun, personalizar!!
     {
         return[
-            'equipo_id.required'=>'Se necesita ingresar el codigo del Equipo',
-            'de.required'=>'Se necesita ingresar de',
-            'para.required'=>'Se necesita ingresar para',
-            'det1.required'=>'Se necesita ingresar el detalle', 
-            'per_abre.required'=>'Se necesita su firma', 
+            
+            'solicitante.required'=>'Se necesita ingresar solicitante',
+            'fechaNecesidad.required'=>'Se necesita ingresar la fecha',
+            'asignadoA.required'=>'Se necesita ingresar a quien se le entrega', 
+            'prioridad.required'=>'Se necesita la prioridad',
+            'det1.required' =>'Debe contener entre 10 y 500 caracteres', 
            
         ];
     }

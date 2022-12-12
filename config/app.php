@@ -69,7 +69,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    //'timezone' => 'America/Argentina/Salta',
+    'timezone' => env('APP_TIMEZONE', 'UTC'), //Lo puse yo tabin agregué APP_TIMEZONE='America/Argentina/Salta' en .env
 
     /*
     |--------------------------------------------------------------------------
