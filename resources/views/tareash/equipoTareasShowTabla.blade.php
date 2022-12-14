@@ -69,7 +69,7 @@
         <p ><a  class="text-white " href={{route('equipoTareash.edit', $equipo->id)}}>Cargar tareas</a></p>
         
         
-        <table class="table" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+        <table id="listado" class="table" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
           <thead>
              <tr>
                

@@ -147,14 +147,14 @@
                   
                                   <div class="col col-md-6">
                                     <div class="form-group">
-                                      <label class="control-label" for="realizadoPor	">Realizado por:</label> 
+                                      <label class="control-label" for="realizadoPor">Realizado por:</label> 
                                       @if ($ot->estado=='Abierta')
                                       <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="realizadoPor" value={{$ot->realizadoPor}}>   {{-- old() mantiene en campo con el dato--}}
                                       @else
                                       <input autocomplete="off" class="form-control" readonly disabled="true" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="realizadoPor" value={{$ot->realizadoPor}}>   {{-- old() mantiene en campo con el dato--}}
                                       @endif
-                                      @error('realizadoPor	') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
-                                      <small class="help-block">*{{$message}}</small>
+                                      @error('realizadoPor') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
+                                      <small>*{{$message}}</small>
                                       @enderror
                                       </div>
                                   </div>

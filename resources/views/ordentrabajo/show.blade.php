@@ -70,6 +70,18 @@
                 </div>
 
                 <div class="col col-md-8">
+
+                  <div class="dropdown">
+                    <a title="Reportes" class=" fa-solid fa-solid fa-print btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                          <a class="dropdown-item" href="{{ route('imprimirOrden', $ot->id) }}">Imprimir orden</a>
+                          <a class="dropdown-item" href="{{ route('ordentrabajo.edit', $equipo->id) }}">Cerrar una orden</a>
+                          <a class="dropdown-item" href="{{ route('historialTodos', $equipo->id) }}">Ambos</a>
+                        </div>
+                  </div>
+                  <br>
+
+
                     {{-- columna2 --}}
                     
                     <form id="cerrarOrden"  action="{{route('ordentrabajo.update', $ot->id)}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
@@ -137,9 +149,9 @@
                   
                                   <div class="col col-md-6">
                                     <div class="form-group">
-                                      <label class="control-label" for="realizadoPor	">Realizado por:</label> 
+                                      <label class="control-label" for="realizadoPor">Realizado por:</label> 
                                       <input autocomplete="off" class="form-control" readonly disabled="true"  STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="realizadoPor" placeholder="{{$ot->realizadoPor}}" value="">   {{-- old() mantiene en campo con el dato--}}
-                                      @error('realizadoPor	') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
+                                      @error('realizadoPor') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
                                       <small class="help-block">*{{$message}}</small>
                                       @enderror
                                       </div>
@@ -148,7 +160,7 @@
                             <div class="row"> {{-- ****** div de la 4ta fila   --}}  
                               <div class="col col-md-6">
                                 <div class="form-group">
-                                  <label class="control-label" for="realizadoPor	">Prioridad:</label> 
+                                  <label class="control-label" for="prioridad ">Prioridad:</label> 
                                   <input   autocomplete="off" class="form-control" readonly disabled="true" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="prioridad" placeholder="{{$ot->prioridad}}" value="">   {{-- old() mantiene en campo con el dato--}}
                                   @error('prioridad')
                                   <small>*{{$message}}</small>

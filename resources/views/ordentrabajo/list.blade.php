@@ -69,15 +69,7 @@
 <div class="card-body "  style="max-width: 95;">
 <div class="text-white card-body "  style="max-width: 95;">
 <p ><a  class="text-white " href={{route('ordentrabajo.createorden', $equipo->id)}}> Crear Orden de trabajo</a></p> 
-<div class="dropdown">
-  <a title="Reportes" class=" fa-solid fa-screwdriver-wrench btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" href="{{ route('ordentrabajo.createorden', $equipo->id) }}">Crear una orden</a>
-        <a class="dropdown-item" href="{{ route('ordentrabajo.edit', $equipo->id) }}">Cerrar una orden</a>
-        <a class="dropdown-item" href="{{ route('historialTodos', $equipo->id) }}">Ambos</a>
-      </div>
-</div>
-<br>
+
 
 
 

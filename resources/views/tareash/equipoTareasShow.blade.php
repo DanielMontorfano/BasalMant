@@ -66,7 +66,7 @@
         
         @if(isset($PlanP))
         @foreach($PlanP as $plan)
-        <table  class="table-bordered" >
+        <table  id="listado" class="table-bordered" >
           <tr >
               <td class="col-2" align="left"><strong>{{$plan['codigo']}}</strong></td>
 

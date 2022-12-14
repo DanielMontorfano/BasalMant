@@ -75,7 +75,7 @@
       <thead class="table-dark" >
           
           <td>O.d.T</td>
-          <td>Descripción</td>
+          <td>Descripción/Estado</td>
           <td>Fecha</td>
           <td>Aprobó</td>
           <td></td>
@@ -86,7 +86,7 @@
         <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
           
           <td STYLE="font-weight:bold; text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; "><a href="{{route('ordentrabajo.show', $ot->id)}}">{{$ot->id}}</a></td> 
-          <td>{{$ot->det2}}</td>
+          <td>{{$ot->det2}}{{"(" . $ot->estado . ")"}}</td>
           <td>{{$ot->updated_at}}</td>
           <td>{{$ot->aprobadoPor}}</td> 
   

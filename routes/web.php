@@ -102,7 +102,7 @@ Route::get('search/equipos', [SearchEquipoController::class,'equipos'])->name('s
 //****************************IMPRIMIR*********************** */
 Route::get('/imprimir', [imprimirController::class,'imprimir'])->name('imprimir');
 Route::get('/imprimirEquipo/{equipo}', [imprimirController::class,'imprimirEquipo'])->name('imprimirEquipo');
-
+Route::get('/imprimirOrden/{orden}', [imprimirController::class,'imprimirOrden'])->name('imprimirOrden');
 
 //route::post('imagen/store', [ImagenController::class,'store'])->name('imagen.store');
 
