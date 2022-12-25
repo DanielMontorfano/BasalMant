@@ -75,8 +75,7 @@
                     <a title="Reportes" class=" fa-solid fa-solid fa-print btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                           <a class="dropdown-item" href="{{ route('imprimirOrden', $ot->id) }}">Imprimir orden</a>
-                          <a class="dropdown-item" href="{{ route('ordentrabajo.edit', $equipo->id) }}">Cerrar una orden</a>
-                          <a class="dropdown-item" href="{{ route('historialTodos', $equipo->id) }}">Ambos</a>
+                          
                         </div>
                   </div>
                   <br>

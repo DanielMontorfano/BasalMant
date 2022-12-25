@@ -1,11 +1,13 @@
-@extends('layouts.plantilla')
+
+{{-- @extends('layouts.plantilla') --}}
+@extends('adminlte::page') 
 @section('title', 'create')
 @section('content')
 
 <style>
     h6 {
-        text-align:center; font-size: 30px;
-                        background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
+        text-align:center; font-size: 60px;
+                        background: -webkit-linear-gradient(rgb(1, 103, 71), rgba(228, 9, 9, 0.671));
                         -webkit-background-clip: text;
                         -webkit-text-fill-color: transparent;
 
@@ -17,6 +19,20 @@
          background: linear-gradient(to right,#030007, #495c5c);
 
     }
+    
+    .container { color: #f3efedd1;
+         font-family: Arial;
+         font-size: 14px;
+        /*  background: linear-gradient(to right,#f5f8f8fd, #495c5c); */
+       
+
+    }
+
+    
+
+    
+
+
 </style>
 
 <br>    
@@ -25,14 +41,14 @@
                 <div class="col col-md-2">
                     {{-- columna1 --}}
                 </div>
-
+                
                 <div class="col col-md-8">
                     {{-- columna2 --}}
-                    
-                    <form id="nuevoPlan"  action="{{route('plans.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                     <h6>Nuevo Plan</h6>
+                    <form id="nuevoPlan"  action="{{route('plans.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+                    
                     @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
-                    <div class="p-3 mb-2 bg-gradient-primary text-white">
+                    <div class="p-3 mb-2  text-white">
                         <div class="container">
                               <div class="row"> {{-- ***** div de la primera fila --}}
                               <div class="col col-md-3">

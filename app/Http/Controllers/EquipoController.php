@@ -100,8 +100,9 @@ class EquipoController extends Controller
         //return $equipo;
         //return 'hhhhhhhhhhhhhhhh' . $repuestos;
         //return view('Equipos.show', ['variable'=>$equipo]); video anterior
-
-       return view('equipos.show', compact('equipo','repuestos', 'plans','equiposB')); //Envío todo el registro en cuestión
+        $id=array($equipo->id); 
+        //print_r($id) ;
+        return view('equipos.show', compact('id','equipo','repuestos', 'plans','equiposB')); //Envío todo el registro en cuestión
 
        // return view('Equipos.show');
     }

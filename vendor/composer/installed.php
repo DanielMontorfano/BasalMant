@@ -5,11 +5,20 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '1802388da4e88d08240cd730837d4ad72875a1a7',
+        'reference' => '78732edae493bd5c3d6e47155e592469d36bcc50',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
     'versions' => array(
+        'almasaeed2010/adminlte' => array(
+            'pretty_version' => 'v3.2.0',
+            'version' => '3.2.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../almasaeed2010/adminlte',
+            'aliases' => array(),
+            'reference' => 'bd4d9c72931f1dd28601b6bfb387554a381ad540',
+            'dev_requirement' => false,
+        ),
         'bacon/bacon-qr-code' => array(
             'pretty_version' => '2.0.7',
             'version' => '2.0.7.0',
@@ -412,6 +421,15 @@
             'reference' => 'daa11c43729510b3700bc34d414664966b03bffe',
             'dev_requirement' => false,
         ),
+        'jeroennoten/laravel-adminlte' => array(
+            'pretty_version' => 'v3.8.5',
+            'version' => '3.8.5.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../jeroennoten/laravel-adminlte',
+            'aliases' => array(),
+            'reference' => '31fd44fd200487f15099e3fae622b0228266372e',
+            'dev_requirement' => false,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -451,7 +469,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '1802388da4e88d08240cd730837d4ad72875a1a7',
+            'reference' => '78732edae493bd5c3d6e47155e592469d36bcc50',
             'dev_requirement' => false,
         ),
         'laravel/pint' => array(
@@ -1401,6 +1419,15 @@
             'install_path' => __DIR__ . '/../tijsverkoyen/css-to-inline-styles',
             'aliases' => array(),
             'reference' => 'da444caae6aca7a19c0c140f68c6182e337d5b1c',
+            'dev_requirement' => false,
+        ),
+        'twbs/bootstrap-icons' => array(
+            'pretty_version' => 'v1.10.2',
+            'version' => '1.10.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../twbs/bootstrap-icons',
+            'aliases' => array(),
+            'reference' => '4deaf1f69ccbe0a996c08a308525a26b05467242',
             'dev_requirement' => false,
         ),
         'vlucas/phpdotenv' => array(

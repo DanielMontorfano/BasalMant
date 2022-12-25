@@ -1,5 +1,10 @@
-@extends('layouts.plantilla')
+
+{{-- @extends('layouts.plantillaLTE') --}}
+
+@extends('adminlte::page',$id[]=array($equipo->id))
 @section('title', 'Equipos')
+
+
 @section('css')
 {{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
 {{-- Para que sea responsive se agraga la tercer libreria --}}
@@ -57,7 +62,9 @@
 </div>
 {{-- aqui Todos los script ver plantilla--}}
 @endsection
-
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop
 
 
 

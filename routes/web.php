@@ -41,6 +41,7 @@ use App\Http\Controllers\HistorialController;
 |
 */
 
+//Route::get('/', InicioController::class)->name('welcome');
 Route::get('/', InicioController::class)->name('home');
 
 Route::view('nosotros','nosotros')->name('nosotros');
