@@ -194,7 +194,7 @@ return [
     'classes_body' => '',
     'classes_brand' => 'bg-white',
     'classes_brand_text' => 'text-danger',
-    'classes_content_wrapper' => '',
+    'classes_content_wrapper' => 'bg-dark',
     'classes_content_header' => '',
     'classes_content' => '',
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
