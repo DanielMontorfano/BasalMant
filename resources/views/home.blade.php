@@ -2,6 +2,12 @@
 @section('title', 'Home')
 @section('content')
 <style>
+  h1{
+  background: -webkit-linear-gradient(yellow,red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: tomato;  
+  }
 .card{
      border:none;
      /*width:400px; */
@@ -14,11 +20,11 @@
     width: 100%;
     height: 12vw;
     /*color:rgb(212, 41, 41);*/
-    object-fit: cover;
+    object-fit:  fill /*cover*/;
 }
 
 </style>
-<h1>Bienvenidos a la Página Principal</h1>
+<h1 align='center'>BasalMant</h1>
 
 <div class="container">
     <div class="row">
@@ -35,7 +41,7 @@
             </div>
             <div class="col col-md-3">
               Columna 2
-              <div class="card  text-white" >
+              <div class="card  text-white" align="center" >
                   
                 <div class="card-body">
                   <img src={{asset('img\imagenes\planImagen.png')}} class="card-img-top" alt="...">
@@ -47,7 +53,7 @@
       
       <div class="col col-md-3">
         Columna 3
-        <div class="card  text-white" >
+        <div class="card  text-white" align="center" >
             
           <div class="card-body">
             <img src={{asset('img\imagenes\OrdenDeTrabajo2.png')}} class="card-img-top" alt="...">
@@ -61,9 +67,9 @@
         Columna 3
         <div class="card  text-white" >
             
-          <div class="card-body">
+          <div class="card-body" align="center">
             <img src={{asset('img\imagenes\checkList.png')}} class="card-img-top" alt="...">
-            <p>Procedimientos de mantenimiento</p>
+            <p>Proced. de mantenimiento</p>
             <a href="#" class="btn stretched-link"></a>
           </div>
         </div>
@@ -72,5 +78,58 @@
   </div>
 </div>
 
+<div class="container">
+  <div class="row">
+          <div class="col col-md-3">
+            Columna 1
+            <div class="card  text-white" >
+                
+                <div class="card-body" align="center" >
+                  <img src={{asset('img\imagenes\tarea2.png')}}  class="card-img-top" alt="...">
+                  <p>Tareas</p>
+                  <a href="#" class="btn stretched-link"></a>
+                </div>
+              </div>
+          </div>
+          <div class="col col-md-3">
+            Columna 2
+            <div class="card  text-white" >
+                
+              <div class="card-body" align="center">
+                <img src={{asset('img\imagenes\Analisis2.png')}} class="card-img-top" alt="...">
+                <p>Datos</p>
+                <a href="#" class="btn stretched-link"></a>
+              </div>
+            </div>
+        </div>
+    
+    <div class="col col-md-3">
+      Columna 3
+      <div class="card  text-white" align="center">
+          
+        <div class="card-body">
+          <img src={{asset('img\imagenes\Repuestos2.png')}} class="card-img-top" alt="...">
+          <p>Repuestos</p>
+          <a href="#" class="btn stretched-link"></a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col">
+      Columna 3
+      <div class="card  text-white" >
+          
+        <div class="card-body" align="center">
+          <img src={{asset('img\imagenes\checkList.png')}} class="card-img-top" alt="...">
+          <p>Control de versiones</p>
+          <a href="#" class="btn stretched-link"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+  
 
 @endsection
