@@ -42,82 +42,85 @@ use App\Http\Controllers\HistorialController;
 */
 
 //Route::get('/', InicioController::class)->name('welcome');
-Route::get('/', InicioController::class)->name('home');
-
-Route::view('nosotros','nosotros')->name('nosotros');
-Route::view('contactanos','contactanos')->name('contactanos');
-
-Route::resource('equipos', EquipoController::class);
-//Route::get('equipos/{equipo}/showphoto', [EquipoController::class, 'showphoto'])->name('equipos.showphoto');
-Route::get('equipos/{equipo}/equipoTareasShow', [EquipoController::class, 'equipoTareasShow'])->name('equipos.showtareas');
-Route::resource('equipoTareash', TareashController::class);
 
 
 
-Route::delete('/equipos/{equipo}/borrar', [EquipoController::class, 'destroy'])->name('equipos.destroy');
-Route::resource('equipoRepuesto', EquipoRepuestoController::class);
-Route::get('search/repuestos', [SearchRepuestosController::class,'repuestos'])->name('search.repuestos');
-Route::resource('equipoPlan', EquipoplanController::class);
-Route::resource('equipoEquipo', EquipoEquipoController::class);
-//************************************************************************** */
-Route::resource('fotos', FotoController::class);
-Route::get('fotos/{equipo}', [EquipoController::class, 'show'])->name('fotos.show');
+Route::get('/', function () {
+    return view('welcome');
+});
 
-//**************************************************************************** */
-Route::resource('documentos', DocumentoController::class);
-Route::get('documentos/{equipo}', [EquipoController::class, 'show'])->name('documentos.show');
-
-
-//**************************************************************************** */
-
-Route::resource('ordentrabajo', OrdenTrabajoController::class);
-Route::get('ordentrabajo/createorden/{equipo}', [OrdenTrabajoController::class, 'createorden'])->name('ordentrabajo.createorden');
-Route::get('ordentrabajo/show/{ordendetrabajo}', [OrdenTrabajoController::class, 'show'])->name('ordentrabajo.show');
-Route::get('ordentrabajo/showCerrar/{ordendetrabajo}', [OrdenTrabajoController::class, 'showCerrar'])->name('ordentrabajo.showCerrar');
-Route::get('ordentrabajo/list/{equipo}', [OrdenTrabajoController::class, 'list'])->name('ordentrabajo.list');
-
-//**************************************************************************** */
-Route::resource('tareas', TareaController::class);
-Route::get('/tareas/{tareas}/borrar', [TareaController::class, 'destroy'])->name('tareas.destroy');
-//Route::get('tarea/{tarea}/edit', [TareaController::class, 'edit'])->name('tarea.edit');
-//**************************************************************************** */
-Route::get('/historialTodos/{equipo}', [HistorialController::class,'historialTodos'])->name('historialTodos');
-Route::get('/historialPreventivo/{equipo}', [HistorialController::class,'historialPreventivo'])->name('historialPreventivo');
-Route::get('/historialCorrectivo/{equipo}', [HistorialController::class,'historialCorrectivo'])->name('historialCorrectivo');
-
-
-//**************************************************************************** */
-Route::resource('protocolos', ProtocoloController::class);
-Route::resource('prototarea', PrototareaController::class);
-//**************************************************************************** */
-Route::resource('plans', PlanController::class);
-Route::resource('planproto', PlanprotoController::class);
-//**************************************************************************** */
-
-
-
-Route::get('search/tareas', [SearchTareasController::class,'tareas'])->name('search.tareas'); //esta ruta permite hacer las busqudas asicrónicas AJAX
-Route::get('search/protocolos', [SearchProtocolosController::class,'protocolos'])->name('search.protocolos'); //esta ruta permite hacer las busqudas asicrónicas AJAX
-Route::get('search/plans', [SearchPlansController::class,'plans'])->name('search.plans'); //NO Olvidar poner use!!!! esta ruta permite hacer las busqudas asicrónicas AJAX
-Route::get('search/equipos', [SearchEquipoController::class,'equipos'])->name('search.equipos'); //NO Olvidar poner use!!!! esta ruta permite hacer las busqudas asicrónicas AJAX
-//****************************IMPRIMIR*********************** */
-Route::get('/imprimir', [imprimirController::class,'imprimir'])->name('imprimir');
-Route::get('/imprimirEquipo/{equipo}', [imprimirController::class,'imprimirEquipo'])->name('imprimirEquipo');
-Route::get('/imprimirOrden/{orden}', [imprimirController::class,'imprimirOrden'])->name('imprimirOrden');
-
-//route::post('imagen/store', [ImagenController::class,'store'])->name('imagen.store');
-
-
-//Route::get('/', function () {
-  //  return view('welcome');
-//});
-
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'),  'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    Route::view('home','home')->name('home');
+ //*********************Desde Aqui ************************************************ */ 
+ Route::view('nosotros','nosotros')->name('nosotros');
+ Route::view('contactanos','contactanos')->name('contactanos');
+ 
+ Route::resource('equipos', EquipoController::class);
+ //Route::get('equipos/{equipo}/showphoto', [EquipoController::class, 'showphoto'])->name('equipos.showphoto');
+ Route::get('equipos/{equipo}/equipoTareasShow', [EquipoController::class, 'equipoTareasShow'])->name('equipos.showtareas');
+ Route::resource('equipoTareash', TareashController::class);
+ 
+ 
+ 
+ Route::delete('/equipos/{equipo}/borrar', [EquipoController::class, 'destroy'])->name('equipos.destroy');
+ Route::resource('equipoRepuesto', EquipoRepuestoController::class);
+ Route::get('search/repuestos', [SearchRepuestosController::class,'repuestos'])->name('search.repuestos');
+ Route::resource('equipoPlan', EquipoplanController::class);
+ Route::resource('equipoEquipo', EquipoEquipoController::class);
+ //************************************************************************** */
+ Route::resource('fotos', FotoController::class);
+ Route::get('fotos/{equipo}', [EquipoController::class, 'show'])->name('fotos.show');
+ 
+ //**************************************************************************** */
+ Route::resource('documentos', DocumentoController::class);
+ Route::get('documentos/{equipo}', [EquipoController::class, 'show'])->name('documentos.show');
+ 
+ 
+ //**************************************************************************** */
+ 
+ Route::resource('ordentrabajo', OrdenTrabajoController::class);
+ Route::get('ordentrabajo/createorden/{equipo}', [OrdenTrabajoController::class, 'createorden'])->name('ordentrabajo.createorden');
+ Route::get('ordentrabajo/show/{ordendetrabajo}', [OrdenTrabajoController::class, 'show'])->name('ordentrabajo.show');
+ Route::get('ordentrabajo/showCerrar/{ordendetrabajo}', [OrdenTrabajoController::class, 'showCerrar'])->name('ordentrabajo.showCerrar');
+ Route::get('ordentrabajo/list/{equipo}', [OrdenTrabajoController::class, 'list'])->name('ordentrabajo.list');
+ 
+ //**************************************************************************** */
+ Route::resource('tareas', TareaController::class);
+ Route::get('/tareas/{tareas}/borrar', [TareaController::class, 'destroy'])->name('tareas.destroy');
+ //Route::get('tarea/{tarea}/edit', [TareaController::class, 'edit'])->name('tarea.edit');
+ //**************************************************************************** */
+ Route::get('/historialTodos/{equipo}', [HistorialController::class,'historialTodos'])->name('historialTodos');
+ Route::get('/historialPreventivo/{equipo}', [HistorialController::class,'historialPreventivo'])->name('historialPreventivo');
+ Route::get('/historialCorrectivo/{equipo}', [HistorialController::class,'historialCorrectivo'])->name('historialCorrectivo');
+ 
+ 
+ //**************************************************************************** */
+ Route::resource('protocolos', ProtocoloController::class);
+ Route::resource('prototarea', PrototareaController::class);
+ //**************************************************************************** */
+ Route::resource('plans', PlanController::class);
+ Route::resource('planproto', PlanprotoController::class);
+ //**************************************************************************** */
+ 
+ 
+ 
+ Route::get('search/tareas', [SearchTareasController::class,'tareas'])->name('search.tareas'); //esta ruta permite hacer las busqudas asicrónicas AJAX
+ Route::get('search/protocolos', [SearchProtocolosController::class,'protocolos'])->name('search.protocolos'); //esta ruta permite hacer las busqudas asicrónicas AJAX
+ Route::get('search/plans', [SearchPlansController::class,'plans'])->name('search.plans'); //NO Olvidar poner use!!!! esta ruta permite hacer las busqudas asicrónicas AJAX
+ Route::get('search/equipos', [SearchEquipoController::class,'equipos'])->name('search.equipos'); //NO Olvidar poner use!!!! esta ruta permite hacer las busqudas asicrónicas AJAX
+ //****************************IMPRIMIR*********************** */
+ Route::get('/imprimir', [imprimirController::class,'imprimir'])->name('imprimir');
+ Route::get('/imprimirEquipo/{equipo}', [imprimirController::class,'imprimirEquipo'])->name('imprimirEquipo');
+ Route::get('/imprimirOrden/{orden}', [imprimirController::class,'imprimirOrden'])->name('imprimirOrden');
+ 
+ //route::post('imagen/store', [ImagenController::class,'store'])->name('imagen.store');
+ 
+ 
+
+ //*********************Hasta Aqui ************************************************ */
+ 
+
 });
