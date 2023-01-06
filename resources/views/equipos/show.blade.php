@@ -4,6 +4,24 @@
  @extends('adminlte::page') 
 
 @section('title', 'Ver ' . $equipo->marca)
+@section('content_header')
+<h6 STYLE="text-align:center; font-size: 30px;
+background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;">Datos técnicos</h6>
+<style>.button {
+  position: absolute;
+  top:50%;
+  background-color:#0a0a23;
+  color: #fff;
+  border:none; 
+  border-radius:10px; 
+  padding:15px;
+  min-height:30px; 
+  min-width: 120px;
+}</style>
+
+@stop
 @section('css')
 {{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
 {{-- Para que sea responsive se agraga la tercer libreria --}}
@@ -59,25 +77,21 @@
     </ul>
   </div>
   
-    <h6 STYLE="text-align:center; font-size: 30px;
-                background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;">Datos técnicos</h6>
-                
+   
       
 
 
        <p ><a  class="text-white " href={{route('equipoTareash.show', $equipo->id)}}>Ver tareas</a></p> 
    
       <table id="listado" class="table table-striped table-success  table-hover border-4" >
-        <thead>
+        {{-- <thead>
           <tr>
             <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>
             
           </tr>
-        </thead>
+        </thead> --}}
         <tbody>
           <tr>
             <th scope="row">Equipo: </th>
@@ -139,8 +153,16 @@
     <div class="accordion" id="accordionPanelsStayOpenExample">
        {{-- 1er item --}}
       <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+        <h2 class="accordion-header" id="panelsStayOpen-headingOne" >
+          <button style="
+          
+          background-color:transparent;
+          color: #fff;
+          border:none; 
+          border-radius:10px; 
+          padding:15px;
+          min-height:30px; 
+          min-width: 120px;" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
             <strong>Repuestos</strong>
           </button>
         </h2>
@@ -149,10 +171,10 @@
             @foreach($repuestos as $repuesto)
                  @if(!$repuesto->pivot->check1 =='on') {{-- Para saber si es repuesto o no --}}
                  <div class="row align-items-end">
-                  <div class="col-2"><strong>{{ $repuesto->codigo }}</strong></div>
-                  <div class="col-4">{{ $repuesto->descripcion}} </div>
-                  <div class="col-3">{{$repuesto->pivot->cant}}{{" "}}  {{$repuesto->pivot->unidad}}</div>
-                  <div class="col-3"></div>
+                  <div class="col-2"><strong>{{ $repuesto->codigo }} </strong></div>
+                  <div class="col-6">{{ $repuesto->descripcion}} </div>
+                  <div class="col-2">{{$repuesto->pivot->cant}}{{" "}}  {{$repuesto->pivot->unidad}}</div>
+                  <div class="col-2"></div>
                 </div>
                  @endif
             @endforeach
@@ -171,10 +193,10 @@
             @foreach($repuestos as $repuesto)
                @if($repuesto->pivot->check1 =='on') {{-- Para saber si es repuesto o no --}}
                <div class="row align-items-end">
-                <div class="col-2"><strong>{{ $repuesto->codigo }}</strong></div>
-                <div class="col-4">{{ $repuesto->descripcion}} </div>
-                <div class="col-3">{{$repuesto->pivot->cant}}{{" "}}  {{$repuesto->pivot->unidad}}</div>
-                <div class="col-3"></div>
+                <div class="col-2"><strong>{{ $repuesto->codigo }} *****</strong></div>
+                <div class="col-6">{{ $repuesto->descripcion}} </div>
+                <div class="col-2">{{$repuesto->pivot->cant}}{{" "}}  {{$repuesto->pivot->unidad}}</div>
+                <div class="col-2"></div>
               </div>  
 
                {{-- <ol style="list-style: none;"><li><strong>{{ $repuesto->codigo }}</strong> {{ $repuesto->descripcion}} {{$repuesto->pivot->cant}} {{$repuesto->pivot->unidad}} </li></ol>   --}}
@@ -195,9 +217,9 @@
               @foreach($plans as $plan)
               <div class="row align-items-end">
                 <div class="col-2"><strong>{{ $plan->codigo }}</strong></div>
-                <div class="col-4">{{ $plan->descripcion}}</div>
-                <div class="col-3">{{ $plan->frecuencia}}{{" "}}{{ $plan->unidad}} </div>
-                <div class="col-3"><a class="bi bi-eye" href="{{route('plans.show', $plan->id)}}"></a></div>
+                <div class="col-6">{{ $plan->descripcion}}</div>
+                <div class="col-2">{{ $plan->frecuencia}}{{" "}}{{ $plan->unidad}} </div>
+                <div class="col-2"><a class="bi bi-eye" href="{{route('plans.show', $plan->id)}}"></a></div>
               </div>
               @endforeach
           </div>
@@ -216,9 +238,9 @@
              @foreach($equiposB as $equipoB)
              <div class="row align-items-end">
               <div class="col-2"><strong>{{ $equipoB->codEquipo }}</strong></div>
-              <div class="col-4">{{ $equipoB->marca}}</div>
-              <div class="col-3">{{ $equipoB->modelo}} </div>
-              <div class="col-3"><a class="bi bi-eye" href="{{route('equipos.show', $equipoB->id)}}"></a></div>
+              <div class="col-6">{{ $equipoB->marca}}</div>
+              <div class="col-2">{{ $equipoB->modelo}} </div>
+              <div class="col-2"><a class="bi bi-eye" href="{{route('equipos.show', $equipoB->id)}}"></a></div>
             </div>
              {{--  <ol style="list-style: none;"><li><strong>{{ $equipoB->codEquipo }}</strong>{{ $equipoB->marca}} {{ $equipoB->modelo}} <a class="bi bi-check2-square" href="{{route('equipos.edit', $equipoB->id)}}"></a> </li></ol> --}} 
               @endforeach
@@ -268,11 +290,48 @@
 {{-- <h3>Estoy en equipos.show.blade </h3> --}}
  
 
+<table class="table table-striped table-black  table-hover border-5">
+  <tbody>
+    <tr data-widget="expandable-table" aria-expanded="false">
+      <td> <strong>Repuestos</strong></td>
+    </tr>
+    @foreach($repuestos as $repuesto)
+        @if($repuesto->pivot->check1 =='on')
+    <tr class="expandable-body">
+        <td><strong>{{ $repuesto->codigo }}</strong></td>
+        <td>{{ $repuesto->descripcion}}</td> 
+        <td>{{$repuesto->pivot->cant}}{{" "}}  {{$repuesto->pivot->unidad}}</td>
+     </tr>
+    @endif
+    @endforeach
+    <tr data-widget="expandable-table" aria-expanded="false">
+      <td>219</td>
+    </tr>
+    <tr class="expandable-body">
+      <td>
+        <p>
+          <!-- YOUR EXPANDABLE TABLE BODY HERE -->
+        </p>
+      </td>
+    </tr>
+    <tr data-widget="expandable-table" aria-expanded="false">
+      <td>657</td>
+    </tr>
+    <tr class="expandable-body">
+      <td>
+        <p>
+          <!-- YOUR EXPANDABLE TABLE BODY HERE -->
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 
 
-
-
+<script>
+  $('#expandable-table-header-row').on('collapsed.lte.expandableTable', handleToggledEvent)
+</script>
 
 @endsection
 

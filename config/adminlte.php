@@ -22,7 +22,7 @@ return [
     'title' => 'AdminLTE 3',
     'title_prefix' => '',
     'title_postfix' => '',
-
+    
     /*
     |--------------------------------------------------------------------------
     | Favicon
@@ -35,7 +35,7 @@ return [
     |
     */
 
-    'use_ico_only' => false,
+    'use_ico_only' => true,
     'use_full_favicon' => false,
 
     /*
@@ -112,7 +112,7 @@ return [
     */
 
     'preloader' => [
-        'enabled' => true,
+        'enabled' => True,
         'img' => [
             'path' => 'img\imagenes\LogoIngenio2.png',
             'alt' => 'AdminLTE Preloader Image',
