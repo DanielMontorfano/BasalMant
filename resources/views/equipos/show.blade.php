@@ -9,20 +9,23 @@
 background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;">Datos técnicos</h6>
-<style>.button {
-  position: absolute;
-  top:50%;
-  background-color:#0a0a23;
-  color: #fff;
-  border:none; 
-  border-radius:10px; 
-  padding:15px;
-  min-height:30px; 
-  min-width: 120px;
-}</style>
 
 @stop
+
+
 @section('css')
+<style  type="text/css">
+  button {
+    font-family: Times New Roman;
+          font-size: 32px; 
+          background-color:transparent;
+          color: rgb(226, 152, 227);
+          border:none; 
+          border-radius:20px; 
+          padding:10px;
+          min-height:30px; 
+          min-width: 120px; }</style>
+
 {{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
 {{-- Para que sea responsive se agraga la tercer libreria --}}
 {{-- Todo lo de plantilla --}}
@@ -153,25 +156,17 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
     <div class="accordion" id="accordionPanelsStayOpenExample">
        {{-- 1er item --}}
       <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingOne" >
-          <button style="
-          
-          background-color:transparent;
-          color: #fff;
-          border:none; 
-          border-radius:10px; 
-          padding:15px;
-          min-height:30px; 
-          min-width: 120px;" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-            <strong>Repuestos</strong>
+        
+          <button  class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+            <strong>Repuestos: </strong>
           </button>
-        </h2>
+       
         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingOne">
           <div class="accordion-body">
             @foreach($repuestos as $repuesto)
                  @if(!$repuesto->pivot->check1 =='on') {{-- Para saber si es repuesto o no --}}
                  <div class="row align-items-end">
-                  <div class="col-2"><strong>{{ $repuesto->codigo }} </strong></div>
+                  <div class="col-2">&nbsp &nbsp &#9900 &nbsp <strong>{{$repuesto->codigo }} </strong></div>
                   <div class="col-6">{{ $repuesto->descripcion}} </div>
                   <div class="col-2">{{$repuesto->pivot->cant}}{{" "}}  {{$repuesto->pivot->unidad}}</div>
                   <div class="col-2"></div>
@@ -183,17 +178,17 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
       </div>
        {{-- 2do item --}} 
       <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-            <strong>Acesorios</strong>
+        
+          <button  class="" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+            <strong>Accesorios:</strong>
           </button>
-        </h2>
+        
         <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
           <div class="accordion-body">
             @foreach($repuestos as $repuesto)
                @if($repuesto->pivot->check1 =='on') {{-- Para saber si es repuesto o no --}}
                <div class="row align-items-end">
-                <div class="col-2"><strong>{{ $repuesto->codigo }} *****</strong></div>
+                <div class="col-2">&nbsp &nbsp &#9900 &nbsp <strong>{{ $repuesto->codigo }}</strong></div>
                 <div class="col-6">{{ $repuesto->descripcion}} </div>
                 <div class="col-2">{{$repuesto->pivot->cant}}{{" "}}  {{$repuesto->pivot->unidad}}</div>
                 <div class="col-2"></div>
@@ -207,16 +202,16 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
       </div>
        {{-- 3er item --}}
       <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-            <strong>Planes asociados</strong>
+       
+          <button  class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+            <strong>Planes asociados:</strong>
           </button>
-        </h2>
+      
         <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
           <div class="accordion-body">
               @foreach($plans as $plan)
               <div class="row align-items-end">
-                <div class="col-2"><strong>{{ $plan->codigo }}</strong></div>
+                <div class="col-2">&nbsp &nbsp &#9900 &nbsp <strong>{{ $plan->codigo }}</strong></div>
                 <div class="col-6">{{ $plan->descripcion}}</div>
                 <div class="col-2">{{ $plan->frecuencia}}{{" "}}{{ $plan->unidad}} </div>
                 <div class="col-2"><a class="bi bi-eye" href="{{route('plans.show', $plan->id)}}"></a></div>
@@ -227,17 +222,16 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
       </div>
 
        {{-- 4to item --}}
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingFour">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
-            <strong>Equipos vinculados</strong>
+      <div class="accordion-item"><h2 class="accordion-header" id="panelsStayOpen-headingFour">
+          <button  class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+            <strong>Equipos vinculados:</strong>
           </button>
-        </h2>
+       
         <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
           <div class="accordion-body">
              @foreach($equiposB as $equipoB)
              <div class="row align-items-end">
-              <div class="col-2"><strong>{{ $equipoB->codEquipo }}</strong></div>
+              <div class="col-2">&nbsp &nbsp &#9900 &nbsp <strong>{{ $equipoB->codEquipo }}</strong></div>
               <div class="col-6">{{ $equipoB->marca}}</div>
               <div class="col-2">{{ $equipoB->modelo}} </div>
               <div class="col-2"><a class="bi bi-eye" href="{{route('equipos.show', $equipoB->id)}}"></a></div>
@@ -290,50 +284,20 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
 {{-- <h3>Estoy en equipos.show.blade </h3> --}}
  
 
-<table class="table table-striped table-black  table-hover border-5">
-  <tbody>
-    <tr data-widget="expandable-table" aria-expanded="false">
-      <td> <strong>Repuestos</strong></td>
-    </tr>
-    @foreach($repuestos as $repuesto)
-        @if($repuesto->pivot->check1 =='on')
-    <tr class="expandable-body">
-        <td><strong>{{ $repuesto->codigo }}</strong></td>
-        <td>{{ $repuesto->descripcion}}</td> 
-        <td>{{$repuesto->pivot->cant}}{{" "}}  {{$repuesto->pivot->unidad}}</td>
-     </tr>
-    @endif
-    @endforeach
-    <tr data-widget="expandable-table" aria-expanded="false">
-      <td>219</td>
-    </tr>
-    <tr class="expandable-body">
-      <td>
-        <p>
-          <!-- YOUR EXPANDABLE TABLE BODY HERE -->
-        </p>
-      </td>
-    </tr>
-    <tr data-widget="expandable-table" aria-expanded="false">
-      <td>657</td>
-    </tr>
-    <tr class="expandable-body">
-      <td>
-        <p>
-          <!-- YOUR EXPANDABLE TABLE BODY HERE -->
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
 
 
+<div class="container"> 
+  @include('layouts.partials.footer')
+ </div>
 
-<script>
+ <script>
   $('#expandable-table-header-row').on('collapsed.lte.expandableTable', handleToggledEvent)
 </script>
-
 @endsection
+
+
+
+
 
 
 

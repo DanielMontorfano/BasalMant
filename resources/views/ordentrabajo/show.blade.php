@@ -1,4 +1,4 @@
-@extends('layouts.plantilla')
+@extends('adminlte::page')
 @section('title', 'create')
 @section('content')
 

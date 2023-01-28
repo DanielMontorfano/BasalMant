@@ -1,4 +1,4 @@
-@extends('layouts.plantilla')
+@extends('adminlte::page')
 @section('title', 'Ordenes de trabajo')
 @section('css')
 {{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
