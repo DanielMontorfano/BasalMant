@@ -1,26 +1,17 @@
-@extends('layouts.plantilla')
+{{-- @extends('layouts.plantilla') --}}
+@extends('adminlte::page')
 @section('title', 'Procedimientos de mantenimiento')
 @section('css')
-{{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
-{{-- Para que sea responsive se agraga la tercer libreria --}}
-{{-- Todo lo de plantilla --}}
 @endsection
-
+@section('content_header')
+<h6 STYLE="text-align:center; font-size: 30px;
+background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;">Listado de todos los procedimientos</h6>
+@stop
 @section('content')
-
-{{--<h1></h1> --}}
-<h1></h1>
-{{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
-{{-- <a href="/Equipos/crear" > Crear curso</a> **Laravel no recomienda direccionar asi--}}
-
 <div class="card border-primary" style="background: linear-gradient(to left,#495c5c,#030007); ">
 <div class="card-body "  style="max-width: 95;">
-  <h6 STYLE="text-align:center; font-size: 30px;
-  background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;">Listado de todos los procedimientos</h6>
-
-
 <div class="text-white card-body "  style="max-width: 95;">
 <p ><a  class="text-white " href={{route('protocolos.create')}}> Crear crear procedimiento</a></p> 
    
@@ -56,7 +47,9 @@
 </div>
 </div>
 </div>
-{{-- aqui Todos los script ver plantilla--}}
+<div class="container"> 
+  @include('layouts.partials.footer')
+</div>
 @endsection
 
 

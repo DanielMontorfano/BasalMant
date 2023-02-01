@@ -348,10 +348,10 @@ return [
         ],
 
         // Sidebar items:
-        [
+        /*[
             'type' => 'sidebar-menu-search',
             'text' => 'search',
-        ],
+        ], 
         [
             'text' => 'blog',
             'url'  => 'admin/blog',
@@ -374,7 +374,7 @@ return [
             'text' => 'change_password',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
-        ],
+        ],"Quitar opciones de  menus "*/ 
         [
             'text'    => 'Crear',
             'icon'    => 'fas fa-fw fa-share',
@@ -399,20 +399,13 @@ return [
                 ],
                  
                 [
-                    'text' => 'P.d.M.',  //protocolo
-                    'icon' => 'fa-solid fa-file-invoice',
-                    'route'=> 'protocolos.create',
-                ],
-                           
-                
-                [
                     'text' => 'Tareas',
                     'icon' => 'fa-solid fa-person-digging',
                     'route'=> 'tareas.create',
                 ],
                 
 
-                [
+                /*FOTOS[
                     'text'    => 'Fotos',
                     'url'     => '#',
                     'submenu' => [
@@ -439,21 +432,21 @@ return [
                 [
                     'text' => 'level_one',
                     'url'  => '#',
-                ],
+                ], FOTOS*/
             ],
         ],
-        ['header' => 'labels'],
+        ['header' => 'Acerca de:'],
         [
-            'text'       => 'important',
+            'text'       => 'Nosotros',
             'icon_color' => 'red',
             'url'        => '#',
         ],
         [
-            'text'       => 'warning',
+            'text'       => 'Versión',
             'url'        => '#',
         ],
         [
-            'text'       => 'information',
+            'text'       => 'Ayuda',
             'icon_color' => 'cyan',
             'url'        => '#',
         ],

@@ -3,8 +3,6 @@
 
 @extends('adminlte::page',$id[]=array($equipo->id))
 @section('title', 'Equipos')
-
-
 @section('css')
 {{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
 {{-- Para que sea responsive se agraga la tercer libreria --}}
@@ -25,12 +23,9 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
 
 <div class="card border-primary" style="background: linear-gradient(to left,#495c5c,#030007); ">
 <div class="card-body "  style="max-width: 95;">
-  
-
-
 <div class="text-white card-body "  style="max-width: 95;">
 <p ><a  class="text-white " href={{route('equipos.create')}}> Crear equipo</a></p> 
-<p><a href="{{ route('imprimir') }}">Imprime el archivo</a>
+
    
 
 <table id="listado" class="table table-striped table-success  table-hover border-4" >

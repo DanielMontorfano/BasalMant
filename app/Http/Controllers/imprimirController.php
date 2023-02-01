@@ -48,8 +48,9 @@ $dompdf->stream(); */
                $repuestos=$equipo->equiposRepuestos;
                $plans=Equipo::find($id)->equiposPlans; 
                $equiposB=Equipo::find($id)->equiposAEquiposB; 
-               $pdf = PDF::loadView('imprimir', compact('equipo', 'repuestos', 'plans','equiposB'));
-               return $pdf->download('imprimir2.pdf'); 
+               $pdf = PDF::loadView('impresiones.imprimirFichaEquipo', compact('equipo', 'repuestos', 'plans','equiposB'));
+               $variable="Ficha " . $equipo->codEquipo .".pdf";
+               return $pdf->download($variable); 
                
               //return $equipo; 
               //return view('imprimir'); 

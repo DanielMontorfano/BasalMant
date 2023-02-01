@@ -29,48 +29,48 @@
 <div class="container">
     <div class="row">
             <div class="col col-md-3">
-              Columna 1
+              {{-- Columna 1 --}}
               <div class="card  text-white" >
                   
                   <div class="card-body" align='center'>
                     <img src={{asset('img\imagenes\CentrifugaSilver2.png')}}  class="card-img-top" alt="...">
                     <p>Equipos</p>
-                    <a href="#" class="btn stretched-link"></a>
+                    <a href="{{route('equipos.index')}}" class="btn stretched-link"></a>
                   </div>
                 </div>
             </div>
             <div class="col col-md-3">
-              Columna 2
+              {{-- Columna 2 --}}
               <div class="card  text-white" align="center" >
                   
                 <div class="card-body">
                   <img src={{asset('img\imagenes\planImagen.png')}} class="card-img-top" alt="...">
-                  <p>Planes de Mantenimiento</p>
-                  <a href="#" class="btn stretched-link"></a>
+                  <p>Planes de Mantenimientos</p>
+                  <a href="{{route('plans.index')}}" class="btn stretched-link"></a>
                 </div>
               </div>
           </div>
       
       <div class="col col-md-3">
-        Columna 3
+        {{-- Columna 3 --}}
         <div class="card  text-white" align="center" >
             
           <div class="card-body">
             <img src={{asset('img\imagenes\OrdenDeTrabajo2.png')}} class="card-img-top" alt="...">
             <p>Ordenes de Trabajo</p>
-            <a href="#" class="btn stretched-link"></a>
+            <a href="{{route('ordentrabajo.index')}}" class="btn stretched-link"></a>
           </div>
         </div>
       </div>
     
       <div class="col">
-        Columna 3
+        {{-- Columna 3 --}}
         <div class="card  text-white" >
             
           <div class="card-body" align="center">
             <img src={{asset('img\imagenes\checkList.png')}} class="card-img-top" alt="...">
             <p>Proced. de mantenimiento</p>
-            <a href="#" class="btn stretched-link"></a>
+            <a href="{{route('protocolos.index')}}" class="btn stretched-link"></a>
           </div>
         </div>
       </div>
@@ -81,18 +81,18 @@
 <div class="container">
   <div class="row">
           <div class="col col-md-3">
-            Columna 1
+            {{-- Columna 1 --}}
             <div class="card  text-white" >
                 
                 <div class="card-body" align="center" >
                   <img src={{asset('img\imagenes\tarea2.png')}}  class="card-img-top" alt="...">
                   <p>Tareas</p>
-                  <a href="#" class="btn stretched-link"></a>
+                  <a href="{{route('tareas.index')}}" class="btn stretched-link"></a>
                 </div>
               </div>
           </div>
           <div class="col col-md-3">
-            Columna 2
+            {{-- Columna 2 --}}
             <div class="card  text-white" >
                 
               <div class="card-body" align="center">
@@ -104,7 +104,7 @@
         </div>
     
     <div class="col col-md-3">
-      Columna 3
+      {{-- Columna 3 --}}
       <div class="card  text-white" align="center">
           
         <div class="card-body">
@@ -116,11 +116,11 @@
     </div>
   
     <div class="col">
-      Columna 3
+      {{-- Columna 3 --}}
       <div class="card  text-white" >
           
         <div class="card-body" align="center">
-          <img src={{asset('img\imagenes\checkList.png')}} class="card-img-top" alt="...">
+          <img src={{asset('img\imagenes\Evolución2.png')}} class="card-img-top" alt="...">
           <p>Control de versiones</p>
           <a href="#" class="btn stretched-link"></a>
         </div>
@@ -130,6 +130,10 @@
 </div>
 </div>
 
-  
+<div class="container"> 
+  @include('layouts.partials.footer')
+ </div>
 
-@endsection
+@endsection  
+
+

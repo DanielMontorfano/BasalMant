@@ -1,15 +1,17 @@
-@extends('layouts.plantilla')
+{{-- @extends('layouts.plantilla') --}}
+@extends('adminlte::page')
 @section('title', 'Ver ' . $protocolo->codigo)
 @section('content')
 <h1></h1>
-
+<br>
+<h6 STYLE="text-align:center; font-size: 30px;
+                      background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
+                      -webkit-background-clip: text;
+                      -webkit-text-fill-color: transparent;">Ficha de procedimiento de mantenimiento</h6>
   <section class="main row ">
  
     <div class="container ">
-      
-      <div class="card" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
-              
-               <br>
+            
                <br> 
               {{-- Probando Col --}}
               <div class="container">
@@ -21,21 +23,18 @@
                   <div class="col col-md-8">
                     {{-- Columna2 --}}
                     <form id="encabezado" action="{{route('protocolos.update', $protocolo->id)}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
-                      <h6 STYLE="text-align:center; font-size: 30px;
-                      background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
-                      -webkit-background-clip: text;
-                      -webkit-text-fill-color: transparent;">Ficha de protocolo</h6>
+                      
                       @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
                       @method('put') {{-- Metodo PUT no existe en html, por eso indicamos a laravel como sigue --}}
                       
-                      <div class="p-3 mb-2 bg-gradient-primary text-white">
+                      <div class="p-3 mb-2 text-white">
           
                         <div class="container">
                           <div class="row">
                             <div class="col col-md-3">
                               <div class="form-group">
                                 <label class="control-label" for="codigo">Código:</label> 
-                                <input readonly autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="marca" value="{{old('codigo', $protocolo->codigo)}}"> 
+                                <input readonly autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 17px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="marca" value="{{old('codigo', $protocolo->codigo)}}"> 
                                 @error('codigo')
                                 <small>*{{$message}}</small>
                                 @enderror
@@ -110,75 +109,12 @@
                     
                    </div>
                    <br>   
-                  </div>             
+                            
     </section>
+    <div class="container"> 
+      @include('layouts.partials.footer')
+    </div>
 
-
-
-{{-- ************************************************************************************** --}}
-{{-- ****LAS SIGUIENTES LINEAS SE COMENTAN POR RAZONES DE SER CODIGO MAESTRO --}}
-{{-- <p><strong>Marca:</strong>{{$equipo->marca}}</p>
-<p><strong>Modelo:</strong>{{$equipo->modelo}}</p>
-<p><strong>Seccion:</strong>{{$equipo->idSecc}}</p>
-<p><strong>Subsección:</strong>{{$equipo->idSubSecc}}</p>
-<p><strong>Caractrística 1:</strong>{{$equipo->det1}}</p>
-<p><strong>Caractrística 2:</strong>{{$equipo->det2}}</p>
-<p><strong>Caractrística 3:</strong>{{$equipo->det3}}</p>
-<p><strong>Caractrística 4:</strong>{{$equipo->det4}}</p>
-<p><strong>Caractrística 5:</strong>{{$equipo->det5}}</p>
-<p><strong>Repuestos:</strong></p>
- 
-<h3>Listado de repuestos</h3>
-
-@foreach($repuestos as $repuesto)
-<table>
-   <tr>
-    
-    <td><li>*{{$repuesto->pivot->cant}}* - - {{ $repuesto->codigo }} - {{ $repuesto->descripcion}} </li> </td>
-      
-  </tr>
-
-</table>
-         
-@endforeach --}}
-{{-- ************************************************************************************** --}}
-
-{{-- <h3>Estoy en equipos.show.blade </h3> --}}
- 
-
-{{-- Para hacer resposive necesito agregar las 2 ultimas librerias --}}
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-<script>src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"</script>
-<script>src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"</script>
-
-
-
-
-<script>
-    $(document).ready(function () {
-    $('#equipo').DataTable({
-      
-      reponsive: true,
-      autoWidth: false,
-      
-      "language": {
-            "lengthMenu": "Mostrar _MENU_",
-            "zeroRecords": "No se encontró ningún registro - disculpe",
-            "info": "Viendo _PAGE_ de _PAGES_",
-            "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(filtrados desde _MAX_ total registros)",
-            "search":"Buscar:",
-            "paginate":{
-            "next":"Siguiente",
-            "previous":"Anterior"
-          }
-
-        }
-    });
-});
-</script>
 @endsection
 
 
