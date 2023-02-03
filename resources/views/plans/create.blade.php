@@ -126,6 +126,19 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                     {{-- columna 3 --}}
                 </div>
     </div>  {{-- div del row1 Principal --}}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
 </div> {{-- div del container Principal--}}
     <div class="container"> 
       @include('layouts.partials.footer')

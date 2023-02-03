@@ -67,6 +67,16 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
 </div> {{-- div del container Principal--}}
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 <div class="container"> 
   @include('layouts.partials.footer')
  </div>

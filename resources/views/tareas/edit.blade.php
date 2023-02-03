@@ -1,7 +1,8 @@
-@extends('layouts.plantilla')
+{{-- @extends('layouts.plantilla') --}}
+@extends('adminlte::page') 
 @section('title', 'Edit')
 @section('content')
-<h1></h1>
+
 <style>
     h6 {
         text-align:center; font-size: 30px;
@@ -20,7 +21,7 @@
 </style>
 
 <br>    
-<div class="container"> {{-- container principal --}}
+
     <div class="row"> {{-- row principal --}}
                 <div class="col col-md-1">
                     {{-- columna1 --}}
@@ -35,7 +36,7 @@
                         @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
                         @method('put')
                       
-                        <div class="p-3 mb-2 bg-gradient-primary text-white">
+                        <div class="p-3 mb-2  text-white">
                         <div class="container">
                             
                             <div class="row"> {{-- ***** div de la primera fila --}}
@@ -102,10 +103,23 @@
                     {{-- columna 3 --}}
                 </div>
     </div>  {{-- div del row1 Principal --}}
-</div> {{-- div del container Principal--}}
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-
+<div class="container"> 
+  @include('layouts.partials.footer')
+</div>
 @endsection
 
 
