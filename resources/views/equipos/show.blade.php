@@ -238,7 +238,7 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
 
 <div class="container"> 
   @include('layouts.partials.footer')
- </div>
+</div>
 
  <script>
   $('#expandable-table-header-row').on('collapsed.lte.expandableTable', handleToggledEvent)

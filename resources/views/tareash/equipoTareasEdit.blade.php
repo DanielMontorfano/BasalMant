@@ -1,4 +1,5 @@
-@extends('layouts.plantilla')
+{{-- @extends('layouts.plantilla') --}}
+@extends('adminlte::page') 
 @section('title', 'Ver ' . $equipo->marca)
 @section('css')
 {{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
@@ -10,62 +11,18 @@
 @endsection
 
 @section('content')
+@include('layouts.partials.menuEquipo')
 
-<h1>Estas en editar las tareas para este equipo</h1>
-{{-- ESTO ES UN COMENTARIO <h1>Aqui podras ver el equipo: <?php echo $variable;?></h1> --}}
-{{-- <h1>Aqui podras ver el equipo: {{ $variable}}</h1> --}}
 <div class="card" STYLE="background: linear-gradient(to right,#5c5649,#030007);" >
   <div class="card-header" STYLE="background: linear-gradient(to right,#201f1e,#030007);">
-    <ul class="nav nav-tabs card-header-tabs">
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="true"  style="background-color: #1e2020;" href="{{route('equipos.show', $equipo->id)}}">Ficha</a>
-       
-      </li>
-     
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('fotos.show', $equipo->id)}}">Fotos</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Historial</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Protocolo</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Plan</a>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('documentos.show', $equipo->id)}}">Documentos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href={{route('equipos.edit', $equipo->id)}}>Editar</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href={{route('ordentrabajo.list', $equipo->id)}}>OT</a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Descargar</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('equipos.index')}}">Imprimir</a>
-      </li>
-      
-
-    </ul>
-  </div>
+    
+  
   
     <h6 STYLE="text-align:center; font-size: 30px;
                 background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;">Datos técnicos</h6>
-                <div class="row align-items-end">
-                  <div class="col-4">Columna 1</div>
-                  <div class="col-4">Columna 2</div>
-                  <div class="col-4">Columna 3</div>
-              </div>
-      
+                
 
 
 
@@ -187,9 +144,12 @@
 
 
 
+</div>
+</div>
 
-
-
+<div class="container"> 
+  @include('layouts.partials.footer')
+</div>
 @endsection
 
 
