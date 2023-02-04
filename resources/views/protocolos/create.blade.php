@@ -51,7 +51,8 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                             <br>
                             <br>
                            <div class="form-group">
-                            <button form="nuevoProtocolo" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
+                          
+                            <button title="Adjuntar tareas a este procedimiento" form="nuevoProtocolo" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Siguiente</button>
                             <p style="text-align: right;"><a  class="text-white " href={{route('protocolos.index')}}>Salir</a></p> 
                           </div>
  

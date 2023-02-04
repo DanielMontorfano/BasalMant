@@ -3,9 +3,7 @@
 @section('css')
 {{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
 {{-- Para que sea responsive se agraga la tercer libreria --}}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap5.min.css">
+
 @endsection
 @section('content')
 <h1></h1>
@@ -32,7 +30,7 @@
                   @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
                   @method('put') {{-- Metodo PUT no existe en html, por eso indicamos a laravel como sigue --}}
                   
-                  <div class="p-3 mb-2 bg-gradient-primary text-white">
+                  <div class="p-3 mb-2 text-white">
       
                     <div class="container">
                       <div class="row">
@@ -64,7 +62,7 @@
                   <div class="card " STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                     <div class="card-header " STYLE="background: linear-gradient(to right,#495c5c,#030007);">            
                                  {{-- MUESTRA PROTOCOLOS --}} 
-                          <table  class="table table-striped table-success  table-hover border-4">
+                          <table  id="listado" class="table table-striped table-success  table-hover border-4">
                                  <thead >
                                     <tr>
                                       <th style="text-align: center; color: #ffffff;" scope="col">Código</th>

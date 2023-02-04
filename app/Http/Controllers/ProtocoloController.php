@@ -61,17 +61,19 @@ class ProtocoloController extends Controller
         $tarea= Protocolo::find($protocolo->id);
         $protocolo->codigo= $id_ultimo;
         $protocolo->save();
-
-
-
+        
+        $tareasTodos=Tarea::all();
+        $protocolo=Protocolo::find($protocolo->id);
+        $tareas= Protocolo::find($protocolo->id)->protocolosTareas;
+        return view('protocolos.edit', compact('protocolo','tareas', 'tareasTodos'));
      
-        //Asi se realizará con Asignacion Masiva, es mas simple, pero se debe colocar 
-        //en el modelo Equipo "protected $fillable=[array que se desea]"
-        //esto asigna todo el formulario de una vez, y hace el save() automaticamente
-        //$equipo=Equipo::create($request->all());
-       return redirect()->route('protocolos.show', $protocolo->id); //se puede omitir ->id, igual funciona
-        //return view('Equipos.store');
-      // return "LISTA";
+       //Asi se realizará con Asignacion Masiva, es mas simple, pero se debe colocar 
+       //en el modelo Equipo "protected $fillable=[array que se desea]"
+       //esto asigna todo el formulario de una vez, y hace el save() automaticamente
+       //$equipo=Equipo::create($request->all());
+       // *****return redirect()->route('protocolos.show', $protocolo->id); //se puede omitir ->id, igual funciona
+       //return view('Equipos.store');
+       //return "LISTA";
     }  
 
     /**
@@ -81,8 +83,8 @@ class ProtocoloController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   $equipo=Equipo::find($id);
-        $plan=$equipo->equiposPlans;
+    {  //******* $equipo=Equipo::find($id);
+       //******* $plan=$equipo->equiposPlans;
         //$plans=Equipo::find($id)->equiposPlans;
         $protocolo= Protocolo::find($id); // Ver la linea de abajo alternativa
         $tareas=$protocolo->protocolosTareas; // otra alternativa: $repuestos= Equipo::find($id)->equiposRepuestos; en una sola linea. 
@@ -103,7 +105,7 @@ class ProtocoloController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   $equipo=Equipo::find($id);
+    {   //$equipo=Equipo::find($id);
         $tareasTodos=Tarea::all();
         $protocolo=Protocolo::find($id);
         $tareas= Protocolo::find($id)->protocolosTareas; //"protocolosTareas" Metodo perteneciente al modelo Protocolo
@@ -118,7 +120,7 @@ class ProtocoloController extends Controller
             //}
       //  }
         //return $tareas;
-        return view('protocolos.edit', compact('equipo','protocolo','tareas', 'tareasTodos'));
+        return view('protocolos.edit', compact('protocolo','tareas', 'tareasTodos'));
     }
 
 
