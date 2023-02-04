@@ -81,7 +81,9 @@ class ProtocoloController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   $equipo=Equipo::find($id);
+        $plan=$equipo->equiposPlans;
+        //$plans=Equipo::find($id)->equiposPlans;
         $protocolo= Protocolo::find($id); // Ver la linea de abajo alternativa
         $tareas=$protocolo->protocolosTareas; // otra alternativa: $repuestos= Equipo::find($id)->equiposRepuestos; en una sola linea. 
         

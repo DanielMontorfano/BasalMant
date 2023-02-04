@@ -317,12 +317,7 @@ return [
             'topnav_right' => true,
         ],
 
-        [
-            'text'         => 'O.d.T.',
-             'route'       => 'ordentrabajo.index',
-            'topnav_right' => true,
-        ],
-        
+                
         [
             'text'         => 'P.d.M.',
             'route'       => 'protocolos.index',
@@ -332,6 +327,12 @@ return [
         [
             'text'         => 'Tareas',
             'route'       => 'tareas.index',
+            'topnav_right' => true,
+        ],
+        
+        [
+            'text'         => 'O.d.T.',
+             'route'       => 'ordentrabajo.index',
             'topnav_right' => true,
         ],
         

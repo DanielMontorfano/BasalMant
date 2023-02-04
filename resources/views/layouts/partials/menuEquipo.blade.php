@@ -36,7 +36,6 @@
     <li><a href={{route('fotos.show', $equipo->id)}}>Fotos</a></li>
     <li><a href="{{route('historialPreventivo', $equipo->id)}}">Historial</a></li>
     <li><a href={{route('equipoTareash.show', $equipo->id)}}>Plan</a></li>
-    <li><a href="{{route('protocolos.show', $equipo->id)}}">P.d.M.</a></li>
     <li><a href="{{route('documentos.show', $equipo->id)}}">Documentos</a></li>
     <li><a href={{route('equipos.edit', $equipo->id)}}>Editar</a></li>
     <li><a href={{route('ordentrabajo.list', $equipo->id)}}>OT</a></li>

@@ -23,7 +23,7 @@ class StorePlanRequest extends FormRequest
      */
     public function rules()
     {
-        return ['codigo'=>'required|max:10',
+        return ['codigo'=>'required|max:13',
                 'nombre'=>'required|min:1',
                 'frecuencia'=>'required',
                 'unidadSelect'=>'required',
