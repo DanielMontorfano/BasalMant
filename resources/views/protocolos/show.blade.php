@@ -2,7 +2,7 @@
 @extends('adminlte::page')
 @section('title', 'Ver ' . $protocolo->codigo)
 @section('content')
-<h1></h1>
+
 <br>
 <h6 STYLE="text-align:center; font-size: 30px;
                       background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));

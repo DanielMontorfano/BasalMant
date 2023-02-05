@@ -1,39 +1,125 @@
 @extends('adminlte::page')
-
-@section('title', 'Dashboard')
-
-@section('content_header')
-@include('layouts.partials.menuEquipo')
-@stop
-
+@section('title', 'Ver ')
 @section('content')
-<div class="card border-primary" style="background: linear-gradient(to left,#495c5c,#030007); ">
-<div class="card-body "  style="max-width: 95;">
 
-  <TABLE BORDER=3  WIDTH="100%" CELLPADDING=1 CELLSPACING=0 >
-    <TR ALIGN=center >
-  
-      <TD ROWSPAN=3 Width=20% valign= middle> <img src="../storage/LogoIngenio2.png"   height="100px" width="130px"/></TD>
-          <TD ROWSPAN=3 Width=60%><h1>Ficha técnica de equipo</h1><h2>{{$equipo->codEquipo}}</h2></TD>
-        <TD>GFPO17.V01</TD>
-        
+<br>
+<h6 STYLE="text-align:center; font-size: 30px;
+                      background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
+                      -webkit-background-clip: text;
+                      -webkit-text-fill-color: transparent;">Ficha Equipo</h6>
+<head>
+<style>
+/**
+Establezca los márgenes de la página en 0, por lo que el pie de página y el encabezado
+puede ser de altura y anchura completas.
+**/
+@page {
+margin: 0.5cm 0.5cm;
+}
+
+/** Defina ahora los márgenes reales de cada página en el PDF **/
+/*body {
+margin-top: 2cm;
+margin-left: 2cm;
+margin-right: 2cm;
+margin-bottom: 2cm;
+}
+/*
+/** Definir las reglas del encabezado **/
+/*header {
+position: fixed;
+top: 0cm;
+left: 0cm;
+right: 0cm;
+height: 3cm;
+
+/** Estilos extra personales **/
+background-color: white;
+color: black;
+text-align: center;
+line-height: .5cm;
+}
+
+/** Definir las reglas del pie de página **/
+/*footer {
+position: fixed;
+bottom: 0.5cm;
+left: 0cm;
+right: 0cm;
+height: 2.0cm;
+
+/** Estilos extra personales **/
+background-color:white;
+color: black;
+text-align: center;
+line-height: 0.5cm;
+}
+
+
+
+
+
+
+</style>
+</head>
+<body>
+<!-- Defina bloques de encabezado y pie de página antes de su contenido -->
+<header>
+<TABLE BORDER=3  WIDTH="100%" CELLPADDING=1 CELLSPACING=0 >
+	<TR ALIGN=center >
+
+    <TD ROWSPAN=3 Width=20% valign= middle> <img src="storage/logoIngenio2.png"   height="100px" width="130px"/></TD>
+        <TD ROWSPAN=3 Width=60%><h1>Ficha técnica de equipo</h1><h2>{{$equipo->codEquipo}}</h2></TD>
+	    <TD>GFPO17.V01</TD>
+      
+	</TR>
+	<TR>
+        <TD>Revisión:</TD>
     </TR>
     <TR>
-          <TD>Revisión:</TD>
-      </TR>
-      <TR>
-          <TD>Página 1 de 1:</TD>
-      </TR>
-      
-      
-  
-  </TABLE>
+        <TD>Página 1 de 1:</TD>
+    </TR>
+    
+    
+
+</TABLE>
+</header>
+
+
+
+
+<footer>
+<!-- Copyright © <?php echo date("Y");?> -->
+
+
+<TABLE BORDER=3  WIDTH="100%" CELLPADDING=1 CELLSPACING=0 >
+	<TR  ALIGN=center>
+
+    <TD Width=25% valign= middle> Revisión</TD>
+    <TD Width=25% valign= middle> Elaboración</TD>
+    <TD Width=50% colspan="2" valign= middle> Aprobaciones</TD>  
+    
+	</TR>
+	<TR>
+        <TD valign= top ><br></TD>
+        <TD style="text-align: center"  >Equipo de calidad</TD>
+        <TD height="55px" valign= top >&nbsp; Area origen:<br></TD>
+        <TD valign= top >&nbsp; Area usuaria:</TD>
+    </TR>
+    
+    
+
+</TABLE>
+</footer>
+
+<!-- Envuelva el contenido de su PDF dentro de una etiqueta principal -->
+<main>
 <br>
 <br>
 <br>
 <br>
 <br>
-  
+
   <Ul style="list-style-type: none; margin-left: -37px;">
     <li style="font-size:150%;"><strong>Marca:</strong>&nbsp;  {{$equipo->marca}}</li>
     <li style="font-size:150%;"><strong>Modelo:</strong>&nbsp;  {{$equipo->modelo}}</li>
@@ -107,10 +193,7 @@
         <table>
         <thead>
           <tr>
-            <td scope="col" style="text-align: rigth; font-size:150%;"><u> Plan:</u>
-               <button style="background-color: Transparent;border: none;" title="Ver plan"><a  class="bi bi-eye" href={{route('equipoTareash.show', $equipo->id)}}>  </a></button>
-               <button style="background-color: Transparent;border: none;" title="Cargar ficha plan"><a  class="bi bi-plus-square" href={{route('equipoTareash.edit', $equipo->id)}}>  </a></button>
-            </td>
+            <td scope="col" style="text-align: rigth; font-size:150%;"><u> Plan:</u></td>
             <td scope="col" class="text-center; "></td>
             <td scope="col" class="text-center"></td>
           </tr>
@@ -150,43 +233,19 @@
         @endforeach
         </tbody>
       </table>
-      <br>
-      <footer>
-        <!-- Copyright © <?php echo date("Y");?> -->
-        
-        
-        <TABLE BORDER=3  WIDTH="100%" CELLPADDING=1 CELLSPACING=0 >
-          <TR  ALIGN=center>
-        
-            <TD Width=25% valign= middle> Revisión</TD>
-            <TD Width=25% valign= middle> Elaboración</TD>
-            <TD Width=50% colspan="2" valign= middle> Aprobaciones</TD>  
-            
-          </TR>
-          <TR>
-                <TD valign= top ><br></TD>
-                <TD style="text-align: center"  >Equipo de calidad</TD>
-                <TD height="55px" valign= top >&nbsp; Area origen:<br></TD>
-                <TD valign= top >&nbsp; Area usuaria:</TD>
-            </TR>
-            
-            
-        
-        </TABLE>
-        </footer>
-        <br>
-   </div>  {{-- card 1 --}}
-   </div>  {{-- card 2 --}}
-  <br>     
-@stop
+      <br>   
 
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+        
 
-    
-@stop
 
-@section('js')
-    <script> console.log('Hi!'); </script>
-@stop
+
+
+
+</main>
+
+  
+</body>
+
+
+</html>

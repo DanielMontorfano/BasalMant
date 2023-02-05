@@ -142,7 +142,7 @@ class ProtocoloController extends Controller
         $protocolo->descripcion=$request->descripcion;
         $protocolo->save();      
         
-        return view('protocolos.show', compact('protocolo','tareas')); //Envío show todo el registro en cuestión, sin $
+        return view('protocolos.edit', compact('protocolo','tareas')); //Envío show todo el registro en cuestión, sin $
     }
 
     /**

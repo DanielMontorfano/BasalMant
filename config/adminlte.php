@@ -491,13 +491,12 @@ return [
         'Datatables' => [
             'active' => true,
             'files' => [
-                
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => '//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js', //QUEDA PENDIENTE PARA LOCAL
+                    'location' => 'dataprint\bootstrap\js\bootstrap.bundle.min.js', //icono lapiz, ojo y otros
                 ], 
-
+                
                 [
                     'type' => 'css',
                     'asset' => true,
@@ -509,6 +508,8 @@ return [
                     'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js', //QUEDA PENDIENTE PARA LOCAL
                 ],
+
+               
                 
                 [
                     'type' => 'js',
@@ -564,11 +565,7 @@ return [
                     'location' => 'dataprint/datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css',
                 ],
              
-                [
-                    'type' => 'css',
-                    'asset' => false,
-                    'location' => 'dataprint\fontawesome\css\all.min.css', //icono impresora y otros
-                ],
+                
                  
                 [
                     'type' => 'css',
@@ -577,11 +574,7 @@ return [
                 ],
                 
                
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'dataprint\bootstrap\js\bootstrap.bundle.min.js', //icono lapiz, ojo y otros
-                ],
+                
 
 
 
@@ -593,7 +586,10 @@ return [
                     'asset' => true,
                     'location' => 'dataprint/main.js',
                 ],
+
                 
+                
+
             ],
         ],
         'Select2' => [

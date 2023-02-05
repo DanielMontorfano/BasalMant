@@ -12,7 +12,8 @@
 
 @section('content')
 @include('layouts.partials.menuEquipo')
-<div class="card" STYLE="background: linear-gradient(to right,#1761f4,#030007);" >
+<div class="card border-primary" style="background: linear-gradient(to left,#495c5c,#030007); ">
+  <div class="card-body "  style="max-width: 95;">
   
   
     <h6 STYLE="text-align:center; font-size: 30px;
@@ -57,7 +58,7 @@
       @endforeach
       @endif 
   </div>
-
+</div>
   <div class="container"> 
     @include('layouts.partials.footer')
   </div>

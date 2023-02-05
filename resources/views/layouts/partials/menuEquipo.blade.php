@@ -32,14 +32,13 @@
   
   <div id="primero">
   <ul>
-    <li><a href="{{route('equipos.show', $equipo->id)}}">Fichas</a></li>
+    <li><a href="{{route('equipos.show', $equipo->id)}}">Ficha</a></li>
     <li><a href={{route('fotos.show', $equipo->id)}}>Fotos</a></li>
     <li><a href="{{route('historialPreventivo', $equipo->id)}}">Historial</a></li>
     <li><a href={{route('equipoTareash.show', $equipo->id)}}>Plan</a></li>
     <li><a href="{{route('documentos.show', $equipo->id)}}">Documentos</a></li>
     <li><a href={{route('equipos.edit', $equipo->id)}}>Editar</a></li>
     <li><a href={{route('ordentrabajo.list', $equipo->id)}}>OT</a></li>
-    <li><a href="{{route('equipos.index')}}">Descargar</a></li>
     <li><a href="{{route('imprimirEquipo',$equipo->id )}}">Imprimir</a></li>
   </div>   
 

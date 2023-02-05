@@ -21,7 +21,8 @@
 </style>
 
 <br>    
-
+<h6>Editar tarea</h6>
+<br>
     <div class="row"> {{-- row principal --}}
                 <div class="col col-md-1">
                     {{-- columna1 --}}
@@ -32,7 +33,7 @@
                     
                     <form id="nuevaTarea"  action="{{route('tareas.update', $tarea->id)}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                         
-                        <h6>Editar tarea</h6>
+                      
                         @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
                         @method('put')
                       

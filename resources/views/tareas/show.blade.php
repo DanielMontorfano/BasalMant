@@ -1,7 +1,8 @@
-@extends('layouts.plantilla')
+
+@extends('adminlte::page') 
 @section('title', 'Ver ' . $tarea->codigo)
 @section('content')
-<h1></h1>
+
 <style>
     h6 {
         text-align:center; font-size: 30px;
@@ -19,7 +20,9 @@
     }
 </style>
 
-<br>    
+<br> 
+<h6>Ver tarea</h6>   
+<br>
 <div class="container"> {{-- container principal --}}
     <div class="row"> {{-- row principal --}}
                 <div class="col col-md-1">
@@ -31,11 +34,11 @@
                     
                     <form id="nuevoTarea"  action="{{route('tareas.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                         
-                        <h6>Ver tarea</h6>
+                      
                         @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
                     
                       
-                        <div class="p-3 mb-2 bg-gradient-primary text-white">
+                        <div class="p-3 mb-2  text-white">
                         <div class="container">
                             
                             <div class="row"> {{-- ***** div de la primera fila --}}
@@ -57,25 +60,17 @@
                                   @enderror
                                 </div>
                               </div> 
-                              <div class="col col-md-1">
+                              <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="duracion">Duración: </label>
-                                  <input disabled class="form-control" type="text" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 13px; background: linear-gradient(to right,#030007, #495c5c);" name="duracion" value="{{old('duracion', $tarea->duracion)}}" > {{-- old() mantiene en campo con el dato--}} 
+                                  <input disabled class="form-control" type="text" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 13px; background: linear-gradient(to right,#030007, #495c5c); text-align: right;" name="duracion" value="{{$tarea->duracion ." ". $tarea->unidad}}" > {{-- old() mantiene en campo con el dato--}} 
                                   
                                    @error('duracion')
                                   <small>*{{$message}}</small>
                                   @enderror
                                 </div>
                               </div> 
-                              <div class="col col-md-1">
-                                <div class="form-group">
-                                  <label class="control-label" for="unidad">Unidad:</label> 
-                                  <input disabled  class="form-control" type="text"  STYLE="padding: 6px; text-align: right; color: #f2baa2; font-family: Times New Roman;  font-size: 13px; background: linear-gradient(to right,#030007, #495c5c);" name="unidad"   value="{{old('unidad', $tarea->unidad)}}" >  {{-- value={{old('de', $ot->de)}} disabled --}}
-                                  @error('unidad')
-                                  <small>*{{$message}}</small>
-                                  @enderror
-                                </div>
-                            </div>
+                              
                             </div> {{-- ***** div de la primera fila --}}
                             <br>
                             <br>
@@ -93,7 +88,21 @@
                 </div>
     </div>  {{-- div del row1 Principal --}}
 </div> {{-- div del container Principal--}}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
+
+<div class="container"> 
+  @include('layouts.partials.footer')
+</div>
 
 @endsection
 
