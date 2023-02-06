@@ -38,15 +38,20 @@ class DocumentoController extends Controller
     public function store(Request $request)
     {
         $Selector=$request->get('Selector'); // toma del formulario
-       
+       // dd ($request->all());
         if ($Selector=="BorrarDocu"){ 
-        
-           // $equipo_id=$request->get('equipo_id'); // toma del formulario
+            //$Selector=$request->get('Selector');
+
             $docu_id=$request->get('docu_id');
             $docu = Documento::find($docu_id);
             $docu->delete();
+            $id=$request->get('equipo_id'); // toma del formulario
+            
+            
+           
             $id=$request->equipo_id;  //lo traigo oculto en el formulario
             $equipo= Equipo::find($id);
+            echo "adentro 2" ."Selector". $Selector . "id equipo=".$id . "docu_id=".$docu_id . "docu=".$docu  ." equipo=".$equipo; 
             goto salir;
         }; 
         if ($Selector=="AgregarDocu"){    
@@ -86,7 +91,8 @@ class DocumentoController extends Controller
                    //  echo "equipo=" . $equipo->id . "<br>";
                    // echo "Foto id=" . $foto_id . "<br>";
                    // echo "Nombre:" . $documentos. "<br>";
-                    //return ;
+                  // echo "adentro"; 
+                   //return;
        return redirect()->route('equipos.edit', $equipo->id);
     }
 

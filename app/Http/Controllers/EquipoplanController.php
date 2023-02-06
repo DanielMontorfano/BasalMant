@@ -41,7 +41,7 @@ class Equipoplancontroller extends Controller
     public function store(Request $request) //esto funciona una vez creado StoreEquipo de Request
     {
         
-       // dd(request()->all());
+        //dd(request()->all());
        // return;
 
         //$request->validate(['codEquipo'=>'required|max:8', 'marca'=>'required|min:3', 'modelo'=>'required']);
@@ -73,8 +73,9 @@ class Equipoplancontroller extends Controller
         $mensaje='Antes de preguntar'; 
         if ($Selector=="AgregarPlan"){  
         $search=$request->get('BuscaPlan'); //toma cadena completa del formulario
-        $planCodigo = substr("$search", 0, 10); //Extrae solo la descripcion
+        $planCodigo = substr("$search", 0, 12); //Extrae solo la descripcion
        
+        
         $plan_id=Plan::where('codigo',$planCodigo)->first()->id;       
         //goto salir; 
         //$equipo=Equipo::find($equipo_id); //de la tabla equipos**Puede andar pero no graba con time at 

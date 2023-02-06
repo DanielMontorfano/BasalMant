@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    <p>Bienvenido a software de mantenimiento </p>
+ <h4><p>Software de gestión mantenimiento para Ingenio Río Grande</p></h4>   
 @stop
 
 @section('css')

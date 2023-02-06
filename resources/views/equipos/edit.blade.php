@@ -268,16 +268,16 @@
                                   <th style="text-align: center;  color: #ffffff;" scope="col"></th>
                                 </tr>
                               </thead>
-                              @foreach($fotosTodos as $foto)
-                                <form action="{{route('equipoRepuesto.store')}}" method="POST">
+                              @foreach($documentos as $documento)
+                                <form action="{{route('documentos.store')}}" method="POST">
                                 @csrf
                               <tbody>
                                 <tr>
-                                  {{-- <input type="hidden" name="Selector" value="BorrarRep" readonly > --}}
-                                  {{-- <input type="hidden" name="equipo_id" value={{$equipo->id}} readonly > --}}
-                                  {{-- <input type="hidden" name="repuestoBorrar_id" value={{$repuesto->id}} readonly > --}}
+                                  <input type="hidden" name="Selector" value="BorrarDocu" readonly > 
+                                  <input type="hidden" name="equipo_id" value={{$equipo->id}} readonly > 
+                                  <input type="hidden" name="docu_id" value={{$documento->id}} readonly >
                                   <th STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; " scope="row"></th>
-                                  <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{ $foto->nombreFoto}}</td>
+                                  <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{ $documento->nombreDocu}}</td>
                                   <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "></td>
                                   <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; text-align: right; "> <button type="submit" class="bi bi-trash3-fill"></button></td>
                                 </tr>
@@ -473,7 +473,7 @@
           <input type="hidden" name="equipo_id" value={{$equipo->id}} readonly >
                <table class="table table-sm" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
                  <tr>
-                    <td><input type="text" class='form-control' name="BuscaPlan" id="BuscaPlan" autocomplete="off" placeholder="Buscar plan"class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
+                    <td><input type="text" class='form-control' name="BuscaPlan" id="BuscaPlan" autocomplete="off" placeholder="Buscar plan (ej: PLAN-)"class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
                     <td style="text-align: right;"><button class="btn btn-primary" type="submit" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Agregar</button> </td>
                  </tr>
                </table>
@@ -509,22 +509,7 @@
 
 <script>
     
-    $( "#BuscaPlan" ).autocomplete({
-      source: function(request, response){
-        
-              $.ajax({
-              url:"{{route('search.plans')}}",
-               dataType: 'json',
-              data:{
-                     term: request.term
-                    },
-                    success: function(data) {
-                    response(data)  
-            }
-
-        });
-      }
-    });
+    
 
     $( "#search" ).autocomplete({
       source: function(request, response){
@@ -542,6 +527,24 @@
         });
       }
     });
+
+    $( "#BuscaPlan" ).autocomplete({
+      source: function(request, response){
+        
+              $.ajax({
+              url:"{{route('search.plans')}}",
+               dataType: 'json',
+              data:{
+                     term: request.term
+                    },
+                    success: function(data) {
+                    response(data)  
+            }
+
+        });
+      }
+    });
+
 
     $( "#BuscaEquipo" ).autocomplete({
       source: function(request, response){

@@ -18,7 +18,7 @@ margin: 0.5cm 0.5cm;
 }
 
 /** Defina ahora los márgenes reales de cada página en el PDF **/
-/*body {
+body {
 margin-top: 2cm;
 margin-left: 2cm;
 margin-right: 2cm;
@@ -26,7 +26,7 @@ margin-bottom: 2cm;
 }
 /*
 /** Definir las reglas del encabezado **/
-/*header {
+header {
 position: fixed;
 top: 0cm;
 left: 0cm;
@@ -41,7 +41,7 @@ line-height: .5cm;
 }
 
 /** Definir las reglas del pie de página **/
-/*footer {
+footer {
 position: fixed;
 bottom: 0.5cm;
 left: 0cm;

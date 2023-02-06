@@ -144,7 +144,7 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                                   <div class="form-group">
                                     <label class="control-label" for="det5"> Detalle:</label> 
                                     <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det5" value={{old('det5')}}>   {{-- old() mantiene en campo con el dato--}}
-                                    @error('marca')
+                                    @error('det5')
                                     <small>*{{$message}}</small>
                                     @enderror
                                   </div>
