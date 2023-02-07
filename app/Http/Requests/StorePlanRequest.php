@@ -23,7 +23,7 @@ class StorePlanRequest extends FormRequest
      */
     public function rules()
     {
-        return ['codigo'=>'required|max:13',
+        return [//'codigo'=>'required|max:13',
                 'nombre'=>'required|min:1',
                 'frecuencia'=>'required',
                 'unidadSelect'=>'required',
@@ -37,7 +37,7 @@ class StorePlanRequest extends FormRequest
     public function attributes() //Fabuloso!! personalizar mensaje
     {
         return[
-            'codigo'=>'Codigo de Plan',
+           // 'codigo'=>'Codigo de Plan',
             'nombre'=>'Nombre que desee',
             'frecuencia'=>'Cada cuanto',
             'unidad'=>'Unidad de tiempo',
@@ -52,7 +52,7 @@ class StorePlanRequest extends FormRequest
     public function messages() //Mejor Aun, personalizar!!
     {
         return[
-            'codigo.required'=>'Se necesita ingresar el codigo de 12 caracteres',
+            //'codigo.required'=>'Se necesita ingresar el codigo de 12 caracteres',
             'nombre.required'=>'Se necesita ingresar un nombre',
             'frecuencia.required'=>'Se necesita ingresar la frecuencia',
             'unidad.required'=>'Se necesita ingresar la unidad', 

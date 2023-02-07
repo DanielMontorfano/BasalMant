@@ -50,14 +50,18 @@ class PlanController extends Controller
       
         // las siguentes lineas seria en forma manual, 
         $plan= new Plan();
-        $plan->codigo=$request->codigo;
+       // $plan->codigo=$request->codigo;
         $plan->nombre=$request->nombre;
         $plan->frecuencia=$request->frecuencia;
         $plan->unidad=$request->unidadSelect;
         $plan->descripcion=$request->descripcion;
-       
-
         $plan->save();
+
+        $id_ultimo= "PL-" . str_pad($plan->id,"8","0", STR_PAD_LEFT); //Formato para codigo
+        $plan= Plan::find($plan->id);
+        $plan->codigo= $id_ultimo;
+        $plan->save();
+
         
         //Asi se realizará con Asignacion Masiva, es mas simple, pero se debe colocar 
         //en el modelo Equipo "protected $fillable=[array que se desea]"

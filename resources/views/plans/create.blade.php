@@ -50,20 +50,12 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                     <div class="p-3 mb-2  text-white">
                         <div class="container">
                               <div class="row"> {{-- ***** div de la primera fila --}}
-                              <div class="col col-md-3">
-                                <div class="form-group">
-                                  <label class="control-label" for="codigo">Codigo:</label> 
-                                  <input maxlength="13" minlength="13" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="codigo" value={{old('codigo')}}> 
-                                  @error('codigo')
-                                  <small>*{{$message}}</small>
-                                  @enderror
-                                </div>
-                              </div> 
+                             
 
                               <div class="col col-md-5">
                                 <div class="form-group">
                                   <label class="control-label" for="descripcion">Nombre:</label> 
-                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="nombre" value={{old('nombre')}}> 
+                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" placeholder="Ej.: Motores 1"  type="text" name="nombre" value={{old('nombre')}}> 
                                   @error('nombre')
                                  <small>*{{$message}}</small>
                                   @enderror
@@ -73,7 +65,7 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                               <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="frcuencia">Frecuencia:</label> 
-                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="frecuencia" value={{old('frecuencia')}}> 
+                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="number" min="0" max="99" step="1"  minlength="1" maxlength="2" onkeydown="filtro()" name="frecuencia" value={{old('frecuencia')}}> 
                                   @error('frecuencia')
                                  <small>*{{$message}}</small>
                                   @enderror
@@ -95,13 +87,17 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                                   @enderror
                                 </div>
                                </div>
+
+                               <div class="col col-md-3"> {{-- Columna vacía --}} 
+                                
+                               </div> 
                             </div> {{-- ***** div de la primera fila --}}
 
                             <div class="row"> {{-- ***** div de la segunda fila --}}
                               <div class="col col-md-12">
                                 <div class="form-group">
                                   <label class="control-label" for="descripcion">Descripción:</label> 
-                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="descripcion" value={{old('descripcion')}}> 
+                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" placeholder="Ej.: Para motores menores de 25 Hp"  type="text" name="descripcion" value={{old('descripcion')}}> 
                                   @error('descripcion')
                                  <small>*{{$message}}</small>
                                   @enderror
@@ -143,6 +139,17 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
     <div class="container"> 
       @include('layouts.partials.footer')
     </div>
+
+
+    {{-- solo enteros en el campo frecuencia --}}
+    <script> 
+      function filtro()  
+      {
+      var tecla = event.key;
+      if (['.','e'].includes(tecla))
+         event.preventDefault()
+      }
+      </script>
 @endsection
 
 
