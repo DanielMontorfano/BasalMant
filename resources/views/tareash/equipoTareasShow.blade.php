@@ -22,13 +22,13 @@
                 -webkit-text-fill-color: transparent;">Plan de mantenimiento: {{$equipo->codEquipo}} </h6>
                 
       
-        <p ><a  class="text-white " href={{route('equipoTareash.edit', $equipo->id)}}>Cargar tareas</a></p>
+        <p ><a  class="text-white " href={{route('equipoTareash.edit', $equipo->id)}}>Cargar ficha plan</a></p>
         
         @if(isset($PlanP))
         @foreach($PlanP as $plan)
         <table  id="listado" class="table-bordered" >
           <tr >
-              <td class="col-2" align="left"><strong>{{$plan['codigo']}}</strong></td>
+              <td class="col-2" align="left"><strong>{{$plan['codigo']}}</strong> <br> {{$plan['descripcion']}}</td>
 
               <td class="col-8" align="center" >
                       @if(isset($ProtocoloP))

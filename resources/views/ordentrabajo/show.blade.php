@@ -1,5 +1,8 @@
 @extends('adminlte::page')
-@section('title', 'create')
+@section('title', 'O.d.T')
+@section('content_header')
+@include('layouts.partials.menuEquipo')
+@stop
 @section('content')
 
 <style>
@@ -18,49 +21,6 @@
 
     }
 </style>
-<div class="card-header" STYLE="background: linear-gradient(to right,#201f1e,#030007);">
-  <ul class="nav nav-tabs card-header-tabs">
-    <li class="nav-item">
-      <a class="nav-link" href="{{route('equipos.show', $equipo->id)}}">Ficha</a>
-     
-    </li>
-   
-    <li class="nav-item">
-      <a class="nav-link" href="{{route('fotos.show', $equipo->id)}}">Fotos</a>
-    </li>
-
-    <li class="nav-item">
-      <a class="nav-link" href="{{route('historialPreventivo', $equipo->id)}}">Historial</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{{route('equipos.index')}}">Protocolo</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href={{route('equipoTareash.show', $equipo->id)}}>Plan</a>
-    
-    <li class="nav-item">
-      <a class="nav-link" href="{{route('documentos.show', $equipo->id)}}">Documentos</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href={{route('equipos.edit', $equipo->id)}}>Editar</a>
-    </li>
-    <li class="nav-item">
-      <a  class="nav-link active" aria-current="true"  style="background-color: #1e2020;" href={{route('ordentrabajo.list', $equipo->id)}}>OT</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-link" href="{{route('equipos.index')}}">Descargar</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{{route('imprimirEquipo',$equipo->id )}}">Imprimir</a>
-    </li>
-    
-
-  </ul>
-</div>
-
-
-
 
 <br>    
 <div class="container"> {{-- container principal --}}
@@ -70,7 +30,7 @@
                 </div>
 
                 <div class="col col-md-8">
-
+                  <h6>O.d.T para:  {{$equipo->codEquipo}}</h6> 
                   <div class="dropdown">
                     <a title="Reportes" class=" fa-solid fa-solid fa-print btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -80,18 +40,17 @@
                   </div>
                   <br>
 
-
+                  
                     {{-- columna2 --}}
                     
                     <form id="cerrarOrden"  action="{{route('ordentrabajo.update', $ot->id)}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
-                        <br>
-                        <h6>O.d.T para:  {{$equipo->codEquipo}}</h6>
+                        
                         @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
                         {{-- Metodo PUT no existe en html, por eso indicamos a laravel como sigue --}}
                         @method('put')
 
                       
-                        <div class="p-3 mb-2 bg-gradient-primary text-white">
+                        <div class="p-3 mb-2 text-white">
                         <div class="container">
                             
                             <div class="row"> {{-- ***** div de la primera fila --}}
@@ -254,6 +213,10 @@
     </div>  {{-- div del row1 Principal --}}
 </div> {{-- div del container Principal--}}
 
+
+<div class="container"> 
+  @include('layouts.partials.footer')
+ </div>
 @endsection
 
 

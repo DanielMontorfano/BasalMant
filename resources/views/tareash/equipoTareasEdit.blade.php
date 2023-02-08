@@ -21,12 +21,12 @@
     <h6 STYLE="text-align:center; font-size: 30px;
                 background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                 -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;">Datos técnicos</h6>
+                -webkit-text-fill-color: transparent;">Ficha plan</h6>
                 
 
 
 
-        <p ><a  class="text-white " href={{route('equipoTareash.show', $equipo->id)}}>editar tareas de este equipo</a></p>
+        {{-- <p ><a  class="text-white " href={{route('equipoTareash.show', $equipo->id)}}>editar tareas de este equipo</a></p> --}}
         
         <form id="cargaPlan" action="{{route('equipoTareash.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
           @csrf
@@ -78,21 +78,6 @@
       @endforeach
       @endif
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
    <br>
                <div class="form-group">
                    <button form="cargaPlan" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
@@ -100,16 +85,6 @@
                <br>   
    </form>
       
-
-
-    
-
-
-
-
-
-
-
 {{-- ************************************************************************************** --}}
 {{-- ****LAS SIGUIENTES LINEAS SE COMENTAN POR RAZONES DE SER CODIGO MAESTRO --}}
 {{-- <p><strong>Marca:</strong>{{$equipo->marca}}</p>

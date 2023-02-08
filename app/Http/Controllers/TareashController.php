@@ -65,9 +65,10 @@ class TareashController extends Controller
       //echo $plans[$i] . "<br>";
       $tareash->save(); } 
       }   
-      echo "FIN";  
-         return;
-
+     // echo "FIN";  
+     //    return;
+     return redirect()->route('historialPreventivo', $request->equipo_id); //Intento mostrar el plan
+        
 
     }
 

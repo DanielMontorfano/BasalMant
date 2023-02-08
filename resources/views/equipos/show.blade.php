@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', $equipo->codEquipo)
 
 @section('content_header')
 @include('layouts.partials.menuEquipo')

@@ -62,31 +62,48 @@ class HistorialController extends Controller
 
 
 
-    public function  historialTodos($id) //entro con id de Equipo
+    public function  historialTodos($id) //entro con id de Equipo, mezcla los origenes Preventivo y Correctivo
     {   
         $equipo=Equipo::find($id);
         $ots_e=Equipo::find($id)->ordentrabajo; 
-
         $tareas=Equipo::find($id)->equiposTareash; //Todas las tareas sobre este equipo
         $tareash=Tareash::all();
         $tareasR=DB::table('tareashes')->where('equipo_id', $id)->get();
         $trabajosRealizados = $ots_e->concat( $tareasR);
         $numero = count($trabajosRealizados)-1;  //Contamos la cantidad de registros a guardar2
-        foreach( $tareas as $tarea){
+         // Primero compruebo que la consulta no sea vacia //
+        if($tareas->isEmpty()) { //OJO que si no hay ordenes (consulta nula, implica ARRAY vacio) ERROR 
+            $registro1[] =array('detalle'=> "No se encontraron resultados", 'origen' => "", 'fecha'=>"",  'operario' => "");
+            $descripcion1=[];
+            $plan_id=[];
+            goto salir1;  
+        }
+        
+        // Si consulta no vacia //
+          foreach( $tareas as $tarea){
           $descripcion= $tarea->descripcion;
           $tcheck= $tarea->pivot->tcheck;
           $fecha=  $tarea->updated_at;
           $fecha= substr($tarea->updated_at, 0, 10); //Para tomar solo la fecha sin hora
           $plan=$tarea->pivot->plan_id;
           $operario=$tarea->pivot->operario;
-
           $detalle=$descripcion . "(" . $tcheck . ") " ; 
           $registro1[] =array('detalle'=> $detalle, 'origen' => $plan, 'fecha'=>$fecha,  'operario' => $operario);
           // echo $tarea;
           $descripcion1[]= $detalle;
           $plan_id[]=$plan;
+         
         }
-      //  echo "************************************";
+        salir1:
+        // Primero compruebo que la consulta no sea vacia //
+        if($ots_e->isEmpty()) { //OJO que si no hay ordenes (consulta nula, implica ARRAY vacio) ERROR 
+        $registro2[] =array('detalle'=> "", 'origen' => "", 'fecha'=>"",  'operario' => "");
+        $descripcion2=[];
+        $Norden1=[];
+        goto salir;
+      }
+      
+        // Si consulta no vacia //
         foreach( $ots_e as $ot_e){
             $det2= $ot_e->det2;
             $estado= $ot_e->estado;
@@ -97,30 +114,15 @@ class HistorialController extends Controller
             $registro2[] =array('detalle'=> $detalle, 'origen' => $Norden, 'fecha'=>$fecha,  'operario' => $operario);
             $descripcion2[]=$detalle;
             $Norden1[]= $Norden;
+            }
 
-           }
-           //********************************************************** */
-          /* foreach($tareas as $tarea){
-            // echo $plan->id . "*" . $protocolo->codigo . "*" . $tarea->codigo .  "*" .  $tarea->descripcion . "<br>";
-                
-              $Tareas[] =array('cod'=>$protocolosParciales->codigo, 'codigoTar' => $tarea->codigo, 'descripcion' => $tarea->descripcion, $tarea->duracion);
-           
-        }*/
-           //var_export ($detalles1);
-          // var_export ($detalles2);
-           //echo "************************************";
+            salir:
            $registros= array_merge($registro1, $registro2);
            $origenes= array_merge($plan_id, $Norden1);
-
-           //var_export ( $origen);
-             
-       /* foreach($detalles as $detalle){
-            echo $detalle;
-        }*/
-
-
-       return view('historial.todos',compact('tareas', 'ots_e', 'equipo', 'registros'));
-       return $registros;
+        return view('historial.todos',compact('tareas', 'ots_e', 'equipo', 'registros'));
+       
+     //  echo"No Hay Ordenes";
+      // return;
 
     }
 
