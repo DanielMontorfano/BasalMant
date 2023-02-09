@@ -17,7 +17,7 @@
   <h6 STYLE="text-align:center; font-size: 30px;
   background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;">Mantenimientos realizados</h6>
+  -webkit-text-fill-color: transparent;">Historial de {{$equipo->codEquipo}} </h6>
 
   <div class="dropdown">
     <a title="Reportes de mantenimientos" class=" fa-solid fa-screwdriver-wrench btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>

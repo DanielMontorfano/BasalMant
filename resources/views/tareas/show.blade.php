@@ -18,6 +18,25 @@
          background: linear-gradient(to right,#030007, #495c5c);
 
     }
+    #menuhorizontal {
+margin:0;
+padding:0;
+list-style-type:none;
+} #menuhorizontal a { width:50px;
+text-decoration:none;
+text-align:center;
+color:#ff0000;
+background-color:transparent;
+padding:3px 5px;
+/*border-right:1px solid blue;*/
+display:block; }
+#menuhorizontal li {
+float:left;
+}
+
+#menuhorizontal a:hover {
+background-color:#02462c;
+}
 </style>
 
 <br> 
@@ -42,7 +61,7 @@
                         <div class="container">
                             
                             <div class="row"> {{-- ***** div de la primera fila --}}
-                              <div class="col col-md-2">
+                              <div class="col col-md-3">
                                 <div class="form-group">
                                   <label class="control-label" for="codigo">Codigo:</label> 
                                   <input disabled  class="form-control" type="text" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 13px; background: linear-gradient(to right,#030007, #495c5c);"  name="codigo" value="{{old('codigo', $tarea->codigo)}}" > 
@@ -70,14 +89,22 @@
                                   @enderror
                                 </div>
                               </div> 
-                              
-                            </div> {{-- ***** div de la primera fila --}}
-                            <br>
-                            <br>
-                            <div class="form-group">
-                                <p style="text-align: right;"><a  class="text-white " href={{route('tareas.index')}}>Salir</a></p> 
-                            </div>
- 
+                              </div> {{-- ***** div de la primera fila --}}
+                              <div class="row"> {{-- ***** div de la segunda fila --}}
+                                          <br>
+                                          <br>
+                                          <br>
+                                          <div class="form-group">
+                                            <nav>
+                                              <ul id="menuhorizontal">
+                                                  <li><a  class="text-white " href={{route('tareas.create')}}>Otra</a></li>
+                                                  <li><a  class="text-white " href={{route('tareas.index')}}>Salir</a></li>
+                                              </ul>
+                                            </nav>
+                                         </div>
+                              </div>{{-- ***** div de la segunda --}}
+  
+                            
 
                         </div>{{-- div del container dentro de columna 2 --}}    
                         </div>{{-- div del Letra blanca --}}
