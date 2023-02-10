@@ -1,7 +1,16 @@
-@extends('layouts.plantilla')
+@extends('adminlte::page') 
+
 @section('title', 'Edit')
+@section('css')
+{{--  EL MEJOR EJEMPLO DE LA PAGINA DE jquery-ui (https://jqueryui.com/autocomplete/) !!! --}}
+<link rel="stylesheet" href="{{asset('jquery-ui/jquery-ui.min.css')}}"> 
+<script src="{{asset('jquery/dist/jquery.js')}}"></script>
+<script src="{{asset('jquery-ui/jquery-ui.min.js')}}"></script>
+
+@endsection
+
+ 
 @section('content')
-<h1></h1>
 <style>
   h6 {
       text-align:center; font-size: 30px;
@@ -21,12 +30,11 @@
 
 
 <section class="main row ">
- <div class="container ">
-  <div class="card" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
-            <br>
-            <br>
-          {{-- Probando Col --}}
+         {{-- Probando Col --}}
           <div class="container">
+            <br>
+            <h6>Editar plan</h6>
+            <br>
             <div class="row">
               <div class="col col-md-2">
                 {{-- Columna 1 --}}
@@ -34,11 +42,11 @@
               <div class="col col-md-8">
                 {{-- Columna2 --}}
                 <form id="encabezado" action="{{route('plans.update', $plan->id)}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
-                  <h6>Editar plan</h6>
+                  
                   @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
                   @method('put') {{-- Metodo PUT no existe en html, por eso indicamos a laravel como sigue --}}
                   
-                  <div class="p-3 mb-2 bg-gradient-primary text-white">
+                  <div class="p-3 mb-2 text-white">
       
                     <div class="container">
                       <div class="row">
@@ -54,7 +62,7 @@
 
                         <div class="col col-md-5">
                           <div class="form-group">
-                            <label class="control-label" for="descripcion">Nombre:</label> 
+                            <label class="control-label" for="descripcion">Nombre/Alcance:</label> 
                             <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="nombre" value={{old('nombre', $plan->nombre)}}> 
                             @error('nombre')
                            <small>*{{$message}}</small>
@@ -142,49 +150,45 @@
                 {{-- Columna --}}
               </div>
             </div>
-          </div>
             <br>
-               <div class="form-group">
-                   <button form="encabezado" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
-               </div>
-               <br>   
-              </div>             
+            <div class="form-group">
+            <button form="encabezado" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
+          </div>
+           
+                
+                         
 </section>
  
 {{-- $$$$$$$$$$$$$$$$$$$$$$  Segundo grupo de  formularios $$$$$$$$$$$$$$$ --}}
 <br>
 
 <section class="main row ">
-  <div class="container">
-    <div class="card" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
-     <br>
-     <br>
-     <div class="container ">
-      
-        <div class="card-header" STYLE="background: linear-gradient(to right,#1e2020,#030007);">
-    
-          <h6 STYLE="text-align:center; font-size: 30px;
+  <div class="container" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+    <h6 STYLE="text-align:center; font-size: 30px;
                       background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                       -webkit-background-clip: text;
                       -webkit-text-fill-color: transparent;">Adjuntar</h6>
     
+    
+      
+       
+    
+          
       <br>
-            <form action="{{route('planproto.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+            <form action="{{route('planproto.store')}}" method="POST" class="form-horizontal" >
               @csrf
               <input type="hidden" name="Selector" value="Agregarproto" readonly >
               <input type="hidden" name="plan_id" value={{$plan->id}} readonly >
                   <table class="table table-sm" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
                     <tr>
-                        <td><input class='form-control' name="search" id="search" autocomplete="off" placeholder="Buscar procedimiento de mantenimiento" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
+                        <td><input class='form-control' name="search" id="search" autocomplete="off" placeholder="Buscar: Ej. PDM-000000254" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
                         
                         <td style="text-align: right;"><button class="btn btn-primary" type="submit" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Agregar</button> </td>
                         
                       </tr>
                 </table>
             </form>
-        </div> 
-      </div> 
-    </div> 
+     
     </div>
   
 </section>

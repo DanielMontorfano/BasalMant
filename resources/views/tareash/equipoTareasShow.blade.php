@@ -28,7 +28,7 @@
         @foreach($PlanP as $plan)
         <table  id="listado" class="table-bordered" >
           <tr >
-              <td class="col-2" align="left"><strong>{{$plan['codigo']}}</strong> <br> {{$plan['descripcion']}}</td>
+              <td class="col-2" align="left"><strong>{{$plan['nombre']}}</strong> <br> {{$plan['descripcion']}}</td>
 
               <td class="col-8" align="center" >
                       @if(isset($ProtocoloP))

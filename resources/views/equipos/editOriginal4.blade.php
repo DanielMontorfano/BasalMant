@@ -1,27 +1,53 @@
-@extends('adminlte::page') 
-
+@extends('layouts.plantilla1')
 @section('title', 'Edit')
-@section('css')
-{{--  EL MEJOR EJEMPLO DE LA PAGINA DE jquery-ui (https://jqueryui.com/autocomplete/) !!! --}}
-<link rel="stylesheet" href="{{asset('jquery-ui/jquery-ui.min.css')}}"> 
-<script src="{{asset('jquery/dist/jquery.js')}}"></script>
-<script src="{{asset('jquery-ui/jquery-ui.min.js')}}"></script>
-@endsection
-
- 
 @section('content')
-<br>
-<h6 STYLE="text-align:center; font-size: 30px;
-                  background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
-                  -webkit-background-clip: text;
-                  -webkit-text-fill-color: transparent;">Editar ficha equipo</h6>  
+<h1></h1>
 
-<br>
+
 <section class="main row ">
  
 <div class="container ">
   
+  <div class="card" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
+    <div class="card-header" STYLE="background: linear-gradient(to right,#201f1e,#030007);">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="true"  style="background-color: #1e2020;" href="{{route('equipos.show', $equipo->id)}}">Ficha</a>
+         
+        </li>
+       
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('fotos.show', $equipo->id)}}">Fotos</a>
+        </li>
   
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('equipos.index')}}">Historial</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('equipos.index')}}">Protocolo</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href={{route('equipoTareash.show', $equipo->id)}}>Plan</a>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('documentos.show', $equipo->id)}}">Documentos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href={{route('equipos.edit', $equipo->id)}}>Editar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href={{route('ordentrabajo.list', $equipo->id)}}>OT</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('equipos.index')}}">Descargar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('imprimirEquipo',$equipo->id )}}">Imprimir</a>
+        </li>
+      </ul>
+    </div>
+          </div>   
             
           {{-- Probando Col --}}
           <div class="container">
@@ -33,10 +59,14 @@
               <div class="col col-md-8">
                 {{--  Columna2 --}}
                 <form id="encabezado" action="{{route('equipos.update', $equipo->id)}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+                  <h6 STYLE="text-align:center; font-size: 30px;
+                  background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
+                  -webkit-background-clip: text;
+                  -webkit-text-fill-color: transparent;">Ficha de equipo </h6>
                   @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
                   @method('put') {{-- Metodo PUT no existe en html, por eso indicamos a laravel como sigue --}}
                   
-                  <div class="p-3 mb-2 text-white">
+                  <div class="p-3 mb-2 bg-gradient-primary text-white">
       
                     <div class="container">
                       <div class="row">

@@ -18,104 +18,73 @@
          background: linear-gradient(to right,#030007, #495c5c);
 
     }
-    #menuhorizontal {
-margin:0;
-padding:0;
-list-style-type:none;
-} #menuhorizontal a { width:50px;
-text-decoration:none;
-text-align:center;
-color:#ff0000;
-background-color:transparent;
-padding:3px 5px;
-/*border-right:1px solid blue;*/
-display:block; }
-#menuhorizontal li {
-float:left;
-}
-
-#menuhorizontal a:hover {
-background-color:#02462c;
-}
+    
 </style>
 
 <br> 
 <h6>Ver tarea</h6>   
 <br>
-<div class="container"> {{-- container principal --}}
-    <div class="row"> {{-- row principal --}}
-                <div class="col col-md-1">
-                    {{-- columna1 --}}
-                </div>
-
-                <div class="col col-md-10">
-                    {{-- columna2 --}}
-                    
-                    <form id="nuevoTarea"  action="{{route('tareas.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
-                        
-                      
-                        @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
-                    
-                      
-                        <div class="p-3 mb-2  text-white">
-                        <div class="container">
-                            
-                            <div class="row"> {{-- ***** div de la primera fila --}}
-                              <div class="col col-md-3">
-                                <div class="form-group">
-                                  <label class="control-label" for="codigo">Codigo:</label> 
-                                  <input disabled  class="form-control" type="text" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 13px; background: linear-gradient(to right,#030007, #495c5c);"  name="codigo" value="{{old('codigo', $tarea->codigo)}}" > 
-                                  @error('codigo')
-                                  <small>*{{$message}}</small>
-                                  @enderror
-                                </div>
-                              </div> 
-                              <div class="col col-md-7">
-                                <div class="form-group">
-                                  <label class="control-label" for="descripcion">Descripción:</label> 
-                                  <input disabled class="form-control" type="text" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 13px; background: linear-gradient(to right,#030007, #495c5c);"   name="descripcion" value="{{old('descripcion', $tarea->descripcion)}}" > 
-                                  @error('descripcion')
-                                 <small>*{{$message}}</small>
-                                  @enderror
-                                </div>
-                              </div> 
-                              <div class="col col-md-2">
-                                <div class="form-group">
-                                  <label class="control-label" for="duracion">Duración: </label>
-                                  <input disabled class="form-control" type="text" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 13px; background: linear-gradient(to right,#030007, #495c5c); text-align: right;" name="duracion" value="{{$tarea->duracion ." ". $tarea->unidad}}" > {{-- old() mantiene en campo con el dato--}} 
-                                  
-                                   @error('duracion')
-                                  <small>*{{$message}}</small>
-                                  @enderror
-                                </div>
-                              </div> 
-                              </div> {{-- ***** div de la primera fila --}}
-                              <div class="row"> {{-- ***** div de la segunda fila --}}
-                                          <br>
-                                          <br>
-                                          <br>
-                                          <div class="form-group">
-                                            <nav>
-                                              <ul id="menuhorizontal">
-                                                  <li><a  class="text-white " href={{route('tareas.create')}}>Otra</a></li>
-                                                  <li><a  class="text-white " href={{route('tareas.index')}}>Salir</a></li>
-                                              </ul>
-                                            </nav>
-                                         </div>
-                              </div>{{-- ***** div de la segunda --}}
-  
+    <div  class="container" > {{-- container principal --}}
+      <div class="row"> {{-- row principal --}}
+                  <div class="col col-md-1">
+                      {{-- columna1 Del medio --}}
+                  </div>{{-- columna1 Del medio --}}
+                    <div STYLE="background: linear-gradient(to right,#495c5c,#030007);" class="col col-md-10">{{-- div del container dentro de columna 2 --}} 
+                      {{-- columna2 --}}
+                           <form id="nuevoTarea"  action="{{route('tareas.store')}}" method="POST" class="form-horizontal" >
+                              @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
+                                <div class="p-3 mb-2  text-white">
+                                  <div class="container">
+                                    <div class="row"> {{-- ***** div de la primera fila dentro del form--}}
+                                            <div class="col col-md-3">
+                                                <div class="form-group">
+                                                  <label class="control-label" for="codigo">Codigo:</label> 
+                                                  <input disabled  class="form-control" type="text" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 13px; background: linear-gradient(to right,#030007, #495c5c);"  name="codigo" value="{{old('codigo', $tarea->codigo)}}" > 
+                                                  @error('codigo')
+                                                  <small>*{{$message}}</small>
+                                                  @enderror
+                                                </div>
+                                                <br><br>
+                                                <div style="text-align:left;"><a title="Crear otra tarea" class="text-white " href={{route('tareas.create')}}>&lt; &lt; &nbsp; Otra</a></div>
+                                                </div> 
+                                            <div class="col col-md-7">
+                                                    <div class="form-group">
+                                                      <label class="control-label" for="descripcion">Descripción:</label> 
+                                                      <input disabled class="form-control" type="text" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 13px; background: linear-gradient(to right,#030007, #495c5c);"   name="descripcion" value="{{old('descripcion', $tarea->descripcion)}}" > 
+                                                      @error('descripcion')
+                                                      <small>*{{$message}}</small>
+                                                      @enderror
+                                                    </div>
+                                                        <br>
+                                                        <br>    
+                                            </div> 
+                                            <div class="col col-md-2">
+                                                  <div class="form-group">
+                                                    <label class="control-label" for="duracion">Duración: </label>
+                                                    <input disabled class="form-control" type="text" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 13px; background: linear-gradient(to right,#030007, #495c5c); text-align: right;" name="duracion" value="{{$tarea->duracion ." ". $tarea->unidad}}" > {{-- old() mantiene en campo con el dato--}} 
+                                                    @error('duracion')
+                                                    <small>*{{$message}}</small>
+                                                    @enderror
+                                                  </div>
+                                                  <br><br>
+                                                  <div style="text-align:right;"><a  title="Ir a listado de tareas" class="text-white " href={{route('tareas.index')}}> Salir &nbsp; &gt;&gt;</a></div>
+                                                      
+                                            </div> 
+                                    </div> 
+                                  </div>{{-- div del container dentro de columna 2 --}} 
+                              </div>  {{-- div del Letra blanca --}}  
+                            </form>
                             
 
-                        </div>{{-- div del container dentro de columna 2 --}}    
-                        </div>{{-- div del Letra blanca --}}
-                    </form>
-                    </div>
-                <div class="col col-md-1">
-                    {{-- columna 3 --}}
-                </div>
-    </div>  {{-- div del row1 Principal --}}
-</div> {{-- div del container Principal--}}
-<br>
+                  </div>{{-- columna2 Del medio--}}
+                  <div class="col col-md-1">
+                      {{-- columna 3 --}}
+
+                  </div> {{-- columna 3 Del medio--}}
+
+      </div>  {{-- div del row1 Principal --}}
+  </div> {{-- div del container Principal--}}
+
 <br>
 <br>
 <br>

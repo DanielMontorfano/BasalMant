@@ -1,5 +1,10 @@
-@extends('layouts.plantilla')
-@section('title', 'Ver ' . $plan->codigo)
+@extends('adminlte::page') 
+
+@section('title', 'Ver')
+@section('css')
+
+@endsection
+
 @section('content')
 <h1></h1>
 
@@ -13,6 +18,10 @@
                <br> 
               {{-- Probando Col --}}
               <div class="container">
+                <h6 STYLE="text-align:center; font-size: 30px;
+                      background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
+                      -webkit-background-clip: text;
+                      -webkit-text-fill-color: transparent;">Ficha de plan</h6>
                 <div class="row">
                   <div class="col col-md-2">
                     {{-- Columna 1 --}}
@@ -21,14 +30,11 @@
                   <div class="col col-md-8">
                     {{-- Columna2 --}}
                     <form id="encabezado" action="{{route('protocolos.update', $plan->id)}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
-                      <h6 STYLE="text-align:center; font-size: 30px;
-                      background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
-                      -webkit-background-clip: text;
-                      -webkit-text-fill-color: transparent;">Ficha de plan</h6>
+                      
                       @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
                       @method('put') {{-- Metodo PUT no existe en html, por eso indicamos a laravel como sigue --}}
                       
-                      <div class="p-3 mb-2 bg-gradient-primary text-white">
+                      <div class="p-3 mb-2  text-white">
                       <div class="container">
                           <div class="row">
                             <div class="col col-md-3">
@@ -39,6 +45,7 @@
                                 <small>*{{$message}}</small>
                                 @enderror
                               </div>
+                              
                             </div>
                             <div class="col col-md-5">
                               <div class="form-group">
@@ -68,6 +75,7 @@
                                 <small>*{{$message}}</small>
                                 @enderror
                               </div>
+                             
                              </div>
 
                             </div> {{-- cierra row 1--}}
@@ -79,7 +87,7 @@
                                 <small class="help-block">*{{$message}}</small>
                                 @enderror
                              </div>
-                            
+                             
                         
                               
                       </form >  {{-- Cierra Formulario Nº1 --}} 
@@ -104,8 +112,8 @@
                                            
                                             <tbody>
                                                   <tr>
-                                                    <th STYLE="color: #3ef10d; font-family: Times New Roman;  font-size: 14px; "scope="row">{{$protocolo['codProto']}}</th>
-                                                    <td STYLE="color: #3ef10d; font-family: Times New Roman;  font-size: 14px; ">{{$protocolo['descripcion']}}</td>
+                                                    <th title="Editar este protocolo" STYLE="color: #bcc7e0; font-family: Times New Roman;  font-size: 14px; "scope="row">{{$protocolo['codProto']}} <a href=""></a> </th>
+                                                    <td STYLE="color: #bcc7e0; font-family: Times New Roman;  font-size: 14px; ">{{$protocolo['descripcion']}}</td>
                                                   </tr>
                                                   @foreach($Tareas as $tarea) 
                                                   @if($protocolo['codProto'] ==$tarea['cod'])
@@ -127,8 +135,9 @@
                   <div class="col col-md-2">
                     {{-- Columna --}}
                   </div>
-                  <p style="text-align: right;"><a  class="text-white " href={{route('plans.index')}}>Salir</a></p> 
-                </div>
+                   <p style="text-align: right;"><a  class="text-white " href={{route('plans.index')}}>Salir</a></p>
+                   
+                  </div>
               </div>
     
     
