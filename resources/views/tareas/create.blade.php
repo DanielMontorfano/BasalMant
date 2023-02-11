@@ -19,12 +19,15 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
 
     }
 
-    .input { color: #f2baa2;
+    .form-control { 
+        
+         color: #f2baa2;
          font-family: Times New Roman;
          font-size: 18px;
-         background: linear-gradient(to right,#030007, #495c5c);
+         background: linear-gradient(to right,#030007, #495c5c);}
 
-    }
+   
+  
 </style>
 <br>    
 <div class="container"> {{-- container principal --}}
@@ -46,7 +49,7 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                               <div class="col col-md-8"> {{-- ***** div de la primera fila --}}
                                 <div class="form-group">
                                   <label class="control-label" for="descripcion">Descripción:</label> 
-                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="descripcion" value={{old('descripcion')}}> 
+                                  <input autocomplete="off" class="form-control" style="color: #f2baa2;" type="text" name="descripcion" value={{old('descripcion')}}> 
                                   @error('descripcion')
                                  <small>*{{$message}}</small>
                                   @enderror
@@ -55,7 +58,7 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                               <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="duracion">Duración:</label> 
-                                  <input type="number" autocomplete="off" class="form-control"  STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"   name="duracion" value={{old('duracion')}}> 
+                                  <input type="number" autocomplete="off" style="color: #f2baa2;" class="form-control"  name="duracion" value={{old('duracion')}}> 
                                    @error('duracion')
                                   <small>*{{$message}}</small>
                                   @enderror
@@ -64,7 +67,8 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                               <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="unidad">Unidad:</label> 
-                                  <select name="uniTiempoSelect" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" >
+                                  <select name="uniTiempoSelect" class="form-control" >
+                                    <option value=""></option> 
                                   <option value="Min">Min</option> 
                                   <option value="Hs">Hs</option> 
                                   <option value="Días">Días</option> 

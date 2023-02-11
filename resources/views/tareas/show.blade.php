@@ -12,12 +12,14 @@
 
     }
 
-    .input { color: #f2baa2;
+    .form-control { color: #f2baa2;
          font-family: Times New Roman;
          font-size: 18px;
          background: linear-gradient(to right,#030007, #495c5c);
 
     }
+
+    
     
 </style>
 
@@ -39,7 +41,7 @@
                                             <div class="col col-md-3">
                                                 <div class="form-group">
                                                   <label class="control-label" for="codigo">Codigo:</label> 
-                                                  <input disabled  class="form-control" type="text" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 13px; background: linear-gradient(to right,#030007, #495c5c);"  name="codigo" value="{{old('codigo', $tarea->codigo)}}" > 
+                                                  <input disabled  class="form-control" type="text" name="codigo" value="{{old('codigo', $tarea->codigo)}}" > 
                                                   @error('codigo')
                                                   <small>*{{$message}}</small>
                                                   @enderror
@@ -50,7 +52,7 @@
                                             <div class="col col-md-7">
                                                     <div class="form-group">
                                                       <label class="control-label" for="descripcion">Descripción:</label> 
-                                                      <input disabled class="form-control" type="text" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 13px; background: linear-gradient(to right,#030007, #495c5c);"   name="descripcion" value="{{old('descripcion', $tarea->descripcion)}}" > 
+                                                      <input disabled class="form-control" type="text"  name="descripcion" value="{{old('descripcion', $tarea->descripcion)}}" > 
                                                       @error('descripcion')
                                                       <small>*{{$message}}</small>
                                                       @enderror
@@ -61,7 +63,7 @@
                                             <div class="col col-md-2">
                                                   <div class="form-group">
                                                     <label class="control-label" for="duracion">Duración: </label>
-                                                    <input disabled class="form-control" type="text" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 13px; background: linear-gradient(to right,#030007, #495c5c); text-align: right;" name="duracion" value="{{$tarea->duracion ." ". $tarea->unidad}}" > {{-- old() mantiene en campo con el dato--}} 
+                                                    <input disabled class="form-control" type="text" STYLE="text-align: right;" name="duracion" value="{{$tarea->duracion ." ". $tarea->unidad}}" > {{-- old() mantiene en campo con el dato--}} 
                                                     @error('duracion')
                                                     <small>*{{$message}}</small>
                                                     @enderror

@@ -33,7 +33,7 @@
               <td class="col-8" align="center" >
                       @if(isset($ProtocoloP))
                       @foreach($ProtocoloP as $protocolo)
-                      <div class="col-12" align="left"><strong>{{$protocolo['codProto']}}</strong>  ( {{$protocolo['descripcion']}} )</div>
+                      <div class="col-12" align="left"><strong>{{$protocolo['descripcion']}}</strong></div>
                       <div class="row align-items-end">
                         @foreach($Tareas as $tarea) 
                         @if($protocolo['codProto'] ==$tarea['cod'])

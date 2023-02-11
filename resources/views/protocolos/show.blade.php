@@ -1,6 +1,10 @@
 {{-- @extends('layouts.plantilla') --}}
 @extends('adminlte::page')
 @section('title', 'Ver ' . $protocolo->codigo)
+@section('content_header')
+@include('layouts.partials.menuPdm')
+@stop
+
 @section('content')
 
 <br>

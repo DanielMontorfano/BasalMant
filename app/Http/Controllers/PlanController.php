@@ -95,7 +95,7 @@ class PlanController extends Controller
         foreach($protocolos as $protocolo){
                 $proto_id= $protocolo->pivot->proto_id; //busco el id del protocolo relacionado
                 $protocolosParciales= Protocolo::find( $proto_id); // traigo la coleccion de ese protocolo
-                $ProtocoloP[]=array('codProto'=> $protocolosParciales->codigo, 'descripcion'=> $protocolosParciales->descripcion);
+                $ProtocoloP[]=array('idProto'=>$protocolosParciales->id,'codProto'=> $protocolosParciales->codigo, 'descripcion'=> $protocolosParciales->descripcion);
                 $tareas=$protocolosParciales->protocolosTareas; // traigo todas las tareas de ese protocolo
             foreach($tareas as $tarea){
                 // echo $plan->id . "*" . $protocolo->codigo . "*" . $tarea->codigo .  "*" .  $tarea->descripcion . "<br>";

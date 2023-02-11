@@ -1,6 +1,9 @@
 @extends('adminlte::page') 
 
 @section('title', 'Edit')
+@section('content_header')
+@include('layouts.partials.menuEquipo')
+@stop
 @section('css')
 {{--  EL MEJOR EJEMPLO DE LA PAGINA DE jquery-ui (https://jqueryui.com/autocomplete/) !!! --}}
 <link rel="stylesheet" href="{{asset('jquery-ui/jquery-ui.min.css')}}"> 

@@ -1,7 +1,9 @@
 
 @extends('adminlte::page') 
-
 @section('title', 'Edit')
+@section('content_header')
+@include('layouts.partials.menuPdm')
+@stop
 @section('css')
 
 @endsection

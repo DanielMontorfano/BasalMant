@@ -88,7 +88,7 @@
         <br>
         <tbody>
         @foreach($repuestos as $repuesto)
-        @if(!$repuesto->pivot->check1 =='on') {{-- Para saber si es repuesto o no --}}
+        @if($repuesto->pivot->check1 =='on') {{-- Para saber si es repuesto o no --}}
         <tr>
           <td scope="row" class="text-left"><b>{{ $repuesto->codigo }}</b></td>
           <td class="text-left">{{ $repuesto->descripcion}} </td>
@@ -119,7 +119,7 @@
         <tbody>
         @foreach($plans as $plan)
         <tr>
-          <td scope="row" class="text-left"><b>{{ $plan->codigo }} &nbsp;</b></td>
+          <td scope="row" class="text-left"><a href="{{route('plans.show', $plan->id)}}"><b>{{ $plan->codigo }} &nbsp;</b></a></td>
           <td class="text-left">{{ $plan->descripcion}} &nbsp; cada &nbsp; </td>
           <td class="text-rigth">&nbsp;{{ $plan->frecuencia}}&nbsp;{{ $plan->unidad}} </td>
         </tr>
