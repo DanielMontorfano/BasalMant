@@ -115,7 +115,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),  'verified'
  Route::get('/imprimir', [imprimirController::class,'imprimir'])->name('imprimir');
  Route::get('/imprimirEquipo/{equipo}', [imprimirController::class,'imprimirEquipo'])->name('imprimirEquipo');
  Route::get('/imprimirOrden/{orden}', [imprimirController::class,'imprimirOrden'])->name('imprimirOrden');
- 
+ Route::get('/imprimirPlan/{plan}', [imprimirController::class,'imprimirPlan'])->name('imprimirPlan');
  //route::post('imagen/store', [ImagenController::class,'store'])->name('imagen.store');
  
  

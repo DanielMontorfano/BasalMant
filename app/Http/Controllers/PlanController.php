@@ -86,7 +86,7 @@ class PlanController extends Controller
         $plan= Plan::find($id); // Ver la linea de abajo alternativa
         $protocolos= Plan::find($id)->plansProtocolos; // otra alternativa: $repuestos= Equipo::find($id)->equiposRepuestos; en una sola linea. 
         if ($protocolos->isEmpty()) {
-            $ProtocoloP[]=array('codProto'=> '', 'descripcion'=> 'Este plan no tiene protocolos vinculados');
+            $ProtocoloP[]=array('idProto'=> '','codProto'=> '', 'descripcion'=> 'Este plan no tiene procedimientos de mantenimientos vinculados');
             $Tareas[] =array('cod'=>'', 'codigoTar' => '', 'descripcion' => '', '');
             //return $protocolos;
             goto salir;

@@ -110,7 +110,8 @@
             <td scope="col" style="text-align: rigth; font-size:150%;"><u> Plan:</u>
                <button style="background-color: Transparent;border: none;" title="Ver plan"><a  class="bi bi-eye" href={{route('equipoTareash.show', $equipo->id)}}>  </a></button>
                <button style="background-color: Transparent;border: none;" title="Cargar ficha plan"><a  class="bi bi-plus-square" href={{route('equipoTareash.edit', $equipo->id)}}>  </a></button>
-            </td>
+               <button style="background-color: Transparent;border: none;" title="Imprimir ficha plan"><a  class="bi bi-printer" href={{route('imprimirPlan', $equipo->id)}}>  </a></button>
+              </td>
             <td scope="col" class="text-center; "></td>
             <td scope="col" class="text-center"></td>
           </tr>
