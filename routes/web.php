@@ -59,7 +59,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),  'verified'
  Route::view('contactanos','contactanos')->name('contactanos');
  
  Route::resource('equipos', EquipoController::class);
- //Route::get('equipos/{equipo}/showphoto', [EquipoController::class, 'showphoto'])->name('equipos.showphoto');
+ Route::get('equipos/{equipo}/clonar', [EquipoController::class, 'clonar'])->name('equipos.clonar');
  Route::get('equipos/{equipo}/equipoTareasShow', [EquipoController::class, 'equipoTareasShow'])->name('equipos.showtareas');
  Route::resource('equipoTareash', TareashController::class);
  

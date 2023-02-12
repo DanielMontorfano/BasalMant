@@ -156,6 +156,11 @@
                     
                   </form >  {{-- Cierra Formulario Nº1 --}} 
                   <br>
+                      <div class="form-group">
+                          <button form="encabezado" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
+                      </div>
+                  <br>   
+                  <br>
                   {{--INICIO DE SEGUNDO FORMULARIO --}}
                   <div class="card " STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                     <div class="card-header " STYLE="background: linear-gradient(to right,#495c5c,#030007);">            
@@ -351,11 +356,7 @@
                    
         
 
-            <br>
-               <div class="form-group">
-                   <button form="encabezado" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
-               </div>
-               <br>   
+            
               </div>             
 </section>
    
@@ -457,6 +458,11 @@
           @csrf
           <input type="hidden" name="Selector" value="AgregarEquipo" readonly >
           <input type="hidden" name="equipo_id" value={{$equipo->id}} readonly >
+          @if(isset($data))
+          @foreach($data as $dat) 
+          <input type="hidden" name="equipoB_id" value={{$dat['id_B']}} readonly >
+          @endforeach
+          @endif   
                <table class="table table-sm" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
                  <tr>
                     <td><input type="text" class='form-control' name="BuscaEquipo" id="BuscaEquipo" autocomplete="off" placeholder="Buscar equipo"class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>

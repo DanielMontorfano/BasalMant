@@ -64,14 +64,15 @@
   
       <div id="primero">
         <ul>
-          <li><a href="{{route('equipos.show', $equipo->id)}}">Ficha</a></li>
-          <li><a href={{route('fotos.show', $equipo->id)}}>Fotos</a></li>
-          <li><a href="{{route('historialPreventivo', $equipo->id)}}">Historial</a></li>
-          <li><a href={{route('equipoTareash.show', $equipo->id)}}>Plan</a></li>
-          <li><a href="{{route('documentos.show', $equipo->id)}}">Documentos</a></li>
-          <li><a href={{route('equipos.edit', $equipo->id)}}>Editar</a></li>
-          <li><a href={{route('ordentrabajo.list', $equipo->id)}}>OT</a></li>
-          <li><a href="{{route('imprimirEquipo',$equipo->id )}}">Imprimir </a></li>
+          <li><a title="Ver la ficha de equipo" href="{{route('equipos.show', $equipo->id)}}">Ficha</a></li>
+          <li><a title="Ver imágenes de este equipo" href={{route('fotos.show', $equipo->id)}}>Fotos</a></li>
+          <li><a title="Ver trabajos relizados sobre este equipo" href="{{route('historialPreventivo', $equipo->id)}}">Historial</a></li>
+          <li><a title="Ver plan de mantenimiento de este esquipo" href={{route('equipoTareash.show', $equipo->id)}}>Plan</a></li>
+          <li><a title="Permite ver documentos adjuntos" href="{{route('documentos.show', $equipo->id)}}">Documentos</a></li>
+          <li><a title="Permite editar este equipo" href={{route('equipos.edit', $equipo->id)}}>Editar</a></li>
+          <li><a title="Permite ver y generar ódenes sobre este equipo" href={{route('ordentrabajo.list', $equipo->id)}}>OT</a></li>
+          <li><a title="Permite clonar este equipo" href={{route('equipos.clonar', $equipo->id)}}>Clonar</a></li>
+          <li><a title="Imprime la ficha de este equipo" href="{{route('imprimirEquipo',$equipo->id )}}">Imprimir </a></li>
            
           <div id="segundo">
           

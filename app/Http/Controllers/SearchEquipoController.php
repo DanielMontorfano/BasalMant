@@ -21,11 +21,12 @@ class SearchEquipoController extends Controller
         //->orWhere('marca','LIKE','%'.$term.'%')->get();
         //$querys=Equipo::all();
         $data =  [];
+        $id_B = [];
         foreach($querys as $query){
            $data[] = [
-            'label' =>$query->codEquipo ." ". $query->modelo . " " . $query->id    //Ojo el simbolo => es para arrays
+            'label' =>$query->codEquipo ." ". $query->modelo . " " . $query->id,    //Ojo el simbolo => es para arrays
          ];
-         }
+          }
 
         }else{$data[] = [
          'label' =>'NADA1' ." ". 'Nada2' . " " . 'Nada3'    //Ojo el simbolo => es para arrays

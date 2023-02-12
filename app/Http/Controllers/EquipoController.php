@@ -191,7 +191,11 @@ class EquipoController extends Controller
      */
     //public function update(Request $request, Equipo $equipo) //En realidad se abre una instancia Equipo, de la cual se recupera el registro enviado en $equipo
        public function update(Request $request, $id)
-    { //$request trae lo del formulario, $id el id de equipo, trae lo que tengo en el registro sin modificar                                  
+    { //$request trae lo del formulario, $id el id de equipo, trae lo que tengo en el registro sin modificar  
+        
+        //dd(request()->all());
+        //return;
+
         $request->validate(['codEquipo'=>'required', 'marca'=>'required', 'modelo'=>'required']);
         $equipo= Equipo::find($id);
         $repuestos=$equipo->equiposRepuestos;
@@ -210,7 +214,7 @@ class EquipoController extends Controller
         $equipo->save();
        
 
-        //return $equipo;
+        //return $equipo->codEquipo;
         //return view('Equipos.update');;
         /************************************** */
         //Asi se realizará con Asignacion Masiva, es mas simple, pero se debe colocar 
@@ -275,6 +279,48 @@ class EquipoController extends Controller
 
        // return view('Equipos.show');
     }
+
+     //****************************CLONAR******************************************* */
+     public function clonar($id)
+    { //$request trae lo del formulario, $id el id de equipo, trae lo que tengo en el registro sin modificar                                  
+        //$request->validate(['codEquipo'=>'required', 'marca'=>'required', 'modelo'=>'required']);
+        $equipo= Equipo::find($id);
+        $repuestos=$equipo->equiposRepuestos;
+        $plans=$equipo->equiposPlans;
+        $equiposB=$equipo->equiposAEquiposB;
+
+              
+        $codEquipo="XX-CLON-XX-XX";
+        $clon= new Equipo();
+        $clon->codEquipo=$codEquipo;
+        //$clon->codEquipo=$equipo->marca;
+        $clon->modelo=$equipo->modelo;
+        $clon->idSecc=$equipo->idSecc;
+        $clon->idSubSecc=$equipo->idSubSecc;
+        $clon->det1=$equipo->det1;
+        $clon->det2=$equipo->det2;
+        $clon->det3=$equipo->det3;
+        $clon->det4=$equipo->det4;
+        $clon->det5=$equipo->det5;
+        $clon=$clon->save();
+        
+        foreach($repuestos as $repuesto){
+        $E_R= new EquipoRepuesto();
+        $E_R->equipo_id=$equipo->id;
+        $E_R->repuesto_id=$repuesto->id;
+        $E_R->unidad=$repuesto->unidad;
+        $E_R->cant=$repuesto->cant;
+        $E_R->check1=$repuesto->check1;
+        $E_R->save();
+         }
+        $equipo = Equipo::latest('id')->first(); //toma el id del clon
+        
+       return redirect()->route('equipos.show', $equipo->id); //se puede omitir ->id, igual funciona
+       //**********return view('equipos.show', compact('equipo','repuestos', 'plans','equiposB')); //Envío show todo el registro en cuestión, sin $
+       //return $repuestos;
+    }
+
+
 
 
 

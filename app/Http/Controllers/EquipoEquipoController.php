@@ -38,8 +38,8 @@ class EquipoEquipoController extends Controller
     public function store(Request $request)
     {
         
-       //  dd(request()->all());
-       //  return;
+         //dd(request()->all());
+         //return;
  
          $Selector=$request->get('Selector'); //toma del formulario
          $equipo_id=$request->get('equipo_id'); //toma del formulario
@@ -47,7 +47,7 @@ class EquipoEquipoController extends Controller
          $mensaje='Antes de preguntar'; 
          if ($Selector=="AgregarEquipo"){  
          $search=$request->get('BuscaEquipo'); //toma cadena completa del formulario
-         $equipoCodigo = substr("$search", 0, 11); //Extrae solo la descripcion
+         $equipoCodigo = substr("$search", 0, 12); //Extrae solo la codEquipo
          $EquipoB_id=Equipo::where('codEquipo',$equipoCodigo)->first()->id;       
          $existeVinculo = $equipo->equiposAEquiposB()->where('vinc_id', $EquipoB_id)->exists();
          if($existeVinculo){
