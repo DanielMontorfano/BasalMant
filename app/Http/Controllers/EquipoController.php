@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreEquipo;
 use Illuminate\Support\Facades\DB;
 use App\Models\EquipoRepuesto; 
-use App\Models\Equipoplan;
+use App\Models\Equipoplan; 
+use App\Models\equipoEquipo;
 use App\Models\Repuesto;
 use App\Models\Foto;
 use App\Models\Documento;
@@ -289,7 +290,7 @@ class EquipoController extends Controller
         $repuestos=$equipo->equiposRepuestos;
         $plans=$equipo->equiposPlans;
         $equiposB=$equipo->equiposAEquiposB;
-        //return $plans;
+        //return $equiposB;
               
         $codEquipo="XX-CLON-XX-XX";
         $clon= new Equipo();
@@ -316,7 +317,7 @@ class EquipoController extends Controller
          }
         $equipo = Equipo::latest('id')->first(); //toma el id del clon
         
-        // $mensaje='ENTRE A GRABAR';
+        // $mensaje='ENTRE A GRABAR PLANES vinculados';
         foreach($plans as $plan){
         $equipo_id=$equipo->id;
         $plan_id=$plan->id;    
@@ -326,8 +327,16 @@ class EquipoController extends Controller
         $E_P->save();
         }
 
-
-
+        // $mensaje='ENTRE A GRABAR Equipos vinculados';
+        // goto salir;
+        foreach($equiposB as $equipoB){
+        $equipo_id=$equipo->id;  
+        $EquipoB_id=$equipoB->id;
+        $E_E= new equipoEquipo();
+        $E_E->equipo_id=$equipo_id;
+        $E_E->vinc_id=$EquipoB_id;
+        $E_E->save();
+        }
         
        return redirect()->route('equipos.show', $equipo->id); //se puede omitir ->id, igual funciona
        //**********return view('equipos.show', compact('equipo','repuestos', 'plans','equiposB')); //Envío show todo el registro en cuestión, sin $
