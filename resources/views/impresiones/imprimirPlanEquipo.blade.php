@@ -2,6 +2,7 @@
 
 <html>
 <head>
+  
 <style>
 /**
 Establezca los márgenes de la página en 0, por lo que el pie de página y el encabezado
@@ -138,12 +139,12 @@ line-height: 0.5cm;
       
         @if(isset($ProtocoloP))
         @foreach($ProtocoloP as $protocolo)
-        <div class="col-12" align="left"><strong>{{$protocolo['descripcion']}}</strong></div> <br>
+        <div class="col-12" align="left"><strong>{{$protocolo['descripcion']}}</strong></div> 
         <div style="padding-top: 1%;" class="row align-items-end">
           @foreach($Tareas as $tarea) 
           @if($protocolo['codProto'] ==$tarea['cod'])
          
-          <div class="col-6" align="left"><p style="margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px;"><li>{{$tarea['descripcion']}}</li></p></div>
+          <div class="col-6" align="left"><p style="margin-top: 10px; margin-right: 5px; margin-bottom: 10px; margin-left: 5px;"><li>{{$tarea['descripcion']}}</li></p></div>
          
           
           
@@ -168,5 +169,22 @@ line-height: 0.5cm;
   
 </body>
 
-
+<script type="text/php"> 
+    
+    if (isset($pdf)) { 
+     //Shows number center-bottom of A4 page with $x,$y values
+        $x = 469;  //X-axis i.e. vertical position 
+        $y = 85; //Y-axis horizontal position
+        $text = "Página {PAGE_NUM} de {PAGE_COUNT}";  //format of display message
+        $font =  $fontMetrics->get_font("serif", "");
+        $size = 26;
+        $color = array(5,0,0);
+        $word_space = 0.0;  //  default
+        $char_space = 0.0;  //  default
+        $angle = 0.0;   //  default
+        $pdf->page_text($x, $y, $text, $font, $size, $color, $word_space, $char_space, $angle);
+    }
+    
+</script>
 </html>
+
