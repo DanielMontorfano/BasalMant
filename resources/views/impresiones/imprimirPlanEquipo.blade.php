@@ -12,11 +12,20 @@ margin: 0.5cm 0.5cm;
 }
 
 /** Defina ahora los márgenes reales de cada página en el PDF **/
+
 body {
+  height: 100%;  /**para que no se corte con footer */
+}
+body {
+  display: flex; /**para que no se corte con footer */
+  flex-direction: column; /**para que no se corte con footer */
 margin-top: 2cm;
 margin-left: 2cm;
 margin-right: 2cm;
 margin-bottom: 2cm;
+}
+main {
+  flex: 1; /**para que no se corte con footer */
 }
 
 /** Definir las reglas del encabezado **/
