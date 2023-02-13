@@ -6,7 +6,8 @@ use App\Models\Equipo;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreEquipo;
 use Illuminate\Support\Facades\DB;
-use App\Models\EquipoRepuesto;
+use App\Models\EquipoRepuesto; 
+use App\Models\Equipoplan;
 use App\Models\Repuesto;
 use App\Models\Foto;
 use App\Models\Documento;
@@ -288,7 +289,7 @@ class EquipoController extends Controller
         $repuestos=$equipo->equiposRepuestos;
         $plans=$equipo->equiposPlans;
         $equiposB=$equipo->equiposAEquiposB;
-
+        //return $plans;
               
         $codEquipo="XX-CLON-XX-XX";
         $clon= new Equipo();
@@ -314,6 +315,19 @@ class EquipoController extends Controller
         $E_R->save();
          }
         $equipo = Equipo::latest('id')->first(); //toma el id del clon
+        
+        // $mensaje='ENTRE A GRABAR';
+        foreach($plans as $plan){
+        $equipo_id=$equipo->id;
+        $plan_id=$plan->id;    
+        $E_P= new Equipoplan();
+        $E_P->equipo_id=$equipo_id;
+        $E_P->plan_id=$plan_id;
+        $E_P->save();
+        }
+
+
+
         
        return redirect()->route('equipos.show', $equipo->id); //se puede omitir ->id, igual funciona
        //**********return view('equipos.show', compact('equipo','repuestos', 'plans','equiposB')); //Envío show todo el registro en cuestión, sin $
