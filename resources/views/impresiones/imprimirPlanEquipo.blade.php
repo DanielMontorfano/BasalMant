@@ -143,7 +143,7 @@ line-height: 0.5cm;
           @foreach($Tareas as $tarea) 
           @if($protocolo['codProto'] ==$tarea['cod'])
          
-          <div class="col-6" align="left"><li>{{$tarea['descripcion']}}</li></div>
+          <div class="col-6" align="left"><p style="margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px;"><li>{{$tarea['descripcion']}}</li></p></div>
          
           
           
