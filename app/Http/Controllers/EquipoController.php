@@ -306,6 +306,7 @@ class EquipoController extends Controller
         $clon->det5=$equipo->det5;
         $clon=$clon->save();
         
+        $equipo = Equipo::latest('id')->first(); //toma el id del clon
         foreach($repuestos as $repuesto){
         $E_R= new EquipoRepuesto();
         $E_R->equipo_id=$equipo->id;
@@ -315,8 +316,9 @@ class EquipoController extends Controller
         $E_R->check1=$repuesto->check1;
         $E_R->save();
          }
-        $equipo = Equipo::latest('id')->first(); //toma el id del clon
         
+       // $equipo = Equipo::latest('id')->first(); //toma el id del clon
+       // return   $equipo->id;
         // $mensaje='ENTRE A GRABAR PLANES vinculados';
         foreach($plans as $plan){
         $equipo_id=$equipo->id;
