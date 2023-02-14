@@ -1,6 +1,8 @@
 {{-- @extends('layouts.plantilla') --}}
 @extends('adminlte::page') 
 @section('title', 'Edit')
+
+
 @section('content')
 
 <style>

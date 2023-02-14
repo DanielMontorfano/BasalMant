@@ -5,13 +5,13 @@
 @include('layouts.partials.menuPdm')
 @stop
 @section('css')
-
+{{--  EL MEJOR EJEMPLO DE LA PAGINA DE jquery-ui (https://jqueryui.com/autocomplete/) !!! --}}
+<link rel="stylesheet" href="{{asset('jquery-ui/jquery-ui.min.css')}}"> 
+<script src="{{asset('jquery/dist/jquery.js')}}"></script>
+<script src="{{asset('jquery-ui/jquery-ui.min.js')}}"></script>
 @endsection
 
- {{--  EL MEJOR EJEMPLO DE LA PAGINA DE jquery-ui (https://jqueryui.com/autocomplete/) !!! --}}
- <link rel="stylesheet" href="{{asset('jquery-ui/jquery-ui.min.css')}}"> 
- <script src="{{asset('jquery/dist/jquery.js')}}"></script>
- <script src="{{asset('jquery-ui/jquery-ui.min.js')}}"></script>
+ 
 @section('content')
 <br>
 <h6 STYLE="text-align:center; font-size: 30px;
