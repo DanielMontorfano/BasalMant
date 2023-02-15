@@ -56,11 +56,6 @@ text-align: center;
 line-height: 0.5cm;
 }
 
-
-
-
-
-
 </style>
 </head>
 <body>

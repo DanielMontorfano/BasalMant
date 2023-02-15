@@ -13,47 +13,47 @@ margin: 0.5cm 0.5cm;
 
 /** Defina ahora los márgenes reales de cada página en el PDF **/
 body {
-margin-top: 2cm;
-margin-left: 2cm;
-margin-right: 2cm;
-margin-bottom: 2cm;
-}
-
-/** Definir las reglas del encabezado **/
-header {
-position: fixed;
-top: 0cm;
-left: 0cm;
-right: 0cm;
-height: 3cm;
-
-/** Estilos extra personales **/
-background-color: white;
-color: black;
-text-align: center;
-line-height: .5cm;
-}
-
-/** Definir las reglas del pie de página **/
-footer {
-position: fixed;
-bottom: 0.5cm;
-left: 0cm;
-right: 0cm;
-height: 2.0cm;
-
-/** Estilos extra personales **/
-background-color:white;
-color: black;
-text-align: center;
-line-height: 0.5cm;
-}
-
-
-
-
-
-
+ 
+ margin-top: 4.5cm;
+ margin-left: 2cm;
+ margin-right: 2cm;
+ margin-bottom: 3.5cm;
+ }
+ 
+ 
+ /** Definir las reglas del encabezado **/
+ header {
+   background-color: transparent; 
+ position: fixed;
+ top: 0cm;
+ left: 0cm;
+ right: 0cm;
+ height: 4cm;
+ 
+ /** Estilos extra personales **/
+ background-color: transparent;
+ color: black;
+ text-align: center;
+ line-height: .5cm;
+ }
+ 
+ /** Definir las reglas del pie de página **/
+ footer {
+ background-color: transparent;  
+ position: fixed;
+ bottom: 0.5cm;
+ left: 0cm;
+ right: 0cm;
+ height: 2.5cm;
+ 
+ /** Estilos extra personales **/
+ background-color:white;
+ color: black;
+ text-align: center;
+ line-height: 0.5cm;
+ }
+ 
+ 
 </style>
 </head>
 <body>
@@ -71,7 +71,7 @@ line-height: 0.5cm;
         <TD>Revisión:</TD>
     </TR>
     <TR>
-        <TD>Página 1 de 1:</TD>
+        <TD></TD>
     </TR>
     
     
@@ -85,7 +85,7 @@ line-height: 0.5cm;
 <footer>
 <!-- Copyright © <?php echo date("Y");?> -->
 
-
+<br><br>
 <TABLE BORDER=3  WIDTH="100%" CELLPADDING=1 CELLSPACING=0 >
 	<TR  ALIGN=center>
 
@@ -108,11 +108,6 @@ line-height: 0.5cm;
 
 <!-- Envuelva el contenido de su PDF dentro de una etiqueta principal -->
 <main>
-<br>
-<br>
-<br>
-<br>
-<br>
 
   <Ul style="list-style-type: none; margin-left: -37px;">
     <li style="font-size:150%;"><strong>Marca:</strong>&nbsp;  {{$equipo->marca}}</li>
@@ -120,7 +115,7 @@ line-height: 0.5cm;
     <li style="font-size:150%;"><strong>Sección:</strong>&nbsp;  {{$equipo->idSecc}}</li>
     <li style="font-size:150%;"><strong>Subsección:</strong>&nbsp;  {{$equipo->idSubSecc}}</li>
   </Ul>  
-    <br>
+    
   <Ul style="margin-left: -25px;">
     <li style="font-size:100%;">&nbsp;  {{$equipo->det1}}</li>
     <li style="font-size:100%;">&nbsp;  {{$equipo->det2}}</li>
@@ -129,7 +124,7 @@ line-height: 0.5cm;
     <li style="font-size:100%;">&nbsp;  {{$equipo->det5}}</li>
   </Ul>  
 
-    <br>
+    
     
   <!-- REPUESTOS -->
 
@@ -230,16 +225,26 @@ line-height: 0.5cm;
       <br>   
 
 
-        
-
-
-
-
-
 </main>
 
   
 </body>
-
+<script type="text/php"> 
+    
+  if (isset($pdf)) { 
+   //Shows number center-bottom of A4 page with $x,$y values
+      $x = 469;  //X-axis i.e. vertical position 
+      $y = 83; //Y-axis horizontal position
+      $text = "Página {PAGE_NUM} de {PAGE_COUNT}";  //format of display message
+      $font =  $fontMetrics->get_font("serif", "");
+      $size = 12;
+      $color = array(0,0,0);
+      $word_space = 0.0;  //  default
+      $char_space = 0.0;  //  default
+      $angle = 0.0;   //  default
+      $pdf->page_text($x, $y, $text, $font, $size, $color, $word_space, $char_space, $angle);
+  }
+  
+</script>
 
 </html>

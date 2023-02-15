@@ -21,24 +21,22 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
 <table id="listado" class="table table-striped table-success  table-hover border-4" >
     <thead class="table-dark" >
         
-      <td STYLE="font-weight:bold; text-align:left; color: #edf3f3; font-family: Times New Roman;  font-size: 14px; ">Orden Nº:</td>
-      <td>De:</td>
-      <td>Para:</td>
-      <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">Estado:</td>
-      <td></td>
+      <td>Nº de Orden</td>
+      <td>Solicitante/Receptor</td>
+      <td>Fecha de apertura</td>
+      <td>Estado</td>
+      <td>Fecha de cierre</td>
        
     <tbody>
        @foreach($ots as $ot)
 
       <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
         
-        <td> <a href="{{route('ordentrabajo.show', $ot->id)}}">{{$ot->id}}</a></td>
-        <td>{{$ot->de}}</td>
-        <td>{{$ot->para}}</td>
+        <td> <a href="{{route('ordentrabajo.show', $ot->id)}}">O.d.T-{{$ot->id}}</a></td>
+        <td>{{$ot->solicitante}}/{{$ot->asignadoA}}</td>
+        <td>{{$ot->created_at}}</td>
         <td>{{$ot->estado}}</td>
-        <td>
-        
-        </td>
+        <td>{{$ot->updated_at}}</td>
       </tr>
         @endforeach 
     </tbody>

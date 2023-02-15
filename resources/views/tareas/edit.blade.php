@@ -76,6 +76,7 @@
                                 <div class="form-group">
                                   <label class="control-label" for="unidad">Unidad:</label> 
                                   <select name="uniTiempoSelect" class="form-control"   STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 14px; background: linear-gradient(to right,#030007, #495c5c);" value="{{$tarea->duracion}}">
+                                  <option value=""></option>
                                   <option value="Min">Min</option> 
                                   <option value="Hs">Hs</option> 
                                   <option value="Días">Días</option> 

@@ -33,7 +33,7 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
   <tbody>
     @foreach ($ots_e as $ot)
     <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
-      <td><a title="{{$ot->det1}}" href="{{route('ordentrabajo.show', $ot->id)}}">{{$ot->id}}</a></td>
+      <td><a title="{{$ot->det1}}" href="{{route('ordentrabajo.show', $ot->id)}}">O.d.T-{{$ot->id}}</a></td>
       <td>{{$ot->solicitante}}/{{$ot->asignadoA}}</td>
       <td>{{$ot->created_at}}</td>
       <td> <a href="{{route('ordentrabajo.showCerrar', $ot->id)}}">{{$ot->estado}}</a></td>

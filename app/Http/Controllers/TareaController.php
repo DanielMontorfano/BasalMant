@@ -116,8 +116,9 @@ class TareaController extends Controller
         
 
 
-        $tareas= Tarea::orderBy('id','desc')->paginate();
-        return view('tareas.index', compact('tareas')); //Envío show todo el registro en cuestión, sin $
+        $tareas= Tarea::all();
+        return redirect()->route('tareas.index');
+       // return view('tareas.index', compact('tareas')); //Envío show todo el registro en cuestión, sin $
     }
 
     /**
