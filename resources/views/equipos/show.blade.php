@@ -30,9 +30,7 @@
   </TABLE>
 <br>
 <br>
-<br>
-<br>
-<br>
+
   
   <Ul style="list-style-type: none; margin-left: -37px;">
     <li style="font-size:150%;"><strong>Marca:</strong>&nbsp;  {{$equipo->marca}}</li>

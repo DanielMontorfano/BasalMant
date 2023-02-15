@@ -6,9 +6,9 @@
 @include('layouts.partials.menuEquipo')
 
 
-<div class="container "> {{-- Conatiner Tabla --}}
-<div class="table-responsive">
-    <table class="table table-responsive table-sm table-dark table-striped table-bordered table-hover">
+
+
+    <table class="table  table-sm table-dark ">
           @foreach($fotosTodos as $foto)
                                   
             <tbody>
@@ -21,9 +21,9 @@
         @endforeach
           
     </table>
-</div>
-</div> {{-- Container tabla --}}
-<div class="container"> 
+
+
+
   @include('layouts.partials.footer')
 </div>
 @endsection

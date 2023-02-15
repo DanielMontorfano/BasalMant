@@ -1,5 +1,8 @@
-@extends('layouts.plantilla')
-@section('title', 'create')
+@extends('adminlte::page')
+@section('title', 'O.d.T')
+@section('content_header')
+@include('layouts.partials.menuEquipo')
+@stop
 @section('content')
 
 <style>
@@ -18,52 +21,10 @@
 
     }
 </style>
-<div class="card-header" STYLE="background: linear-gradient(to right,#201f1e,#030007);">
-  <ul class="nav nav-tabs card-header-tabs">
-    <li class="nav-item">
-      <a class="nav-link" href="{{route('equipos.show', $equipo->id)}}">Ficha</a>
-     
-    </li>
-   
-    <li class="nav-item">
-      <a class="nav-link" href="{{route('fotos.show', $equipo->id)}}">Fotos</a>
-    </li>
-
-    <li class="nav-item">
-      <a class="nav-link" href="{{route('historialPreventivo', $equipo->id)}}">Historial</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{{route('equipos.index')}}">Protocolo</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href={{route('equipoTareash.show', $equipo->id)}}>Plan</a>
-    
-    <li class="nav-item">
-      <a class="nav-link" href="{{route('documentos.show', $equipo->id)}}">Documentos</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href={{route('equipos.edit', $equipo->id)}}>Editar</a>
-    </li>
-    <li class="nav-item">
-      <a  class="nav-link active" aria-current="true"  style="background-color: #1e2020;" href={{route('ordentrabajo.list', $equipo->id)}}>OT</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-link" href="{{route('equipos.index')}}">Descargar</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{{route('imprimirEquipo',$equipo->id )}}">Imprimir</a>
-    </li>
-    
-
-  </ul>
-</div>
-
-
-
 
 <br>    
 <div class="container"> {{-- container principal --}}
+  <h6>Cerrar O.d.T-{{$ot->id}} sobre:  {{$equipo->codEquipo}}</h6>
     <div class="row"> {{-- row principal --}}
                 <div class="col col-md-2">
                     {{-- columna1 --}}
@@ -71,16 +32,15 @@
 
                 <div class="col col-md-8">
                     {{-- columna2 --}}
-                    
+                    <br>
                     <form id="cerrarOrden"  action="{{route('ordentrabajo.update', $ot->id)}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
-                        <br>
-                        <h6>O.d.T para:  {{$equipo->codEquipo}}</h6>
+                        
                         @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
                         {{-- Metodo PUT no existe en html, por eso indicamos a laravel como sigue --}}
                         @method('put')
 
                       
-                        <div class="p-3 mb-2 bg-gradient-primary text-white">
+                        <div class="p-3 mb-2  text-white">
                         <div class="container">
                             
                             <div class="row"> {{-- ***** div de la primera fila --}}
@@ -270,6 +230,10 @@
     </div>  {{-- div del row1 Principal --}}
 </div> {{-- div del container Principal--}}
 
+
+<div class="container"> 
+  @include('layouts.partials.footer')
+</div>
 @endsection
 
 

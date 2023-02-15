@@ -6,8 +6,8 @@
 
 
 
-<div class="table-responsive">
-    <table class="table table-responsive table-sm table-dark table-striped table-bordered table-hover">
+
+    <table class="table table-sm table-dark  table-bordered ">
           @foreach($docuTodos as $docu)
                                   
             <tbody>
@@ -16,7 +16,7 @@
                
                 <td> <iframe
                 src="..{{ $docu->rutaDocu}}"
-                width=90% height=600></iframe></td>
+                width=100% height=600></iframe></td>
                {{-- <td><img src="..{{ $docu->rutaDocu}}" width="200" height="200"></td> --}}
                 
                 </tr>
@@ -24,6 +24,9 @@
         @endforeach
             
     </table>
-</div>
 
+
+    <div class="container"> 
+        @include('layouts.partials.footer')
+       </div>
 @endsection

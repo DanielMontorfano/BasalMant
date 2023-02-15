@@ -385,7 +385,7 @@
           <input type="hidden" name="equipo_id" value={{$equipo->id}} readonly >
                <table class="table table-sm" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
                  <tr>
-                    <td><input type="text" class='form-control' name="search" id="search" autocomplete="off" placeholder="Buscar repuesto"class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
+                    <td><input type="text" class='form-control' name="search" id="search" autocomplete="off" placeholder="Buscar repuesto (Ej.: 7984 2305)"class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
                     <td><div class="form-check">
                         <input class="form-check-input" type="checkbox" name="check1"  id="check1">
                         <label class="form-check-label text-white" for="check1">Accesorio</label>
@@ -447,7 +447,7 @@
           <input type="hidden" name="equipo_id" value={{$equipo->id}} readonly >
                <table class="table table-sm" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
                  <tr>
-                    <td><input type="text" class='form-control' name="BuscaPlan" id="BuscaPlan" autocomplete="off" placeholder="Buscar plan (ej: PLAN-)"class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
+                    <td><input type="text" class='form-control' name="BuscaPlan" id="BuscaPlan" autocomplete="off" placeholder="Buscar plan (Ej.: PL-00000315)"class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
                     <td style="text-align: right;"><button class="btn btn-primary" type="submit" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Agregar</button> </td>
                  </tr>
                </table>
@@ -465,7 +465,7 @@
           @endif   
                <table class="table table-sm" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
                  <tr>
-                    <td><input type="text" class='form-control' name="BuscaEquipo" id="BuscaEquipo" autocomplete="off" placeholder="Buscar equipo"class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
+                    <td><input type="text" class='form-control' name="BuscaEquipo" id="BuscaEquipo" autocomplete="off" placeholder="Buscar equipo (Ej.:03-ELE-22901)"class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
                     <td style="text-align: right;"><button class="btn btn-primary" type="submit" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Agregar</button> </td>
                  </tr>
                </table>

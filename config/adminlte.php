@@ -112,7 +112,7 @@ return [
     */
 
     'preloader' => [
-        'enabled' => True,
+        'enabled' => False,
         'img' => [
             'path' => 'img\imagenes\LogoIngenio2.png',
             'alt' => 'AdminLTE Preloader Image',
