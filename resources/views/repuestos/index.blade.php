@@ -14,7 +14,7 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
 <div class="card-body "  style="max-width: 95;">
 <div class="text-white card-body "  style="max-width: 95;">
 <p ><a title="Permite dar de alta un repuesto" class="text-white " href={{route('repuestos.create')}}> Crear repuesto</a></p> 
-<table id="listado" class="table table-striped table-success  table-hover border-4" >
+<table id="listado3" class="table table-striped table-success  table-hover border-4" >
     <thead class="table-dark" style="text-align: left;" >
         
         <td>Código</td>
