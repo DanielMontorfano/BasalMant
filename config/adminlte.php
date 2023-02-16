@@ -335,11 +335,17 @@ return [
              'route'       => 'ordentrabajo.index',
             'topnav_right' => true,
         ],
+
+        [
+            'text'         => 'Repuestos',
+             'route'       => 'repuestos.index',
+            'topnav_right' => true,
+        ],
         
         [
             'type'         => 'navbar-search',
             'text'         => 'search',
-            'topnav_right' => true,
+            'topnav_right' => false,
         ],
         
 
@@ -584,7 +590,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => 'dataprint/main.js',
+                    'location' => 'dataprint/main.js', //Codigo montorfano para config datatables public/dataprint/main.js  
                 ],
 
                 

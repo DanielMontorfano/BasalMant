@@ -23,7 +23,7 @@ $(document).ready(function() {
 			{ orderable: false, targets: [3,4] } //desactiva boton de ordenar en las columnas
 		  ],
 		 // order: [[1, 'asc']]
-
+		 //"order": [[ 1, "desc" ]],
 
         dom: 'Brftilp',       
         buttons:[ 

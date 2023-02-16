@@ -110,7 +110,7 @@
         <div class="card-body">
           <img src={{asset('img\imagenes\Repuestos2.png')}} class="card-img-top" alt="...">
           <p>Repuestos</p>
-          <a href="#" class="btn stretched-link"></a>
+          <a href="{{route('repuestos.index')}}" class="btn stretched-link"></a>
         </div>
       </div>
     </div>

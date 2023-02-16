@@ -19,6 +19,8 @@ use App\Http\Controllers\FotoController;
 use App\Http\Controllers\OrdenTrabajoController;
 use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\TareaController;
+use App\Http\Controllers\RepuestoController;
+
 use App\Http\Controllers\ProtocoloController; 
 use App\Http\Controllers\PrototareaController;
 use App\Http\Controllers\PlanController;
@@ -92,6 +94,15 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),  'verified'
  Route::get('/tareas/{tareas}/borrar', [TareaController::class, 'destroy'])->name('tareas.destroy');
  //Route::get('tarea/{tarea}/edit', [TareaController::class, 'edit'])->name('tarea.edit');
  //**************************************************************************** */
+/**************************************************************************** */
+Route::resource('repuestos', RepuestoController::class);
+//Route::get('/tareas/{tareas}/borrar', [TareaController::class, 'destroy'])->name('tareas.destroy');
+//Route::get('tarea/{tarea}/edit', [TareaController::class, 'edit'])->name('tarea.edit');
+//**************************************************************************** */
+
+
+
+
  Route::get('/historialTodos/{equipo}', [HistorialController::class,'historialTodos'])->name('historialTodos');
  Route::get('/historialPreventivo/{equipo}', [HistorialController::class,'historialPreventivo'])->name('historialPreventivo');
  Route::get('/historialCorrectivo/{equipo}', [HistorialController::class,'historialCorrectivo'])->name('historialCorrectivo');
