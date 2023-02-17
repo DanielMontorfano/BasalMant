@@ -40,9 +40,7 @@
                         @method('put')
                       
                         <div class="p-3 mb-2  text-white">
-                        <div>{{$repuesto->codigo}}
-                          {{old('codigo', $repuesto->codigo)}}
-                          <input type="text" value="{{old('codigo', $repuesto->codigo)}}">
+                        
                         </div>
                         <div class="container">
                             
@@ -77,7 +75,7 @@
                             <button form="nuevaRepuesto" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
                             <p style="text-align: right;"><a  class="text-white " href={{route('repuestos.index')}}>Salir</a></p> 
                           </div>
- 
+                           
 
                         </div>{{-- div del container dentro de columna 2 --}}    
                         </div>{{-- div del Letra blanca --}}
