@@ -72,9 +72,18 @@ class RepuestoController extends Controller
      * @param  \App\Models\Repuesto  $repuesto
      * @return \Illuminate\Http\Response
      */
+    public function catchId(request $request){
+        $search=$request->get('search'); //toma cadena completa del formulario
+        $repuestoCodigo = substr("$search", 0, 9); //Extrae solo la descripcion
+        $repuesto_id=Repuesto::where('codigo',$repuestoCodigo)->first()->id; 
+
+       // return  $search; 
+         return redirect()->route('repuestos.edit', $repuesto_id);
+    }
+
+
     public function edit($id)
     {
-       
         
         $repuesto=Repuesto::find($id);
         //dd($tarea);

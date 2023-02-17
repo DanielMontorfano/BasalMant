@@ -95,7 +95,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),  'verified'
  //Route::get('tarea/{tarea}/edit', [TareaController::class, 'edit'])->name('tarea.edit');
  //**************************************************************************** */
 /**************************************************************************** */
-Route::resource('repuestos', RepuestoController::class);
+Route::resource('repuestos', RepuestoController::class); 
+Route::get('/catchId', [RepuestoController::class, 'catchId'])->name('repuestos.catchId');
+
 //Route::get('/tareas/{tareas}/borrar', [TareaController::class, 'destroy'])->name('tareas.destroy');
 //Route::get('tarea/{tarea}/edit', [TareaController::class, 'edit'])->name('tarea.edit');
 //**************************************************************************** */

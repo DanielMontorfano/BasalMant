@@ -40,19 +40,24 @@
                         @method('put')
                       
                         <div class="p-3 mb-2  text-white">
+                        <div>{{$repuesto->codigo}}
+                          {{old('codigo', $repuesto->codigo)}}
+                          <input type="text" value="{{old('codigo', $repuesto->codigo)}}">
+                        </div>
                         <div class="container">
                             
                             <div class="row"> {{-- ***** div de la primera fila --}}
                               <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="codigo">Codigo:</label> 
-                                  <input maxlength="9" minlength="9" autocomplete="off" class="form-control" STYLE="padding: 7px; color: #f2baa2; font-family: Times New Roman;  font-size: 14px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="codigo" value={{old('codigo', $repuesto->codigo)}}> 
+                                  <input class="form-control" name="codigo" maxlength="9" minlength="9" autocomplete="off" STYLE="padding: 7px; color: #f2baa2; font-family: Times New Roman;  font-size: 14px; background: linear-gradient(to right,#030007, #495c5c);" value="{{old('codigo', $repuesto->codigo)}}">
+                                  
                                   @error('codigo')
                                   <small>*{{$message}}</small>
                                   @enderror
                                 </div>
                               </div> 
-                              <div class="col col-md-6">
+                              <div class="col col-md-10">
                                 <div class="form-group">
                                   <label class="control-label" for="marca">Descripción:</label> 
                                   <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 14px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="descripcion" value="{{old('descripcion', $repuesto->descripcion)}}"> 
