@@ -9,6 +9,7 @@
                         background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                         -webkit-background-clip: text;
                         -webkit-text-fill-color: transparent;
+                        
 
     }
 
@@ -16,6 +17,7 @@
          font-family: Times New Roman;
          font-size: 18px;
          background: linear-gradient(to right,#030007, #495c5c);
+         
 
     }
 

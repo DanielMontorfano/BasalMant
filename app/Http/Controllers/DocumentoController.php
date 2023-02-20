@@ -69,7 +69,7 @@ class DocumentoController extends Controller
                      $nombre_a_guardar = $nombre_imagen.'_'.time().'.'.$extension_imagen; //Con un numero aleatorio
 
                    //***** $documentos= $request->file('file1')->store('public/imagenesEquipos');  //para que se guarde dentro de la capeta public
-                    $documentos= $request->file('file1')->storeAs('public/imagenesEquipos', $nombre_a_guardar);
+                    $documentos= $request->file('file1')->storeAs('public/documentosEquipos', $nombre_a_guardar);
                     
                     $url=Storage::url($documentos);
                     $imagen=$url;

@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Requests;
+use App\Models\Repuesto;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use App\Rules\NineCharacterRule;
+use App\Rules\UnicoCodigoRule;
 class StoreRepuestoRequest extends FormRequest
 {
     /**
@@ -23,13 +25,14 @@ class StoreRepuestoRequest extends FormRequest
      * @return array<string, mixed>
      */
     public function rules()
-    {
-        return ['codigo'=>'required|min:9|max:9',
-                //'duracion'=>'required|min:1|max:2',
-                
-                                           
-        ];
-    }
+{
+    
+    return [
+       // 'codigo' => ['required', new NineCharacterRule],
+       'codigo' => ['required', new UnicoCodigoRule],
+
+    ];
+}
     public function attributes() //Fabuloso!! personalizar mensaje
     {
         return[ 'codigo'=>'el código',
@@ -47,4 +50,9 @@ class StoreRepuestoRequest extends FormRequest
                        
         ];
     }
+
+    
+
+
+
 }

@@ -13,10 +13,11 @@
                                   
             <tbody>
                 <tr>
-                    {{-- <td>{{ $foto->nombreFoto}}</td> --}}
-                
-                <td style="text-align: center; vertical-align: middle;"><img src="..{{ $foto->rutaFoto}}" width="400" height="400"></td>
-                </tr>
+                    <td>{{ $foto->rutaFoto}}</td> 
+                {{--  <td style="text-align: center; vertical-align: middle;"><img src="..{{ $foto->rutaFoto}}" width="400" height="400"></td> --}}
+                <td style="text-align: center; vertical-align: middle;"><img src="..{{ $foto->rutaFoto}}"  width="400" height="400"></td>
+                  
+            </tr>
             </tbody>
         @endforeach
           

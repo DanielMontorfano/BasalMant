@@ -38,7 +38,7 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => storage_path('app/public'), //'root' => storage_path('app/public'), Original lo cambio yo
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
@@ -69,8 +69,12 @@ return [
     |
     */
 
+    //'links' => [
+      //  public_path('storage') => storage_path('app/public'), // public_path('storage') => storage_path('app/public'),
+    //],
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('fotos') => storage_path('app/fotos'),
+        public_path('documents') => storage_path('app/documents'),
     ],
-
 ];

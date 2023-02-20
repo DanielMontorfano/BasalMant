@@ -30,8 +30,11 @@ class TareaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('tareas.create');
+    {   
+
+        $ultimasTareas = Tarea::orderBy('created_at', 'desc')->take(5)->get();
+        return view('tareas.create', ['ultimasTareas' => $ultimasTareas]);
+       // return view('tareas.create');
         //return;
     }
 
@@ -65,7 +68,8 @@ class TareaController extends Controller
         //$equipo=Equipo::create($request->all());
        //***** return redirect()->route('equipos.show', $tarea->id); //se puede omitir ->id, igual funciona
         //return view('Equipos.store');
-        return redirect()->route('tareas.show', $tarea->id);
+        return redirect()->route('tareas.create');
+       // return redirect()->route('tareas.show', $tarea->id);
     }  
 
     /**

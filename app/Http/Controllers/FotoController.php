@@ -58,7 +58,7 @@ class FotoController extends Controller
                     //goto salir;
                     // $repuestos=$equipo->equiposRepuestos;
                     $request->validate(['file'=>'required|image|max:2048']);
-                    $imagenes= $request->file('file')->store('public/documentosEquipos');  //para que se guarde dentro de la capeta public
+                    $imagenes= $request->file('file')->store('public/fotos');  //para que se guarde dentro de la capeta public
                     $url=Storage::url($imagenes);
                     $imagen=$url;
                     Foto::create([  'equipo_id'=>$id,

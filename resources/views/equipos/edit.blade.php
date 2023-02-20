@@ -407,7 +407,7 @@
              
             <table class="table table-sm" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
               <tr>
-                <td style="text-align: right;"><input type="text" class='form-control' name="nombreFoto" id="" accept="" autocomplete="off" placeholder="Nombre de imagen" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" >
+                <td style="text-align: right;"><input type="text" class='form-control' name="nombreFoto" id="" accept="image/*" autocomplete="off" placeholder="Nombre de imagen" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" >
                   @error('nombreFoto')
                   <small class="text-danger"> {{$message}}</small>
                   @enderror
