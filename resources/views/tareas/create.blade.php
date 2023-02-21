@@ -7,15 +7,6 @@
 
 @section('content_header')
 
-@section('css')
-<script>
-  var select = document.getElementById("uniTiempoSelect");
-  select.addEventListener("change", function() {
-    select.blur(); // desenfoca el select
-    document.getElementById("enviar").focus(); // enfoca otro elemento
-  });
-</script>
-@endsection
 <h6 STYLE="text-align:center; font-size: 30px;
 background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
 -webkit-background-clip: text;
@@ -39,8 +30,6 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
          font-size: 18px;
          background: linear-gradient(to right,#030007, #495c5c);}
 
-   
-  
 </style>
 <br>    
 <div class="container"> {{-- container principal --}}
@@ -62,7 +51,7 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                               <div class="col col-md-8"> {{-- ***** div de la primera fila --}}
                                 <div class="form-group">
                                   <label class="control-label" for="descripcion">Descripción:</label> 
-                                  <input id="descripcion" name="descripcion"  autofocus autocomplete="off" class="form-control" style="color: #f2baa2;" type="text" value="{{old('descripcion')}}""> 
+                                  <input id="descripcion" name="descripcion"  autofocus autocomplete="off" class="form-control" style="color: #f2baa2;" type="text" value="{{old('descripcion')}}"> 
                                   @error('descripcion')
                                  <small>*{{$message}}</small>
                                   @enderror
@@ -71,7 +60,7 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                               <div class="col col-md-2">
                                 <div class="form-group">
                                   <label class="control-label" for="duracion">Duración:</label> 
-                                  <input type="number" autocomplete="off" style="color: #f2baa2;" class="form-control"  name="duracion" value="{{old('duracion')}}"> 
+                                  <input  type="number" min="1" max="99" autocomplete="off" style="color: #f2baa2;" class="form-control"  name="duracion" value="{{old('duracion')}}"> 
                                    @error('duracion')
                                   <small>*{{$message}}</small>
                                   @enderror
@@ -100,6 +89,7 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                            </div> 
 
                           <table class="table">
+                            <h5>Ultimas tareas creadas:</h5>
                             <tbody>
                               @foreach ($ultimasTareas as $tarea)
                               <tr>

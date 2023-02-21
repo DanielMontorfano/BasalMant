@@ -96,6 +96,7 @@ class TareaController extends Controller
        
         
         $tarea=Tarea::find($id);
+
         //dd($tarea);
         //return;
         return view('tareas.edit',compact('tarea'));
@@ -121,7 +122,7 @@ class TareaController extends Controller
 
 
         $tareas= Tarea::all();
-        return redirect()->route('tareas.index');
+        return redirect()->route('tareas.edit',compact('tarea') );
        // return view('tareas.index', compact('tareas')); //Envío show todo el registro en cuestión, sin $
     }
 
