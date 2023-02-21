@@ -7,7 +7,38 @@
 {{-- Todo lo de plantilla --}}
 {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
 
+<style>
+  .select-custom {
+  background-color: #9d9074a3;
+  
+  margin-top: 15px; /* Ajusta este valor para lograr el espacio deseado */
 
+ }
+ a {
+      color: rgb(197, 166, 11);
+    }
+    a:hover {
+      color: rgba(119, 238, 15, 0.758);
+    }   
+    .tarea-container {
+  border-bottom: 1px solid rgb(209, 209, 158);
+  padding-bottom: 10px; /* Añade un poco de espacio entre cada elemento y la línea */
+
+}
+.protocolo-container {
+  padding-top: 15px;
+  border-bottom: 2px solid rgb(111, 213, 9);
+  padding-bottom: 20px; /* Añade un poco de espacio entre cada elemento y la línea */
+}
+.btn-submit {
+  background: linear-gradient(to right, #495c5c, #030007);
+  border-color:  rgb(209, 209, 158);
+  margin: 0 auto;
+  display: block;
+}
+
+
+</style>
 @endsection
 
 @section('content')
@@ -21,7 +52,7 @@
     <h6 STYLE="text-align:center; font-size: 30px;
                 background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                 -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;">Ficha plan</h6>
+                -webkit-text-fill-color: transparent;">Formulario de ficha plan</h6>
                 
 
 
@@ -32,55 +63,64 @@
           @csrf
         @if(isset($PlanP))
         @foreach($PlanP as $plan)
-        <table  class="table-bordered" >
-          <tr >
-              <td class="col-2" align="left"><strong>{{$plan['codigo']}}</strong></td>
-
-              <td class="col-8" align="center" >
-                      @if(isset($ProtocoloP))
-                      @foreach($ProtocoloP as $protocolo)
-                      <div class="col-12" align="left"><strong>{{$protocolo['codProto']}}</strong>  ( {{$protocolo['descripcion']}} )</div>
-                      <div class="row align-items-end">
-                        @foreach($Tareas as $tarea) 
-                        @if($protocolo['codProto'] ==$tarea['cod'])
-                        <div class="col-2" align="left">
-                          
-                            <input type="hidden" name="equipo_id[]" value="{{$equipo->id}}" readonly > 
-                            <input type="hidden" name="plans[]" value="{{$plan['codigo']}}" readonly > 
-                            <input type="hidden" name="protocolos[]" value="{{$protocolo['codProto']}}" readonly >  
-                            <input type="hidden" name="tareas[]" value="{{$tarea['tarea_id']}}" readonly > 
-                            <select name="estados[]" id="estado">
-                              <option value=""></option>
-                              <option value="NR">NR</option>
-                              <option value="R">R</option>
-                              <option value="INC">INC</option>
-                              <option value="OP">OP</option>
-                             </select>
-                          
-                        </div>
-                        <div class="col-5" align="left"><li>{{$tarea['descripcion']}}</li></div>
-                        <div class="col-5" align="left">{{$tarea['duracion']}} {{$tarea['unidad']}}</div>
-                        
-                        
-                       
-                        @endif 
-                        @endforeach  
-                        <div>&nbsp;</div>
-                      </div>
-                      @endforeach  
-                      @endif
-              </td>
-
+        <table class="table-bordered">
+          <tr>
+            <td class="col-2" title="Editar este plan">
+              <strong>
+                <a href="{{route('plans.edit', $plan->id)}}">{{$plan->codigo}}</a>
+              </strong><br>
               
+              {{$plan->descripcion}}
+
+            </td>
+            <td class="col-8">
+              @if(isset($ProtocoloP))
+              @foreach($ProtocoloP as $protocolo)
+              <div class="col-12 protocolo-container" title="Editar este procedimiento">
+                <strong>
+                  <a href="{{route('protocolos.edit', $protocolo->id)}}">{{$protocolo->codProto}}</a>
+                </strong>
+                ( {{$protocolo->descripcion}} )
+              </div>
+              <div class="row">
+                
+                @foreach($Tareas as $tarea)
+             
+                @if($protocolo->codProto ==$tarea->cod)
+                <div class="col-2 tarea-container">
+                  
+                  <input type="hidden" name="equipo_id[]" value="{{$equipo->id}}" readonly > 
+                  <input type="hidden" name="plans[]" value="{{$plan->codigo}}" readonly > 
+                  <input type="hidden" name="protocolos[]" value="{{$protocolo->codProto}}" readonly >  
+                  <input type="hidden" name="tareas[]" value="{{$tarea->tarea_id}}" readonly > 
+                  <select name="estados[]" id="estado" class="form-select select-custom rounded border-radius-3 border border-dark">
+                    <option value=""></option>
+                    <option value="NR">NR</option>
+                    <option value="R">R</option>
+                    <option value="INC">INC</option>
+                    <option value="OP">OP</option>
+                  </select>
+                </div>
+                <div class="col-9 tarea-container tarea-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}. &nbsp;{{$tarea->descripcion}} </div>
+                <div class="col-1 tarea-container">{{$tarea->duracion}} {{$tarea->unidad}}</div>
+              
+                @endif 
+                @endforeach  
+                <div>&nbsp;</div>
+              </div>
+              @endforeach  
+              @endif
+            </td>
           </tr>
-         
-      </table>
+        </table>
+        
+        
       @endforeach
       @endif
 
    <br>
                <div class="form-group">
-                   <button form="cargaPlan" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Enviar</button>
+                <button form="cargaPlan" class="btn btn-primary btn-submit" type="submit">Enviar</button>
                </div>
                <br>   
    </form>

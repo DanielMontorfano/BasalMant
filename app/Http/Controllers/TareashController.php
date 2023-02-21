@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Collection; //Muy importante para transformar array en coleccion
 use App\Models\Tareash;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -115,6 +115,7 @@ class TareashController extends Controller
         }
       }  
     }
+      //No convierto a array asociativo de objetos para tener la posibilidad de elejir en futuros proyectos(ej: edit de abajo)
 
       return view('tareash.equipoTareasShow', compact('equipo','PlanP', 'ProtocoloP','Tareas')); //Envío todo el registro en cuestión
     
@@ -148,13 +149,13 @@ class TareashController extends Controller
         foreach($plans as $plan){
         $plan_id=$plan->pivot->plan_id;
         $planParciales= Plan::find( $plan_id); 
-        $PlanP[]=array('codigo'=>$planParciales->codigo, 'nombre'=> $planParciales->nombre, 'descripcion'=> $planParciales->descripcion, 'frecuencia'=> $planParciales->frecuencia, 'unidad'=> $planParciales->unidad);
+        $PlanP[]=array('id'=>$planParciales->id,'codigo'=>$planParciales->codigo, 'nombre'=> $planParciales->nombre, 'descripcion'=> $planParciales->descripcion, 'frecuencia'=> $planParciales->frecuencia, 'unidad'=> $planParciales->unidad);
         $protocolos=$planParciales->plansProtocolos;
 
         foreach($protocolos as $protocolo){
             $proto_id= $protocolo->pivot->proto_id; //busco el id del protocolo relacionado
             $protocolosParciales= Protocolo::find( $proto_id); // traigo la coleccion de ese protocolo
-            $ProtocoloP[]=array('codProto'=> $protocolosParciales->codigo, 'descripcion'=> $protocolosParciales->descripcion);
+            $ProtocoloP[]=array('id'=> $protocolosParciales->id,'codProto'=> $protocolosParciales->codigo, 'descripcion'=> $protocolosParciales->descripcion);
             $tareas=$protocolosParciales->protocolosTareas; // traigo todas las tareas de ese protocolo
         foreach($tareas as $tarea){
             // echo $plan->id . "*" . $protocolo->codigo . "*" . $tarea->codigo .  "*" .  $tarea->descripcion . "<br>";
@@ -164,8 +165,22 @@ class TareashController extends Controller
         }
       }  
     }
+    
+    $PlanP = collect($PlanP)->map(function ($item) { //Conversión del array asociociativo, objetos
+        return (object) $item;
+    });
+    
+    $ProtocoloP = collect($ProtocoloP)->map(function ($item) { //Conversión del array asociociativo, objetos
+        return (object) $item;
+    });
+    
+    $Tareas = collect($Tareas)->map(function ($item) { //Conversión del array asociociativo, objetos
+        return (object) $item;
+    });
 
-       return view('tareash.equipoTareasEdit', compact('equipo','PlanP', 'ProtocoloP','Tareas')); //Envío todo el registro en cuestión
+
+   
+     return view('tareash.equipoTareasEdit', compact('equipo','PlanP', 'ProtocoloP','Tareas')); //Envío todo el registro en cuestión
 
        // return view('Equipos.show');
       // return;

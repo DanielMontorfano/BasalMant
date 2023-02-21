@@ -29,7 +29,8 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                   <label class="control-label" for="search"></label> 
                   <td style="text-align: right;">
                       <input type="text" class='form-control' value="" name="search" id="search" autocomplete="off" placeholder="Buscar repuesto (Ej.: rodamiento, manguito, rele, 7984 2305 )" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);">
-                  </td>
+                          
+                    </td>
                   <label class="control-label" for="editar"></label> 
                   <td style="text-align: right;">
                       <button class="btn btn-primary" type="submit" name="editar" id="editar" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Editar</button>
@@ -48,8 +49,8 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
 <br><br><br>
 <br><br><br><br>
 <div class="container"> 
-  @include('layouts.partials.footer')
- </div>
+   @include('layouts.partials.footer')
+</div>
 
 <script>
    

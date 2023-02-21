@@ -128,6 +128,7 @@
                         <br>
                         <div >
                           <p style="text-align: right;"><a  class="text-white " href={{route('protocolos.index')}}>Salir</a></p> 
+                          <a href="{{ URL::previous() }}" >Volver</a>
                         </div>
 
             </div> {{-- Container 2 --}}    

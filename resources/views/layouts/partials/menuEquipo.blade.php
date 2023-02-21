@@ -72,8 +72,8 @@
           <li><a title="Permite editar este equipo" href={{route('equipos.edit', $equipo->id)}}>Editar</a></li>
           <li><a title="Permite ver y generar ódenes sobre este equipo" href={{route('ordentrabajo.list', $equipo->id)}}>OT</a></li>
           <li><a title="Permite clonar este equipo" href={{route('equipos.clonar', $equipo->id)}}>Clonar</a></li>
-          <li><a title="Imprime la ficha de este equipo" href="{{route('imprimirEquipo',$equipo->id )}}">Imprimir </a></li>
-           
+          <li><a title="Permite cargar el formulario del plan" href="{{route('equipoTareash.edit', $equipo->id)}}">Formulario</a></li>
+          <li><a title="Imprime la ficha de este equipo" href="{{route('imprimirEquipo',$equipo->id )}}">Imprimir </a></li> 
           <div id="segundo">
           
               <li>  <a href="">"{{$equipo->codEquipo}}"</a>  </li>
