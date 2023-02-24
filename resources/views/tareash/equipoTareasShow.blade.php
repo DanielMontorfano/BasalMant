@@ -2,63 +2,116 @@
 @extends('adminlte::page') 
 @section('title', 'Ver ' . $equipo->marca)
 @section('css')
-{{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
-{{-- Para que sea responsive se agraga la tercer libreria --}}
-{{-- Todo lo de plantilla --}}
-{{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
+<style>
+  /* Estilos de la tabla */
+  #listado {
+    background: linear-gradient(to bottom right, #111010, #1f1001);
+    border: 1px solid  rgb(209, 209, 158);
+   
+    border-color:  rgb(209, 209, 158);
+    text-align: center;
+    font-family: "serif", Times, serif;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  #listado td {
+    border-color:  rgb(209, 209, 158);
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid rgb(111, 213, 9);
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
+  #listado td.col-8 {
+    padding-left: 50px;
+    padding-top: 30px;"
+    padding-bottom: 30px;
+  }
+  #listado td.col-12 {
+    border-bottom: 1px solid #FFD966;
+    margin-bottom: 10px;
+    padding-top: 30px;"
+   
+  }
+  table td:first-child {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
 
+  table td:last-child {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+  #listado li {
+    list-style: none;
+  }
 
+  a {
+      color: rgb(197, 166, 11);
+    }
+    a:hover {
+      color: rgba(119, 238, 15, 0.758);
+    }  
+</style>
 @endsection
 
 @section('content')
 @include('layouts.partials.menuEquipo')
-<div class="card border-primary" style="background: linear-gradient(to left,#495c5c,#030007); ">
-  <div class="card-body "  style="max-width: 95;">
-  
-  
-    <h6 STYLE="text-align:center; font-size: 30px;
+
+<div class="card border-primary" style="background: linear-gradient(to left, #495c5c, #030007);">
+  <div class="card-body">
+    <h6 style="text-align:center; font-size: 30px;
                 background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                 -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;">Plan de mantenimiento: {{$equipo->codEquipo}} </h6>
-                
-      
-        <p ><a  class="text-white " href={{route('equipoTareash.edit', $equipo->id)}}>Cargar ficha plan</a></p>
+                -webkit-text-fill-color: transparent;">Plan de mantenimiento: {{ $equipo->codEquipo }}</h6>
+
+    <p class="text-white"><a href="{{ route('equipoTareash.edit', $equipo->id) }}" class="text-white">Cargar ficha plan</a></p>
         
-        @if(isset($PlanP))
-        @foreach($PlanP as $plan)
-        <table  id="listado" class="table-bordered" >
-          <tr >
-              <td class="col-2" align="left"><strong>{{$plan['nombre']}}</strong> <br> {{$plan['descripcion']}}</td>
-
-              <td class="col-8" align="center" >
-                      @if(isset($ProtocoloP))
-                      @foreach($ProtocoloP as $protocolo)
-                      <div class="col-12" align="left"><strong>{{$protocolo['descripcion']}}</strong></div>
-                      <div class="row align-items-end">
-                        @foreach($Tareas as $tarea) 
-                        @if($protocolo['codProto'] ==$tarea['cod'])
-                       
-                        <div class="col-6" align="left"><li>{{$tarea['descripcion']}}</li></div>
-                        <div class="col-6" align="left">{{$tarea['duracion']}} {{$tarea['unidad']}}</div>
-                        
-                        
-                       
-                        @endif 
-                        @endforeach  
-                        <div>&nbsp;</div>
-                      </div>
-                      @endforeach  
-                      @endif
-              </td>
-
-              
-          </tr>
-         
-      </table>
-      @endforeach
-      @endif 
+    @if (isset($PlanP))
+        @foreach ($PlanP as $plan)
+            <table id="listado" class="table-bordered">
+                <tr>
+                    <td class="col-2" style="background-color:trnasparent ; " align="left">
+                      <div title="Editar este plan"> <a href="{{ route('plans.edit', $plan['id']) }}"><br> {{ $plan['codigo'] }}</a><br>   {{ $plan['nombre'] }} <br> ({{ $plan['descripcion'] }})</div>
+                     
+                    
+                    </td>
+                    <td class="col-8" style="background-color: trnasparent;  " class="text-right">
+                      @if (isset($ProtocoloP))
+                      @foreach ($ProtocoloP as $protocolo)
+                          <div class="col-12"  title="Editar este procedimiento" align="left" >
+                            <strong>
+                              <a href="{{ route('protocolos.edit', $protocolo['id']) }}">{{ $protocolo['codProto'] }} &nbsp; ({{ $protocolo['descripcion'] }})</a>
+                            </strong>  
+                           </div>
+                          <div class="row align-items-end padding-right: 50px;">
+                              <?php $contador = 1; ?>
+                              @foreach ($Tareas as $tarea)
+                                  @if ($protocolo['codProto'] == $tarea['cod'])
+                                      <div class="col-1" align="right">
+                                          {{ str_pad($contador, 2, '0', STR_PAD_LEFT) }}.
+                                      </div>
+                                      <div class="col-5" align="left">
+                                          {{ $tarea['descripcion'] }}
+                                      </div>
+                                      <div class="col-6" align="left">
+                                          {{ $tarea['duracion'] }} {{ $tarea['unidad'] }}
+                                      </div>
+                                      <?php $contador++; ?>
+                                  @endif
+                              @endforeach
+                              <div>&nbsp;</div>
+                          </div>
+                      @endforeach
+                  @endif
+                  </td>
+                </tr>
+            </table>
+        @endforeach
+    @endif
   </div>
 </div>
+
   <div class="container"> 
     @include('layouts.partials.footer')
   </div>
