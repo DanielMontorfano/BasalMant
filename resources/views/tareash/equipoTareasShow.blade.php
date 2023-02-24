@@ -5,7 +5,7 @@
 <style>
   /* Estilos de la tabla */
   #listado {
-    background: linear-gradient(to bottom right, #111010, #1f1001);
+    background: transparent; /*linear-gradient(to bottom right, #111010, #1f1001);*/
     border: 1px solid  rgb(209, 209, 158);
    
     border-color:  rgb(209, 209, 158);
@@ -66,7 +66,7 @@
                 -webkit-text-fill-color: transparent;">Plan de mantenimiento: {{ $equipo->codEquipo }}</h6>
 
     <p class="text-white"><a href="{{ route('equipoTareash.edit', $equipo->id) }}" class="text-white">Cargar ficha plan</a></p>
-        
+    <button style="background-color: Transparent;border: none;" title="Imprimir ficha plan"><a  class="bi bi-printer" href={{route('imprimirPlan', $equipo->id)}}>  </a></button>    
     @if (isset($PlanP))
         @foreach ($PlanP as $plan)
             <table id="listado" class="table-bordered">

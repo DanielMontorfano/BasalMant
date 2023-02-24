@@ -56,6 +56,24 @@ text-align: center;
 line-height: 0.5cm;
 }
 
+
+#tabla-ot {
+    border-collapse: collapse;
+    border: 3px solid black;
+}
+#tabla-ot tr {
+  margin-bottom: 200px;
+  padding-left: 20px;
+}
+
+#tabla-ot td {
+  margin-left: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+}
+
+
 </style>
 </head>
 <body>
@@ -113,8 +131,11 @@ line-height: 0.5cm;
 
 
    
-  <h1>O.d.T-{{$ot->id}}</h1>
-  <table>
+
+  <table  id="tabla-ot" class="tabla-ot"  border="1" >
+    <tr align="center">
+        <td colspan="2"><h1>O.d.T-{{$ot->id}}</h1></td>
+    </tr>
       <tr>
           <td>Esta orden está:{{$ot->estado}}</td>
           <td></td>
