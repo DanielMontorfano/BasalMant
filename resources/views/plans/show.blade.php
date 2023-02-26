@@ -120,7 +120,8 @@
         <br>
    </div>  {{-- card 1 --}}
    </div>  {{-- card 2 --}}
-  <br>     
+  <br>   
+  <button onclick="mostrarAdvertencia()">Mostrar advertencia</button>  
 @stop
 
 
@@ -132,4 +133,5 @@
 
 @section('js')
     <script> console.log('Hi!'); </script>
+   
 @stop

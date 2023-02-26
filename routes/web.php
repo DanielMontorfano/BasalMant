@@ -113,9 +113,11 @@ Route::get('/catchId', [RepuestoController::class, 'catchId'])->name('repuestos.
  //**************************************************************************** */
  Route::resource('protocolos', ProtocoloController::class);
  Route::resource('prototarea', PrototareaController::class);
+ 
  //**************************************************************************** */
  Route::resource('plans', PlanController::class);
  Route::resource('planproto', PlanprotoController::class);
+ Route::get('plans/{plans}/copiar', [PlanController::class, 'copiar'])->name('plans.copiar');
  //**************************************************************************** */
  
  

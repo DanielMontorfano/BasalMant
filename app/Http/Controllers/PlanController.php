@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Plan;
 use App\Models\Protocolo;
 use App\Models\Equipo;
+use App\Models\Tarea;
+use App\Models\PlanProto;
+use App\Models\ProtoTarea;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePlanRequest;
 use Illuminate\Support\Facades\DB;
@@ -196,7 +199,64 @@ class PlanController extends Controller
        return redirect()->route('plans.show', $plan->id);
        //return $repuestos;
     }
+      
+    public function copiar($id){
+        $plan= Plan::find($id);
+        $protocolos=$plan->plansProtocolos;
+        //$tareas=$protocolos->protocolosTareas;
+        
+        //return $equiposB;
+              
+       // $codEquipo="XX-CLON-XX-XX";
+        $copyPlan= new Plan();
+       // $plan->codigo=$request->codigo;
+       $copyPlan->nombre=$plan->nombre;
+       $copyPlan->frecuencia=$plan->frecuencia;
+       $copyPlan->unidad=$plan->unidadSelect;
+       $copyPlan->descripcion=$plan->descripcion;
+       $copyPlan->save();
 
+        $id_ultimo= "PL-" . str_pad($copyPlan->id,"8","0", STR_PAD_LEFT); //Formato para codigo
+        $copyPlan= Plan::find($copyPlan->id);  //lineas abajo es el nuevo id, es decir el de la copia
+        $copyPlan->codigo= $id_ultimo;
+        $copyPlan->save();
+       
+        // copia protocolos asociacios con nuevo id
+        foreach($protocolos as $protocolo){
+        $copyProto= new Protocolo();
+        $copyProto->descripcion=$protocolo->descripcion;
+        $copyProto->save();
+        $id_ultimo= "PDM-" . str_pad($copyProto->id,"8","0", STR_PAD_LEFT); //Formato para codigo
+        $copyProto->codigo= $id_ultimo;
+        $copyProto->save();
+        $tareas= Protocolo::find($protocolo->id)->protocolosTareas;
+                    foreach($tareas as $tarea){                   //tareas de cada protocolo
+                    $copyTarea = new Tarea();
+                    $copyTarea->descripcion=$tarea->descripcion;
+                    $copyTarea->duracion=$tarea->duracion;
+                    $copyTarea->unidad=$tarea->uniTiempoSelect;
+                    $copyTarea->save();
+                    $id_ultimo= "TAR-" . str_pad( $copyTarea->id,"8","0", STR_PAD_LEFT); //Formato para codigo
+                    $copyTarea= Tarea::find( $copyTarea->id);
+                    $copyTarea->codigo= $id_ultimo;
+                    $copyTarea->save();
+                        // **************************** Asignamos nuevastareas a nuevos protocolos ********************
+                        $P_T= new Prototarea();
+                        $P_T->proto_id=$copyProto->id;
+                        $P_T->tarea_id=$copyTarea->id;
+                        $P_T->save();
+                    } //Fin foreach de tareas
+                        // **************************** Asignamos nuevas protocolos a nuevos planes ******************** 
+                        $P_P= new Planproto();
+                        $P_P->plan_id=$copyPlan->id;
+                        $P_P->proto_id=$copyProto->id;
+                        $P_P->save();
+
+
+        }   //Fin foreach de protocolos
+           $plan = Plan::latest()->first();
+        return redirect()->route('plans.show', $plan->id);
+    }  
     /**
      * Remove the specified resource from storage.
      *

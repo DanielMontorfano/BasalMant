@@ -17,7 +17,12 @@
         <style>
             body {
                 font-family: 'Nunito', sans-serif;
-            }
+                background-color: #000000;
+                background-image: url('ruta/a/la/imagen.jpg');
+                background-size: cover;
+                background-repeat: no-repeat;
+                
+                            }
 
             <style>
             h1{

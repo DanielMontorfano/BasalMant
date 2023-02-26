@@ -307,13 +307,16 @@ class EquipoController extends Controller
         $clon=$clon->save();
         
         $equipo = Equipo::latest('id')->first(); //toma el id del clon
+        
         foreach($repuestos as $repuesto){
         $E_R= new EquipoRepuesto();
         $E_R->equipo_id=$equipo->id;
         $E_R->repuesto_id=$repuesto->id;
-        $E_R->unidad=$repuesto->unidad;
-        $E_R->cant=$repuesto->cant;
-        $E_R->check1=$repuesto->check1;
+        $E_R->unidad=$repuesto->pivot->unidad;
+        $E_R->cant=$repuesto->pivot->cant;
+        $E_R->check1=$repuesto->pivot->check1;
+        //dd(request()->all());
+
         $E_R->save();
          }
         
