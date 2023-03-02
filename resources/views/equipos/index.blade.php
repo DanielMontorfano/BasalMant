@@ -8,6 +8,7 @@
 {{-- Para que sea responsive se agraga la tercer libreria --}}
 {{-- Todo lo de plantilla --}}
 @endsection
+
 @section('content_header')
 <h6 STYLE="text-align:center; font-size: 30px;
 background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
@@ -15,7 +16,6 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
 -webkit-text-fill-color: transparent;">Listado de todos los equipos</h6>
 @stop
 @section('content')
-
 {{--<h1></h1> --}}
 <h1></h1>
 {{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
@@ -54,16 +54,31 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
         @endforeach
     </tbody>
 </table>
+
 </div>
+
 </div>
+      <div class="container"> 
+        @include('layouts.partials.menuListados')
+      </div>
 </div>
+
 <div class="container"> 
   @include('layouts.partials.footer')
  </div>
 {{-- aqui Todos los script ver plantilla--}}
+
+
 @endsection
 @section('js')
-    <script> console.log('Hi!'); </script>
+<script>
+ 
+ /* var logoUrl = '{{ asset('dataprint/LogoIngenio2.png') }}';
+
+  var titulo ='Listado de todos los equipos';
+  var url = "{{route('imprimirListado','equipos')}}" */
+</script>
+
 @stop
 
 

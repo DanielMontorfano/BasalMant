@@ -31,6 +31,11 @@ class EquipoController extends Controller
         //$equipos= Equipo::orderBy('id','desc')->paginate(); //NO le GUSTA con el PLUG IN datatable;!!!!
         $equipos= Equipo::all(); //Trae todos los registros
        // return $equipos;   //Sirve para ver la consulta
+      // $encabezado = view('equipos.encabezado')->render();
+
+      // return view('equipos.index', compact('equipos', 'encabezado'));
+
+
        return view('equipos.index',compact('equipos')); //Envío todos los registro en cuestión.La consulta va sin simbolo de pesos
        // dd ($equipos->all());
        //return;

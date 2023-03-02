@@ -45,7 +45,9 @@ $(document).ready(function() {
 				titleAttr: 'Imprimir',
 				className: 'btn btn-info'
 			},
+
 		],	
+		
 		
 		//"columnDefs": [ {
 		//	"targets": 2,

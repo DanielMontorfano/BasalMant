@@ -142,7 +142,7 @@
         <tbody>
         @foreach($equiposB as $equipoB)
         <tr>
-          <td scope="row" class="text-left"><b>{{ $equipoB->codEquipo }} &nbsp;</b></td>
+          <td scope="row" class="text-left"><b><a href="{{route('equipos.show', $equipoB->id)}}">{{ $equipoB->codEquipo }}</a> &nbsp;</b></td>
           <td class="text-left">{{ $equipoB->marca}},  </td>
           <td class="text-rigth">&nbsp;{{ $equipoB->modelo}} </td>
         </tr>

@@ -38,8 +38,9 @@
                       {{-- Los siguientes link los quito para administralos yo --}}
                        {{--  <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a> --}}
                         {{-- <a href="{{ route('equipos.index') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Equipos</a> --}}
-                        <a href="{{ route('home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
-                    @else
+                        <a href="{{ route('home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Mantenimiento</a>
+                        <a href="#" class="text-sm text-gray-700 dark:text-gray-500 underline">Control de acceso</a>
+                        @else
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
                         @if (Route::has('register'))
@@ -48,15 +49,13 @@
                     @endauth
                 </div>
             @endif
+            <div><h1 style="font-size: 50px; color: tomato;">BIENVENIDOS A: </h1>
+                <br>
+               <h1 style="font-size: 100px; color: tomato;"><br>BASALMANT</h1>
+           </div>    
 
-         
-
-            <h1 style="font-size: 50px; color: tomato;">BIENVENIDOS A: </h1>
-            <br>
-            <h1 style="font-size: 100px; color: tomato;"><br>BASALMANT</h1>
-S
         </div>
-            
+          
         
         
     </body>

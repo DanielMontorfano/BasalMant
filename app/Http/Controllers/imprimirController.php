@@ -128,9 +128,36 @@ $dompdf->stream(); */
          // return view('Equipos.show');
       }
   
-  
+     // ************************************************************************************************
+
+     public function imprimirListado($id){
+      if ($id='equipos') {
+        $listado=[];
+        $equipos= Equipo::all();
+       //$equipos = Equipo::latest()->paginate(300);
+
+        foreach($equipos as $equipo){
+        $listados[]=array('var1'=>$equipo->codEquipo, 'var2'=>$equipo->marca, 'var3'=>$equipo->modelo, 'var4'=>'', 'var5'=>'');
+       
+      }
+      $titulo=$id; 
+      $T1="Equipo";
+      $T2="Descripción";
+      $T3="Marca";
+      $T4="";
+      $T5="";
+
+      } 
+      //$titulo=$id;
+      //echo'ENTRO';
+      $pdf = PDF::loadView('impresiones.imprimirListado', compact('listados','titulo','T1','T2','T3','T4','T5'));
+      $variable="Listado" . $id .".pdf";
+      return $pdf->download($variable); 
+     // return view('impresiones.imprimirListado', compact('listados','titulo'));
+     // return;
+
+     }
 
 
- 
 
 }

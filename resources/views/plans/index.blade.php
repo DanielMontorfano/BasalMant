@@ -48,7 +48,11 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
   @include('layouts.partials.footer')
  </div>
 @endsection
-
+@section('js')
+<script>
+  var logoUrl = '{{ asset('dataprint/LogoIngenio2.png') }}';
+</script>
+@stop
 
 
 
