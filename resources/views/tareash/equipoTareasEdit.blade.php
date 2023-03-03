@@ -38,6 +38,33 @@
 }
 
 
+
+.form-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.form-group label {
+  margin-right: 10px; /* ajusta el valor según sea necesario */
+  flex-basis: 20%; /* ajusta el valor según sea necesario */
+}
+.form-group input {
+  flex-basis: 80%; /* ajusta el valor según sea necesario */
+}
+#tabla2 {
+  margin-top: 20px; /* ajusta el valor según sea necesario */
+  margin-bottom: 20px; /* ajusta el valor según sea necesario */
+  margin-left: 150px;
+  border: none;}
+#tabla2  tr, td, input {
+  border: none;
+  padding-left: 60px;
+  padding-bottom: 0px; /* Añade un poco de espacio entre cada elemento y la línea */
+  padding-top: 20
+}
+
+  
 </style>
 @endsection
 
@@ -107,18 +134,45 @@
                 @endif 
                 @endforeach  
                 <div>&nbsp;</div>
-              </div>
-              @endforeach  
-              @endif
-            </td>
-          </tr>
-        </table>
+                
         
         
       @endforeach
       @endif
-
+      
+    </div>
+    @endforeach  
+    @endif
+  </td>
+</tr>
+</table>
    <br>
+   <div >
+    <table id="tabla2">
+      <tr>
+        <td>
+         
+          <div class="form-group">
+            <label class="control-label" for="operario"></label> 
+            <input placeholder="Realizó" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="operario" value={{old('operario')}}> 
+            @error('operario')
+           <small>*{{$message}}</small>
+            @enderror
+          </div>
+        
+      </td>
+        <td>
+          <div class="form-group">
+            <label class="control-label" for="supervisor"></label> 
+          <input placeholder="Supervisó" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="supervisor" value={{old('supervisor')}}> 
+          @error('supervisor')
+         <small>*{{$message}}</small>
+          @enderror
+        </div>
+      </td>
+    </tr>
+    </table>
+  </div>
                <div class="form-group">
                 <button form="cargaPlan" class="btn btn-primary btn-submit" type="submit">Enviar</button>
                </div>

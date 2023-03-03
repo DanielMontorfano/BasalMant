@@ -21,6 +21,7 @@ return new class extends Migration
                 $table->string('tcheck')->nullable(); //unidad de medida
                 $table->string('detalle')->nullable(); //Indica que es un accesorio
                 $table->string('operario')->nullable(); //Indica que es un accesorio
+                $table->string('supervisor')->nullable(); //Indica que es un accesorio
                 $table->timestamps();
                 $table->foreign('equipo_id')->references('id')->on('equipos')->onDelete('cascade');
                 $table->foreign('tarea_id')->references('id')->on('tareas')->onDelete('cascade');

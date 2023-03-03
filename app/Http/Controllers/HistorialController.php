@@ -28,16 +28,17 @@ class HistorialController extends Controller
     {   
         $equipo=Equipo::find($id);
         $tareas=Equipo::find($id)->equiposTareash; //Todas las tareas sobre este equipo
-        $tareash=Tareash::all();
-        
+        //$tareash=Tareash::all();
+        //$tareash=Equipo::find($id);
        /*  foreach ($tareas as $tarea) {
           
                 echo $tarea->pivot->updated_at;
            
             
         } */
-        
-
+        //dd(request()->all());
+       // echo $tareas;
+       // return;
       return view('historial.preventivo',compact('tareas','equipo'));
       // return  ;
 

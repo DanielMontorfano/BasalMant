@@ -34,20 +34,19 @@
   <br>
 <table id="listado" class="table table-striped table-success  table-hover border-4" >
     <thead class="table-dark" >
-        
-        <td>Descripción</td>
         <td>Estado</td>
+        <td>Descripción</td>
         <td>Fecha</td>
-        <td>Realizó</td>
+        <td>Realizó/Supervisó</td>
         <td></td>
        
     <tbody>
       @foreach ($tareas as $tarea)
       <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
-        <td>{{$tarea->descripcion}}</td>
         <td STYLE="font-weight:bold; text-align:left; color: #022a2a; font-family: Times New Roman;  font-size: 14px; ">{{$tarea->pivot->tcheck}}</td> 
+        <td>{{$tarea->descripcion}}</td>
         <td>{{$tarea->pivot->updated_at}}</td>
-        <td>{{$tarea->pivot->operario}}</td> 
+        <td>{{$tarea->pivot->operario}}/{{$tarea->pivot->supervisor}}</td> 
 
         <td>
           <a class="bi bi-eye" href="{{route('equipos.show', $equipo->id)}}"></a>

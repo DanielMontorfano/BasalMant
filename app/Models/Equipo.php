@@ -83,7 +83,7 @@ class Equipo extends Model
     public function equiposTareash()
     {
         return $this->belongsToMany('App\Models\Tarea', 'tareashes', 'equipo_id', 'tarea_id')
-        ->withPivot('plan_id','tcheck','detalle', 'operario', 'updated_at');
+        ->withPivot('plan_id','tcheck','detalle', 'operario', 'supervisor', 'updated_at');
         //->withTimestamps();
        // return $this->belongsToMany('App\Models\Repuesto', 'equipo_repuestos', 'equipo_id', 'repuesto_id');
     }

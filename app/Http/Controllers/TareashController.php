@@ -10,6 +10,8 @@ use App\Models\Equipo;
 use App\Models\Protocolo;
 use App\Models\Plan;
 
+//ESTA ES LA TABLA PIVOT ENTRE EQUIPO Y TAREAS !!!!!!!!!!
+
 class TareashController extends Controller
 {
     /**
@@ -47,8 +49,9 @@ class TareashController extends Controller
         $protocolos=$request->protocolos;
         $tareas=$request->tareas;
         $tcheck=$request->estados;
+        $operario=$request->operario;
+        $supervisor=$request->supervisor;
         
-      
 	   $numero = count($tareas)-1;  //Contamos la cantidad de registros a guardar
       //echo"$numero";
     
@@ -60,6 +63,8 @@ class TareashController extends Controller
       //$tareash->plan_id=$plans[$i];   //Por  ahora no lo usamos
       if($tcheck[$i]<>""){
       $tareash->tcheck=$tcheck[$i]; 
+      $tareash->operario=$operario;
+      $tareash->supervisor=$supervisor;
       //echo $i; 
       //echo $tareas[$i] . "<br>"; 
       //echo $plans[$i] . "<br>";
