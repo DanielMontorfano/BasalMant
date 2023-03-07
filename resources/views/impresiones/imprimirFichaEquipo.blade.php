@@ -163,7 +163,7 @@ body {
         <br>
         <tbody>
         @foreach($repuestos as $repuesto)
-        @if(!$repuesto->pivot->check1 =='on') {{-- Para saber si es repuesto o no --}}
+        @if($repuesto->pivot->check1 =='on') {{-- Para saber si es repuesto o no --}}
         <tr>
           <td scope="row" class="text-left"><b>{{ $repuesto->codigo }}</b></td>
           <td class="text-left">{{ $repuesto->descripcion}} </td>

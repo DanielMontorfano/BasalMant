@@ -19,7 +19,7 @@ class Tarea extends Model
     public function tareasEquipos()
     {
         return $this->belongsToMany('App\Models\Equipo')
-        ->withPivot('plan_id','tcheck','detalleh', 'operario','supervisor');
+        ->withPivot('plan_id','tcheck','detalle', 'operario','supervisor');
         
         
     } 

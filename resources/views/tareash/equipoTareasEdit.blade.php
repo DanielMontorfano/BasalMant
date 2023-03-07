@@ -25,6 +25,17 @@
   padding-bottom: 10px; /* Añade un poco de espacio entre cada elemento y la línea */
 
 }
+
+.detalle-container {
+  text-align: left;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  
+}
+ 
+
 .protocolo-container {
   padding-top: 15px;
   border-bottom: 2px solid rgb(111, 213, 9);
@@ -128,7 +139,8 @@
                     <option value="OP">OP</option>
                   </select>
                 </div>
-                <div class="col-9 tarea-container tarea-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}. &nbsp;{{$tarea->descripcion}} </div>
+                
+                <div class="col-9 tarea-container tarea-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}. &nbsp;{{$tarea->descripcion}}  </div>
                 <div class="col-1 tarea-container">{{$tarea->duracion}} {{$tarea->unidad}}</div>
               
                 @endif 
@@ -149,6 +161,11 @@
    <br>
    <div >
     <table id="tabla2">
+      </tr>
+          <th>
+            <input placeholder="(Observación)" autocomplete="off" class="detalle-container"  type="text" name="detalle" value={{old('detalle')}}>
+          </th>
+      </tr>
       <tr>
         <td>
          
@@ -170,8 +187,8 @@
           @enderror
         </div>
       </td>
-    </tr>
-    </table>
+    
+  </table>
   </div>
                <div class="form-group">
                 <button form="cargaPlan" class="btn btn-primary btn-submit" type="submit">Enviar</button>

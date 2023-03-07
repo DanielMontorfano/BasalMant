@@ -43,7 +43,7 @@ class TareashController extends Controller
     public function store(Request $request)
     {
        // echo"Hasta aqui llegamos";
-        //dd(request()->all());
+       // dd(request()->all());
         $equipo_id=$request->equipo_id;
         $plans=$request->plans;  //codigo de plan
         $protocolos=$request->protocolos;
@@ -51,6 +51,7 @@ class TareashController extends Controller
         $tcheck=$request->estados;
         $operario=$request->operario;
         $supervisor=$request->supervisor;
+        $detalle=$request->detalle;
         
 	   $numero = count($tareas)-1;  //Contamos la cantidad de registros a guardar
       //echo"$numero";
@@ -63,6 +64,7 @@ class TareashController extends Controller
       //$tareash->plan_id=$plans[$i];   //Por  ahora no lo usamos
       if($tcheck[$i]<>""){
       $tareash->tcheck=$tcheck[$i]; 
+      $tareash->detalle=$detalle; 
       $tareash->operario=$operario;
       $tareash->supervisor=$supervisor;
       //echo $i; 
