@@ -15,7 +15,6 @@
 
 <div class="card border-primary" style="background: linear-gradient(to left,#495c5c,#030007); ">
   <div class="card-body "  style="max-width: 95;">
-
   <h6 STYLE="text-align:center; font-size: 30px;
   background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
   -webkit-background-clip: text;
@@ -30,10 +29,8 @@
         </div>
   </div>
   <br>
-
     <table id="listado" class="table table-striped table-success  table-hover border-4" >
       <thead class="table-dark" >
-          
           <td>O.d.T</td>
           <td>Descripción/Estado</td>
           <td>Fecha</td>
@@ -56,10 +53,10 @@
         </tr>
        @endforeach
       </tbody>
-  </table>
+    </table>
 </div>
 </div>
-</div>
+
 
 <div class="container"> 
   @include('layouts.partials.footer')

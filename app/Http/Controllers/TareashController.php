@@ -43,7 +43,7 @@ class TareashController extends Controller
     public function store(Request $request)
     {
        // echo"Hasta aqui llegamos";
-       // dd(request()->all());
+        //dd(request()->all());
         $equipo_id=$request->equipo_id;
         $plans=$request->plans;  //codigo de plan
         $protocolos=$request->protocolos;

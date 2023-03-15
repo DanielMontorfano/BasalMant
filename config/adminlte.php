@@ -592,7 +592,13 @@ return [
                     'asset' => true,
                     'location' => 'dataprint/main.js', //Codigo montorfano para config datatables public/dataprint/main.js  
                 ],
-
+                
+                //  <script type="text/javascript" src="{{asset('dataprint/main.js')}}"></script>
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'dataprint/main1.js', //Codigo montorfano para config datatables public/dataprint/main.js  
+                ],
                 
                 
 

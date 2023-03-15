@@ -28,6 +28,8 @@ class HistorialController extends Controller
     {   
         $equipo=Equipo::find($id);
         $tareas=Equipo::find($id)->equiposTareash; //Todas las tareas sobre este equipo
+        //$tareas = Equipo::find($id)->equiposTareash()->orderByDesc('created_at')->get();
+        // dd(Equipo::find($id)->equiposTareash()->orderByDesc('created_at')->get());
         //$tareash=Tareash::all();
         //$tareash=Equipo::find($id);
        /*  foreach ($tareas as $tarea) {
