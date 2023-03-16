@@ -21,10 +21,14 @@
   margin-top: 2px; /* ajusta el valor según sea necesario */
   margin-bottom: 20px; /* ajusta el valor según sea necesario */
   margin-left: 15px;
+
   }
 #tabla2  tr, td, input {
   
-  padding-left: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   padding-bottom: 3px; /* Añade un poco de espacio entre cada elemento y la línea */
   padding-top: 20
 }
@@ -80,6 +84,7 @@
                               
                             </td>
                           </tr>
+                          <?php $contador = 1; ?>
                           @foreach($Tareas as $tarea)
                           
                           @if($protocolo->codProto ==$tarea->cod)
@@ -97,9 +102,10 @@
                                   <option value="OP">OP</option>
                                 </select>
                               </td>
-                              <td> &nbsp;{{$tarea->descripcion}}  </td>
+                              <td>{{ str_pad($contador, 2, '0', STR_PAD_LEFT) }}. &nbsp; &nbsp;{{$tarea->descripcion}}  </td>
                               <td>{{$tarea->duracion}} {{$tarea->unidad}}</td>
                             </tr>
+                            <?php $contador++; ?>
                             @endif 
                             @endforeach 
 
@@ -117,34 +123,44 @@
    
    
    <div>
-   <input id="observacion" placeholder="(Observación)" autocomplete="off" class="form-control"  STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"type="text" name="detalle" value={{old('detalle')}}>
-   <table >
+    <table style="width: 80%; border: 0; margin: 20px auto 0;">
+    
+      <tr>
+        <td colspan="2">
+          <input id="observacion" placeholder="(Observación)" autocomplete="off" class="form-control"  STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#243B55,#141E30);"type="text" name="detalle" value={{old('detalle')}}>
+        </td>
+      </tr>
     <tr>
       <td>
-       
-        <div class="form-group">
-          <label class="control-label" for="operario"></label> 
-          <input placeholder="Realizó" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="operario" value={{old('operario')}}> 
-          @error('operario')
-         <small>*{{$message}}</small>
-          @enderror
+       <div class="form-group">
+              <label class="control-label" for="operario"></label> 
+              <input placeholder="Realizó" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#243B55,#141E30);"  type="text" name="operario" value={{old('operario')}}> 
+              @error('operario')
+             <small>*{{$message}}</small>
+              @enderror
         </div>
-      
-    </td>
+      </td>
       <td>
         <div class="form-group">
-          <label class="control-label" for="supervisor"></label> 
-        <input placeholder="Supervisó" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="supervisor" value={{old('supervisor')}}> 
-        @error('supervisor')
-       <small>*{{$message}}</small>
-        @enderror
-      </div>
+              <label class="control-label" for="supervisor"></label> 
+              <input placeholder="Supervisó" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#243B55,#141E30);"  type="text" name="supervisor" value={{old('supervisor')}}> 
+              @error('supervisor')
+              <small>*{{$message}}</small>
+              @enderror
+        </div>
     </td>
-  
+    </tr>
+    <tr>
+      <tr>
+        <td colspan="2" style="text-align: center;">
+          <div class="form-group">
+            <button form="cargaPlan" class="btn btn-submit" style="background: linear-gradient(to right,#243B55,#a1a7b0);" type="submit">Enviar</button>
+          </div> 
+        </td>
+      </tr>
+   </tr>
 </table>
-      <div class="form-group">
-        <button form="cargaPlan" class="btn btn-primary btn-submit" type="submit">Enviar</button>
-      </div> 
+      
 
 </div>
                
