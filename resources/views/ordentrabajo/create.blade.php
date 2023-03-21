@@ -1,5 +1,5 @@
-@extends('layouts.plantilla')
-@section('title', 'create')
+@extends('adminlte::page')
+@section('title', 'Ordenes de trabajo')
 @section('content')
 
 <style>
@@ -78,7 +78,7 @@
                         @csrf  {{-- Envía un token de seguridad. Siempre se debe poner!!! sino no funca --}}
                         
                       
-                        <div class="p-3 mb-2 bg-gradient-primary text-white">
+                        <div class="p-3 mb-2  text-white">
                         <div class="container">
                             
                             <div class="row"> {{-- ***** div de la primera fila --}}
