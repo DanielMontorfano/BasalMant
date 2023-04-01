@@ -300,7 +300,7 @@ class EquipoController extends Controller
         $codEquipo="XX-CLON-XX-XX";
         $clon= new Equipo();
         $clon->codEquipo=$codEquipo;
-        //$clon->codEquipo=$equipo->marca;
+        $clon->marca=$equipo->marca;  //OJO estaba anulada;01/04/2023
         $clon->modelo=$equipo->modelo;
         $clon->idSecc=$equipo->idSecc;
         $clon->idSubSecc=$equipo->idSubSecc;
