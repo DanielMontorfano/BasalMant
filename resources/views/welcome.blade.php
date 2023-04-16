@@ -39,7 +39,9 @@
                        {{--  <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a> --}}
                         {{-- <a href="{{ route('equipos.index') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Equipos</a> --}}
                         <a href="{{ route('home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Mantenimiento</a>
-                        <a href="#" class="text-sm text-gray-700 dark:text-gray-500 underline">Control de acceso</a>
+                        {{-- <a href="http://inicio1.test" class="text-sm text-gray-700 dark:text-gray-500 underline">Control</a> --}}
+
+                        {{-- <a href="#" class="text-sm text-gray-700 dark:text-gray-500 underline">Control de acceso</a> --}}
                         @else
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
