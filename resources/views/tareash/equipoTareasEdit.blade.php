@@ -57,12 +57,15 @@
         <form id="cargaPlan" action="{{route('equipoTareash.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#141E30,#243B55);">
           @csrf
         @if(isset($PlanP))
+        <?php $contadorPlan = 0; ?>
         @foreach($PlanP as $plan)
+        <?php $contadorPlan++; ?>
         <table class="table-bordered">
           <tr >
             <td class="col-2" title="Editar este plan">
               <strong>
                 <a href="{{route('plans.edit', $plan->id)}}">{{$plan->codigo}}</a>
+
               </strong><br>
               
               {{$plan->descripcion}}
@@ -108,22 +111,79 @@
                             <?php $contador++; ?>
                             @endif 
                             @endforeach 
-
+                             
+                            
                           @endforeach 
+                         
+                              {{-- Inicio  tabla de pie de plan --}} 
+                                   <div>
+                                    <h1>AQUI VA</h1>
+                                    <table style="width: 100%; border: 0; margin: 20px auto 0;">
+                                    
+                                      <tr>
+                                        <td colspan="3">
+                                          <input id="pendiente" placeholder="Tarea pendiente" autocomplete="off" class="form-control"  STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#243B55,#141E30);"type="text" name="pendiente[]" value={{old('pendiente')}}>
+                                        </td>
+                                      </tr>
+                                    <tr>
+                                      <td>
+                                       <div class="form-group">
+                                              <label class="control-label" for="tecnico"></label> 
+                                              <input placeholder="Técnico que realizó" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#243B55,#141E30);"  type="text" name="tecnico[]" value={{old('tecnico')}}> 
+                                              @error('tecnico')
+                                             <small>*{{$message}}</small>
+                                              @enderror
+                                        </div>
+                                      </td>
+                                      <td>
+                                        <div class="form-group">
+                                              <label class="control-label" for="supervisor1"></label> 
+                                              <input placeholder="Supervisó" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#243B55,#141E30);"  type="text" name="supervisor1[]" value={{old('supervisor1')}}> 
+                                              @error('supervisor1')
+                                              <small>*{{$message}}</small>
+                                              @enderror
+                                        </div>
+                                     </td>
+                                     <td>
+                                      <div class="form-group">
+                                        <label class="control-label" for="ejecucion"></label> 
+                                              <select name="ejecucion[]" id="ejecucion" class="form-select select-custom rounded border-radius-3 border border-dark">
+                                                <option value="E">Ejecutado</option>
+                                                <option value="P">Pendiente</option>
+                                              </select>
+                                      </div>
+                                      </td>
+
+
+
+                                    </tr>
+                                    <tr>
+                                      <tr>
+                                        <td colspan="3" style="text-align: center;">
+                                          <div class="form-group">
+                                            <input type="hidden" name="planId[]" value="{{$plan->id}}">
+                                            <input type="hidden" name="equipoId[]" value="{{$equipo->id}}">
+                                            <input type="hidden" name="contadorPlan" value="{{$contadorPlan}}">
+                                            <button form="cargaPlan" class="btn btn-submit" style="background: linear-gradient(to right,#243B55,#a1a7b0);" type="submit">Enviar</button>
+                                          </div> 
+                                        </td>
+                                      </tr>
+                                   </tr>
+                                </table>
+                                </div>
+                              {{-- Fin  tabla de pie de plan --}}      
                     </table>
               </td>
-
-              
           </tr>
-         
-      </table>
+       </table>
       @endforeach
       @endif
 
    
    
    <div>
-    <table style="width: 80%; border: 0; margin: 20px auto 0;">
+  
+    <table style="width: 50%; border: 0; margin: 20px auto 0;">
     
       <tr>
         <td colspan="2">
@@ -160,8 +220,6 @@
       </tr>
    </tr>
 </table>
-      
-
 </div>
                
 {{-- ************************************************************************************** --}}

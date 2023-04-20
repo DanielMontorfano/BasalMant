@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Equipo;
 use App\Models\Tareash;
+use App\Models\Equipoplansejecut;
 use Illuminate\Support\Facades\DB;
 
 
@@ -129,7 +130,31 @@ class HistorialController extends Controller
 
     }
 
-   
+    public function historialPreventivoEjecut($id) //entro con id de Equipo
+    {   
+        //dd(request()->all());
+        $equipo=Equipo::find($id);
+        $planes = Equipoplansejecut::select('codigoPlan')->distinct()->orderBy('codigoPlan')->pluck('codigoPlan');
+
+        $datos = Equipoplansejecut::select('created_at', 'codigoPlan', 'ejecucion')
+                    ->orderBy('created_at')
+                    ->get()
+                    ->groupBy('created_at')
+                    ->map(function ($item) use ($planes) {
+                        $planData = $item->pluck('ejecucion', 'codigoPlan')->toArray();
+                        return array_merge(['fecha' => $item[0]->created_at->format('Y-m-d')], $planData);
+                    })
+                    ->toArray();
+        
+        $datos = collect($datos)->sortByDesc('fecha')->toArray();
+       // return $planes;
+        return view('historial.preventivoEjecut', compact('datos', 'planes','equipo'));
+        
+    
+        
+         
+ 
+    }
 
 
 

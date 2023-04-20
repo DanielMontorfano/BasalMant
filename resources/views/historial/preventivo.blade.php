@@ -37,7 +37,8 @@
   
       <div class="dropdown">
     <a title="Reportes" class=" fa-solid fa-screwdriver-wrench btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink"> 
+          <a class="dropdown-item" href="{{ route('historialPreventivoEjecut', $equipo->id) }}">Estado general</a> 
           <a class="dropdown-item" href="{{ route('historialPreventivo', $equipo->id) }}">Preventivos</a>
           <a class="dropdown-item" href="{{ route('historialCorrectivo', $equipo->id) }}">Correctivos</a>
           <a class="dropdown-item" href="{{ route('historialTodos', $equipo->id) }}">Ambos</a>

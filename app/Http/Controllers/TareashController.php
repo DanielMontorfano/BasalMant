@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Equipo;
 use App\Models\Protocolo;
 use App\Models\Plan;
+use App\Models\Equipoplansejecut;
 
 //ESTA ES LA TABLA PIVOT ENTRE EQUIPO Y TAREAS !!!!!!!!!!
 
@@ -43,7 +44,7 @@ class TareashController extends Controller
     public function store(Request $request)
     {
        // echo"Hasta aqui llegamos";
-        //dd(request()->all());
+       // dd(request()->all());
         $equipo_id=$request->equipo_id;
         $plans=$request->plans;  //codigo de plan
         $protocolos=$request->protocolos;
@@ -53,7 +54,17 @@ class TareashController extends Controller
         $supervisor=$request->supervisor;
         $detalle=$request->detalle;
         
+        $contadorPlan=$request->contadorPlan-1;
+        $pendiente=$request->pendiente;
+        $tecnico=$request->tecnico;
+        $supervisor1=$request->supervisor1;
+        $ejecucion=$request->ejecucion;
+        $planId=$request->planId;
+        $equipoId=$request->equipoId;
+        
 	   $numero = count($tareas)-1;  //Contamos la cantidad de registros a guardar
+      // $ejecucionCount = $request->input('ejecucion_count');
+     //  return $numero2;
       //echo"$numero";
     
       for ($i = 0; $i <=$numero; $i++){
@@ -74,7 +85,30 @@ class TareashController extends Controller
       }   
      // echo "FIN";  
      //    return;
-     return redirect()->route('historialPreventivo', $request->equipo_id); //Intento mostrar el plan
+
+      //tratamiento de planes ejecutados o pendientes
+      for ($i = 0; $i <=$contadorPlan; $i++){
+      $equipolansejecut= new Equipoplansejecut();
+      
+      if (!empty($tecnico[$i]) && !empty($supervisor1[$i])) {
+      $plan=Plan::find($planId[$i]);  
+     // echo $plan->id;
+     // echo $plan->codigo;
+      $equipolansejecut->pendiente=$pendiente[$i];
+      $equipolansejecut->tecnico=$tecnico[$i]; 
+      $equipolansejecut->supervisor1=$supervisor1[$i];
+      $equipolansejecut->ejecucion=$ejecucion[$i];
+      $equipolansejecut->plan_id=$planId[$i];
+      $equipolansejecut->equipo_id=$equipoId[$i];
+      $equipolansejecut->codigoPlan=$plan->codigo;
+      $equipolansejecut->save();
+         
+      }}
+
+     // return;
+
+
+     return redirect()->route('historialPreventivoEjecut', $request->equipo_id); //Intento mostrar el plan
         
 
     }
@@ -123,6 +157,8 @@ class TareashController extends Controller
       }  
     }
       //No convierto a array asociativo de objetos para tener la posibilidad de elejir en futuros proyectos(ej: edit de abajo)
+     
+     
 
       return view('tareash.equipoTareasShow', compact('equipo','PlanP', 'ProtocoloP','Tareas')); //Envío todo el registro en cuestión
     

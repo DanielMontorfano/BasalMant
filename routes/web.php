@@ -108,6 +108,7 @@ Route::get('/catchId', [RepuestoController::class, 'catchId'])->name('repuestos.
  Route::get('/historialTodos/{equipo}', [HistorialController::class,'historialTodos'])->name('historialTodos');
  Route::get('/historialPreventivo/{equipo}', [HistorialController::class,'historialPreventivo'])->name('historialPreventivo');
  Route::get('/historialCorrectivo/{equipo}', [HistorialController::class,'historialCorrectivo'])->name('historialCorrectivo');
+ Route::get('/historialPreventivoEjecut/{equipo}', [HistorialController::class,'historialPreventivoEjecut'])->name('historialPreventivoEjecut');
  
  
  //**************************************************************************** */
