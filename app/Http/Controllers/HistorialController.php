@@ -136,18 +136,18 @@ class HistorialController extends Controller
         $equipo=Equipo::find($id);
         $planes = Equipoplansejecut::select('codigoPlan')->distinct()->orderBy('codigoPlan')->pluck('codigoPlan');
 
-        $datos = Equipoplansejecut::select('created_at', 'codigoPlan', 'ejecucion')
-                    ->orderBy('created_at')
+        $datos = Equipoplansejecut::select('id','created_at', 'codigoPlan', 'ejecucion')
+                    ->orderByDesc('id')
                     ->get()
                     ->groupBy('created_at')
                     ->map(function ($item) use ($planes) {
                         $planData = $item->pluck('ejecucion', 'codigoPlan')->toArray();
-                        return array_merge(['fecha' => $item[0]->created_at->format('Y-m-d')], $planData);
+                      return array_merge(['fecha' => $item[0]->created_at->format('Y-m-d')], $planData);
                     })
                     ->toArray();
-        
+                   
         $datos = collect($datos)->sortByDesc('fecha')->toArray();
-       // return $planes;
+       // return $datos;
         return view('historial.preventivoEjecut', compact('datos', 'planes','equipo'));
         
     
