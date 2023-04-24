@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
                 $table->unsignedBigInteger('equipo_id')->nullable();
                 $table->unsignedBigInteger('tarea_id')->nullable();
+                $table->unsignedBigInteger('numFormulario')->nullable();
                 $table->string('plan_id')->nullable();
                 $table->string('tcheck')->nullable(); //unidad de medida
                 $table->string('detalle')->nullable(); //Indica que es un accesorio

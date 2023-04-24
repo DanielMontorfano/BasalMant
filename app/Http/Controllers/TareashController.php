@@ -61,57 +61,52 @@ class TareashController extends Controller
         $ejecucion=$request->ejecucion;
         $planId=$request->planId;
         $equipoId=$request->equipoId;
+       
         
-	   $numero = count($tareas)-1;  //Contamos la cantidad de registros a guardar
-      // $ejecucionCount = $request->input('ejecucion_count');
-     //  return $numero2;
-      //echo"$numero";
-    
+        //Primero obtenemos el numero de formulario (tratamiento de planes ejecutados o pendientes)
+        for ($i = 0; $i <=$contadorPlan; $i++){
+        $equipolansejecut= new Equipoplansejecut();
+        
+        if (!empty($tecnico[$i]) && !empty($supervisor1[$i])) { //Iniciamos guardado solo si firmaron
+        $plan=Plan::find($planId[$i]);  
+        $equipolansejecut->pendiente=$pendiente[$i];
+        $equipolansejecut->tecnico=$tecnico[$i]; 
+        $equipolansejecut->supervisor1=$supervisor1[$i];
+        $equipolansejecut->ejecucion=$ejecucion[$i];
+        $equipolansejecut->plan_id=$planId[$i];
+        $equipolansejecut->equipo_id=$equipoId[$i];
+        $equipolansejecut->codigoPlan=$plan->codigo;
+        $equipolansejecut->save();
+        $formulario= $equipolansejecut::latest()->first(); //para tomar el ultmo registro guardado
+        $numFormulario=$formulario->id; // tomo el ultimo id para vincular cada formulario a las tareash
+      //*******  Etapa de guardar tareas *********
+      $numero = count($tareas)-1;  //Contamos la cantidad de registros a guardar
       for ($i = 0; $i <=$numero; $i++){
       $tareash= new Tareash();  
       $tareash->tarea_id=$tareas[$i];
       $tareash->equipo_id=$equipo_id[$i];
       $tareash->plan_id= $plans[$i]; //guarda codigo deolan en pivot
-      //$tareash->plan_id=$plans[$i];   //Por  ahora no lo usamos
-      if($tcheck[$i]<>""){
+      $tareash->numFormulario= $numFormulario;  //guarda numero de formulario, para saber a que grupo pertenece
+      if($tcheck[$i]<>""){  // Solo guarda si las tareas que tuvieron alguna novedad
       $tareash->tcheck=$tcheck[$i]; 
       $tareash->detalle=$detalle; 
       $tareash->operario=$operario;
       $tareash->supervisor=$supervisor;
-      //echo $i; 
-      //echo $tareas[$i] . "<br>"; 
-      //echo $plans[$i] . "<br>";
       $tareash->save(); } 
-      }   
-     // echo "FIN";  
-     //    return;
+      }
+       
+        }}
 
-      //tratamiento de planes ejecutados o pendientes
-      for ($i = 0; $i <=$contadorPlan; $i++){
-      $equipolansejecut= new Equipoplansejecut();
-      
-      if (!empty($tecnico[$i]) && !empty($supervisor1[$i])) {
-      $plan=Plan::find($planId[$i]);  
-     // echo $plan->id;
-     // echo $plan->codigo;
-      $equipolansejecut->pendiente=$pendiente[$i];
-      $equipolansejecut->tecnico=$tecnico[$i]; 
-      $equipolansejecut->supervisor1=$supervisor1[$i];
-      $equipolansejecut->ejecucion=$ejecucion[$i];
-      $equipolansejecut->plan_id=$planId[$i];
-      $equipolansejecut->equipo_id=$equipoId[$i];
-      $equipolansejecut->codigoPlan=$plan->codigo;
-      $equipolansejecut->save();
-         
-      }}
 
-     // return;
 
+
+
+
+
+	  
 
      return redirect()->route('historialPreventivoEjecut', $request->equipo_id); //Intento mostrar el plan
-        
-
-    }
+     }
 
     /**
      * Display the specified resource.

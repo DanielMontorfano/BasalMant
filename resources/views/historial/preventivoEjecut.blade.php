@@ -46,9 +46,9 @@
               @foreach($planes as $plan)
                 @if(isset($planData[$plan]))
                   @if($planData[$plan] === 'E')
-                    <td class="ejecutado">{{ $planData[$plan] }}</td>
+                    <td title="Ejecutado" class="ejecutado">{{ $planData[$plan] }}</td>
                   @else
-                    <td class="pendiente">{{ $planData[$plan] }}</td>
+                    <td title="Pendiente" class="pendiente">{{ $planData[$plan] }}</td>
                   @endif
                 @else
                   <td>***</td>
