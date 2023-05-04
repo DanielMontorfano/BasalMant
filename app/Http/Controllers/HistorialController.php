@@ -133,21 +133,26 @@ class HistorialController extends Controller
     public function historialPreventivoEjecut($id) //entro con id de Equipo
     {   
         //dd(request()->all());
+
         $equipo=Equipo::find($id);
         $planes = Equipoplansejecut::select('codigoPlan')->distinct()->orderBy('codigoPlan')->pluck('codigoPlan');
 
-        $datos = Equipoplansejecut::select('id','created_at', 'codigoPlan', 'ejecucion')
-                    ->orderByDesc('id')
+        $datos = Equipoplansejecut::select('created_at', 'codigoPlan', 'ejecucion', 'id')
+                    ->orderByDesc('created_at')
                     ->get()
                     ->groupBy('created_at')
-                    ->map(function ($item) use ($planes) {
-                        $planData = $item->pluck('ejecucion', 'codigoPlan')->toArray();
-                      return array_merge(['fecha' => $item[0]->created_at->format('Y-m-d')], $planData);
-                    })
+                    ->map(function ($item) {
+                      // $planData = $item->pluck('ejecucion', 'codigoPlan')->toArray();
+                       $planData = $item->pluck('ejecucion', 'codigoPlan')->toArray();
+                       //return $planData1;
+                       return array_merge(['fecha' => $item[0]->created_at->format('Y-m-d')], $planData );
+                   })
                     ->toArray();
-                   
+                    
+        //return $datos;           
         $datos = collect($datos)->sortByDesc('fecha')->toArray();
        // return $datos;
+     //   dd($datos);
         return view('historial.preventivoEjecut', compact('datos', 'planes','equipo'));
         
     
@@ -156,7 +161,7 @@ class HistorialController extends Controller
  
     }
 
-
+    
 
 
 
@@ -192,9 +197,15 @@ class HistorialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $fecha=$request->fecha;
+        $plan=$request->plan;
+        $resultado = Equipoplansejecut::where('created_at', $fecha)
+                              ->where('codigoPlan', $plan)
+                              ->get();
+        return $resultado;
+      
     }
 
     /**
@@ -203,9 +214,20 @@ class HistorialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request) //Para solucionar Pendiente
     {
-        //
+        $fecha=$request->fecha;
+        $plan=$request->plan;
+        $equipoplanejecut = Equipoplansejecut::where('created_at', $fecha)
+                              ->where('codigoPlan', $plan)
+                              ->first();  //puedo hacerlo con get() pero debo recorrer con foreach
+        $id=$equipoplanejecut->id;
+        $equipo_id=$equipoplanejecut->equipo_id;
+        $equipo=Equipo::find($equipo_id);
+        $plan_id=$equipoplanejecut->plan_id;
+       // return $id;         
+        return view('historial.pedientesEdit', compact('equipoplanejecut','equipo'));   
+        return $id;
     }
 
     /**
@@ -215,9 +237,20 @@ class HistorialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        return;
+        $fecha=$request->fecha;
+        $plan=$request->plan;
+        $resultado = Equipoplansejecut::where('created_at', $fecha)
+                              ->where('codigoPlan', $plan)
+                              ->first();  //puedo hacerlo con get() pero debo recorrer con foreach
+        $id=$resultado->id;
+        $equipo_id=$resultado->equipo_id;
+        $plan_id=$resultado->plan_id;
+                 
+
+        return $id;
     }
 
     /**
