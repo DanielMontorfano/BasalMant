@@ -522,6 +522,7 @@ return [
                     'asset' => true,
                     'location' => 'dataprint/jquery/jquery-3.3.1.min.js',
                 ],
+                
                 [
                     'type' => 'js',
                     'asset' => true,
@@ -600,8 +601,7 @@ return [
                     'location' => 'dataprint/main1.js', //Codigo montorfano para config datatables public/dataprint/main.js  
                 ],
                 
-                
-
+              
             ],
         ],
         'Select2' => [
