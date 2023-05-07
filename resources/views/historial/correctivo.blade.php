@@ -1,6 +1,10 @@
 {{-- @extends('layouts.plantilla') --}}
 @extends('adminlte::page') 
 @section('title', 'Historial de' . " " . $equipo->codEquipo)
+@section('content_header')
+
+@include('layouts.partials.menuEquipo')
+@stop
 @section('css')
 {{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
 {{-- Para que sea responsive se agraga la tercer libreria --}}
@@ -8,11 +12,11 @@
 @endsection
 
 @section('content')
-@include('layouts.partials.menuEquipo')
 {{--<h1></h1> --}}
 {{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
 {{-- <a href="/Equipos/crear" > Crear curso</a> **Laravel no recomienda direccionar asi--}}
-
+<div class="container">
+ 
 <div class="card border-primary" style="background: linear-gradient(to left,#495c5c,#030007); ">
   <div class="card-body "  style="max-width: 95;">
   <h6 STYLE="text-align:center; font-size: 30px;
@@ -58,6 +62,7 @@
 </div>
 </div>
 
+</div> {{-- Container --}}
 
 <div class="container"> 
   @include('layouts.partials.footer')

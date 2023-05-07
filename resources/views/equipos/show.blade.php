@@ -1,12 +1,17 @@
-@extends('adminlte::page')
 
+@extends('adminlte::page')
+{{-- comment --}}
 @section('title', $equipo->codEquipo)
 
 @section('content_header')
+<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 @include('layouts.partials.menuEquipo')
 @stop
 
 @section('content')
+<div class="container">
+ 
+
 <div class="card border-primary" style="background: linear-gradient(to left,#495c5c,#030007); ">
 <div class="card-body "  style="max-width: 95;">
 
@@ -176,7 +181,8 @@
         <br>
    </div>  {{-- card 1 --}}
    </div>  {{-- card 2 --}}
-  <br>     
+  <br>  
+</div>   
 @stop
 
 
@@ -188,4 +194,5 @@
 
 @section('js')
     <script> console.log('Hi!'); </script>
+    
 @stop

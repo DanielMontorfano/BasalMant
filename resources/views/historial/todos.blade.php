@@ -1,35 +1,26 @@
 {{-- @extends('layouts.plantilla') --}}
 @extends('adminlte::page') 
 @section('title', 'Historial de' . " " . $equipo->codEquipo)
+@section('content_header')
+
+@include('layouts.partials.menuEquipo')
+@stop
 @section('css')
-{{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
-{{-- Para que sea responsive se agraga la tercer libreria --}}
-{{-- Todo lo de plantilla --}}
+
+
 @endsection
 
 @section('content')
-@include('layouts.partials.menuEquipo')
-
-<div class="card border-primary" style="background: linear-gradient(to left,#495c5c,#030007); ">
-<div class="card-body "  style="max-width: 95;">
- 
-  
-  <h6 STYLE="text-align:center; font-size: 30px;
-  background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;">Historial de {{$equipo->codEquipo}} </h6>
-
-  <div class="dropdown">
-    <a title="Reportes de mantenimientos" class=" fa-solid fa-screwdriver-wrench btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" href="{{ route('historialPreventivoEjecut', $equipo->id) }}">Estado general</a> 
-          <a class="dropdown-item" href="{{ route('historialPreventivo', $equipo->id) }}">Preventivos</a>
-          <a class="dropdown-item" href="{{ route('historialCorrectivo', $equipo->id) }}">Correctivos</a>
-          <a class="dropdown-item" href="{{ route('historialTodos', $equipo->id) }}">Ambos</a>
-        </div>
-  </div>
-  <br>
-
+<div class="container">
+  <div class="card border-primary" style="background: linear-gradient(to left,#495c5c,#030007); ">
+    <div class="card-body" style="background: linear-gradient(to left,#495c5c,#030007);">
+      <div class="text-white card-body">
+        <h6 STYLE="text-align:center; font-size: 30px;
+          background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;">Historial de {{$equipo->codEquipo}} </h6>
+      
+    <div class="table-responsive">
     <table id="listado" class="table table-striped table-success  table-hover border-4" >
       <thead class="table-dark" >
           
@@ -54,10 +45,12 @@
 
       </tbody>
   </table>
+    </div> {{-- resposive --}}
 </div>
 </div>
 </div> 
 
+</div> {{-- Container --}}
 <div class="container"> 
   @include('layouts.partials.footer')
 </div>

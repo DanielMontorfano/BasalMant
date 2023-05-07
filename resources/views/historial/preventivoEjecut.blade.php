@@ -1,6 +1,11 @@
 @extends('adminlte::page')
 @section('title', 'Historial de' . " ")
+
+@section('content_header')
+  @include('layouts.partials.menuEquipo')
+@stop
 @section('css') 
+
 <style>
     .degradado-gris {
         background: linear-gradient(to bottom, #181818 0%, #1b1919 100%);
@@ -24,8 +29,9 @@
 @endsection
 
 @section('content')
-@include('layouts.partials.menuEquipo')
 
+<div class="container">
+    
 <table id="listado" class="table degradado-gris">
     <thead>
         <tr>
@@ -76,6 +82,7 @@
     </tbody>
 </table>
 
+</div>
 <div class="container"> 
     @include('layouts.partials.footer')
 </div>

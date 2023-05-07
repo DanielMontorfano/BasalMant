@@ -1,6 +1,9 @@
 {{-- @extends('layouts.plantilla') --}}
 @extends('adminlte::page') 
 @section('title', 'Ver ' . $equipo->marca)
+@section('content_header')
+  @include('layouts.partials.menuEquipo')
+@stop
 @section('css')
 {{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
 {{-- Para que sea responsive se agraga la tercer libreria --}}
@@ -37,7 +40,8 @@
 @endsection
 
 @section('content')
-@include('layouts.partials.menuEquipo')
+<div class="container">
+  
 
 <div class="card" STYLE="background: linear-gradient(to right,#5c5649,#030007);" >
   <div class="card-header" STYLE="background: linear-gradient(to right,#201f1e,#030007);" >
@@ -117,8 +121,8 @@
                          
                               {{-- Inicio  tabla de pie de plan --}} 
                                    <div>
-                                    <h1>AQUI VA</h1>
-                                    <table style="width: 100%; border: 0; margin: 20px auto 0;">
+                                    <h1>{{$plan->codigo}}</h1> <h5> Frecuencia: {{$plan->frecuencia}} {{$plan->unidad}}</h5>
+                                    <table class="table mi-tabla table-borderless">
                                     
                                       <tr>
                                         <td colspan="3">
@@ -144,15 +148,15 @@
                                               @enderror
                                         </div>
                                      </td>
-                                     <td>
+                                     <td style="padding-top: 50px;">
                                       <div class="form-group">
-                                        <label class="control-label" for="ejecucion"></label> 
-                                              <select name="ejecucion[]" id="ejecucion" class="form-select select-custom rounded border-radius-3 border border-dark">
-                                                <option value="E">Ejecutado</option>
-                                                <option value="P">Pendiente</option>
-                                              </select>
+                                          <label class="control-label" for="ejecucion"></label> 
+                                          <select name="ejecucion[]" id="ejecucion" class="form-select select-custom rounded border-radius-3 border border-dark">
+                                              <option value="E">Ejecutado</option>
+                                              <option value="P">Pendiente</option>
+                                          </select>
                                       </div>
-                                      </td>
+                                     </td>
 
 
 
@@ -180,47 +184,6 @@
       @endif
 
    
-   
-   <div>
-  
-    <table style="width: 50%; border: 0; margin: 20px auto 0;">
-    
-      <tr>
-        <td colspan="2">
-          <input id="observacion" placeholder="(Observación)" autocomplete="off" class="form-control"  STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#243B55,#141E30);"type="text" name="detalle" value={{old('detalle')}}>
-        </td>
-      </tr>
-    <tr>
-      <td>
-       <div class="form-group">
-              <label class="control-label" for="operario"></label> 
-              <input placeholder="Realizó" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#243B55,#141E30);"  type="text" name="operario" value={{old('operario')}}> 
-              @error('operario')
-             <small>*{{$message}}</small>
-              @enderror
-        </div>
-      </td>
-      <td>
-        <div class="form-group">
-              <label class="control-label" for="supervisor"></label> 
-              <input placeholder="Supervisó" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#243B55,#141E30);"  type="text" name="supervisor" value={{old('supervisor')}}> 
-              @error('supervisor')
-              <small>*{{$message}}</small>
-              @enderror
-        </div>
-    </td>
-    </tr>
-    <tr>
-      <tr>
-        <td colspan="2" style="text-align: center;">
-          <div class="form-group">
-            <button form="cargaPlan" class="btn btn-submit" style="background: linear-gradient(to right,#243B55,#a1a7b0);" type="submit">Enviar</button>
-          </div> 
-        </td>
-      </tr>
-   </tr>
-</table>
-</div>
                
 {{-- ************************************************************************************** --}}
 {{-- ****LAS SIGUIENTES LINEAS SE COMENTAN POR RAZONES DE SER CODIGO MAESTRO --}}
@@ -259,6 +222,8 @@
 </div>
 </div>
 </form>
+
+</div> {{-- Container --}}
 <div class="container"> 
   @include('layouts.partials.footer')
 </div>

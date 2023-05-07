@@ -1,9 +1,15 @@
 {{-- @extends('layouts.plantilla') --}}
 @extends('adminlte::page') 
 @section('title', 'Fotos')
-@section('content')
+@section('content_header')
 
 @include('layouts.partials.menuEquipo')
+@stop
+@section('content')
+
+<div class="container">
+  
+
 
 
 
@@ -23,8 +29,8 @@
           
     </table>
 
-
+  </div>
 
   @include('layouts.partials.footer')
-</div>
+
 @endsection

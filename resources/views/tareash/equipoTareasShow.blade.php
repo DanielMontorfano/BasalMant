@@ -1,6 +1,10 @@
 {{-- @extends('layouts.plantilla') --}}
 @extends('adminlte::page') 
 @section('title', 'Ver ' . $equipo->marca)
+@section('content_header')
+
+@include('layouts.partials.menuEquipo')
+@stop
 @section('css')
 <style>
   /* Estilos de la tabla */
@@ -56,7 +60,8 @@
 @endsection
 
 @section('content')
-@include('layouts.partials.menuEquipo')
+<div class="container">
+  
 
 <div class="card border-primary" style="background: linear-gradient(to left, #495c5c, #030007);">
   <div class="card-body">
@@ -112,6 +117,8 @@
   </div>
 </div>
 
+
+</div> {{-- container --}}
   <div class="container"> 
     @include('layouts.partials.footer')
   </div>

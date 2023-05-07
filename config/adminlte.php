@@ -502,7 +502,11 @@ return [
                     'asset' => true,
                     'location' => 'dataprint\bootstrap\js\bootstrap.bundle.min.js', //icono lapiz, ojo y otros
                 ], 
-                
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'dataprint/bootstrap/js/bootstrap.min.js',
+                ], 
                 [
                     'type' => 'css',
                     'asset' => true,
@@ -529,11 +533,7 @@ return [
                     'location' => 'dataprint/popper/popper.min.js',
                 ],
                  
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'dataprint/bootstrap/js/bootstrap.min.js',
-                ], 
+                
                 [
                     'type' => 'js',
                     'asset' => true,

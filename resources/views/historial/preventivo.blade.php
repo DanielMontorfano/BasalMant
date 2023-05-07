@@ -1,6 +1,10 @@
 {{-- @extends('layouts.plantilla') --}}
 @extends('adminlte::page') 
 @section('title', 'Historial de' . " " . $equipo->codEquipo)
+@section('content_header')
+
+@include('layouts.partials.menuEquipo')
+@stop
 @section('css')
 <style>
   
@@ -23,7 +27,8 @@
 @endsection
 
 @section('content')
-@include('layouts.partials.menuEquipo')
+<div class="container">
+ 
 {{--<h1></h1> --}}
 {{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
 {{-- <a href="/Equipos/crear" > Crear curso</a> **Laravel no recomienda direccionar asi--}}
@@ -72,6 +77,7 @@
 </div>
 
 
+</div> {{-- Container --}}
 <div class="container"> 
   @include('layouts.partials.footer')
 </div>

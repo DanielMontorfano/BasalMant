@@ -8,7 +8,7 @@ use App\Models\Equipo;
 use App\Models\Tareash;
 use App\Models\Equipoplansejecut;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\OrdenTrabajo;
 
 class HistorialController extends Controller
 {
@@ -223,10 +223,15 @@ class HistorialController extends Controller
                               ->first();  //puedo hacerlo con get() pero debo recorrer con foreach
         $id=$equipoplanejecut->id;
         $equipo_id=$equipoplanejecut->equipo_id;
+
         $equipo=Equipo::find($equipo_id);
         $plan_id=$equipoplanejecut->plan_id;
+
+        $ODT=Equipo::find($equipo_id)->ordentrabajo;
+       // return $ots_e;
+
        // return $id;         
-        return view('historial.pedientesEdit', compact('equipoplanejecut','equipo'));   
+        return view('historial.pedientesEdit', compact('equipoplanejecut','equipo','ODT'));   
         return $id;
     }
 
