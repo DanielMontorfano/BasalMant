@@ -2,11 +2,23 @@
 @section('title', 'Historial de' . " ")
 
 @section('content_header')
+<head>
+    <title>Tabla de datos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
   @include('layouts.partials.menuEquipo')
 @stop
 @section('css') 
 
 <style>
+
+
+    .border {
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 5px;
+    }
+
     .degradado-gris {
         background: linear-gradient(to bottom, #181818 0%, #1b1919 100%);
     }
@@ -32,59 +44,125 @@
 
 <div class="container">
     
-<table id="listado" class="table degradado-gris">
-    <thead>
-        <tr>
-            <th>Fecha y hora</th>
-            @foreach($planes as $plan)
-            <th>{{ $plan }}</th>
-            @endforeach
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($datos as $fecha => $planData)
-        <tr>
-            <td>{{ $fecha }}</td>
-            @foreach($planes as $plan)
-            @if(isset($planData[$plan]))
-            @if($planData[$plan] === 'E')
-            <td title="Ejecutado" class="ejecutado">
-            <form action="{{ route('equipoplansejecut.edit', $equipo->id) }}" method="POST">
-              @csrf
-              <input type="hidden" name="fecha" value="{{ $fecha }}">
-              <input type="hidden" name="plan" value="{{ $plan }}">
-             
-              <button type="submit" class="btn btn-success ">{{ $planData[$plan] }}</button>
-          </form>
-            </td>
+   
+    
+    <body>
+        <div class="container">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Nº formulario</th>
+                        <th>Fecha</th>
+                        @foreach ($planes as $plan)
+                            <th>{{ $plan }}</th>
+                        @endforeach
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($datos as $numFormulario => $item)
+                        <tr>
+                            {{-- <td><a href="{{ route('nombre_de_la_ruta', ['numFormulario' => $numFormulario]) }}">{{ $numFormulario }}</a></td> --}}
+                            <td><a href="#">{{ $numFormulario }}</a></td>
+                            <td>{{ $item['fecha'] }}</td>
+                            @foreach ($planes as $plan)
+                                <td>
+                                    @if (isset($item[$plan]))
+                                        @if ($item[$plan] === 'E')
+                                            <button class="btn btn-success">{{ $item[$plan] }}</button>
+                                        @elseif ($item[$plan] === 'P')
+
+                                        <form action="{{ route('equipoplansejecut.edit', $equipo->id) }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="fecha" value="{{ $item['fecha'] }}">
+                                            <input type="hidden" name="numFormulario" value="{{ $numFormulario }}"> 
+                                           
+                                            <button type="submit" class="btn btn-danger">{{ $item[$plan] }}</button>
+                                        </form>
+                                        @elseif ($item[$plan] === 'C')
+                                        <button type="button" class="btn btn-warning">C</button>
 
 
-            @else
 
-            <td title="Pendiente" class="pendiente">
-              <form action="{{ route('equipoplansejecut.edit', $equipo->id) }}" method="POST">
-                @csrf
-                <input type="hidden" name="fecha" value="{{ $fecha }}">
-                <input type="hidden" name="plan" value="{{ $plan }}">
-               
-                <button type="submit" class="btn btn-danger">{{ $planData[$plan] }}</button>
-            </form>
-              </td> 
-             
-            @endif
+                                            
+                                        @else
+                                            {{ $item[$plan] }}
+                                        @endif
+                                    @endif
+                                </td>
+                            @endforeach
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
             
-            @else
-            <td>***</td>
-            @endif
-            @endforeach
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+            
+        </div>
+    
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </body>
+
+    
 
 </div>
-<div class="container"> 
+
+
+
+<div class="container">
+    <!-- ... código de la tabla ... -->
+</div>
+
+<div class="container mt-4">
+    <div class="border border-secondary p-2">
+        <div class="row align-items-center">
+            <div class="col-auto">
+                <label for="desde" class="mr-2">Desde:</label>
+            </div>
+            <div class="col-auto">
+                <input type="date" id="desde" class="form-control form-control-sm">
+            </div>
+            <div class="col-auto">
+                <label for="hasta" class="mr-2">Hasta:</label>
+            </div>
+            <div class="col-auto">
+                <input type="date" id="hasta" class="form-control form-control-sm">
+            </div>
+            <div class="col-auto">
+                <button id="filtrar-btn" class="btn btn-primary">Filtrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <p><strong>E:</strong> <span class="text-success">Ejecutado</span></p>
+    <p><strong>P:</strong> <span class="text-danger">Pendiente</span></p>
+    <p><strong>C:</strong> <span class="text-warning">Corregido</span></p>
+</div>
+
+<div class="container">
     @include('layouts.partials.footer')
 </div>
+
+
+<script>
+    document.getElementById('filtrar-btn').addEventListener('click', function () {
+        var desde = document.getElementById('desde').value;
+        var hasta = document.getElementById('hasta').value;
+
+        var filas = document.querySelectorAll('.table tbody tr');
+
+        for (var i = 0; i < filas.length; i++) {
+            var fecha = filas[i].querySelector('td:nth-child(2)').textContent;
+            if (fecha < desde || fecha > hasta) {
+                filas[i].style.display = 'none';
+            } else {
+                filas[i].style.display = '';
+            }
+        }
+    });
+</script>
+
 
 @endsection

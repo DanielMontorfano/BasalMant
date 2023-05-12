@@ -41,7 +41,7 @@ class TareashController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) // ojo! almacena en  2 tablas Equipoplansejecut y Tareash, 
     {
        // echo"Hasta aqui llegamos";
        // dd(request()->all());
@@ -79,7 +79,9 @@ class TareashController extends Controller
         $equipolansejecut->save();
         $formulario= $equipolansejecut::latest()->first(); //para tomar el ultmo registro guardado
         $numFormulario=$formulario->id; // tomo el ultimo id para vincular cada formulario a las tareash
-      //*******  Etapa de guardar tareas *********
+        $equipolansejecut->numFormulario=$numFormulario;
+        $equipolansejecut->save(); //Con esto podre filtarar en tabla tareash, cada formulario cargado
+      //*******  Etapa de guardar tareas (muy vinculado Equipoplansejecut y Tareash)*********
       $numero = count($tareas)-1;  //Contamos la cantidad de registros a guardar
       for ($i = 0; $i <=$numero; $i++){
       $tareash= new Tareash();  

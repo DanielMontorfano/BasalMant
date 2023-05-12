@@ -32,8 +32,8 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
     <thead class="table-dark" >
         
         <td>Equipo</td>
-        <td>Marca</td>
         <td>Modelo</td>
+        <td>Detalle</td>
         <td></td>
         <td></td>
        
@@ -42,8 +42,8 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
       <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
         
         <td STYLE="font-weight:bold; text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">{{$equipo->codEquipo }}</td>
-        <td>{{$equipo->marca}}</td>
-        <td>{{$equipo->modelo}}</td>
+        <td>{{$equipo->Modelo}}</td>
+        <td>{{$equipo->det5}}</td>
         <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">
           <a class="bi bi-pencil-fill" href="{{route('equipos.edit', $equipo->id)}}"></a> 
         </td>

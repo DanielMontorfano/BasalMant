@@ -64,7 +64,7 @@
                         @method('put')
                         <div class="form-group">
                           <label for="pendiente">Pendiente:</label>
-                          <input type="text" class="form-control form-control-sm input-control" id="pendiente" value="Dato correspondiente">
+                          <input type="text" class="form-control form-control-sm input-control" id="pendiente" value="{{$equipoplanejecut->pendiente}}" readonly >
                         </div>
                         <div class="form-group">
                           <label for="solucion">Solución:</label><br>
@@ -79,7 +79,7 @@
                         </div>
                         <div class="form-group" id="solucionATexto">
                           <label for="textoSolucionA">Que solución simple se realizó:</label>
-                          <input type="text" class="form-control form-control-sm input-control" id="textoSolucionA">
+                          <input type="text" class="form-control form-control-sm input-control" id="textoSolucionA" name="textoSolucionA" value="">
                         </div>
                         <div class="form-group" id="solucionBSelect" style="display:none;">
                           <label for="selectSolucionB">Qué Nº de orden se generó?:</label>
@@ -89,7 +89,7 @@
                             @endforeach
                           </select>
                         </div>
-                      
+                        <input type="hidden" name="numFormulario" value="{{$equipoplanejecut->numFormulario}}">
                         <button type="submit" class="btn btn-primary btn-block mt-4" id="submitButton">Enviar</button>
                       </form>
                       

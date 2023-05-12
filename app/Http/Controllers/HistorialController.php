@@ -9,6 +9,7 @@ use App\Models\Tareash;
 use App\Models\Equipoplansejecut;
 use Illuminate\Support\Facades\DB;
 use App\Models\OrdenTrabajo;
+use App\Models\Equipoplan;
 
 class HistorialController extends Controller
 {
@@ -135,23 +136,33 @@ class HistorialController extends Controller
         //dd(request()->all());
 
         $equipo=Equipo::find($id);
-        $planes = Equipoplansejecut::select('codigoPlan')->distinct()->orderBy('codigoPlan')->pluck('codigoPlan');
+        $planesEsteEquipo=Equipoplan::where('equipo_id',$equipo->id)->get();
+        $equipoplansejecuts = Equipoplansejecut::whereIn('plan_id', $planesEsteEquipo->pluck('plan_id'))
+    ->where('equipo_id', $equipo->id)
+    ->get();
+        //return $equipoplansejecuts;
+        //$planes = $equipoplansejecuts::select('codigoPlan')->distinct()->orderBy('codigoPlan')->pluck('codigoPlan');
+       $planes = $equipoplansejecuts->pluck('codigoPlan')->unique()->sort()->values();
 
-        $datos = Equipoplansejecut::select('created_at', 'codigoPlan', 'ejecucion', 'id')
+        //return $planes ;
+        $datos = Equipoplansejecut::select('equipo_id','created_at', 'codigoPlan', 'ejecucion', 'numFormulario')
                     ->orderByDesc('created_at')
+                    ->where('equipo_id',$equipo->id)
                     ->get()
-                    ->groupBy('created_at')
-                    ->map(function ($item) {
+                   // ->groupBy('fecha')
+                    ->groupBy('numFormulario')
+                    ->map(function ($item) { // Solo para permitirme mostrar en forma adecuada
                       // $planData = $item->pluck('ejecucion', 'codigoPlan')->toArray();
                        $planData = $item->pluck('ejecucion', 'codigoPlan')->toArray();
-                       //return $planData1;
-                       return array_merge(['fecha' => $item[0]->created_at->format('Y-m-d')], $planData );
+                      // return $item;
+                     // return array_merge(['numFormulario' => $item[0]->numFormulario], $planData );
+                      return array_merge(['fecha' => $item[0]->created_at->format('Y-m-d')], $planData );
                    })
                     ->toArray();
                     
-        //return $datos;           
-        $datos = collect($datos)->sortByDesc('fecha')->toArray();
-       // return $datos;
+       // $datos = collect($datos)->sortByDesc('numFormulario')->toArray(); 
+       $datos = collect($datos)->sortByDesc('fecha')->toArray(); 
+       //return $planes;
      //   dd($datos);
         return view('historial.preventivoEjecut', compact('datos', 'planes','equipo'));
         
@@ -217,10 +228,13 @@ class HistorialController extends Controller
     public function edit(Request $request) //Para solucionar Pendiente
     {
         $fecha=$request->fecha;
-        $plan=$request->plan;
-        $equipoplanejecut = Equipoplansejecut::where('created_at', $fecha)
-                              ->where('codigoPlan', $plan)
+        $numFormulario=$request->numFormulario;
+        //dd($request);
+        
+        $equipoplanejecut = Equipoplansejecut::where('numFormulario', $numFormulario)
+                              //->where('codigoPlan', $plan)
                               ->first();  //puedo hacerlo con get() pero debo recorrer con foreach
+        //return $equipoplanejecut;                      
         $id=$equipoplanejecut->id;
         $equipo_id=$equipoplanejecut->equipo_id;
 
@@ -244,18 +258,29 @@ class HistorialController extends Controller
      */
     public function update(Request $request)
     {
-        return;
-        $fecha=$request->fecha;
-        $plan=$request->plan;
-        $resultado = Equipoplansejecut::where('created_at', $fecha)
-                              ->where('codigoPlan', $plan)
-                              ->first();  //puedo hacerlo con get() pero debo recorrer con foreach
-        $id=$resultado->id;
-        $equipo_id=$resultado->equipo_id;
-        $plan_id=$resultado->plan_id;
-                 
+        //dd($request);
+        $numFormulario=$request->numFormulario;
+        $solucion=$request->solucion;
+        $correccion="";
+        $resultado = Equipoplansejecut::where('numFormulario', $numFormulario)
+        ->first();  //puedo hacerlo con get() pero debo recorrer con foreach
+       // return $resultado;
+        if($solucion=="A"){
+            $correccion=$request->textoSolucionA; //toma  texto de la solución A
+        }
+        if($solucion=="B"){
+            $correccion="Se generó la ODT-" . $request->selectSolucionB; //toma  Select de la solución B
+        }
+        
+       // return $correccion;
+        $equipoplanejecut= Equipoplansejecut::find($numFormulario); 
+        $equipoplanejecut->pendiente=$correccion;
+        $equipoplanejecut->ejecucion="C";
+        $equipoplanejecut->save();
 
-        return $id;
+
+
+        return $equipoplanejecut;
     }
 
     /**

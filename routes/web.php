@@ -110,7 +110,7 @@ Route::get('/catchId', [RepuestoController::class, 'catchId'])->name('repuestos.
  Route::get('/historialCorrectivo/{equipo}', [HistorialController::class,'historialCorrectivo'])->name('historialCorrectivo');
  Route::get('/historialPreventivoEjecut/{equipo}', [HistorialController::class,'historialPreventivoEjecut'])->name('historialPreventivoEjecut');
  Route::post('/equipoplansejecut/{equipo}/editarPendiente', [HistorialController::class,'edit'])->name('equipoplansejecut.edit');
- Route::post('/equipoplansejecut/{equipo}/updatePendiente', [HistorialController::class,'update'])->name('equipoplansejecut.update');
+ Route::put('/equipoplansejecut/{equipo}/updatePendiente', [HistorialController::class,'update'])->name('equipoplansejecut.update');
  
  //**************************************************************************** */
  Route::resource('protocolos', ProtocoloController::class);
