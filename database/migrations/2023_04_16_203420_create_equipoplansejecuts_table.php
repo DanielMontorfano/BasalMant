@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('supervisor1')->nullable(); //Indica que es un accesorio
             $table->string('tecnico')->nullable(); //Indica que es un accesorio
             $table->string('pendiente')->nullable(); //Indica que es un accesorio
-            $table->string('auxiliar')->nullable(); //Indica que es un accesorio
+            $table->string('correccion')->nullable(); //Indica que es un accesorio
             $table->timestamps();
             $table->foreign('equipo_id')->references('id')->on('equipos')->onDelete('cascade');
             $table->foreign('plan_id')->references('id')->on('plans')->onDelete('cascade');

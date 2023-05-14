@@ -63,6 +63,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),  'verified'
  Route::resource('equipos', EquipoController::class);
  Route::get('equipos/{equipo}/clonar', [EquipoController::class, 'clonar'])->name('equipos.clonar');
  Route::get('equipos/{equipo}/equipoTareasShow', [EquipoController::class, 'equipoTareasShow'])->name('equipos.showtareas');
+
  Route::resource('equipoTareash', TareashController::class);
  
  
@@ -111,6 +112,7 @@ Route::get('/catchId', [RepuestoController::class, 'catchId'])->name('repuestos.
  Route::get('/historialPreventivoEjecut/{equipo}', [HistorialController::class,'historialPreventivoEjecut'])->name('historialPreventivoEjecut');
  Route::post('/equipoplansejecut/{equipo}/editarPendiente', [HistorialController::class,'edit'])->name('equipoplansejecut.edit');
  Route::put('/equipoplansejecut/{equipo}/updatePendiente', [HistorialController::class,'update'])->name('equipoplansejecut.update');
+ Route::get('/formularioShow/{formulario}/Show', [HistorialController::class, 'formularioShow'])->name('formularioShow');
  
  //**************************************************************************** */
  Route::resource('protocolos', ProtocoloController::class);

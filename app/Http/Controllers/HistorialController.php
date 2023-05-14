@@ -10,6 +10,8 @@ use App\Models\Equipoplansejecut;
 use Illuminate\Support\Facades\DB;
 use App\Models\OrdenTrabajo;
 use App\Models\Equipoplan;
+use App\Models\Plan;
+use App\Models\Protocolo;
 
 class HistorialController extends Controller
 {
@@ -218,6 +220,83 @@ class HistorialController extends Controller
         return $resultado;
       
     }
+    
+    public function formularioshow($formulario_id)
+    {
+              
+        //echo "estoy adentro de formulario show" .  $formulario;
+        $formulario = Equipoplansejecut::where('id', '=', $formulario_id)->first(); //Registro completo
+        $tareash= Tareash::where('numFormulario', '=', $formulario_id)->get();
+        $equipo_id=$formulario->equipo_id;
+        $plan_id=$formulario->plan_id; 
+       // ************************************************** $resultado = Equipoplansejecut::first(['id' => $formulario]);
+
+       $equipo= Equipo::find($equipo_id); // Ver la linea de abajo alternativa
+       // $plans=Equipo::find($id)->equiposPlans; 
+       $PlanP= [];
+       $ProtocoloP = [];
+       $Tareas=[];
+
+
+       //foreach($plans as $plan){
+       //$plan_id=$plan->pivot->plan_id;
+       $planParciales= Plan::find( $plan_id); 
+       $PlanP[]=array('id'=>$planParciales->id,'codigo'=>$planParciales->codigo, 'nombre'=> $planParciales->nombre, 'descripcion'=> $planParciales->descripcion, 'frecuencia'=> $planParciales->frecuencia, 'unidad'=> $planParciales->unidad);
+       $protocolos=$planParciales->plansProtocolos;
+
+       foreach($protocolos as $protocolo){
+           $proto_id= $protocolo->pivot->proto_id; //busco el id del protocolo relacionado
+           $protocolosParciales= Protocolo::find( $proto_id); // traigo la coleccion de ese protocolo
+           $ProtocoloP[]=array('id'=> $protocolosParciales->id,'codProto'=> $protocolosParciales->codigo, 'descripcion'=> $protocolosParciales->descripcion);
+           $tareas=$protocolosParciales->protocolosTareas; // traigo todas las tareas de ese protocolo
+       foreach($tareas as $tarea){
+                    
+            $tcheck = tareash::where('tarea_id', '=', $tarea->id)
+            ->where('numFormulario', '=', $formulario->id)
+            ->pluck('tcheck')
+            ->first();
+        
+
+             //return $tcheck;
+             $Tareas[] =array('tarea_id'=>$tarea->id, 'cod'=>$protocolosParciales->codigo, 'codigoTar' => $tarea->codigo, 'descripcion' => $tarea->descripcion, 'duracion' =>$tarea->duracion, 'unidad' =>$tarea->unidad, 'ejecucion'=>$formulario->ejecucion, 'numFormulario'=>$formulario->numFormulario, 'tcheck'=>$tcheck);
+                 
+            
+      
+      
+      
+      
+            }
+     }  
+   //}
+   
+  /* $PlanP = collect($PlanP)->map(function ($item) { //Conversión del array asociociativo, objetos
+       return (object) $item;
+   });
+   
+   $ProtocoloP = collect($ProtocoloP)->map(function ($item) { //Conversión del array asociociativo, objetos
+       return (object) $item;
+   });
+   
+   $Tareas = collect($Tareas)->map(function ($item) { //Conversión del array asociociativo, objetos
+       return (object) $item;
+   });*/
+   
+
+
+
+
+  // return view('tareash.equipoTareasEdit', compact('equipo','PlanP', 'ProtocoloP','Tareas')); 
+  return View('historial.equipoFormularioShow', compact('equipo','PlanP', 'ProtocoloP','Tareas','formulario'));              
+        return $ProtocoloP;
+      
+    }
+
+
+
+
+
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -274,12 +353,13 @@ class HistorialController extends Controller
         
        // return $correccion;
         $equipoplanejecut= Equipoplansejecut::find($numFormulario); 
-        $equipoplanejecut->pendiente=$correccion;
+        $equipoplanejecut->correccion=$correccion;
         $equipoplanejecut->ejecucion="C";
         $equipoplanejecut->save();
 
-
-
+        $equipo_id=$equipoplanejecut->equipo_id;
+        //name('historialPreventivoEjecut')
+        return redirect()->route('historialPreventivoEjecut', $equipo_id); //se puede omitir ->id, igual funciona
         return $equipoplanejecut;
     }
 
