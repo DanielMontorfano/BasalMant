@@ -5,7 +5,8 @@ use App\Models\Equipo;
 use App\Models\OrdenTrabajo;
 use App\Models\Plan;
 use App\Models\Protocolo;
-
+use App\Models\Equipoplansejecut; 
+use App\Models\Tareash;
 use App\Models\Repuesto;
 
 use App\Http\Controllers\Controller;
@@ -157,6 +158,55 @@ $dompdf->stream(); */
      // return;
 
      }
+
+
+
+     public function imprimirFormulario($formulario_id)
+    {
+              
+       // echo "estoy adentro de imprimir formulario " .  $formulario_id;
+       // return;
+        $formulario = Equipoplansejecut::where('id', '=', $formulario_id)->first(); //Registro completo
+        $tareash= Tareash::where('numFormulario', '=', $formulario_id)->get();
+        $equipo_id=$formulario->equipo_id;
+        $plan_id=$formulario->plan_id; 
+       // ************************************************** $resultado = Equipoplansejecut::first(['id' => $formulario]);
+
+       $equipo= Equipo::find($equipo_id); // Ver la linea de abajo alternativa
+       // $plans=Equipo::find($id)->equiposPlans; 
+       $PlanP= [];
+       $ProtocoloP = [];
+       $Tareas=[];
+
+       $planParciales= Plan::find( $plan_id); 
+       $PlanP[]=array('id'=>$planParciales->id,'codigo'=>$planParciales->codigo, 'nombre'=> $planParciales->nombre, 'descripcion'=> $planParciales->descripcion, 'frecuencia'=> $planParciales->frecuencia, 'unidad'=> $planParciales->unidad);
+       $protocolos=$planParciales->plansProtocolos;
+
+       foreach($protocolos as $protocolo){
+           $proto_id= $protocolo->pivot->proto_id; //busco el id del protocolo relacionado
+           $protocolosParciales= Protocolo::find( $proto_id); // traigo la coleccion de ese protocolo
+           $ProtocoloP[]=array('id'=> $protocolosParciales->id,'codProto'=> $protocolosParciales->codigo, 'descripcion'=> $protocolosParciales->descripcion);
+           $tareas=$protocolosParciales->protocolosTareas; // traigo todas las tareas de ese protocolo
+       foreach($tareas as $tarea){
+                    
+            $tcheck = tareash::where('tarea_id', '=', $tarea->id)
+            ->where('numFormulario', '=', $formulario->id)
+            ->pluck('tcheck')
+            ->first();
+        
+
+             //return $tcheck;
+             $Tareas[] =array('tarea_id'=>$tarea->id, 'cod'=>$protocolosParciales->codigo, 'codigoTar' => $tarea->codigo, 'descripcion' => $tarea->descripcion, 'duracion' =>$tarea->duracion, 'unidad' =>$tarea->unidad, 'ejecucion'=>$formulario->ejecucion, 'numFormulario'=>$formulario->numFormulario, 'tcheck'=>$tcheck);
+            }
+     }  
+   //}
+  
+         $pdf = PDF::loadView('impresiones.imprimirFormulario', compact('equipo','PlanP', 'ProtocoloP','Tareas','formulario'));
+        $variable="Formulario" . $formulario_id .".pdf";
+        return $pdf->download($variable);       
+      
+    }
+
 
 
 

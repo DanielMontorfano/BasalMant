@@ -110,7 +110,7 @@
 </TABLE> 
 
 <body>
-
+  <a class="dropdown-item bi bi-printer" href={{route('imprimirFormulario', $formulario->id)}}>&nbsp; Formualrio</a>
 
 
 
@@ -123,6 +123,7 @@
 
 <!-- Envuelva el contenido de su PDF dentro de una etiqueta principal -->
 <main>
+ 
   @if(isset($PlanP))
     @foreach($PlanP as $plan)
     <table class="table-bordered">
@@ -136,15 +137,13 @@
       <br>
     </table>
       @if(isset($ProtocoloP))
+      
         @foreach($ProtocoloP as $protocolo)
           <div class="col-12" align="left"><strong>{{ $protocolo['descripcion'] }}</strong></div> 
           <div style="padding-top: 1%;" class="row align-items-end">
            
-            <table class="table-bordered">
-              <thead>
-                <th>TCheck</th>
-                <th>Descripción</th>
-              </thead>
+           
+            <table class="table">
               @foreach($Tareas as $tarea) 
                 @if($tarea['tcheck'] !== null && $protocolo['codProto'] == $tarea['cod'])
                   <tr>
@@ -158,18 +157,28 @@
             <div>&nbsp;</div>
           </div>
         @endforeach 
-      </ul> 
+    
       @endif
     @endforeach
   @endif 
  
   <table id="rotulo">
     <tr>
-      <td colspan="2">Tarea pendiente: {{$formulario->pendiente}}</td>
+      <td colspan="2">
+        @if($formulario->pendiente)
+          Tarea pendiente: {{$formulario->pendiente}}
+        @else
+          <span class="text-success">No existe tarea pendiente</span>
+        @endif
+      </td>
     </tr>
+    
     <tr>
-      <td colspan="2">Corrección realizada: {{$formulario->correccion}} en la fecha {{ $formulario->created_at->format('d-m-Y') }}</td>
+      @if($formulario->correccion !== null)
+        <td colspan="2">Corrección realizada: {{$formulario->correccion}} en la fecha {{ $formulario->created_at->format('d-m-Y') }}</td>
+      @endif
     </tr>
+    
     <tr>
       <td>Realizado por: {{$formulario->tecnico}}</td>
       <td>Supervisado por: {{$formulario->supervisor1}}</td>
@@ -177,11 +186,12 @@
     </tr>
   </table>
   <div class="container mt-4">
-    <p><strong>R:</strong> <span class="text-success">Realizado</span></p>
-    <p><strong>OP:</strong> <span class="text-success">Operativo</span></p>
-    <p><strong>INC:</strong> <span class="text-warning">Incompleto</span></p>
-    <p><strong>NR:</strong> <span class="text-danger">No realizado</span></p>
+  <p class="mb-1"><strong>R:</strong> <span class="text-success">Realizado</span></p>
+  <p class="mb-1"><strong>OP:</strong> <span class="text-success">Operativo</span></p>
+  <p class="mb-1"><strong>INC:</strong> <span class="text-warning">Incompleto</span></p>
+  <p class="mb-0"><strong>NR:</strong> <span class="text-danger">No realizado</span></p>
 </div>
+
 
   
 </main>

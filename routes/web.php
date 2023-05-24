@@ -136,7 +136,8 @@ Route::get('/catchId', [RepuestoController::class, 'catchId'])->name('repuestos.
  Route::get('/imprimirOrden/{orden}', [imprimirController::class,'imprimirOrden'])->name('imprimirOrden');
  Route::get('/imprimirPlan/{plan}', [imprimirController::class,'imprimirPlan'])->name('imprimirPlan');
  Route::get('/imprimirListado/{titulo}', [imprimirController::class,'imprimirListado'])->name('imprimirListado');
-
+ Route::get('/imprimirFormulario/{titulo}', [imprimirController::class,'imprimirListado'])->name('imprimirListado');
+ Route::get('/imprimirFormulario/{formulario}/Imprimir', [imprimirController::class, 'imprimirFormulario'])->name('imprimirFormulario');
  //route::post('imagen/store', [ImagenController::class,'store'])->name('imagen.store');
  
  
