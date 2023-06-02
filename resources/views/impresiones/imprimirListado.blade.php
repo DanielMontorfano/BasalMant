@@ -87,28 +87,28 @@ body {
 
 
 <footer>
-<!-- Copyright © <?php echo date("Y");?> -->
-
-<br><br>
-<TABLE BORDER=3  WIDTH="100%" CELLPADDING=1 CELLSPACING=0 >
-	<TR  ALIGN=center>
-
-    <TD Width=25% valign= middle> Revisión</TD>
-    <TD Width=25% valign= middle> Elaboración</TD>
-    <TD Width=50% colspan="2" valign= middle> Aprobaciones</TD>  
-    
-	</TR>
-	<TR>
-        <TD valign= top ><br></TD>
-        <TD style="text-align: center"  >Equipo de calidad</TD>
-        <TD height="55px" valign= top >&nbsp; Area origen:<br></TD>
-        <TD valign= top >&nbsp; Area usuaria:</TD>
+  <!-- Copyright © <?php echo date("Y");?> -->
+  
+  
+  <TABLE BORDER=3  WIDTH="100%" CELLPADDING=1 CELLSPACING=0 >
+    <TR  ALIGN=center>
+  
+      <TD Width=25% valign= middle> Revisión</TD>
+      <TD Width=25% valign= middle> Elaboración</TD>
+      <TD Width=50% colspan="2" valign= middle> Aprobaciones</TD>  
+      
     </TR>
-    
-    
-
-</TABLE>
-</footer>
+    <TR>
+          <TD valign= top style="padding-left: 15px;" > Revisó:<br>LEI</TD>
+          <TD style="text-align: center"  >Depto. Mantenimiento</TD>
+          <TD height="55px" valign= top style="padding-left: 15px;" >Area origen:<br>Depto. Mantenimiento</TD>
+          <TD valign= top style="padding-left: 15px;"> Area usuaria: <br> Fábrica</TD>
+      </TR>
+      
+      
+  
+  </TABLE>
+  </footer>
 
 <!-- Envuelva el contenido de su PDF dentro de una etiqueta principal -->
 <main>

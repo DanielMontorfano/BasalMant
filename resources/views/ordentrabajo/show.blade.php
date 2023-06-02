@@ -31,12 +31,12 @@
 
                 <div class="col col-md-8">
                   <h6>O.d.T para:  {{$equipo->codEquipo}}</h6> 
-                  <div class="dropdown">
-                    <a title="Reportes" class=" fa-solid fa-solid fa-print btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                          <a class="dropdown-item" href="{{ route('imprimirOrden', $ot->id) }}">Imprimir orden</a>
-                          
-                        </div>
+                  
+
+                  <div id="boton">
+                    <a class="btn btn-success" href="{{ route('imprimirOrden', $ot->id) }}">
+                      <i class="bi bi-printer"></i>  Imprimir orden
+                    </a>
                   </div>
                   <br>
 

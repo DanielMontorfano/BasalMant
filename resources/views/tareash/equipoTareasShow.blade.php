@@ -71,7 +71,12 @@
                 -webkit-text-fill-color: transparent;">Plan de mantenimiento: {{ $equipo->codEquipo }}</h6>
 
     <p class="text-white"><a href="{{ route('equipoTareash.edit', $equipo->id) }}" class="text-white">Cargar ficha plan</a></p>
-    <button style="background-color: Transparent;border: none;" title="Imprimir ficha plan"><a  class="bi bi-printer" href={{route('imprimirPlan', $equipo->id)}}>  </a></button>    
+    <div id="boton">
+      <a class="btn btn-success" href={{route('imprimirPlan', $equipo->id)}}>
+        <i class="bi bi-printer"></i>  Imprimir plan
+      </a>
+    </div>
+   
     @if (isset($PlanP))
         @foreach ($PlanP as $plan)
             <table id="listado" class="table-bordered">

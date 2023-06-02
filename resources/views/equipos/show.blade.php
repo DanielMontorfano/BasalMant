@@ -15,29 +15,34 @@
 <div class="card border-primary" style="background: linear-gradient(to left,#495c5c,#030007); ">
 <div class="card-body "  style="max-width: 95;">
 
-  <TABLE BORDER=3  WIDTH="100%" CELLPADDING=1 CELLSPACING=0 >
-    <TR ALIGN=center >
-  
-      <TD ROWSPAN=3 Width=20% valign= middle> <img src="../storage/LogoIngenio2.png"   height="100px" width="130px"/></TD>
-          <TD ROWSPAN=3 Width=60%><h1>Ficha técnica de equipo</h1><h2>{{$equipo->codEquipo}}</h2></TD>
-        <TD>GFPO17.V01</TD>
-        
+  <header>
+<TABLE BORDER=3  WIDTH="100%" CELLPADDING=1 CELLSPACING=0  >
+	<TR ALIGN=center >
+
+    <TD ROWSPAN=3 Width=20% valign= middle> <img src="../storage/LogoIngenio2.png"    height="100px" width="130px"/></TD>
+        <TD ROWSPAN=3 Width=60%><h1>Ficha técnica de equipo</h1></TD>
+	    <TD>GFRE11.V01</TD>
+      
+	</TR>
+	<TR>
+        <TD>Vigencia: 09/02/2023</TD>
     </TR>
     <TR>
-          <TD>Revisión:</TD>
-      </TR>
-      <TR>
-          <TD>Página 1 de 1:</TD>
-      </TR>
-      
-      
-  
-  </TABLE>
+        <TD>Revisión: 09/02/2023</TD> <!-- Aqui Nº de pagina  -->
+    </TR>
+    
+    
+
+</TABLE>
+
+</header>
+
 <br>
 <br>
 
-  
+ 
   <Ul style="list-style-type: none; margin-left: -37px;">
+    <li style="font-size:150%;"><strong>Código:</strong>&nbsp;  {{$equipo->codEquipo}}</li> 
     <li style="font-size:150%;"><strong>Marca:</strong>&nbsp;  {{$equipo->marca}}</li>
     <li style="font-size:150%;"><strong>Modelo:</strong>&nbsp;  {{$equipo->modelo}}</li>
     <li style="font-size:150%;"><strong>Sección:</strong>&nbsp;  {{$equipo->idSecc}}</li>
@@ -168,10 +173,10 @@
             
           </TR>
           <TR>
-                <TD valign= top ><br></TD>
-                <TD style="text-align: center"  >Equipo de calidad</TD>
-                <TD height="55px" valign= top >&nbsp; Area origen:<br></TD>
-                <TD valign= top >&nbsp; Area usuaria:</TD>
+                <TD valign= top style="padding-left: 15px;" > Revisó:<br>LEI</TD>
+                <TD style="text-align: center"  >Depto. Mantenimiento</TD>
+                <TD height="55px" valign= top style="padding-left: 15px;" >Area origen:<br>Depto. Mantenimiento</TD>
+                <TD valign= top style="padding-left: 15px;"> Area usuaria: <br> Fábrica</TD>
             </TR>
             
             

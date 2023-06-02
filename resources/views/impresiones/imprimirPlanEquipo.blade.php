@@ -65,15 +65,15 @@ line-height: 0.5cm;
 	<TR ALIGN=center >
 
     <TD ROWSPAN=3 Width=20% valign= middle> <img src="storage/logoIngenio2.png"   height="100px" width="130px"/></TD>
-        <TD ROWSPAN=3 Width=60%><h1>Ficha plan</h1><h2>PLAN-{{$equipo->codEquipo}}</h2></TD>
-	    <TD>GFPO17.V01</TD>
+        <TD ROWSPAN=3 Width=60%><h1>FICHA PLAN</h1></TD>
+	    <TD>GFRE11.V01</TD>
       
 	</TR>
 	<TR>
-        <TD>Revisión:</TD>
+        <TD>Vigencia: 09/02/2023</TD>
     </TR>
     <TR>
-        <TD></TD> <!-- Aqui Nº de pagina  -->
+        <TD>Revisión: 09/02/2023</TD> <!-- Aqui Nº de pagina  -->
     </TR>
     
     
@@ -86,40 +86,41 @@ line-height: 0.5cm;
 
 
 <footer>
-<!-- Copyright © <?php echo date("Y");?> -->
-<br><br>
-<TABLE BORDER=3  WIDTH="100%" CELLPADDING=1 CELLSPACING=0 >
-	<TR  ALIGN=center>
-
-    <TD Width=25% valign= middle> Revisión</TD>
-    <TD Width=25% valign= middle> Elaboración</TD>
-    <TD Width=50% colspan="2" valign= middle> Aprobaciones</TD>  
-    
-	</TR>
-	<TR>
-        <TD valign= top ><br></TD>
-        <TD style="text-align: center"  >Equipo de calidad</TD>
-        <TD height="55px" valign= top >&nbsp; Area origen:<br></TD>
-        <TD valign= top >&nbsp; Area usuaria:</TD>
+  <!-- Copyright © <?php echo date("Y");?> -->
+  
+  
+  <TABLE BORDER=3  WIDTH="100%" CELLPADDING=1 CELLSPACING=0 >
+    <TR  ALIGN=center>
+  
+      <TD Width=25% valign= middle> Revisión</TD>
+      <TD Width=25% valign= middle> Elaboración</TD>
+      <TD Width=50% colspan="2" valign= middle> Aprobaciones</TD>  
+      
     </TR>
-    
-    
-
-</TABLE>
-</footer>
-
+    <TR>
+          <TD valign= top style="padding-left: 15px;" > Revisó:<br>LEI</TD>
+          <TD style="text-align: center"  >Depto. Mantenimiento</TD>
+          <TD height="55px" valign= top style="padding-left: 15px;" >Area origen:<br>Depto. Mantenimiento</TD>
+          <TD valign= top style="padding-left: 15px;"> Area usuaria: <br> Fábrica</TD>
+      </TR>
+      
+      
+  
+  </TABLE>
+  </footer>
 <!-- Envuelva el contenido de su PDF dentro de una etiqueta principal -->
 <main>
-
-
-
 
   @if(isset($PlanP))
   @foreach($PlanP as $plan)
   <Ul style="list-style-type: none; margin-left: -37px;">
-    <li style="font-size:150%; text-align:center"><strong><u>{{$equipo->marca}}&nbsp;{{$equipo->modelo}} </u></strong></li><br><br>
-    <li style="font-size:110%;"><strong>Aplicar en:</strong>&nbsp;  {{$plan['nombre']}}</li>
-    <li style="font-size:110%;"><strong>Clasificación del plan:</strong>&nbsp;  {{$plan['descripcion']}}</li>
+
+    <li style="font-size:110%;"><strong>Código del equipo:</strong>&nbsp;  {{$equipo->codEquipo}}</li>
+    <li style="font-size:110%;"><strong>Marca del equipo:</strong>&nbsp;  {{$equipo->marca}}</li>
+    <li style="font-size:110%;"><strong>Modelo del equipo:</strong>&nbsp;  {{$equipo->modelo}}</li>
+    <li style="font-size:110%;"><strong>Nombre:</strong>&nbsp;  {{$plan['nombre']}}</li>
+    <li style="font-size:110%;"><strong>Descripción:</strong>&nbsp;  {{$plan['descripcion']}}</li>
+    <li style="font-size:110%;"><strong>Frecuencia:</strong>&nbsp;  {{$plan['frecuencia']}}&nbsp;{{$plan['unidad']}}</li>
   </Ul> 
 <br>
 
@@ -158,7 +159,7 @@ line-height: 0.5cm;
 
   
 </body>
-<script type="text/php"> 
+{{-- <script type="text/php"> 
     
   if (isset($pdf)) { 
    //Shows number center-bottom of A4 page with $x,$y values
@@ -174,6 +175,6 @@ line-height: 0.5cm;
       $pdf->page_text($x, $y, $text, $font, $size, $color, $word_space, $char_space, $angle);
   }
   
-</script>
+</script> --}}
 </html>
 

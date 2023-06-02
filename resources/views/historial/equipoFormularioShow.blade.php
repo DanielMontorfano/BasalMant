@@ -81,7 +81,9 @@
   .select-custom {
   background-color: #9d9074a3;
 }
-
+#boton {
+  padding-top: 10px;
+}
 
 </style>
 @endsection
@@ -110,8 +112,11 @@
 </TABLE> 
 
 <body>
-  <a class="dropdown-item bi bi-printer" href={{route('imprimirFormulario', $formulario->id)}}>&nbsp; Formualrio</a>
-
+  <div id="boton">
+  <a class="btn btn-success" href="{{ route('imprimirFormulario', $formulario->id) }}">
+    <i class="bi bi-printer"></i> Formulario
+  </a>
+</div>
 
 
 

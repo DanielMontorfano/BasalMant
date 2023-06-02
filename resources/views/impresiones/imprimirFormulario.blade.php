@@ -13,10 +13,10 @@ margin: 0.5cm 0.5cm;
 
 /** Defina ahora los márgenes reales de cada página en el PDF **/
 body {
-margin-top: 2cm;
+margin-top: 3.5cm;
 margin-left: 2cm;
 margin-right: 2cm;
-margin-bottom: 2cm;
+margin-bottom: 4cm;
 }
 
 /** Definir las reglas del encabezado **/
@@ -37,7 +37,7 @@ line-height: .5cm;
 /** Definir las reglas del pie de página **/
 footer {
 position: fixed;
-bottom: 0.5cm;
+bottom: 0.9cm;
 left: 0cm;
 right: 0cm;
 height: 2.0cm;
@@ -53,14 +53,14 @@ line-height: 0.5cm;
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    border: 1px solid #4c4a4a;
+    border: 1px solid #9c9a9a;
     border-radius: 5px;
     overflow: hidden;
   }
 
   .rounded-table td {
     padding: 8px;
-    border: 1px solid #4c4a4a;
+    border: 1px solid  #9c9a9a;
   }
 
 
@@ -79,7 +79,7 @@ line-height: 0.5cm;
       
 	</TR>
 	<TR>
-        <TD>Revisión:</TD>
+        <TD>Revisión:{{ $formulario->created_at->format('d-m-Y') }}</TD>
     </TR>
     <TR>
         <TD>Página 1 de 1:</TD>
@@ -107,10 +107,10 @@ line-height: 0.5cm;
     
 	</TR>
 	<TR>
-        <TD valign= top ><br></TD>
-        <TD style="text-align: center"  >Equipo de calidad</TD>
-        <TD height="55px" valign= top >&nbsp; Area origen:<br></TD>
-        <TD valign= top >&nbsp; Area usuaria:</TD>
+        <TD valign= top style="padding-left: 15px;" > Revisó:<br>LEI</TD>
+        <TD style="text-align: center"  >Depto. Mantenimiento</TD>
+        <TD height="55px" valign= top style="padding-left: 15px;" >Area origen:<br>Depto. Mantenimiento</TD>
+        <TD valign= top style="padding-left: 15px;"> Area usuaria: <br> Fábrica</TD>
     </TR>
     
     
@@ -131,6 +131,7 @@ line-height: 0.5cm;
         <li style="font-size: 110%; "><strong>Sección: {{ $equipo->idSecc }}</strong></li>
         <li style="font-size: 110%;"><strong>Plan:</strong>&nbsp;{{ $plan['nombre'] }} </li>
         <li style="font-size: 110%;"><strong>Frecuencia: </strong>{{ $plan['frecuencia'] }} {{ $plan['unidad'] }} </li>
+        <li style="font-size: 110%;"><strong>Fecha de ejecución:</strong>{{ $formulario->created_at->format('d-m-Y') }} </li>
         <li style="font-size: 110%;"><strong>Descripción del plan:</strong>&nbsp;{{ $plan['descripcion'] }}</li>
       </ul> 
       </tr>

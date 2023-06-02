@@ -63,15 +63,15 @@ body {
 	<TR ALIGN=center >
 
     <TD ROWSPAN=3 Width=20% valign= middle> <img src="storage/logoIngenio2.png"   height="100px" width="130px"/></TD>
-        <TD ROWSPAN=3 Width=60%><h1>Ficha técnica de equipo</h1><h2>{{$equipo->codEquipo}}</h2></TD>
-	    <TD>GFPO17.V01</TD>
+        <TD ROWSPAN=3 Width=60%><h2>FICHA TECNICA DE EQUIPO</h2></TD>
+	    <TD>GFRE12.V01</TD>
       
 	</TR>
 	<TR>
-        <TD>Revisión:</TD>
+        <TD>Vigencia: 09/02/2023</TD>
     </TR>
     <TR>
-        <TD></TD>
+        <TD>Revisión: 09/02/2023</TD>
     </TR>
     
     
@@ -83,37 +83,38 @@ body {
 
 
 <footer>
-<!-- Copyright © <?php echo date("Y");?> -->
-
-<br><br>
-<TABLE BORDER=3  WIDTH="100%" CELLPADDING=1 CELLSPACING=0 >
-	<TR  ALIGN=center>
-
-    <TD Width=25% valign= middle> Revisión</TD>
-    <TD Width=25% valign= middle> Elaboración</TD>
-    <TD Width=50% colspan="2" valign= middle> Aprobaciones</TD>  
-    
-	</TR>
-	<TR>
-        <TD valign= top ><br></TD>
-        <TD style="text-align: center"  >Equipo de calidad</TD>
-        <TD height="55px" valign= top >&nbsp; Area origen:<br></TD>
-        <TD valign= top >&nbsp; Area usuaria:</TD>
+  <!-- Copyright © <?php echo date("Y");?> -->
+  
+  
+  <TABLE BORDER=3  WIDTH="100%" CELLPADDING=1 CELLSPACING=0 >
+    <TR  ALIGN=center>
+  
+      <TD Width=25% valign= middle> Revisión</TD>
+      <TD Width=25% valign= middle> Elaboración</TD>
+      <TD Width=50% colspan="2" valign= middle> Aprobaciones</TD>  
+      
     </TR>
-    
-    
-
-</TABLE>
-</footer>
+    <TR>
+          <TD valign= top style="padding-left: 15px;" > Revisó:<br>LEI</TD>
+          <TD style="text-align: center"  >Depto. Mantenimiento</TD>
+          <TD height="55px" valign= top style="padding-left: 15px;" >Area origen:<br>Depto. Mantenimiento</TD>
+          <TD valign= top style="padding-left: 15px;"> Area usuaria: <br> Fábrica</TD>
+      </TR>
+      
+      
+  
+  </TABLE>
+  </footer>
 
 <!-- Envuelva el contenido de su PDF dentro de una etiqueta principal -->
 <main>
-
+  
   <Ul style="list-style-type: none; margin-left: -37px;">
-    <li style="font-size:150%;"><strong>Marca:</strong>&nbsp;  {{$equipo->marca}}</li>
-    <li style="font-size:150%;"><strong>Modelo:</strong>&nbsp;  {{$equipo->modelo}}</li>
-    <li style="font-size:150%;"><strong>Sección:</strong>&nbsp;  {{$equipo->idSecc}}</li>
-    <li style="font-size:150%;"><strong>Subsección:</strong>&nbsp;  {{$equipo->idSubSecc}}</li>
+    <li style="font-size:130%;"><strong>Código:</strong>&nbsp;  {{$equipo->codEquipo}}</li>
+    <li style="font-size:130%;"><strong>Marca:</strong>&nbsp;  {{$equipo->marca}}</li>
+    <li style="font-size:130%;"><strong>Modelo:</strong>&nbsp;  {{$equipo->modelo}}</li>
+    <li style="font-size:130%;"><strong>Sección:</strong>&nbsp;  {{$equipo->idSecc}}</li>
+    <li style="font-size:130%;"><strong>Subsección:</strong>&nbsp;  {{$equipo->idSubSecc}}</li>
   </Ul>  
     
   <Ul style="margin-left: -25px;">
@@ -229,7 +230,8 @@ body {
 
   
 </body>
-<script type="text/php"> 
+
+{{-- <script type="text/php"> 
     
   if (isset($pdf)) { 
    //Shows number center-bottom of A4 page with $x,$y values
@@ -245,6 +247,6 @@ body {
       $pdf->page_text($x, $y, $text, $font, $size, $color, $word_space, $char_space, $angle);
   }
   
-</script>
+</script> --}}
 
 </html>

@@ -17,24 +17,28 @@
 <div class="card border-primary" style="background: linear-gradient(to left,#495c5c,#030007); ">
 <div class="card-body "  style="max-width: 95;">
 
-  <TABLE BORDER=3  WIDTH="100%" CELLPADDING=1 CELLSPACING=0 >
-    <TR ALIGN=center >
-  
-      <TD ROWSPAN=3 Width=20% valign= middle> <img src="../storage/LogoIngenio2.png"   height="100px" width="130px"/></TD>
-          <TD ROWSPAN=3 Width=60%><h1>Ficha Plan</h1><h2>{{$plan->codigo}}</h2></TD>
-        <TD>GFPO17.V01</TD>
-        
-    </TR>
-    <TR>
-          <TD>Revisión:</TD>
+  <header>
+    <TABLE BORDER=3  WIDTH="100%" CELLPADDING=1 CELLSPACING=0  >
+      <TR ALIGN=center >
+    
+        <TD ROWSPAN=3 Width=20% valign= middle> <img src="../storage/LogoIngenio2.png"   height="100px" width="130px"/></TD>
+            <TD ROWSPAN=3 Width=60%><h1>Ficha plan</h1><h2>{{$plan->codigo}}</h2></TD>
+          <TD>GFRE11.V01</TD>
+          
       </TR>
       <TR>
-          <TD>Página 1 de 1:</TD>
-      </TR>
-      
-      
-  
-  </TABLE>
+            <TD>Vigencia: 09/02/2023</TD>
+        </TR>
+        <TR>
+            <TD>Revisión: 09/02/2023</TD> <!-- Aqui Nº de pagina  -->
+        </TR>
+        
+        
+    
+    </TABLE>
+    
+    </header>
+    
 <br>
 <br>
 <br>
