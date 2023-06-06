@@ -53,6 +53,8 @@
                     <tr>
                         <th>Nº formulario</th>
                         <th>Fecha</th>
+                        <th>Técnico</th>
+                        <th>Supervisor</th>
                         @foreach ($planes as $plan)
                             <th>{{ $plan }}</th>
                         @endforeach
@@ -64,6 +66,8 @@
                             {{-- <td><a href="{{ route('nombre_de_la_ruta', ['numFormulario' => $numFormulario]) }}">{{ $numFormulario }}</a></td> --}}
                             <td><a href="{{ route('formularioShow', $numFormulario) }}">{{ $numFormulario }}</a></td>
                             <td>{{ $item['fecha'] }}</td>
+                            <td>{{ $item['tecnico'] }}</td>
+                            <td>{{ $item['supervisor1'] }}</td>
                             @foreach ($planes as $plan)
                                 <td>
                                     @if (isset($item[$plan]))

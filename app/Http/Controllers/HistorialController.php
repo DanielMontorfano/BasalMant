@@ -133,7 +133,7 @@ class HistorialController extends Controller
 
     }
 
-    public function historialPreventivoEjecut($id) //entro con id de Equipo
+   /* public function historialPreventivoEjecut1($id) //PRIMERA VERIOSION entro con id de Equipo
     {   
         //dd(request()->all());
 
@@ -165,16 +165,41 @@ class HistorialController extends Controller
        // $datos = collect($datos)->sortByDesc('numFormulario')->toArray(); 
        $datos = collect($datos)->sortByDesc('fecha')->toArray(); 
        //return $planes;
-     //   dd($datos);
+       // dd($datos);
         return view('historial.preventivoEjecut', compact('datos', 'planes','equipo'));
         
     
         
          
  
-    }
+    } */
 
+    public function historialPreventivoEjecut($id)
+{
+    $equipo = Equipo::find($id);
+    $planesEsteEquipo = Equipoplan::where('equipo_id', $equipo->id)->get();
+    $equipoplansejecuts = Equipoplansejecut::whereIn('plan_id', $planesEsteEquipo->pluck('plan_id'))
+        ->where('equipo_id', $equipo->id)
+        ->get();
     
+    $planes = $equipoplansejecuts->pluck('codigoPlan')->unique()->sort()->values();
+    
+    $datos = Equipoplansejecut::select('equipo_id', 'created_at', 'codigoPlan', 'ejecucion', 'numFormulario', 'tecnico', 'supervisor1')
+        ->orderByDesc('created_at')
+        ->where('equipo_id', $equipo->id)
+        ->get()
+        ->groupBy('numFormulario')
+        ->map(function ($item) {
+            $planData = $item->pluck('ejecucion', 'codigoPlan')->toArray();
+            return array_merge(['fecha' => $item[0]->created_at->format('Y-m-d'), 'tecnico' => $item[0]->tecnico, 'supervisor1' => $item[0]->supervisor1], $planData);
+        })
+        ->toArray();
+
+    $datos = collect($datos)->sortByDesc('fecha')->toArray();
+    // dd($datos);
+    return view('historial.preventivoEjecut', compact('datos', 'planes', 'equipo'));
+}
+
 
 
 
