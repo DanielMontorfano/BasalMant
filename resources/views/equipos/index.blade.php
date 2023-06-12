@@ -4,6 +4,26 @@
 @extends('adminlte::page',$id[]=array($equipo->id))
 @section('title', 'Equipos')
 @section('css')
+<style>
+  .custom-search-button {
+    padding: 5px 10px; /* Ajusta el espacio (padding) según tus preferencias */
+    margin-left: 10px; /* Ajusta el espacio (margen) a la izquierda */
+    background-color: rgb(86, 103, 86); /* Cambia el color de fondo a verde */
+    color: rgb(214, 239, 224); /* Cambia el color del texto a blanco */
+    border: none; /* Elimina el borde */
+    border-radius: 8px; /* Ajusta el radio de las esquinas */
+  }
+  
+  .custom-search-button:hover {
+    background-color: rgb(73, 133, 73); /* Cambia el color de fondo a lightgreen cuando se hace hover */
+  }
+  
+  .custom-search-button:active {
+    background-color: rgb(60, 80, 60); /* Vuelve al color de fondo verde cuando se presiona */
+  }
+  </style>
+
+
 {{-- https://datatables.net/ **IMPORTANTE PLUG IN PARA LAS TABLAS --}}
 {{-- Para que sea responsive se agraga la tercer libreria --}}
 {{-- Todo lo de plantilla --}}
@@ -72,7 +92,31 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
 @endsection
 @section('js')
 <script>
- 
+ $(document).ready(function() {
+  var datatable;
+
+  if ($.fn.DataTable.isDataTable('#listado')) {
+    datatable = $('#listado').DataTable();
+  } else {
+    datatable = $('#listado').DataTable({
+      // Configuración de DataTable
+    });
+  }
+
+  // Agregar botón de filtrado
+  var searchButton = $('<button/>', {
+    text: 'Críticos',
+    title: 'Equipos críticos',
+    class: 'custom-search-button', // Agregamos una clase personalizada
+    click: function() {
+      var searchInput = $('.dataTables_filter input');
+      searchInput.val('Crítico').trigger('keyup');
+    }
+  });
+
+  $('.dataTables_filter').append(searchButton);
+});
+
  /* var logoUrl = '{{ asset('dataprint/LogoIngenio2.png') }}';
 
   var titulo ='Listado de todos los equipos';
