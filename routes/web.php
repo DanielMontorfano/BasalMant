@@ -27,11 +27,16 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\PlanprotoController;
 use App\Http\Controllers\SearchTareasController;
 use App\Http\Controllers\SearchProtocolosController; 
-use App\Http\Controllers\SearchPlansController;
+use App\Http\Controllers\SearchPlansController; 
+use App\Http\Controllers\SearchLubricController; 
 use App\Http\Controllers\SearchEquipoController;
 use App\Http\Controllers\TareashController;
 use App\Http\Controllers\imprimirController;
 use App\Http\Controllers\HistorialController;
+
+use App\Http\Controllers\LubricacionController;
+use App\Http\Controllers\EquipoLubricacionController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -129,7 +134,22 @@ Route::get('/catchId', [RepuestoController::class, 'catchId'])->name('repuestos.
  Route::get('search/tareas', [SearchTareasController::class,'tareas'])->name('search.tareas'); //esta ruta permite hacer las busqudas asicrónicas AJAX
  Route::get('search/protocolos', [SearchProtocolosController::class,'protocolos'])->name('search.protocolos'); //esta ruta permite hacer las busqudas asicrónicas AJAX
  Route::get('search/plans', [SearchPlansController::class,'plans'])->name('search.plans'); //NO Olvidar poner use!!!! esta ruta permite hacer las busqudas asicrónicas AJAX
+ Route::get('search/lubricaciones', [SearchLubricController::class,'lubricaciones'])->name('search.lubricaciones');
  Route::get('search/equipos', [SearchEquipoController::class,'equipos'])->name('search.equipos'); //NO Olvidar poner use!!!! esta ruta permite hacer las busqudas asicrónicas AJAX
+ 
+ 
+ //****************************LUBRICACIONES*********************** */
+ Route::resource('lubricacion', LubricacionController::class);
+ 
+
+
+
+ Route::resource('tablaLubricaciones', EquipoLubricacionController::class);
+ Route::get('tablaCargar', [EquipoLubricacionController::class,'tablaCargar'])->name('tablaCargar');
+ 
+ 
+ 
+ 
  //****************************IMPRIMIR*********************** */
  Route::get('/imprimir', [imprimirController::class,'imprimir'])->name('imprimir');
  Route::get('/imprimirEquipo/{equipo}', [imprimirController::class,'imprimirEquipo'])->name('imprimirEquipo');

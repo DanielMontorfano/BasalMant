@@ -95,7 +95,10 @@ class Equipo extends Model
        // return $this->belongsToMany('App\Models\Repuesto', 'equipo_repuestos', 'equipo_id', 'repuesto_id');
     }
 
-
+    public function lubricaciones()
+    {
+        return $this->hasMany('App\Models\Lubricacion', 'equipo_lubricacion','equipo_id', 'lubricacion_id');
+    }
 
  //   public function products()
 //{

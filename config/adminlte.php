@@ -341,6 +341,8 @@ return [
              'route'       => 'repuestos.index',
             'topnav_right' => true,
         ],
+
+        
         
         [
             'type'         => 'navbar-search',
@@ -383,21 +385,24 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],"Quitar opciones de  menus "*/ 
         [
-            'text'    => 'Crear',
+            'text'    => 'Lubricaciones',
             'icon'    => 'fas fa-fw fa-share',
             'icon_color' => 'cyan',
             'submenu' => [
                 [
-                    'text' => 'Equipos',
+                    'text' => 'Crear',
                     'icon' => 'fa-solid fa-clipboard',
-                    'route'=> 'equipos.create',
+                    'route'=> 'lubricacion.create',
                 ],
                 [
-                    'text' => 'Planes',
+                    'text' => 'Planilla',
                     'icon' => 'fa-solid fa-list',
-                    'route'=> 'plans.create',
+                    'route'=> 'tablaLubricaciones.index',
                     
                 ],
+ 
+               
+
                             
                 [
                     'text' => 'Procedimientos',  //protocolo
