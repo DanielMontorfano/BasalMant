@@ -78,7 +78,21 @@ class EquipoLubricacionController extends Controller
         // Redirige a la vista anterior
         return redirect()->back();
 
+/**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+    
 
+    public function store(Request $request)
+    {  echo"estoy dentrobbbbbbbbbbbbb";
+       return; 
+    }
 
 
 
