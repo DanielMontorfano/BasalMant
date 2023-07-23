@@ -27,13 +27,106 @@ class EquipoLubricacionController extends Controller
     // Obtener los días y turnos únicos de la tabla
     $dias = $LubricacionesVinculadas->pluck('dia')->unique();
     $turnos = $LubricacionesVinculadas->pluck('turno')->unique();
-
+    //return $LubricacionesVinculadas;
     // Pasar los datos a la vista
     return view('lubricacion.index', compact('LubricacionesVinculadas', 'dias', 'turnos'));
 }
 
+    public function create()
+    {
+        //
+    }
+    public function store(Request $request) //esto funciona una vez creado StoreEquipo de Request
+    //public function store(Request $request) //Antes de usar archivo StoreEquipo en Request
+    {   
+        //dd(request()->all());
+        $Selector=$request->get('Selector'); //toma del formulario
+        $equipo_id=$request->get('equipo_id'); //toma del formulario
+        $lubricacion_id=$request->get('lubricacion_id'); //toma del formulario
+        $cadena=$request->get('BuscaLubricacion'); //toma cadena completa del formulario
+        $equipo = Equipo::find($equipo_id);
+
+                // Tu código para verificar si la relación existe
+            $existeRelacion = Equipo::whereHas('lubricaciones', function ($query) use ($lubricacion_id) {
+                $query->where('lubricacion_id', $lubricacion_id);
+            })->where('id', $equipo_id)->exists();
+
+            if ($existeRelacion) {
+                // Si la relación existe, agrega un mensaje a la sesión
+                session()->flash('mensaje', 'Relación existente');
+                return redirect()->back();
+            } else {
+                // Si la relación no existe, agrega un mensaje a la sesión
+        session()->flash('mensaje', 'Relación no existente');
+
+        // Aquí es donde estableces la relación en la tabla pivot usando save()
+        $equipo = Equipo::find($equipo_id);
+        $lubricacion = Lubricacion::find($lubricacion_id);
+        $usuarioLogueado = Auth::user();
+
+        $E_L = new EquipoLubricacion();
+
+        $E_L->equipo_id=$equipo_id;
+        $E_L->lubricacion_id=$lubricacion_id;
+        $E_L->dia = '1'; // Reemplaza 'valor_del_dia' con el valor correcto
+        $E_L->turno = 'M'; // Reemplaza 'valor_del_turno' con el valor correcto
+        $E_L->lcheck = 'OK'; // Reemplaza 'valor_del_lcheck' con el valor correcto
+        $E_L->responsables = $usuarioLogueado->name; // Reemplaza 'valor_de_responsables' con el valor correcto
+        $E_L->save();
+       // $equipo->lubricaciones()->save($lubricacion, ['dia' => $pivot->dia, 'turno' => $pivot->turno, 'lcheck' => $pivot->lcheck, 'responsables' => $pivot->responsables]);
+
+        // Redirige a la vista anterior
+        return redirect()->back();
 
 
+
+
+
+
+            }
+
+            // Redirige a la vista anterior
+            
+    }
+
+
+        /*   if ($Selector=="AgregarLubricacion"){  
+              
+      
+    
+      //
+        }      
+     $existeVinculo = $equipo->equiposPlans()->where('plan_id', $plan_id)->exists();
+        if($existeVinculo){
+        echo "existe el Vinculo";  
+        $mensaje='existe el Vinculo'; 
+        goto salir;
+        }
+       // $mensaje='ENTRE A GRABAR';
+       // goto salir;
+        $E_P= new Equipoplan();
+        $E_P->equipo_id=$equipo_id;
+        $E_P->plan_id=$plan_id;
+              
+        // $equipo=Equipo::find($equipo_id); // Solo leo este registro para poder retornar correctamente
+        $E_P->save();
+        goto salir; }
+         
+         if ($Selector=="BorrarPlan"){  
+         $planBorrar_id=$request->get('planBorrar_id');   //toma del formulario
+         //$equipo=Equipo::find($equipo_id);   
+         $equipo->equiposPlans()->detach( $planBorrar_id); //de la tabla equipoplans  
+        // echo " Debemos Borrar";   
+         goto salir;
+        }
+         
+        
+        // salir:  $par="$Selector,$repuesto_id,$equipo_id";
+        //return $par ; 
+        salir:
+        
+        return $request;*/
+    
 
 
     /**
@@ -147,10 +240,31 @@ class EquipoLubricacionController extends Controller
      * @param  \App\Models\EquipoLubricacion  $equipoLubricacion
      * @return \Illuminate\Http\Response
      */
-    public function edit(EquipoLubricacion $equipoLubricacion)
+    public function edit($id)
     {
-        echo "Estoy adentro";
-        return; 
+        
+        
+        echo "Estoy adentro listo para cambiar el lcheck de Id=$id";
+        $lubricacion = EquipoLubricacion::find($id);
+
+        if (!$lubricacion) {
+            // Si no se encuentra la lubricación con el ID proporcionado, puedes mostrar un mensaje de error o redirigir a la vista anterior.
+            session()->flash('mensaje', 'Lubricación no encontrada');
+            return redirect()->back();
+        }
+    
+        if ($lubricacion->lcheck === 'OK') {
+            $lubricacion->lcheck = 'E';
+        } elseif ($lubricacion->lcheck === 'E') {
+            $lubricacion->lcheck = 'I';
+        } elseif ($lubricacion->lcheck === 'I') {
+            $lubricacion->lcheck = 'OK';
+        }
+    
+        $lubricacion->save();
+    
+        // Redirige a la vista anterior o a la acción index del controlador
+        return redirect()->action([EquipoLubricacionController::class, 'index']);
     }
 
     /**

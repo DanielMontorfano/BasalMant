@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class EquipoLubricacion extends Model
 {
     protected $table = 'equipo_lubricacion';
-    
 
     protected $fillable = [
         'equipo_id',
@@ -24,8 +23,8 @@ class EquipoLubricacion extends Model
     }
 
     public function lubricacion()
-{
-    return $this->belongsTo(Lubricacion::class, 'lubricacion_id');
+    {
+        return $this->belongsTo(Lubricacion::class, 'lubricacion_id');
+    }
 }
 
-}

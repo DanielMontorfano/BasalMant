@@ -134,7 +134,9 @@ Route::get('/catchId', [RepuestoController::class, 'catchId'])->name('repuestos.
  Route::get('search/tareas', [SearchTareasController::class,'tareas'])->name('search.tareas'); //esta ruta permite hacer las busqudas asicrónicas AJAX
  Route::get('search/protocolos', [SearchProtocolosController::class,'protocolos'])->name('search.protocolos'); //esta ruta permite hacer las busqudas asicrónicas AJAX
  Route::get('search/plans', [SearchPlansController::class,'plans'])->name('search.plans'); //NO Olvidar poner use!!!! esta ruta permite hacer las busqudas asicrónicas AJAX
- Route::get('search/lubricaciones', [SearchLubricController::class,'lubricaciones'])->name('search.lubricaciones');
+ //Route::get('search/lubricaciones', [SearchLubricController::class,'lubricaciones'])->name('search.lubricaciones');
+ Route::get('search/lubricaciones', [SearchLubricController::class, 'lubricaciones'])->name('search.lubricaciones');
+
  Route::get('search/equipos', [SearchEquipoController::class,'equipos'])->name('search.equipos'); //NO Olvidar poner use!!!! esta ruta permite hacer las busqudas asicrónicas AJAX
  
  

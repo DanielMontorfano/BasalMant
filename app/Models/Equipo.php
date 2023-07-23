@@ -95,10 +95,21 @@ class Equipo extends Model
        // return $this->belongsToMany('App\Models\Repuesto', 'equipo_repuestos', 'equipo_id', 'repuesto_id');
     }
 
-    public function lubricaciones()
+   /* public function lubricaciones()
     {
-        return $this->hasMany('App\Models\Lubricacion', 'equipo_lubricacion','equipo_id', 'lubricacion_id');
-    }
+        return $this->belongsToMany(Lubricacion::class, 'equipo_lubricacion', 'equipo_id', 'lubricacion_id')
+            ->withPivot(['dia', 'turno', 'lcheck', 'responsables']);
+    }*/
+
+
+    public function lubricaciones()
+{
+    return $this->belongsToMany(Lubricacion::class, 'equipo_lubricacion', 'equipo_id', 'lubricacion_id')
+        ->withPivot(['dia', 'turno', 'lcheck', 'responsables']);
+}
+
+
+
 
  //   public function products()
 //{

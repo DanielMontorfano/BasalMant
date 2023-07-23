@@ -15,9 +15,17 @@ class Lubricacion extends Model
     // Importantisimo personalisar el nombre de la tabla, sobre todo en tablas pivot!!!!!
     protected $table = 'lubricacions';
 
-    public function lubricEquipos()
+   /* public function lubricEquipos()
     {
         return $this->belongsToMany(Equipo::class, 'equipo_lubricacion', 'lubricacion_id', 'equipo_id');
+    }*/
+
+    public function equipos()
+    {
+        return $this->belongsToMany(Equipo::class, 'equipo_lubricacion', 'lubricacion_id', 'equipo_id')
+            ->withPivot(['dia', 'turno', 'lcheck', 'responsables']);
     }
+
+
 }
 

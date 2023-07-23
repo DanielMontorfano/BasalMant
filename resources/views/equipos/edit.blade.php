@@ -496,18 +496,27 @@
                </table>
         </form>
         {{-- Formulario agregar Lubricaciones --}}
+        <div id="mi_seccion">
         <form action="{{route('tablaLubricaciones.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
           @csrf
           <input type="hidden" name="Selector" value="AgregarLubricacion" readonly >
           <input type="hidden" name="equipo_id" value={{$equipo->id}} readonly >
+          <input type="hidden" id="lubricacion_id" name="lubricacion_id">
                <table class="table table-sm" STYLE="background: linear-gradient(to right,#495c5c,#030007);" >
                  <tr>
                     <td><input type="text" class='form-control' name="BuscaLubricacion" id="BuscaLubricacion" autocomplete="off" placeholder="Buscar Lubricación"class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"> </td>
                     <td style="text-align: right;"><button class="btn btn-primary" type="submit" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Agregar</button> </td>
                  </tr>
                </table>
-        </form>
+                              <!-- Aquí muestras el mensaje si está presente en la sesión -->
+                              @if (session()->has('mensaje'))
+                              <div id="mensaje-sesion" class="alert alert-info">
+                                  {{ session('mensaje') }}
+                              </div>
+                              @endif
 
+        </form>
+        </div>
 
 
         
@@ -583,22 +592,25 @@
     });
 
 
-    $( "#BuscaLubricacion" ).autocomplete({
-      source: function(request, response){
-        
-              $.ajax({
-              url:"{{route('search.lubricaciones')}}",
-               dataType: 'json',
-              data:{
-                     term: request.term
-                    },
-                    success: function(data) {
-                    response(data)  
-            }
-
-        });
+    $("#BuscaLubricacion").autocomplete({
+  source: function(request, response) {
+    $.ajax({
+      url: "{{ route('search.lubricaciones') }}",
+      dataType: 'json',
+      data: {
+        term: request.term
+      },
+      success: function(data) {
+        response(data);
       }
     });
+  },
+  select: function(event, ui) {
+    // Cuando se seleccione un elemento, asignamos el ID al campo oculto
+    $("#lubricacion_id").val(ui.item.id);
+  }
+});
+
 
 
     $( "#BuscaEquipo" ).autocomplete({
@@ -617,10 +629,26 @@
         });
       }
     });
+  
     
+  
+  // Obtener el elemento del mensaje de sesión por su id
+  const mensajeSesion = document.getElementById('mensaje-sesion');
+
+// Obtener el input por su id
+const inputBuscaLubricacion = document.getElementById('BuscaLubricacion');
+
+// Agregar evento de clic al input para ocultar el mensaje de sesión
+inputBuscaLubricacion.addEventListener('click', () => {
+    // Ocultar el mensaje de sesión estableciendo el estilo de display a 'none'
+    mensajeSesion.style.display = 'none';
+});
+
+
 
   </script> 
    
+  
 
    {{-- Este es el script de la pagian oficial
      <script>
