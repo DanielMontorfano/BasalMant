@@ -17,13 +17,22 @@ class LubricacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+  /*  public function index()
     {
         echo "dentro de Lubricacion controller";
         return;
         //$equipoLubricaciones = EquipoLubricacion::orderBy('equipo_id')->get();
         $equipoLubricaciones = EquipoLubricacion::with('equipo')->orderBy('equipo_id')->get(); //Interesante, la consulta va con larelacion de la tabla equipo
         return view('lubricacion.index', compact('equipoLubricaciones'));
+    }*/
+    public function index()
+    {
+      //  echo "dentro de Lubricacion controller, metodo index";
+       $lubricaciones=Lubricacion::All();
+       //return $lubricaciones;
+       return view('lubricacion.index',compact('lubricaciones'));
+
+
     }
 
 

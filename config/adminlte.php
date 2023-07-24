@@ -390,25 +390,27 @@ return [
             'icon_color' => 'cyan',
             'submenu' => [
                 [
-                    'text' => 'Crear',
+                    'text' => 'Crear punto',
                     'icon' => 'fa-solid fa-clipboard',
                     'route'=> 'lubricacion.create',
                 ],
                 [
-                    'text' => 'Planilla',
+                    'text' => 'Listado',  //protocolo
+                    'icon' => 'fa-solid fa-file-invoice',
+                    'route'=> 'lubricacion.index',
+                ],
+                
+                [
+                    'text' => 'Planilla de seguimiento',
                     'icon' => 'fa-solid fa-list',
-                    'route'=> 'tablaLubricaciones.index',
+                    'route'=> 'equipoLubricacion.index',
                     
                 ],
  
                
 
                             
-                [
-                    'text' => 'Procedimientos',  //protocolo
-                    'icon' => 'fa-solid fa-file-invoice',
-                    'route'=> 'protocolos.create',
-                ],
+                
                  
                 [
                     'text' => 'Tareas',

@@ -21,15 +21,17 @@ class EquipoLubricacionController extends Controller
      */
     public function index()
 {
+    //echo"Estoy dentro de EquipoLubricacion.index";
+
     // Obtener los datos necesarios de la base de datos
     $LubricacionesVinculadas = EquipoLubricacion::with('lubricacion', 'equipo')->get();
-
+    //return  $LubricacionesVinculadas;
     // Obtener los días y turnos únicos de la tabla
     $dias = $LubricacionesVinculadas->pluck('dia')->unique();
     $turnos = $LubricacionesVinculadas->pluck('turno')->unique();
-    //return $LubricacionesVinculadas;
-    // Pasar los datos a la vista
-    return view('lubricacion.index', compact('LubricacionesVinculadas', 'dias', 'turnos'));
+  
+    // Pasar los datos a la vista equipoLubricacion.index
+    return view('equipoLubricacion.index', compact('LubricacionesVinculadas', 'dias', 'turnos'));
 }
 
     public function create()
@@ -80,56 +82,7 @@ class EquipoLubricacionController extends Controller
             }}
 
     
-
   
-
-
-
-
-            
-
-            // Redirige a la vista anterior
-            
-    
-
-
-        /*   if ($Selector=="AgregarLubricacion"){  
-              
-      
-    
-      //
-        }      
-     $existeVinculo = $equipo->equiposPlans()->where('plan_id', $plan_id)->exists();
-        if($existeVinculo){
-        echo "existe el Vinculo";  
-        $mensaje='existe el Vinculo'; 
-        goto salir;
-        }
-       // $mensaje='ENTRE A GRABAR';
-       // goto salir;
-        $E_P= new Equipoplan();
-        $E_P->equipo_id=$equipo_id;
-        $E_P->plan_id=$plan_id;
-              
-        // $equipo=Equipo::find($equipo_id); // Solo leo este registro para poder retornar correctamente
-        $E_P->save();
-        goto salir; }
-         
-         if ($Selector=="BorrarPlan"){  
-         $planBorrar_id=$request->get('planBorrar_id');   //toma del formulario
-         //$equipo=Equipo::find($equipo_id);   
-         $equipo->equiposPlans()->detach( $planBorrar_id); //de la tabla equipoplans  
-        // echo " Debemos Borrar";   
-         goto salir;
-        }
-         
-        
-        // salir:  $par="$Selector,$repuesto_id,$equipo_id";
-        //return $par ; 
-        salir:
-        
-        return $request;*/
-    
 
 
     /**
@@ -222,7 +175,7 @@ class EquipoLubricacionController extends Controller
     
             $equipoLubricacion->save();
         }
-        return redirect()->action([EquipoLubricacionController::class, 'index']);
+        return redirect()->action([EquipoLubricacionController::class, 'index']); //para mostrar la tabla
         // Puedes devolver la información a una vista o hacer lo que desees con ella
         return $ternasEquiposLubricaciones;
     }

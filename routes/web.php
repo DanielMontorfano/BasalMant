@@ -146,7 +146,7 @@ Route::get('/catchId', [RepuestoController::class, 'catchId'])->name('repuestos.
 
 
 
- Route::resource('tablaLubricaciones', EquipoLubricacionController::class);
+ Route::resource('equipoLubricacion', EquipoLubricacionController::class);
  Route::get('tablaCargar', [EquipoLubricacionController::class,'tablaCargar'])->name('tablaCargar');
  
  
