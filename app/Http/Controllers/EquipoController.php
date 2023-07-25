@@ -174,7 +174,9 @@ class EquipoController extends Controller
         $fotosTodos=Equipo::find($id)->fotos; //Aqui hago referencia al Metodo fotos perteneciente al modelo Equipo que trae los registro del modelo fotos vinculados a este equipo
         $documentos=Equipo::find($id)->documentos;
         $planes=Equipo::find($id)->equiposPlans; 
+        $lubricaciones=Equipo::find($id)->lubricaciones;
         $equiposB=Equipo::find($id)->equiposAEquiposB; 
+       // return $lubricaciones;
         //$repuesto=$equipo->equiposRepuestos;
         //foreach($repuestos as $repuesto){
             //<p>factura: {{ $entrada->factura }}</p>
@@ -185,7 +187,7 @@ class EquipoController extends Controller
             //}
       //  }
        // return ;
-        return view('equipos.edit', compact('equipo','repuestos', 'repuestosTodos','fotosTodos','documentos','planes','equiposB'));
+        return view('equipos.edit', compact('equipo','repuestos', 'repuestosTodos','fotosTodos','documentos','planes','lubricaciones','equiposB'));
     }
 
 

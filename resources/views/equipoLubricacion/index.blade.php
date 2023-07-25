@@ -79,6 +79,7 @@
                     @foreach ($LubricacionesVinculadas->unique('equipo_id') as $item)
                         @php
                             $codEquipo = $item->equipo->codEquipo;
+                            $det5 = $item->equipo->det5;
                             $puntoLubricaciones = $LubricacionesVinculadas->where('equipo_id', $item->equipo_id)->unique('lubricacion.puntoLubric');
                             $rowCount = $puntoLubricaciones->count();
                         @endphp
@@ -88,7 +89,8 @@
                                 <td rowspan="{{ $rowCount }}">
                                     <a href="{{ route('equipos.edit', $item->equipo_id) }}" class="btn btn-primary">
                                         {{ $codEquipo }}
-                                    </a>
+                                    </a> <br>
+                                    <small class="small-font"> {{$det5}}</small>
                                 </td>
                                 @endif
                                 <td>{{ $puntoLubric['lubricacion']['puntoLubric'] }}</td>

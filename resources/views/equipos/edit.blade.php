@@ -308,28 +308,30 @@
                      {{--MUESTRA LUBRCACIONES  ASOCIADOS --}}
                   <div class="card " STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                     <div class="card-header " STYLE="background: linear-gradient(to right,#495c5c,#030007);">            
-                                 {{-- MUESTRA PLANES --}} 
+                                 {{-- MUESTRA LUBRICAIONES --}} 
                           <table class="table" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                                  <thead>
                                     <tr>
-                                      <th style="text-align: center; color: #ffffff;" scope="col">Código</th>
-                                      <th style="text-align: center; color: #ffffff;" scope="col">Nombre</th>
+                                      <th style="text-align: center; color: #ffffff;" scope="col">Ref.</th>
+                                      <th style="text-align: center; color: #ffffff;" scope="col">Punto</th>
                                       <th style="text-align: center; color: #ffffff;" scope="col">Descripción</th>
-                                      <th style="text-align: center; color: #ffffff;" scope="col"></th>
+                                      <th style="text-align: center; color: #ffffff;" scope="col">Lubricante</th>
+                                      <th></th>
                                     </tr>
                                   </thead>
-                                  @foreach($planes as $plan)
-                                    <form action="{{route('equipoPlan.store')}}" method="POST">
+                                  @foreach($lubricaciones as $lubricacion)
+                                    <form action="{{route('equipoLubricacion.store')}}" method="POST">
                                       @csrf
                                        
                                         <tbody>
                                               <tr>
-                                                <input type="hidden" name="Selector" value="BorrarPlan" readonly >
+                                                <input type="hidden" name="Selector" value="BorrarLubricacion" readonly >
                                                 <input type="hidden" name="equipo_id" value={{$equipo->id}} readonly >
-                                                <input type="hidden" name="planBorrar_id" value={{$plan->id}} readonly >
-                                                <th STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "scope="row">{{ $plan->codigo }}</th>
-                                                <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{ $plan->nombre}}</td>
-                                                <td STYLE="text-align: center; color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{$plan->descripcion}}</td>
+                                                <input type="hidden" name="lubricacionBorrar_id" value={{$lubricacion->id}} readonly >
+                                                <th STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; "scope="row">{{ $lubricacion->id }}</th>
+                                                <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{ $lubricacion->puntoLubric}}</td>
+                                                <td STYLE="text-align: center; color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{$lubricacion->descripcion}}</td>
+                                                <td STYLE="text-align: center; color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">{{$lubricacion->lubricante}}</td>
                                                 <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">  <button class="bi bi-trash3-fill btn btn-link"  type="submit" ></button></td>
                                               </tr>
                                         </tbody>
@@ -497,7 +499,7 @@
         </form>
         {{-- Formulario agregar Lubricaciones --}}
         <div id="mi_seccion">
-        <form action="{{route('tablaLubricaciones.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
+        <form action="{{route('equipoLubricacion.store')}}" method="POST" class="form-horizontal" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
           @csrf
           <input type="hidden" name="Selector" value="AgregarLubricacion" readonly >
           <input type="hidden" name="equipo_id" value={{$equipo->id}} readonly >

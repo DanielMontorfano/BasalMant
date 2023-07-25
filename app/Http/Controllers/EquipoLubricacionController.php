@@ -55,12 +55,12 @@ class EquipoLubricacionController extends Controller
 
             if ($existeRelacion) {
                 // Si la relación existe, agrega un mensaje a la sesión
-                session()->flash('mensaje', 'Relación existente');
+                session()->flash('mensaje', 'Esta lubricación ya existe');
                 return redirect()->back();
             } else {
                 // Si la relación no existe, agrega un mensaje a la sesión
-        session()->flash('mensaje', 'Relación no existente');
-
+        //session()->flash('mensaje', 'Relación no existente');
+        if ($Selector=="AgregarLubricacion"){  
         // Aquí es donde estableces la relación en la tabla pivot usando save()
         $equipo = Equipo::find($equipo_id);
         $lubricacion = Lubricacion::find($lubricacion_id);
@@ -75,9 +75,19 @@ class EquipoLubricacionController extends Controller
         $E_L->lcheck = 'OK'; // Reemplaza 'valor_del_lcheck' con el valor correcto
         $E_L->responsables = $usuarioLogueado->name; // Reemplaza 'valor_de_responsables' con el valor correcto
         $E_L->save();
-       // $equipo->lubricaciones()->save($lubricacion, ['dia' => $pivot->dia, 'turno' => $pivot->turno, 'lcheck' => $pivot->lcheck, 'responsables' => $pivot->responsables]);
+        goto salir;
+        } //fin Agregar Lubricaion
+        if ($Selector=="BorrarLubricacion"){  
+            $lubricacionBorrar_id=$request->get('lubricacionBorrar_id');   //toma del formulario
+            //$equipo=Equipo::find($equipo_id);   
+            $equipo->lubricaciones()->detach( $lubricacionBorrar_id); //de la tabla equipo_lubricacion 
+           // echo " Debemos Borrar";   
+            goto salir;
+           }
+     
 
         // Redirige a la vista anterior
+        salir:
         return redirect()->back();
             }}
 

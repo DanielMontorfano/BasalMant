@@ -21,7 +21,8 @@ class SearchLubricController extends Controller
         //Log::info('El método lubricaciones se ha llamado.');
 
         $results = Lubricacion::where(function ($query) use ($term) {
-            $query->where('puntoLubric', 'LIKE', '%' . $term . '%')
+            $query->where('id', 'LIKE', '%' . $term . '%')
+                ->orWhere('puntoLubric', 'LIKE', '%' . $term . '%')
                 ->orWhere('descripcion', 'LIKE', '%' . $term . '%')
                 ->orWhere('lubricante', 'LIKE', '%' . $term . '%')
                 ->orWhere('color', 'LIKE', '%' . $term . '%');
@@ -31,7 +32,7 @@ class SearchLubricController extends Controller
         foreach ($results as $lubricacion) {
             $formattedResults[] = [
                 'id' => $lubricacion->id,
-                'value' => "ITEM Nº" . $lubricacion->id . ": " . "Punto de lubricación: " . $lubricacion->puntoLubric ." ". "Desc: " . $lubricacion->descripcion ." " . "Lubric: " . $lubricacion->lubricante . ' ' . $lubricacion->color,
+                'value' => "Referencia Nº" . $lubricacion->id . ": " . "Punto de lubricación: " . $lubricacion->puntoLubric ." ". "Desc: " . $lubricacion->descripcion ." " . "Lubric: " . $lubricacion->lubricante . ' ' . $lubricacion->color,
             ];
         }
 
