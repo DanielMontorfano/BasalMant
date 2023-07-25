@@ -174,7 +174,8 @@ class EquipoController extends Controller
         $fotosTodos=Equipo::find($id)->fotos; //Aqui hago referencia al Metodo fotos perteneciente al modelo Equipo que trae los registro del modelo fotos vinculados a este equipo
         $documentos=Equipo::find($id)->documentos;
         $planes=Equipo::find($id)->equiposPlans; 
-        $lubricaciones=Equipo::find($id)->lubricaciones;
+       // $lubricaciones=Equipo::find($id)->lubricaciones;
+       $lubricaciones = $equipo->lubricaciones->unique(); //Para que aparezaca solo una vez
         $equiposB=Equipo::find($id)->equiposAEquiposB; 
        // return $lubricaciones;
         //$repuesto=$equipo->equiposRepuestos;
