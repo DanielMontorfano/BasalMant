@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Response;
 use App\Models\Lubricacion;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 
 class EquipoLubricacionController extends Controller
@@ -38,6 +39,11 @@ class EquipoLubricacionController extends Controller
     {
         //
     }
+        
+
+
+
+
     public function store(Request $request) //esto funciona una vez creado StoreEquipo de Request
     //public function store(Request $request) //Antes de usar archivo StoreEquipo en Request
     {   
@@ -61,6 +67,7 @@ class EquipoLubricacionController extends Controller
                 // Si la relación no existe, agrega un mensaje a la sesión
         //session()->flash('mensaje', 'Relación no existente');
         if ($Selector=="AgregarLubricacion"){  
+        
         // Aquí es donde estableces la relación en la tabla pivot usando save()
         $equipo = Equipo::find($equipo_id);
         $lubricacion = Lubricacion::find($lubricacion_id);
@@ -93,13 +100,49 @@ class EquipoLubricacionController extends Controller
 
     
   
-
+    //Prueba de funcion periodo cumplido
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+    //Prueba de funcion periodo cumplido!!
+
+    public function cumplePeriodo($id, $periodoEnHoras)
+{
+    // Establecer la zona horaria para Salta, Argentina (UTC -3)
+    date_default_timezone_set('America/Argentina/Salta');
+
+    $lubricacion = EquipoLubricacion::find($id);
+
+    if (!$lubricacion) {
+        // Si no se encuentra la lubricación con el ID proporcionado, puedes manejar el caso de error según tus necesidades.
+        return false;
+    }
+
+    // Obtén la fecha actual en la zona horaria de Salta, Argentina
+    $fechaActual = Carbon::now();
+
+    // Obtén la última fecha de actualización de la lubricación en la zona horaria de Salta, Argentina
+    $ultimaFechaLubricacion = Carbon::parse($lubricacion->updated_at);
+
+    // Calcula la diferencia en horas entre la fecha actual y la última fecha de lubricación
+    $diferenciaEnHoras = $ultimaFechaLubricacion->diffInHours($fechaActual);
+
+    // Salida de prueba (puedes comentar esta línea después de verificar los resultados)
+     echo "Ultima fecha: " . $ultimaFechaLubricacion . " *** Fecha actual: " . $fechaActual . " *** Diferencia: " . $diferenciaEnHoras . " *** Periodo en horas: " . $periodoEnHoras;
+
+    // Compara si la diferencia en horas es mayor o igual al período requerido
+    return $diferenciaEnHoras >= $periodoEnHoras;
+}
+
+    
+
+
+
+
+
     public function tablaCargar()
     {
         // Obtener las fechas más recientes para cada combinación de "equipo_id" y "lubricacion_id" en la tabla pivot
@@ -134,7 +177,7 @@ class EquipoLubricacionController extends Controller
     
         // Recorrer todas las ternas obtenidas
         foreach ($lubricacionesConEquipos as $terna) {
-            // Agregar la nueva terna con 'turno' modificado según la ley
+                // Agregar la nueva terna con 'turno' modificado según la ley
             if ($terna->turno === 'M') {
                 $ternasEquiposLubricaciones[] = [
                     'id' => $terna->pivot_id,
@@ -173,6 +216,24 @@ class EquipoLubricacionController extends Controller
         }
         $responsableActual = Auth::user()->name; // Cambia "name" por el nombre del campo que almacena el nombre de usuario en tu tabla de usuarios.
         foreach ($ternasEquiposLubricaciones as $terna) {
+            $frecuencia = Lubricacion::find($terna['lubricacion_id'])->frecuencia;
+           // return $frecuencia;
+            $frecuenciasEnHoras = [
+                'Día' => 24,
+                'Turno' => 8,
+                'Semana' => 168,
+                'Mes' => 672,
+            ];
+            // Verifica si la frecuencia está presente en el array y asigna el valor en horas correspondiente
+            $periodoEnHoras = $frecuenciasEnHoras[$frecuencia];
+            // return  $periodoEnHoras;
+            //En cada registro verifica segun periodo si le corresponde actualizar el registro
+            $id=$terna['id'];
+            //$periodoEnHoras = 4;   // Aquí se define el periodo en horas (por ejemplo, 30 días)
+            $cumplePeriodo = $this->cumplePeriodo($id, $periodoEnHoras); //Llama a la funcion "cumplePeriodo" de la mismo controlador o Clase
+            // La variable $cumplePeriodo ahora contiene verdadero o falso dependiendo si se cumple el período o no.
+            //return;
+            if($cumplePeriodo){ //Entra solo si se cumpli la frecuencia de lubricacion
             $equipoLubricacion = new EquipoLubricacion();
             $equipoLubricacion->equipo_id = $terna['equipo_id'];
             $equipoLubricacion->lubricacion_id = $terna['lubricacion_id'];
@@ -184,6 +245,7 @@ class EquipoLubricacionController extends Controller
             // $equipoLubricacion->updated_at = $terna['created_at']; // Opcional, si también deseas establecer el campo 'updated_at'
     
             $equipoLubricacion->save();
+            } // del if $cumpleperiodo
         }
         return redirect()->action([EquipoLubricacionController::class, 'index']); //para mostrar la tabla
         // Puedes devolver la información a una vista o hacer lo que desees con ella
@@ -212,13 +274,13 @@ class EquipoLubricacionController extends Controller
         
         echo "Estoy adentro listo para cambiar el lcheck de Id=$id";
         $lubricacion = EquipoLubricacion::find($id);
-
+        
         if (!$lubricacion) {
             // Si no se encuentra la lubricación con el ID proporcionado, puedes mostrar un mensaje de error o redirigir a la vista anterior.
             session()->flash('mensaje', 'Lubricación no encontrada');
             return redirect()->back();
         }
-    
+       
         if ($lubricacion->lcheck === 'OK') {
             $lubricacion->lcheck = 'E';
         } elseif ($lubricacion->lcheck === 'E') {

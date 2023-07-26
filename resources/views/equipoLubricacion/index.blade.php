@@ -93,7 +93,12 @@
                                     <small class="small-font"> {{$det5}}</small>
                                 </td>
                                 @endif
-                                <td>{{ $puntoLubric['lubricacion']['puntoLubric'] }}</td>
+                                <td>{{ $puntoLubric['lubricacion']['puntoLubric'] }} <br>
+                                    <small class="small-font">{{ $puntoLubric['lubricacion']['lubricante'] }} <br> </small>
+                                    <small class="small-font">Frecc:&nbsp; {{ $puntoLubric['lubricacion']['frecuencia']}}  <br> </small>
+                                    <small class="small-font">Recip:&nbsp; {{ $puntoLubric['lubricacion']['recipiente'] }} <br></small>
+                                    <small class="small-font">Color:&nbsp; {{ $puntoLubric['lubricacion']['color'] }} <br></small>
+                                </td>
                                 @foreach ($LubricacionesVinculadas->where('equipo_id', $item->equipo_id)->where('lubricacion.puntoLubric', $puntoLubric['lubricacion']['puntoLubric']) as $lubricacion)
                                     <td>
                                         <a href="{{ route('equipoLubricacion.edit', $lubricacion->id) }}"

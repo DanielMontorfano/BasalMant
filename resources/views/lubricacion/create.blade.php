@@ -73,29 +73,23 @@
 
             <div class="form-group">
                 <label for="inspecciones">Inspecciones</label>
-                <select name="inspecciones" class="form-control">
-                    <option value="Por turno">Por turno</option>
-                    <option value="Diaria">Diaria</option>
-                    <option value="Semanal">Semanal</option>
-                    <option value="Quincenal">Quincenal</option>
-                    <option value="Mensual">Mensual</option>
-                    <option value="Trimestral">Trimestral</option>
-                    <option value="Anual">Anual</option>
-                    <option value="Inicio de Zafra">Inicio de Zafra</option>
+                <select name="frecuencia" class="form-control">
+                    <option value="Turno">Turno</option>
+                    <option value="Dia">Día</option>
+                    <option value="Semana">Semana</option>
+                    <option value="Mes">Mes</option>
+                    
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="frecuencia">Frecuencia</label>
                 <select name="frecuencia" class="form-control">
-                    <option value="Por turno">Por turno</option>
-                    <option value="Diaria">Diaria</option>
-                    <option value="Semanal">Semanal</option>
-                    <option value="Quincenal">Quincenal</option>
-                    <option value="Mensual">Mensual</option>
-                    <option value="Trimestral">Trimestral</option>
-                    <option value="Anual">Anual</option>
-                    <option value="Inicio de Zafra">Inicio de Zafra</option>
+                    <option value="Turno">Turno</option>
+                    <option value="Día">Día</option>
+                    <option value="Semana">Semana</option>
+                    <option value="Mes">Mes</option>
+                    
                 </select>
             </div>
             <div class="d-flex justify-content-center">
