@@ -233,7 +233,8 @@ class EquipoLubricacionController extends Controller
             $cumplePeriodo = $this->cumplePeriodo($id, $periodoEnHoras); //Llama a la funcion "cumplePeriodo" de la mismo controlador o Clase
             // La variable $cumplePeriodo ahora contiene verdadero o falso dependiendo si se cumple el período o no.
             //return;
-            if($cumplePeriodo){ //Entra solo si se cumpli la frecuencia de lubricacion
+            $otraCondicion= true;
+            if($cumplePeriodo || $otraCondicion){ //Entra solo si se cumpli la frecuencia de lubricacion
             $equipoLubricacion = new EquipoLubricacion();
             $equipoLubricacion->equipo_id = $terna['equipo_id'];
             $equipoLubricacion->lubricacion_id = $terna['lubricacion_id'];
@@ -251,6 +252,63 @@ class EquipoLubricacionController extends Controller
         // Puedes devolver la información a una vista o hacer lo que desees con ella
         return $ternasEquiposLubricaciones;
     }
+
+   /* ************************************************CARGA Automatica ********************************* */
+
+   public function cargaAutom()
+   {
+       // 1) Define la fecha de inicio
+       $fechaInicio = "2023-07-25";
+       $fechaActual = Carbon::createFromFormat('Y-m-d', $fechaInicio)->startOfDay();
+   
+       // 2) Obtén los registros ordenados por "id" ascendente
+       $registros = DB::table('equipo_lubricacion')->orderBy('id', 'asc')->get();
+   
+       // 3) Nombres de responsables en forma aleatoria
+       $nombresResponsables = ['Apaza', 'Cabana', 'Estrada', 'oficial', 'medio oficial'];
+   
+       // 4) Recorre los registros y actualiza los campos "updated_at", "created_at", y "responsables"
+       foreach ($registros as $index => $registro) {
+           // Define la hora y turno según el patrón dado
+           $hora = null;
+           $turno = null;
+           if ($index % 3 == 0) {
+               $hora = "12:00:00";
+               $turno = 'M';
+           } elseif ($index % 3 == 1) {
+               $hora = "20:00:00";
+               $turno = 'T';
+           } elseif ($index % 3 == 2) {
+               $hora = "23:00:00";
+               $turno = 'N';
+               // Incrementa la fecha después del turno 'N' solo si no es la primera iteración
+               if ($index > 0) {
+                   $fechaActual->addDay();
+               }
+           }
+   
+           // Formatea la fecha con la hora y turno correspondientes
+           $createdAt = Carbon::createFromFormat('Y-m-d H:i:s', $fechaActual->toDateString() . ' ' . $hora);
+   
+           // Obtén un nombre de responsable aleatorio
+           $responsable = $nombresResponsables[random_int(0, count($nombresResponsables) - 1)];
+   
+           // Actualiza los campos "created_at", "updated_at", y "responsables"
+           DB::table('equipo_lubricacion')
+               ->where('id', $registro->id)
+               ->update([
+                   'created_at' => $createdAt,
+                   'updated_at' => $createdAt,
+                   'turno' => $turno,
+                   'responsables' => $responsable,
+               ]);
+       }
+   
+       return redirect()->action([EquipoLubricacionController::class, 'index']); //para mostrar la tabla
+   }
+   
+   /* ********************************FIN CARGA AUTOMATICA********************************************** */
+
     /**
      * Display the specified resource.
      *

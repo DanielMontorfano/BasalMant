@@ -406,6 +406,13 @@ return [
                     'route'=> 'equipoLubricacion.index',
                     
                 ],
+                 
+                [
+                    'text' => 'Carga Automática',
+                    'icon' => 'fa-solid fa-list',
+                    'route'=> 'cargaAutom',
+                    
+                ],
  
                
 
