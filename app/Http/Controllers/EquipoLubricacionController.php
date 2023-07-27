@@ -258,7 +258,7 @@ class EquipoLubricacionController extends Controller
    public function cargaAutom()
    {
        // 1) Define la fecha de inicio
-       $fechaInicio = "2023-07-25";
+       $fechaInicio = "2023-06-16";
        $fechaActual = Carbon::createFromFormat('Y-m-d', $fechaInicio)->startOfDay();
    
        // 2) Obtén los registros ordenados por "id" ascendente
