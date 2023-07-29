@@ -408,7 +408,7 @@ return [
                 ],
                  
                 [
-                    'text' => 'Carga Automática',
+                    'text' => 'Carga controlada',
                     'icon' => 'fa-solid fa-list',
                     'route'=> 'cargaAutom',
                     

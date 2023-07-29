@@ -201,13 +201,45 @@ $dompdf->stream(); */
      }  
    //}
   
-         $pdf = PDF::loadView('impresiones.imprimirFormulario', compact('equipo','PlanP', 'ProtocoloP','Tareas','formulario'));
+        $pdf = PDF::loadView('impresiones.imprimirFormulario', compact('equipo','PlanP', 'ProtocoloP','Tareas','formulario'));
         $variable="Formulario" . $formulario_id .".pdf";
         return $pdf->download($variable);       
       
     }
 
+    // ********IMPRIMIR LUBRICACIONES****************************************************************************************
 
+    
+    public function imprimirLubric($equipo_id)
+    {
+        // Buscar el equipo por su id
+        $equipo = Equipo::find($equipo_id);
+    
+        // Verificar si el equipo existe
+        if (!$equipo) {
+            return "El equipo no existe.";
+        }
+    
+        // Obtener todas las lubricaciones relacionadas con el equipo
+        $lubricaciones = $equipo->lubricaciones;
+    
+        // Agrupar las lubricaciones por punto de lubricación
+        $lubricacionArray = [];
+        foreach ($lubricaciones as $lubricacion) {
+            $puntoLubric = $lubricacion->puntoLubric;
+            $lubricacionArray[$puntoLubric][] = [
+                'descripcion' => $lubricacion->descripcion,
+                'lubricante' => $lubricacion->lubricante,
+                'lcheck' => $lubricacion->pivot->lcheck,
+            ];
+        }
+        
+        $pdf = PDF::loadView('impresiones.imprimirLubric', compact('lubricacionArray', 'equipo'));
+        $variable="Lubricacion de:" .  $equipo->codEquipo  . ".pdf";
+        return $pdf->download($variable);
+
+        return view('impresiones.imprimirLubric', compact('lubricacionArray', 'equipo'));
+    }
 
 
 }

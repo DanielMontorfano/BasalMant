@@ -12,7 +12,16 @@
 @stop
 
 @section('content')
+@if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error:</strong> {{ $errors->first('error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
 <style>
+   
     .small-font {
         font-size: 10px;
         margin-top: 4px;
@@ -91,6 +100,7 @@
                                         {{ $codEquipo }}
                                     </a> <br>
                                     <small class="small-font"> {{$det5}}</small>
+                                    <button style="background-color: Transparent;border: none;" title="Imprimir ficha check"><a  class="bi bi-printer" href={{route('imprimirLubric', $item->equipo_id)}}>  </a></button>
                                 </td>
                                 @endif
                                 <td>{{ $puntoLubric['lubricacion']['puntoLubric'] }} <br>
@@ -123,4 +133,6 @@
 <div class="text-center mt-2">
     <a href="{{ route('tablaCargar') }}" class="btn btn-primary">Control Realizado</a>
 </div>
+
+
 @endsection

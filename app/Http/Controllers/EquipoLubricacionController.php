@@ -233,7 +233,7 @@ class EquipoLubricacionController extends Controller
             $cumplePeriodo = $this->cumplePeriodo($id, $periodoEnHoras); //Llama a la funcion "cumplePeriodo" de la mismo controlador o Clase
             // La variable $cumplePeriodo ahora contiene verdadero o falso dependiendo si se cumple el período o no.
             //return;
-            $otraCondicion= true;
+            $otraCondicion= true; //IMPORTANTANTE desactivar luego de hacer la carga controlada
             if($cumplePeriodo || $otraCondicion){ //Entra solo si se cumpli la frecuencia de lubricacion
             $equipoLubricacion = new EquipoLubricacion();
             $equipoLubricacion->equipo_id = $terna['equipo_id'];
@@ -256,7 +256,13 @@ class EquipoLubricacionController extends Controller
    /* ************************************************CARGA Automatica ********************************* */
 
    public function cargaAutom()
-   {
+   {   
+    $usuarioActual = Auth::user()->name;
+
+    // Verifica si el usuario actual es "Daniel"
+    if ($usuarioActual !== 'Daniel') {
+        return redirect()->back()->withErrors(['error' => '¡Acceso restringido! Solo administradores.']);
+    }
        // 1) Define la fecha de inicio
        $fechaInicio = "2023-06-16";
        $fechaActual = Carbon::createFromFormat('Y-m-d', $fechaInicio)->startOfDay();
