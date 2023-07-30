@@ -260,7 +260,7 @@ class EquipoLubricacionController extends Controller
     $usuarioActual = Auth::user()->name;
 
     // Verifica si el usuario actual es "Daniel"
-    if ($usuarioActual !== 'Daniel') {
+    if ($usuarioActual !== 'Admin') {
         return redirect()->back()->withErrors(['error' => '¡Acceso restringido! Solo administradores.']);
     }
        // 1) Define la fecha de inicio
