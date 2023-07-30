@@ -7,7 +7,8 @@
     table {
         border-collapse: collapse;
         width: 100%;
-        border: 1px solid #000; /* Borde de la tabla */
+        /* Remueve el borde de todas las tablas, excepto la que tiene el id "referencias" */
+        border: none; 
     }
 
     th, td {
@@ -68,7 +69,7 @@
         text-align: center;
         line-height: 0.5cm;
     }
-
+    
     h4.title {
         font-size: 18px;
         margin-bottom: 10px;
@@ -77,6 +78,7 @@
 
 </style>
 </head>
+
 <body>
 <!-- Defina bloques de encabezado y pie de página antes de su contenido -->
 <header>
@@ -85,7 +87,7 @@
 
     <TD ROWSPAN=3 Width=20% valign= middle> <img src="storage/logoIngenio2.png"   height="100px" width="130px"/></TD>
         <TD ROWSPAN=3 Width=60%><h1>Lubricación CHECK</h1><h3> {{ $equipo->codEquipo }}</h3></TD>
-	    <TD>GFPO17.V01</TD>
+	    <TD>Check.V01</TD>
       
 	</TR>
 	<TR>
@@ -104,6 +106,10 @@
 
 
 <footer>
+    <div class="small-font" style="margin-top: 5px;">
+        OK: Nivel correcto &nbsp;&nbsp;&nbsp; E: Exceso &nbsp;&nbsp;&nbsp; I: Incompleto
+    </div> 
+    <br>
   <!-- Copyright © <?php echo date("Y");?> -->
   
   
@@ -183,6 +189,8 @@
         </tbody>
     </table>
 @endforeach
+
+
 </main>
 </body>
 <script type="text/php"> 

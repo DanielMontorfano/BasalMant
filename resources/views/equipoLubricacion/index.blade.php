@@ -113,7 +113,7 @@
                                     <td>
                                         <a href="{{ route('equipoLubricacion.edit', $lubricacion->id) }}"
                                            class="btn {{ $lubricacion->lcheck === 'OK' ? 'btn-success' : ($lubricacion->lcheck === 'E' ? 'btn-warning' : 'btn-danger') }}">
-                                            {{ $lubricacion->lcheck }} - {{ $lubricacion->created_at->format('d/m/y') }} - {{ $lubricacion->responsables }}
+                                            {{ $lubricacion->lcheck }} {{ $lubricacion->created_at->format('d/m/y') }}  {{ $lubricacion->responsables }}
                                         </a>
                                     </td>
                                 @endforeach

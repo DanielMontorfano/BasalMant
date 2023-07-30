@@ -333,18 +333,23 @@ class EquipoLubricacionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        
-        
-        echo "Estoy adentro listo para cambiar el lcheck de Id=$id";
-        $lubricacion = EquipoLubricacion::find($id);
-        
-        if (!$lubricacion) {
-            // Si no se encuentra la lubricación con el ID proporcionado, puedes mostrar un mensaje de error o redirigir a la vista anterior.
-            session()->flash('mensaje', 'Lubricación no encontrada');
-            return redirect()->back();
-        }
-       
+{
+    echo "Estoy adentro listo para cambiar el lcheck de Id=$id";
+    $lubricacion = EquipoLubricacion::find($id);
+
+    if (!$lubricacion) {
+        // Si no se encuentra la lubricación con el ID proporcionado, puedes mostrar un mensaje de error o redirigir a la vista anterior.
+        session()->flash('mensaje', 'Lubricación no encontrada');
+        return redirect()->back();
+    }
+
+    // Verifica si el usuario es "Daniel"
+    $user = auth()->user();
+    if ($user->name === 'Admin') {
+        // Si el usuario es "Daniel", elimina el registro completo
+        $lubricacion->delete();
+    } else {
+        // Si no es "Daniel", cambia el valor de lcheck según el ciclo (OK -> E -> I -> OK)
         if ($lubricacion->lcheck === 'OK') {
             $lubricacion->lcheck = 'E';
         } elseif ($lubricacion->lcheck === 'E') {
@@ -352,12 +357,13 @@ class EquipoLubricacionController extends Controller
         } elseif ($lubricacion->lcheck === 'I') {
             $lubricacion->lcheck = 'OK';
         }
-    
+
         $lubricacion->save();
-    
-        // Redirige a la vista anterior o a la acción index del controlador
-        return redirect()->action([EquipoLubricacionController::class, 'index']);
     }
+
+    // Redirige a la vista anterior o a la acción index del controlador
+    return redirect()->action([EquipoLubricacionController::class, 'index']);
+}
 
     /**
      * Update the specified resource in storage.
