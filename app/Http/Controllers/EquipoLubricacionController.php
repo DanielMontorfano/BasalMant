@@ -21,19 +21,66 @@ class EquipoLubricacionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-{
-    //echo"Estoy dentro de EquipoLubricacion.index";
-
-    // Obtener los datos necesarios de la base de datos
-    $LubricacionesVinculadas = EquipoLubricacion::with('lubricacion', 'equipo')->get();
-    //return  $LubricacionesVinculadas;
-    // Obtener los días y turnos únicos de la tabla
-    $dias = $LubricacionesVinculadas->pluck('dia')->unique();
-    $turnos = $LubricacionesVinculadas->pluck('turno')->unique();
-  
-    // Pasar los datos a la vista equipoLubricacion.index
-    return view('equipoLubricacion.index', compact('LubricacionesVinculadas', 'dias', 'turnos'));
+    {
+        $LubricacionesVinculadas = EquipoLubricacion::with('lubricacion', 'equipo')->get(); //Consulta que entrega con las tablas vinculadas previa y posterior
+    
+    
+       foreach ($LubricacionesVinculadas as $lubricacionVinculada) {
+        $codEquipo = $lubricacionVinculada->equipo->codEquipo;     //ASI obtengo los capos de la consulta, muy interesante
+        $puntoLubric = $lubricacionVinculada->lubricacion->puntoLubric;
+        $numMuestra = $lubricacionVinculada->numMuestra;
+        $muestra = $lubricacionVinculada->muestra;
+        $equipoLubricaion_id =$lubricacionVinculada->id;  
+   
+    $todos[]=array('id'=>$equipoLubricaion_id, 'codigo'=>$codEquipo, 'Punto'=>$puntoLubric, 'numMuestra'=> $numMuestra, 'muestras'=> $muestra);
+    // Resto de tu código...
 }
+
+$todosFiltrado = [];
+
+//El siguiente array multidimensional tiene 3 dimensiones las dos peimeras simples  y la 3ra en un vector que lleva los datos de la muestra
+foreach ($todos as $item) { //busco generar una array donde sea no se repitan los codEquipo ni sus respectivos puntos de lubricacion
+    $idValue = $item['id'];
+    $codigo = $item['codigo'];
+    $punto = $item['Punto'];
+    $numMuestra = $item['numMuestra'];
+    $muestras = $item['muestras'];
+
+    if (!isset($todosFiltrado[$codigo])) {
+        $todosFiltrado[$codigo] = [];
+    }
+
+    if (!isset($todosFiltrado[$codigo][$punto])) {
+        $todosFiltrado[$codigo][$punto] = [];
+    }
+
+    $todosFiltrado[$codigo][$punto][] = [
+        'id' => $idValue,
+        'numMuestra'=>$numMuestra,
+        'muestras' => $muestras,
+    ];
+}
+
+foreach ($todosFiltrado as &$codigo) {  //Ordena segun numMuestra
+    foreach ($codigo as &$punto) {
+        usort($punto, function($a, $b) {
+            return $a['numMuestra'] - $b['numMuestra'];
+        });
+    }
+}
+
+
+
+
+      //  return $todosFiltrado;//   $todos;*/
+        return view('equipoLubricacion.index', compact('LubricacionesVinculadas', 'todosFiltrado'));
+    }
+    
+
+
+  //  return  $contadoresPorEquipoYLubricacion;
+   // return view('equipoLubricacion.index', compact('LubricacionesVinculadas'));
+
 
     public function create()
     {
@@ -77,9 +124,10 @@ class EquipoLubricacionController extends Controller
 
         $E_L->equipo_id=$equipo_id;
         $E_L->lubricacion_id=$lubricacion_id;
+        $E_L->numMuestra = '1'; // Reemplaza 'valor_del_dia' con el valor correcto
         $E_L->dia = '1'; // Reemplaza 'valor_del_dia' con el valor correcto
         $E_L->turno = 'M'; // Reemplaza 'valor_del_turno' con el valor correcto
-        $E_L->lcheck = 'OK'; // Reemplaza 'valor_del_lcheck' con el valor correcto
+        $E_L->muestra = 'OK'; // Reemplaza 'valor_del_lcheck' con el valor correcto
         $E_L->responsables = $usuarioLogueado->name; // Reemplaza 'valor_de_responsables' con el valor correcto
         $E_L->save();
         goto salir;
@@ -122,8 +170,8 @@ class EquipoLubricacionController extends Controller
     }
 
     // Obtén la fecha actual en la zona horaria de Salta, Argentina
-    $fechaActual = Carbon::now();
-
+    //$fechaActual = Carbon::now();
+    $fechaActual="2023-06-17";
     // Obtén la última fecha de actualización de la lubricación en la zona horaria de Salta, Argentina
     $ultimaFechaLubricacion = Carbon::parse($lubricacion->updated_at);
 
@@ -137,181 +185,184 @@ class EquipoLubricacionController extends Controller
     return $diferenciaEnHoras >= $periodoEnHoras;
 }
 
-    
 
 
+private function modificarAgregarYGuardarRegistros($registrosAsociativos)
+{
+    foreach ($registrosAsociativos as $registro) {
+        $equipoLubricacion = new EquipoLubricacion(); // Crear una nueva instancia
 
-
-
-    public function tablaCargar()
-    {
-        // Obtener las fechas más recientes para cada combinación de "equipo_id" y "lubricacion_id" en la tabla pivot
-        $ultimasFechas = DB::table('equipo_lubricacion')
-            ->select('equipo_id', 'lubricacion_id', DB::raw('MAX(created_at) as max_created_at'))
-            ->groupBy('equipo_id', 'lubricacion_id');
-    
-        // Realizar el join entre lubricaciones, equipos y la subconsulta de las últimas fechas
-        $lubricacionesConEquipos = Lubricacion::joinSub($ultimasFechas, 'ultimas_fechas', function ($join) {
-            $join->on('lubricacions.id', '=', 'ultimas_fechas.lubricacion_id');
-        })
-        ->join('equipo_lubricacion', function ($join) {
-            $join->on('lubricacions.id', '=', 'equipo_lubricacion.lubricacion_id')
-                ->on('ultimas_fechas.max_created_at', '=', 'equipo_lubricacion.created_at');
-        })
-        ->join('equipos', 'equipos.id', '=', 'equipo_lubricacion.equipo_id')
-        ->select(
-            'equipos.id as equipo_id',
-            'lubricacions.id as lubricacion_id',
-            'equipo_lubricacion.id as pivot_id',
-            'equipo_lubricacion.dia',
-            'equipo_lubricacion.turno',
-            'equipo_lubricacion.lcheck',
-            'equipo_lubricacion.responsables',
-            'ultimas_fechas.max_created_at'
-        )
-        ->orderBy('ultimas_fechas.max_created_at', 'desc') // Ordenar por la fecha más reciente
-        ->get();
-    
-        // Array para almacenar las ternas de "id", "equipo_id", "lubricacion_id", y campos adicionales
-        $ternasEquiposLubricaciones = [];
-    
-        // Recorrer todas las ternas obtenidas
-        foreach ($lubricacionesConEquipos as $terna) {
-                // Agregar la nueva terna con 'turno' modificado según la ley
-            if ($terna->turno === 'M') {
-                $ternasEquiposLubricaciones[] = [
-                    'id' => $terna->pivot_id,
-                    'equipo_id' => $terna->equipo_id,
-                    'lubricacion_id' => $terna->lubricacion_id,
-                    'dia' => $terna->dia,
-                    'turno' => 'T',
-                    'lcheck' => $terna->lcheck,
-                    'responsables' => $terna->responsables,
-                    'created_at' => $terna->max_created_at,
-                ];
-            } elseif ($terna->turno === 'T') {
-                $ternasEquiposLubricaciones[] = [
-                    'id' => $terna->pivot_id,
-                    'equipo_id' => $terna->equipo_id,
-                    'lubricacion_id' => $terna->lubricacion_id,
-                    'dia' => $terna->dia,
-                    'turno' => 'N',
-                    'lcheck' => $terna->lcheck,
-                    'responsables' => $terna->responsables,
-                    'created_at' => $terna->max_created_at,
-                ];
-            } elseif ($terna->turno === 'N') {
-                $dia = intval($terna->dia) + 1;
-                $ternasEquiposLubricaciones[] = [
-                    'id' => $terna->pivot_id,
-                    'equipo_id' => $terna->equipo_id,
-                    'lubricacion_id' => $terna->lubricacion_id,
-                    'dia' => strval($dia),
-                    'turno' => 'M',
-                    'lcheck' => $terna->lcheck,
-                    'responsables' => $terna->responsables,
-                    'created_at' => $terna->max_created_at,
-                ];
+        // Copiar los datos del registro existente
+        foreach ($registro['equipo_lubricacion']->getAttributes() as $key => $value) {
+            // Omitir el campo 'id' para permitir que se genere automáticamente
+            if ($key !== 'id') {
+                $equipoLubricacion->$key = $value;
             }
         }
-        $responsableActual = Auth::user()->name; // Cambia "name" por el nombre del campo que almacena el nombre de usuario en tu tabla de usuarios.
-        foreach ($ternasEquiposLubricaciones as $terna) {
-            $frecuencia = Lubricacion::find($terna['lubricacion_id'])->frecuencia;
-           // return $frecuencia;
-            $frecuenciasEnHoras = [
-                'Día' => 24,
-                'Turno' => 8,
-                'Semana' => 168,
-                'Mes' => 672,
-            ];
-            // Verifica si la frecuencia está presente en el array y asigna el valor en horas correspondiente
-            $periodoEnHoras = $frecuenciasEnHoras[$frecuencia];
-            // return  $periodoEnHoras;
-            //En cada registro verifica segun periodo si le corresponde actualizar el registro
-            $id=$terna['id'];
-            //$periodoEnHoras = 4;   // Aquí se define el periodo en horas (por ejemplo, 30 días)
-            $cumplePeriodo = $this->cumplePeriodo($id, $periodoEnHoras); //Llama a la funcion "cumplePeriodo" de la mismo controlador o Clase
-            // La variable $cumplePeriodo ahora contiene verdadero o falso dependiendo si se cumple el período o no.
-            //return;
-            $otraCondicion= true; //IMPORTANTANTE desactivar luego de hacer la carga controlada
-            if($cumplePeriodo || $otraCondicion){ //Entra solo si se cumpli la frecuencia de lubricacion
-            $equipoLubricacion = new EquipoLubricacion();
-            $equipoLubricacion->equipo_id = $terna['equipo_id'];
-            $equipoLubricacion->lubricacion_id = $terna['lubricacion_id'];
-            $equipoLubricacion->dia = $terna['dia'];
-            $equipoLubricacion->turno = $terna['turno'];
-            $equipoLubricacion->lcheck = 'OK';// $terna['lcheck'];
-            $equipoLubricacion->responsables = $responsableActual;
-            
-            // $equipoLubricacion->updated_at = $terna['created_at']; // Opcional, si también deseas establecer el campo 'updated_at'
-    
-            $equipoLubricacion->save();
-            } // del if $cumpleperiodo
+        $frecuencia = $registro['lubricacion']->frecuencia;
+        $dias=$equipoLubricacion->dia;
+      //  echo $frecuencia . "******" . $dias ;
+       
+        
+        if ($frecuencia-$dias=0) {
+
+            if ($equipoLubricacion->turno === 'M') {
+                $equipoLubricacion->dia=1;
+                $equipoLubricacion->turno = 'T';
+            } elseif ($equipoLubricacion->turno === 'T') {
+                $equipoLubricacion->dia=1;
+                $equipoLubricacion->turno = 'N';
+            } elseif ($equipoLubricacion->turno === 'N') {
+                $equipoLubricacion->dia=1;
+                $equipoLubricacion->turno = 'M';
+                
+            }
+        } else {
+            $equipoLubricacion->lcheck = '***';
+            $equipoLubricacion->dia++;
         }
-        return redirect()->action([EquipoLubricacionController::class, 'index']); //para mostrar la tabla
-        // Puedes devolver la información a una vista o hacer lo que desees con ella
-        return $ternasEquiposLubricaciones;
+        $equipoLubricacion->contador++;
+        $equipoLubricacion->save(); // Guardar el nuevo registro
+    }
+}
+
+
+function calcularDiasDesdeFechaMasReciente() {
+    $fechaMasReciente = EquipoLubricacion::max('created_at');
+    $fechaActual = Carbon::now();
+    
+    $diasTranscurridos = $fechaActual->diffInDays($fechaMasReciente);
+    
+    return $diasTranscurridos;
+}
+
+
+public function cargaDiaria()
+{
+ 
+        // Obtener los pares "equipo_id" y "lubricacion_id" distintos de registros existentes
+        $paresUnicos = DB::table('equipo_lubricacion')
+            ->select('equipo_id', 'lubricacion_id')
+            ->distinct()
+            ->get();
+        
+        // Obtener los datos del registro más reciente en base a los pares únicos
+        foreach ($paresUnicos as $par) {
+            $registroReciente = DB::table('equipo_lubricacion')
+                ->where('equipo_id', $par->equipo_id)
+                ->where('lubricacion_id', $par->lubricacion_id)
+                ->orderBy('created_at', 'desc')
+                ->first();
+
+            $nuevoNumMuestra = $registroReciente->numMuestra + 1;
+            $nuevaFecha = Carbon::now();
+
+            // Insertar nuevo registro
+            DB::table('equipo_lubricacion')->insert([
+                'equipo_id' => $par->equipo_id,
+                'lubricacion_id' => $par->lubricacion_id,
+                'numMuestra' => $nuevoNumMuestra,
+                'dia' => $registroReciente->dia,
+                'turno' => $registroReciente->turno,
+                'muestra' => $registroReciente->muestra,
+                'responsables' => $registroReciente->responsables,
+                'created_at' => $nuevaFecha,
+                'updated_at' => $nuevaFecha,
+            ]);
+        }
+
+        //return "Nuevos registros insertados correctamente.";
+    
+
+    return redirect()->action([EquipoLubricacionController::class, 'index']);
+}
+
+
+
+
+  
+
+
+
+    //return $ultimasFechas;
+
+    //return "Estoy adentro de carga diaria";
+
+
+
+
+
+
+
+
+
+
+
+
+
+public function tablaCargar()
+{
+    $registroMasAlto = EquipoLubricacion::orderBy('id', 'desc')->first();
+if ($registroMasAlto) {
+    $idMasReciente= $registroMasAlto->id;
+    $diaMasReciente = $registroMasAlto->dia;
+    $turnoAnterior = $registroMasAlto->turno;
+    // Ahora puedes utilizar $diaMasReciente y $turnoAnterior como necesites
+} else {
+    // Manejo en caso de que no haya registros en la tabla
+}
+
+    // Consulta SQL
+    
+   // return $idMasReciente . "**" . $diaMasReciente . " **" . $turnoAnterior;
+    if($turnoAnterior=== 'N'){
+    //return "Dentro de Mañana" . "Porque turno anterios es: " .$turnoAnterior;
+    $inicio= $diaMasReciente+1;
+    $mañana = "
+    INSERT INTO equipo_lubricacion (equipo_id, lubricacion_id, dia, turno, lcheck, responsables, created_at, updated_at)
+    SELECT equipo_id, lubricacion_id, $inicio as dia, 'M', lcheck, responsables, DATE_ADD(created_at, INTERVAL 0 DAY) as created_at, DATE_ADD(updated_at, INTERVAL 0 DAY) as updated_at
+    FROM equipo_lubricacion
+    WHERE dia = $inicio -1  and turno='N'";
+    DB::statement($mañana);
+    goto salir;
+    }
+    if($turnoAnterior=== 'M'){
+
+      // return "Dentro de Tarde" . "Porque turno anterios es: " .$turnoAnterior;
+    $inicio= $diaMasReciente;    
+    $tarde = "
+    INSERT INTO equipo_lubricacion (equipo_id, lubricacion_id, dia, turno, lcheck, responsables, created_at, updated_at)
+    SELECT equipo_id, lubricacion_id, $inicio as dia,'T', lcheck, responsables, DATE_ADD(created_at, INTERVAL 0 DAY) as created_at, DATE_ADD(updated_at, INTERVAL 0 DAY) as updated_at
+    FROM equipo_lubricacion
+    WHERE dia = $inicio  and turno= 'M'";
+    DB::statement($tarde);
+    goto salir;
     }
 
-   /* ************************************************CARGA Automatica ********************************* */
-
-   public function cargaAutom()
-   {   
-    $usuarioActual = Auth::user()->name;
-
-    // Verifica si el usuario actual es "Daniel"
-    if ($usuarioActual !== 'Admin') {
-        return redirect()->back()->withErrors(['error' => '¡Acceso restringido! Solo administradores.']);
+    if($turnoAnterior=== 'T'){
+       // return "Dentro de Notche" . "Porque turno anterios es: " .$turnoAnterior;
+    $inicio= $diaMasReciente;    
+    $noche = "
+        INSERT INTO equipo_lubricacion (equipo_id, lubricacion_id, dia, turno, lcheck, responsables, created_at, updated_at)
+        SELECT equipo_id, lubricacion_id, $inicio as dia, 'N', lcheck, responsables, DATE_ADD(created_at, INTERVAL 1 DAY) as created_at, DATE_ADD(updated_at, INTERVAL 1 DAY) as updated_at
+        FROM equipo_lubricacion
+        WHERE dia = $inicio AND turno = 'T';
+    ";
+    DB::statement($noche);
+    goto salir;
     }
-       // 1) Define la fecha de inicio
-       $fechaInicio = "2023-06-16";
-       $fechaActual = Carbon::createFromFormat('Y-m-d', $fechaInicio)->startOfDay();
+    
+    salir:
+    // Redireccionar al índice de EquipoLubricacionController
+    return redirect()->action([EquipoLubricacionController::class, 'index']);
+}
+
+
+
+
+
+
    
-       // 2) Obtén los registros ordenados por "id" ascendente
-       $registros = DB::table('equipo_lubricacion')->orderBy('id', 'asc')->get();
-   
-       // 3) Nombres de responsables en forma aleatoria
-       $nombresResponsables = ['Apaza', 'Cabana', 'Estrada', 'oficial', 'medio oficial'];
-   
-       // 4) Recorre los registros y actualiza los campos "updated_at", "created_at", y "responsables"
-       foreach ($registros as $index => $registro) {
-           // Define la hora y turno según el patrón dado
-           $hora = null;
-           $turno = null;
-           if ($index % 3 == 0) {
-               $hora = "12:00:00";
-               $turno = 'M';
-           } elseif ($index % 3 == 1) {
-               $hora = "20:00:00";
-               $turno = 'T';
-           } elseif ($index % 3 == 2) {
-               $hora = "23:00:00";
-               $turno = 'N';
-               // Incrementa la fecha después del turno 'N' solo si no es la primera iteración
-               if ($index > 0) {
-                   $fechaActual->addDay();
-               }
-           }
-   
-           // Formatea la fecha con la hora y turno correspondientes
-           $createdAt = Carbon::createFromFormat('Y-m-d H:i:s', $fechaActual->toDateString() . ' ' . $hora);
-   
-           // Obtén un nombre de responsable aleatorio
-           $responsable = $nombresResponsables[random_int(0, count($nombresResponsables) - 1)];
-   
-           // Actualiza los campos "created_at", "updated_at", y "responsables"
-           DB::table('equipo_lubricacion')
-               ->where('id', $registro->id)
-               ->update([
-                   'created_at' => $createdAt,
-                   'updated_at' => $createdAt,
-                   'turno' => $turno,
-                   'responsables' => $responsable,
-               ]);
-       }
-   
-       return redirect()->action([EquipoLubricacionController::class, 'index']); //para mostrar la tabla
-   }
    
    /* ********************************FIN CARGA AUTOMATICA********************************************** */
 
@@ -335,6 +386,7 @@ class EquipoLubricacionController extends Controller
     public function edit($id)
 {
     echo "Estoy adentro listo para cambiar el lcheck de Id=$id";
+   
     $lubricacion = EquipoLubricacion::find($id);
 
     if (!$lubricacion) {
@@ -350,12 +402,12 @@ class EquipoLubricacionController extends Controller
         $lubricacion->delete();
     } else {
         // Si no es "Daniel", cambia el valor de lcheck según el ciclo (OK -> E -> I -> OK)
-        if ($lubricacion->lcheck === 'OK') {
-            $lubricacion->lcheck = 'E';
-        } elseif ($lubricacion->lcheck === 'E') {
-            $lubricacion->lcheck = 'I';
-        } elseif ($lubricacion->lcheck === 'I') {
-            $lubricacion->lcheck = 'OK';
+        if ($lubricacion->muestra === 'C') {
+            $lubricacion->muestra = 'E';
+        } elseif ($lubricacion->muestra === 'E') {
+            $lubricacion->muestra = 'I';
+        } elseif ($lubricacion->muestra === 'I') {
+            $lubricacion->muestra = 'C';
         }
 
         $lubricacion->save();

@@ -12,9 +12,10 @@ class CreateEquipoLubricacionPivotTable extends Migration
             $table->id();
             $table->unsignedBigInteger('equipo_id');
             $table->unsignedBigInteger('lubricacion_id');
-            $table->string('dia');
+            $table->integer('numMuestra');
+            $table->interger('dia');
             $table->string('turno');
-            $table->string('lcheck');
+            $table->string('muestra');
             $table->string('responsables');
           
             $table->timestamps();

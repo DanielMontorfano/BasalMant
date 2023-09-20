@@ -23,7 +23,7 @@ class Lubricacion extends Model
     public function equipos()
     {
         return $this->belongsToMany(Equipo::class, 'equipo_lubricacion', 'lubricacion_id', 'equipo_id')
-            ->withPivot(['dia', 'turno', 'lcheck', 'responsables']);
+            ->withPivot(['numMuestra', 'dia', 'turno', 'muestra', 'responsables']);
     }
 
 

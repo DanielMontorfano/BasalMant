@@ -11,9 +11,10 @@ class EquipoLubricacion extends Model
     protected $fillable = [
         'equipo_id',
         'lubricacion_id',
+        'numMuestra',
         'dia',
         'turno',
-        'lcheck',
+        'muestra',
         'responsables',
     ];
 
