@@ -407,24 +407,7 @@ return [
                     
                 ],
                  
-                [
-                    'text' => 'Carga controlada',
-                    'icon' => 'fa-solid fa-list',
-                    'route'=> 'cargaAutom',
-                    
-                ],
- 
-               
-
-                            
-                
-                 
-                [
-                    'text' => 'Tareas',
-                    'icon' => 'fa-solid fa-person-digging',
-                    'route'=> 'tareas.create',
-                ],
-                
+         
 
                 /*FOTOS[
                     'text'    => 'Fotos',

@@ -210,10 +210,11 @@ $dompdf->stream(); */
     // ********IMPRIMIR LUBRICACIONES****************************************************************************************
 
     
-    public function imprimirLubric($equipo_id)
+    public function imprimirLubric($codigo)
     {
         // Buscar el equipo por su id
-        $equipo = Equipo::find($equipo_id);
+        $equipo = Equipo::where('codEquipo', $codigo)->first();
+        //$equipo = Equipo::find($equipo_id);
     
         // Verificar si el equipo existe
         if (!$equipo) {
@@ -230,7 +231,7 @@ $dompdf->stream(); */
             $lubricacionArray[$puntoLubric][] = [
                 'descripcion' => $lubricacion->descripcion,
                 'lubricante' => $lubricacion->lubricante,
-                'lcheck' => $lubricacion->pivot->lcheck,
+                'muestra' => $lubricacion->pivot->muestra,
             ];
         }
         

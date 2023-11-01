@@ -58,7 +58,7 @@
     footer {
         background-color: transparent;  
         position: fixed;
-        bottom: 0.5cm;
+        bottom: 1cm;
         left: 0cm;
         right: 0cm;
         height: 2.5cm;
@@ -107,7 +107,7 @@
 
 <footer>
     <div class="small-font" style="margin-top: 5px;">
-        OK: Nivel correcto &nbsp;&nbsp;&nbsp; E: Exceso &nbsp;&nbsp;&nbsp; I: Incompleto
+        C: Nivel correcto &nbsp;&nbsp;&nbsp; E: Exceso &nbsp;&nbsp;&nbsp; I: Incompleto
     </div> 
     <br>
   <!-- Copyright © <?php echo date("Y");?> -->
@@ -166,7 +166,7 @@
                     <tr>
                 @endif
 
-                <td>{{ $lubricacion['lcheck'] }}</td>
+                <td>{{ $lubricacion['muestra'] }}</td>
                 @php
                     $lcheckCount++;
                 @endphp

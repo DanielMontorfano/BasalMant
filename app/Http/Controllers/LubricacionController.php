@@ -54,23 +54,51 @@ class LubricacionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        // Validar y guardar los datos recibidos del formulario
-        $data = $request->validate([
-            'puntoLubric' => 'required',
-            'descripcion' => 'nullable',
-            'lubricante' => 'nullable',
-            'recipiente' => 'nullable',
-            'color' => 'nullable',
-            'inspecciones' => 'nullable',
-            'frecuencia' => 'nullable',
-        ]);
+{
+    // Validar y guardar los datos recibidos del formulario
+    $data = $request->validate([
+        'puntoLubric' => 'required',
+        'descripcion' => 'nullable',
+        'lubricante' => 'nullable',
+        'recipiente' => 'nullable',
+        'color' => 'nullable',
+        'inspecciones' => 'nullable',
+        'frecuencia' => 'nullable',
+    ]);
 
-        Lubricacion::create($data);
+    // Mapear las opciones de frecuencia a sus valores correspondientes
+   /* $frecuenciaOptions = [
+        'Turno' => 8,   // Turno
+        'Dia' => 24,     // Día
+        'Semana' => 168,  // Semana
+        'Mes' => 720,    // Mes
+    ];*/
 
-        // Redirigir o mostrar un mensaje de éxito
-        return redirect()->route('lubricacion.create')->with('success', 'Lubricación creada correctamente.');
+    $frecuenciaOptions = [
+        'Turno' => 1,   // Turno
+        'Dia' => 2,     // Día
+        'Semana' => 20,  // Semana
+        'Mes' => 83,    // Mes
+    ];
+
+
+    // Verificar si 'frecuencia' se envió desde el formulario
+    if (isset($data['frecuencia'])) {
+        // Verificar si existe en el mapeo y asignar el valor correspondiente
+        if (array_key_exists($data['frecuencia'], $frecuenciaOptions)) {
+            $data['frecuencia'] = $frecuenciaOptions[$data['frecuencia']];
+        } else {
+            // Manejar caso de opción inválida aquí, por ejemplo, mostrar un error o establecer un valor predeterminado.
+        }
     }
+
+    Lubricacion::create($data);
+
+    // Redirigir o mostrar un mensaje de éxito
+    return redirect()->route('lubricacion.create')->with('success', 'Lubricación creada correctamente.');
+}
+
+
 
     /**
      * Display the specified resource.

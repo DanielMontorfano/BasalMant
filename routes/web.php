@@ -148,8 +148,9 @@ Route::get('/catchId', [RepuestoController::class, 'catchId'])->name('repuestos.
 
  Route::resource('equipoLubricacion', EquipoLubricacionController::class);
  Route::get('cargaDiaria', [EquipoLubricacionController::class,'cargaDiaria'])->name('cargaDiaria');
- Route::get('tablaCargar', [EquipoLubricacionController::class,'tablaCargar'])->name('tablaCargar');
- Route::get('cargaAutom', [EquipoLubricacionController::class,'cargaAutom'])->name('cargaAutom');
+ Route::get('codigoAequipo/{codigo}', [EquipoLubricacionController::class,'codigoAequipo'])->name('codigoAequipo');
+ 
+
  
  
  
@@ -162,7 +163,7 @@ Route::get('/catchId', [RepuestoController::class, 'catchId'])->name('repuestos.
  Route::get('/imprimirListado/{titulo}', [imprimirController::class,'imprimirListado'])->name('imprimirListado');
  Route::get('/imprimirFormulario/{titulo}', [imprimirController::class,'imprimirListado'])->name('imprimirListado');
  Route::get('/imprimirFormulario/{formulario}/Imprimir', [imprimirController::class, 'imprimirFormulario'])->name('imprimirFormulario');
- Route::get('/imprimirLubric/{equipo}', [imprimirController::class,'imprimirLubric'])->name('imprimirLubric');
+ Route::get('/imprimirLubric/{codigo}', [imprimirController::class,'imprimirLubric'])->name('imprimirLubric');
  //route::post('imagen/store', [ImagenController::class,'store'])->name('imagen.store');
  
  

@@ -80,9 +80,16 @@ th, td {
                         @foreach ($puntos as $punto => $valores)
                             <tr>
                                 @if ($loop->first)
-                                    <td rowspan="{{ count($puntos) }}">{{ $codigo }}</td>
+                                    <td rowspan="{{ count($puntos) }}">
+                                        <a href="{{ route('codigoAequipo',$codigo)}}">{{ $codigo }}</a>    
+                                        
+                                        <button style="background-color: Transparent;border: none;" title="Imprimir Lcheck"><a  class="bi bi-printer" href="{{ route('imprimirLubric',$codigo)}}">  </a></button>
+                                    </td>
+
                                 @endif
-                                <td>{{ $punto }}</td>
+                                <td title="{{ $valores[0]['descripcion'] }}">{{ $punto }}</td>
+
+
                                 @for ($i = $maxDataColumns; $i >= 1; $i--) <!-- Modificado para contar hacia abajo -->
                                     @php
                                         $valor = isset($valores[$i - 1]) ? $valores[$i - 1] : null;
