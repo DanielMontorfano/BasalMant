@@ -24,7 +24,11 @@ th, td {
 .table-container {
     overflow-x: auto;
 }
+
+@import url("{{ asset('dataprint/sweetalert2.min.css') }}");
 </style>
+
+
 @stop
 
 @section('content_header')
@@ -36,9 +40,14 @@ th, td {
 </h6>
 @stop
 
+<!-- A<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> -->
+
+
+
 @section('content')
 <div class="text-center mt-2">
-    <a href="{{ route('cargaDiaria') }}" class="btn btn-primary">Carga Diaria</a>
+  
+    <button onclick="mostrarAdvertencia()" class="btn btn-success">Carga Diaria</button>
 </div>
 <div class="card custom-card">
     <div class="card-body">
@@ -133,3 +142,42 @@ th, td {
 </div>
 
 @endsection
+
+
+@section('js')
+<script src="{{ asset('dataprint/sweetalert2.all.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('dataprint/sweetalert2.min.css') }}">
+
+<style>
+    .my-swal-container {
+        background: linear-gradient(to bottom, #001eff, #000000);
+        padding: 20px; /* Ajusta el relleno según tus necesidades */
+        border-radius: 10px; /* Ajusta el radio del borde según tus necesidades */
+    }
+</style>
+
+<script>
+    function mostrarAdvertencia() {
+        Swal.fire({
+            title: '¿Está seguro que desea cargar un nuevo día de lubricaciones?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No',
+            customClass: {
+                confirmButton: 'btn btn-success', // Cambia el color del botón 'Sí' a verde
+                cancelButton: 'btn btn-danger',  // Cambia el color del botón 'No' a rojo
+                popup: 'my-swal-container'  // Agrega la clase personalizada al contenedor de SweetAlert2
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "{{ route('cargaDiaria') }}";
+            } else {
+                // Acción si se rechaza la advertencia
+                // alert("Acción cancelada");
+            }
+        });
+    }
+</script>
+@stop
+
