@@ -25,21 +25,74 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
     <thead class="table-dark" >
         
         <td>Referencia</td>
-        <td>Nº de punto</td>
-        <td>Detalle</td>
-        <td>Lubricante</td>
-        <td>Color</td>
-       
+        <td>Caraterísticas</td>
+        <td></td>
+        <td></td>
+        <td>s</td>
+    </thead>   
     <tbody>
       @foreach ($lubricaciones as $lubricacion)
       <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
         
         <td STYLE="font-weight:bold; text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">{{$lubricacion->id}}</td>
         
-        <td>{{$lubricacion->puntoLubric}}</td>
-        <td>{{$lubricacion->Descripción}}</td>
-        <td>{{$lubricacion->lubricante}}</td>
-        <td>{{$lubricacion->color}}</td>
+        <td>
+          Punto: <span style="color: rgb(94, 7, 102);">{{$lubricacion->puntoLubric}}</span> <br> 
+          Frecuencia:
+          @switch($lubricacion->frecuencia)
+              @case(0)
+                  <span style="color: rgb(94, 7, 102);">Turno</span> <br>
+                  @break
+              @case(2)
+                  <span style="color: rgb(94, 7, 102);">Diaria</span> <br>
+                  @break
+              @case(20)
+                  <span style="color: rgb(94, 7, 102);">Semanal</span> <br>
+                  @break
+              @case(83)
+                  <span style="color: rgb(94, 7, 102);">Mensual</span> <br>
+                  @break
+              @default
+                  <span style="color: rgb(94, 7, 102);">Desconocida</span> <br>
+          @endswitch
+          Descripción:<span style="color: rgb(94, 7, 102);">{{$lubricacion->descripcion}}</span> <br>
+          Lubricante: <span style="color: rgb(94, 7, 102);">{{$lubricacion->lubricante}}</span> <br>
+          Color: 
+          <span style="color: rgb(94, 7, 102);">
+              {{ $lubricacion->color }}
+          </span>
+          <span style="color: rgb(94, 7, 102);">
+              @switch($lubricacion->color)
+                  @case('A')
+                      - Aceites convensionales.
+                      @break
+          
+                  @case('B')
+                      - Grasas convensionales.
+                      @break
+          
+                  @case('C')
+                      -  Aceites Grado alimenticio (H1).
+                      @break
+          
+                  @case('D')
+                      - Grasas Grado Alimenticio (H1).
+                      @break
+          
+                  @default
+                      - Texto por defecto o manejo de casos no previstos
+              @endswitch
+          </span>
+          <br>
+          
+          Recipiente: <span style="color: rgb(94, 7, 102);">{{$lubricacion->recipiente}}</span> <br>
+      </td>
+      
+        <td></td>
+        <td></td>
+        <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">
+          <a class="bi bi-pencil-fill" href="{{route('lubricacion.edit', $lubricacion->id)}}"></a> 
+        </td>
         
       </tr>
         @endforeach

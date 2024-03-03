@@ -342,7 +342,11 @@ return [
             'topnav_right' => true,
         ],
 
-        
+        [
+            'text'         => 'Seguimientos',
+             'route'       => 'menu_seguimientos.index',
+            'topnav_right' => true,
+        ],
         
         [
             'type'         => 'navbar-search',

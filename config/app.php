@@ -198,7 +198,8 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-
+        App\Providers\MantenimientoPlanServiceProvider::class, //ESte fue generado por mi 11/02/2024
+        App\Providers\MantenimientoOrdenServiceProvider::class, //ESte fue generado por mi 12/02/2024
     ],
 
     /*

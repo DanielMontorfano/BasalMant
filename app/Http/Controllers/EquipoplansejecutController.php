@@ -2,21 +2,66 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\MantenimientoPlanService;
+use App\Services\MantenimientoOrdenService; // Agrega el servicio MantenimientoOrdenService
 use App\Models\Equipoplansejecut;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class EquipoplansejecutController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $mantenimientoPlanService;
+    protected $mantenimientoOrdenService; // Declara la propiedad para MantenimientoOrdenService
+
+    public function __construct(
+        MantenimientoPlanService $mantenimientoPlanService,
+        MantenimientoOrdenService $mantenimientoOrdenService // Inyecta el servicio MantenimientoOrdenService
+    ) {
+        $this->mantenimientoPlanService = $mantenimientoPlanService;
+        $this->mantenimientoOrdenService = $mantenimientoOrdenService; // Asigna el servicio MantenimientoOrdenService
+    }
+  
     public function index()
     {
-        //
+        
+      return view('seguimientos.menuSeguimientos');
+      
     }
+     
+    public function pendientes()
+    {
+      // Usar el servicio MantenimientoPlanService
+      $planesPendientes = $this->mantenimientoPlanService->getPlanesPendientes();
+
+      // Usar el servicio MantenimientoOrdenService
+      $ordenesAbiertas = $this->mantenimientoOrdenService->getPlanesPendientes();
+      $equiposSinPlan  = $this->mantenimientoPlanService->getEquiposSinPlan();
+      // Aquí puedes hacer cualquier otra lógica con los datos obtenidos de los servicios
+
+    /*  return [
+          'planes_pendientes' => $planesPendientes,
+          'ordenes_abiertas' => $ordenesAbiertas,
+      ];
+    */
+    //return $planesPendientes;
+   // return $equiposSinPlan;
+      return view('seguimientos.index',compact('planesPendientes'));
+      
+    }
+    
+    public function sinPlan()
+    {
+     
+      $equiposSinPlanes  = $this->mantenimientoPlanService->getEquiposSinPlan();
+     
+    //return $planesPendientes;
+   // return $equiposSinPlan;
+      return view('seguimientos.equiposSinPlan',compact('equiposSinPlanes'));
+      
+    }
+
+
+
 
     /**
      * Show the form for creating a new resource.

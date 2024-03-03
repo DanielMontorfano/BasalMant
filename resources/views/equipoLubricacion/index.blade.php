@@ -48,6 +48,7 @@ th, td {
 <div class="text-center mt-2">
   
     <button onclick="mostrarAdvertencia()" class="btn btn-success">Carga Diaria</button>
+    
 </div>
 <div class="card custom-card">
     <div class="card-body">
@@ -70,7 +71,7 @@ th, td {
                             @endforeach
                         @endforeach
                         @for ($i = $maxDataColumns; $i >= 1; $i--) <!-- Modificado para contar hacia abajo -->
-                            <th width="auto" >D{{ $i }}</th>
+                            <th title="Recorrido" width="auto" >R{{ $i }}</th>
                         @endfor
                     </tr>
                 </thead>
@@ -93,10 +94,14 @@ th, td {
                                         <a href="{{ route('codigoAequipo',$codigo)}}">{{ $codigo }}</a>    
                                         
                                         <button style="background-color: Transparent;border: none;" title="Imprimir Lcheck"><a  class="bi bi-printer" href="{{ route('imprimirLubric',$codigo)}}">  </a></button>
+                                        
                                     </td>
 
                                 @endif
-                                <td title="{{ $valores[0]['descripcion'] }}">{{ $punto }}</td>
+                                <td title="{{ $valores[0]['lubricacion_id'] }} - {{ $valores[0]['descripcion'] }}" style="background-color: rgb(27, 106, 109); color: rgb(228, 246, 247);">
+                                    {{ $punto }}
+                                </td>
+                                
 
 
                                 @for ($i = $maxDataColumns; $i >= 1; $i--) <!-- Modificado para contar hacia abajo -->
@@ -141,6 +146,9 @@ th, td {
     </div>
 </div>
 
+
+
+
 @endsection
 
 
@@ -179,5 +187,7 @@ th, td {
         });
     }
 </script>
+
+
 @stop
 

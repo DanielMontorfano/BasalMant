@@ -28,6 +28,7 @@ use App\Http\Controllers\PlanprotoController;
 use App\Http\Controllers\SearchTareasController;
 use App\Http\Controllers\SearchProtocolosController; 
 use App\Http\Controllers\SearchPlansController; 
+use App\Http\Controllers\EquipoplansejecutController; //LO agrgue para ver servicios
 use App\Http\Controllers\SearchLubricController; 
 use App\Http\Controllers\SearchEquipoController;
 use App\Http\Controllers\TareashController;
@@ -70,9 +71,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),  'verified'
  Route::get('equipos/{equipo}/equipoTareasShow', [EquipoController::class, 'equipoTareasShow'])->name('equipos.showtareas');
 
  Route::resource('equipoTareash', TareashController::class);
+ Route::get('menu_seguimientos/', [EquipoplansejecutController::class,'index'])->name('menu_seguimientos.index');
+ Route::get('seguimientos/pendientes/', [EquipoplansejecutController::class,'pendientes'])->name('seguimientos.pendientes');
+ Route::get('seguimientos/sinPlan/', [EquipoplansejecutController::class,'sinPlan'])->name('seguimientos.sinPlan');
  
- 
- 
+
+
+
  Route::delete('/equipos/{equipo}/borrar', [EquipoController::class, 'destroy'])->name('equipos.destroy');
  Route::resource('equipoRepuesto', EquipoRepuestoController::class);
  Route::get('search/repuestos', [SearchRepuestosController::class,'repuestos'])->name('search.repuestos');
@@ -127,6 +132,7 @@ Route::get('/catchId', [RepuestoController::class, 'catchId'])->name('repuestos.
  Route::resource('plans', PlanController::class);
  Route::resource('planproto', PlanprotoController::class);
  Route::get('plans/{plans}/copiar', [PlanController::class, 'copiar'])->name('plans.copiar');
+
  //**************************************************************************** */
  
  

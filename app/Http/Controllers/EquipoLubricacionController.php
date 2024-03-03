@@ -28,14 +28,30 @@ class EquipoLubricacionController extends Controller
     
        foreach ($LubricacionesVinculadas as $lubricacionVinculada) {
         $idEquipo=$lubricacionVinculada->equipo->id;
+        $lubricacion_id=$lubricacionVinculada->lubricacion->id;
         $codEquipo = $lubricacionVinculada->equipo->codEquipo;     //ASI obtengo los capos de la consulta, muy interesante
         $puntoLubric = $lubricacionVinculada->lubricacion->puntoLubric;
-        $descripcion = $lubricacionVinculada->lubricacion->descripcion .", ". $lubricacionVinculada->lubricacion->lubricante .", ". $lubricacionVinculada->lubricacion->recipiente;
+        
+        $frecuencias = [
+            0 => 'Turno',
+            2 => 'Día',
+            20 => 'Semana',
+            83 => 'Mes',
+        ];
+        
+        
+        $frecuenciaNumerica = $lubricacionVinculada->lubricacion->frecuencia;
+        
+        // Verificar si la clave existe en el array antes de acceder a ella
+        $descripcionFrecuencia = isset($frecuencias[$frecuenciaNumerica]) ? $frecuencias[$frecuenciaNumerica] : 'Frecuencia Desconocida';
+        
+        $descripcion = $lubricacionVinculada->lubricacion->descripcion .", ". $lubricacionVinculada->lubricacion->lubricante .", ". $lubricacionVinculada->lubricacion->recipiente .", ". $descripcionFrecuencia;
         $numMuestra = $lubricacionVinculada->numMuestra;
         $muestra = $lubricacionVinculada->muestra;
-        $equipoLubricacion_id =$lubricacionVinculada->id;  
+        $equipoLubricacion_id =$lubricacionVinculada->id;
+        $lubricacion_id= $lubricacionVinculada->lubricacion_id; 
    
-    $todos[]=array('id'=>$equipoLubricacion_id, 'codigo'=>$codEquipo, 'Punto'=>$puntoLubric, 'descripcion'=>$descripcion, 'numMuestra'=> $numMuestra, 'muestras'=> $muestra);
+    $todos[]=array('id'=>$equipoLubricacion_id, 'lubricacion_id'=>$lubricacion_id, 'codigo'=>$codEquipo, 'Punto'=>$puntoLubric, 'descripcion'=>$descripcion, 'numMuestra'=> $numMuestra, 'muestras'=> $muestra);
     // Resto de tu código...
 }
 
@@ -45,6 +61,7 @@ $todosFiltrado = [];
 foreach ($todos as $item) { //busco generar una array donde sea no se repitan los codEquipo ni sus respectivos puntos de lubricacion
    
     $idValue = $item['id'];
+    $lubricacion_id=$item['lubricacion_id'];
     $codigo = $item['codigo'];
     $punto = $item['Punto'];
     $descripcion = $item['descripcion'];
@@ -62,6 +79,7 @@ foreach ($todos as $item) { //busco generar una array donde sea no se repitan lo
     $todosFiltrado[$codigo][$punto][] = [
        
         'id' => $idValue,
+        'lubricacion_id'=>$lubricacion_id,
         'descripcion'=>$descripcion,
         'numMuestra'=>$numMuestra,
         'muestras' => $muestras,
@@ -76,7 +94,20 @@ foreach ($todosFiltrado as &$codigo) {  //Ordena segun numMuestra
     }
 }
 
+// Ordenar los equipos por codEquipo y puntos por numMuestra
+ksort($todosFiltrado); // Ordena los equipos por código de equipo
 
+foreach ($todosFiltrado as &$puntos) {
+    ksort($puntos); // Ordena los puntos de lubricación alfabéticamente (puedes ajustar según tus necesidades)
+
+    foreach ($puntos as &$muestras) {
+        usort($muestras, function($a, $b) {
+            return $a['numMuestra'] <=> $b['numMuestra']; // Ordena las muestras por numMuestra
+        });
+    }
+}
+
+// ...
  //dd($todosFiltrado);
 
         //return $todosFiltrado;//   $todos;*/

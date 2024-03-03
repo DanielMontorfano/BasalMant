@@ -30,6 +30,7 @@ class LubricacionController extends Controller
       //  echo "dentro de Lubricacion controller, metodo index";
        $lubricaciones=Lubricacion::All();
        //return $lubricaciones;
+       //return $lubricaciones;
        return view('lubricacion.index',compact('lubricaciones'));
 
 
@@ -75,7 +76,7 @@ class LubricacionController extends Controller
     ];*/
 
     $frecuenciaOptions = [
-        'Turno' => 1,   // Turno
+        'Turno' => 0,   // Turno
         'Dia' => 2,     // Día
         'Semana' => 20,  // Semana
         'Mes' => 83,    // Mes
@@ -117,9 +118,13 @@ class LubricacionController extends Controller
      * @param  \App\Models\Lubricacion  $lubricacion
      * @return \Illuminate\Http\Response
      */
-    public function edit(Lubricacion $lubricacion)
+    public function edit($id)
     {
-        //
+        $lubricacion=Lubricacion::find($id);
+        $punto=$lubricacion->$id;
+        $hola="Hola" . $id;
+        //return  $lubricacion;
+        return view('lubricacion.edit', compact('lubricacion'));
     }
 
     /**
@@ -129,11 +134,33 @@ class LubricacionController extends Controller
      * @param  \App\Models\Lubricacion  $lubricacion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Lubricacion $lubricacion)
-    {
-        //
-    }
+    public function update(Request $request, $id)
+{
+    $lubricacion = Lubricacion::find($id);
+    $lubricacion->puntoLubric = $request->puntoLubric;
+    $lubricacion->descripcion = $request->descripcion;
+    $lubricacion->lubricante = $request->lubricante;
+    $lubricacion->recipiente = $request->recipiente;
+    $lubricacion->color = $request->color;
+    $lubricacion->inspecciones = $request->inspecciones;
+   
+    // Mapeo de opciones a valores numéricos
+    $frecuenciaMapping = [
+        'Turno' => 0,
+        'Día' => 2,
+        'Semana' => 20,
+        'Mes' => 83,
+    ];
 
+    // Asignar el valor numérico basado en la opción seleccionada
+    $lubricacion->frecuencia = $frecuenciaMapping[$request->frecuencia];
+
+    $lubricacion->save();
+
+    // Lógica para actualizar los datos
+
+    return redirect()->route('lubricacion.index')->with('success', 'Lubricación actualizada correctamente');
+}
     /**
      * Remove the specified resource from storage.
      *
