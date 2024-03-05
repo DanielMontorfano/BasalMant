@@ -63,7 +63,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),  'verified'
     })->name('dashboard');
     Route::view('home','home')->name('home');
  //*********************Desde Aqui ************************************************ */ 
- Route::view('nosotros','nosotros')->name('nosotros');
+ //Route::view('nosotros','nosotros')->name('nosotros');
+ Route::get('/nosotros', function () {
+    return view('nosotros');
+})->name('nosotros');
  Route::view('contactanos','contactanos')->name('contactanos');
  
  Route::resource('equipos', EquipoController::class);

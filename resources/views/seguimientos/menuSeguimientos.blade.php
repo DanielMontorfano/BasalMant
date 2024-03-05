@@ -71,9 +71,9 @@
         <div class="card  text-white" >
             
           <div class="card-body" align="center">
-            <img src={{asset('img\imagenes\checkList.png')}} class="card-img-top" alt="...">
+            {{-- <img src={{asset('img\imagenes\checkList.png')}} class="card-img-top" alt="...">
             <p>Proced. de mantenimiento</p>
-            <a href="{{route('protocolos.index')}}" class="btn stretched-link"></a>
+            <a href="{{route('protocolos.index')}}" class="btn stretched-link"></a> --}}
           </div>
         </div>
       </div>
@@ -88,9 +88,9 @@
             <div class="card  text-white" >
                 
                 <div class="card-body" align="center" >
-                  <img src={{asset('img\imagenes\tarea2.png')}}  class="card-img-top" alt="...">
+                  {{-- <img src={{asset('img\imagenes\tarea2.png')}}  class="card-img-top" alt="...">
                   <p>Tareas</p>
-                  <a href="{{route('tareas.index')}}" class="btn stretched-link"></a>
+                  <a href="{{route('tareas.index')}}" class="btn stretched-link"></a> --}}
                 </div>
               </div>
           </div>
@@ -99,9 +99,9 @@
             <div class="card  text-white" >
                 
               <div class="card-body" align="center">
-                <img src={{asset('img\imagenes\Analisis2.png')}} class="card-img-top" alt="...">
+               {{--  <img src={{asset('img\imagenes\Analisis2.png')}} class="card-img-top" alt="...">
                 <p>Datos</p>
-                <a href="#" class="btn stretched-link"></a>
+                <a href="#" class="btn stretched-link"></a> --}}
               </div>
             </div>
         </div>
@@ -111,9 +111,9 @@
       <div class="card  text-white" align="center">
           
         <div class="card-body">
-          <img src={{asset('img\imagenes\Repuestos2.png')}} class="card-img-top" alt="...">
+          {{-- <img src={{asset('img\imagenes\Repuestos2.png')}} class="card-img-top" alt="...">
           <p>Repuestos</p>
-          <a href="{{route('repuestos.index')}}" class="btn stretched-link"></a>
+          <a href="{{route('repuestos.index')}}" class="btn stretched-link"></a> --}}
         </div>
       </div>
     </div>
@@ -123,9 +123,9 @@
       <div class="card  text-white" >
           
         <div class="card-body" align="center">
-          <img src={{asset('img\imagenes\Evolución2.png')}} class="card-img-top" alt="...">
+          {{-- <img src={{asset('img\imagenes\Evolución2.png')}} class="card-img-top" alt="...">
           <p>Control de versiones</p>
-          <a href="#" class="btn stretched-link"></a>
+          <a href="#" class="btn stretched-link"></a> --}}
         </div>
       </div>
     </div>

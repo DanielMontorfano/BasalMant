@@ -447,7 +447,7 @@ return [
         [
             'text'       => 'Nosotros',
             'icon_color' => 'red',
-            'url'        => '#',
+            'route'      => 'nosotros', // la ruta la generé yo
         ],
         [
             'text'       => 'Versión',
