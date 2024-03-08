@@ -308,7 +308,7 @@ class HistorialController extends Controller
    
 
 
-
+ // return $formulario;
 
   // return view('tareash.equipoTareasEdit', compact('equipo','PlanP', 'ProtocoloP','Tareas')); 
   return View('historial.equipoFormularioShow', compact('equipo','PlanP', 'ProtocoloP','Tareas','formulario'));              

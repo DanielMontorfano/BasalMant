@@ -56,6 +56,7 @@ class TareashController extends Controller
         
         $contadorPlan=$request->contadorPlan-1;
         $pendiente=$request->pendiente;
+        $observacion=$request->observacion;
         $tecnico=$request->tecnico;
         $supervisor1=$request->supervisor1;
         $ejecucion=$request->ejecucion;
@@ -70,6 +71,7 @@ class TareashController extends Controller
         if (!empty($tecnico[$i]) && !empty($supervisor1[$i])) { //Iniciamos guardado solo si firmaron
         $plan=Plan::find($planId[$i]);  
         $equipolansejecut->pendiente=$pendiente[$i];
+        $equipolansejecut->observacion=$observacion[$i]; //Agregado 08/03/2024
         $equipolansejecut->tecnico=$tecnico[$i]; 
         $equipolansejecut->supervisor1=$supervisor1[$i];
         $equipolansejecut->ejecucion=$ejecucion[$i];

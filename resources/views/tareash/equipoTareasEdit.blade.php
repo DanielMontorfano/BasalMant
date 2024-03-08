@@ -128,7 +128,13 @@
                                         <td colspan="3">
                                           <input id="pendiente" placeholder="Tarea pendiente" autocomplete="off" class="form-control"  STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#243B55,#141E30);"type="text" name="pendiente[]" value={{old('pendiente')}}>
                                         </td>
-                                      </tr>
+                                     </tr>
+                                     <tr>
+                                      <td colspan="3">
+                                        <input id="observacion" placeholder="Observación" autocomplete="off" class="form-control"  STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#243B55,#141E30);"type="text" name="observacion[]" value={{old('observacion')}}>
+                                      </td>
+                                     </tr>
+                                     
                                     <tr>
                                       <td>
                                        <div class="form-group">

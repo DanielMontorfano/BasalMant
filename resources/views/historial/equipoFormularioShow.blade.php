@@ -177,7 +177,18 @@
         @endif
       </td>
     </tr>
-    
+    <tr>
+      <td colspan="2">
+        @if($formulario->observacion)
+          Observación: {{$formulario->observacion}}
+        @else
+          <span class="text-success">No existe tarea observación</span>
+        @endif
+      </td>
+    </tr>
+
+
+
     <tr>
       @if($formulario->correccion !== null)
         <td colspan="2">Corrección realizada: {{$formulario->correccion}} en la fecha {{ $formulario->created_at->format('d-m-Y') }}</td>
