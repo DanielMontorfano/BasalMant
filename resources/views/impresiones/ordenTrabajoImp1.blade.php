@@ -17,12 +17,12 @@
 <h1>O.d.T-{{$ot->id}}</h1>
 <table>
     <tr>
-        <td>Esta orden está:{{$ot->estado}}</td>
+        <td>Esta orden está: {{$ot->estado}}</td>
         <td></td>
     </tr>
     <tr>
         <td>Solicitante: {{$ot->solicitante}}</td>
-        <td>Sector:{{$equipo->idSecc}}/{{$equipo->idSubSecc}}</td>
+        <td>Sector: {{$equipo->idSecc}}/{{$equipo->idSubSecc}}</td>
     </tr>
     <tr>
         <td>Prioridad:{{$ot->prioridad}}</td>

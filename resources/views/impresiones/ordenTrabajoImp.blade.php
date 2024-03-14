@@ -56,22 +56,45 @@ text-align: center;
 line-height: 0.5cm;
 }
 
+.tabla-ot thead .encabezado {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 3px solid black;
+    background-color: #cfcdcddc;
+    text-align: center;
+    vertical-align: middle; 
+}   
+
 
 #tabla-ot {
-    border-collapse: collapse;
     border: 3px solid black;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
+
 #tabla-ot tr {
-  margin-bottom: 200px;
-  padding-left: 20px;
+    margin-bottom: 200px;
+    padding-left: 20px;
 }
 
 #tabla-ot td {
-  margin-left: 20px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 20px;
+    margin-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
 }
+.estilo-celda {
+    background-color: #f0f5f0; /* Color de fondo */
+    font-size: 14px; /* Tamaño de fuente */
+    color: #000000; /* Color de fuente */
+}
+.estilo-celda1 {
+    background-color: #f8f8fa; /* Color de fondo */
+    font-size: 14px; /* Tamaño de fuente */
+    color: #000000; /* Color de fuente */
+} 
 
 
 </style>
@@ -132,52 +155,67 @@ line-height: 0.5cm;
 
 
    
+    
+</head>
+<body>
 
-  <table  id="tabla-ot" class="tabla-ot"  border="1" >
-    <tr align="center">
-        <td colspan="2"><h1>O.d.T-{{$ot->id}}</h1></td>
-    </tr>
-      <tr>
-          <td>Esta orden está:{{$ot->estado}}</td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>Solicitante: {{$ot->solicitante}}</td>
-          <td>Sector:{{$equipo->idSecc}}/{{$equipo->idSubSecc}}</td>
-      </tr>
-      <tr>
-          <td>Prioridad:{{$ot->prioridad}}</td>
-          <td>Pedido Fecha/Hora:{{$ot->created_at}}</td>
-      </tr>
-      <tr>
-          <td>Trabajo asignado a:{{$ot->asignadoA}}</td>
-          <td>Fecha necesidad:{{$ot->fechaNecesidad}}</td>
-      </tr>
-      
-      
-      <tr>
-          <td>Descripcion del pedido:</td>
-          <td>{{$ot->det1}}</td>
-      </tr>
-      <tr>
-          <td>Descripcion del trabajo realizado:</td>
-          <td>{{$ot->det2}}</td>
-      </tr>
-      <tr>
-          <td>Detalle incompleto:</td>
-          <td>{{$ot->det3}}</td>
-      </tr>
-      <tr>
-          <td>Realizada por:{{$ot->realizadoPor}}</td>
-          <td>Fecha entrega:{{$ot->fechaEntrega}}</td>
-          
-      </tr>
-  
-      <tr>
-          <td>Aprobada por:{{$ot->aprobadoPor}}</td>
-          <td>Fecha cierre:{{$ot->updated_at}}</td>
-      </tr>
-  </table>
+   
+    
+    
+    <table id="tabla-ot" class="tabla-ot" border="1" >
+        <thead>
+            <tr>
+                <td style="padding-top: 0px; text-align: center;" colspan="2" class="encabezado">
+                    <h3 >O.d.T-{{$ot->id}}</h3>{{$equipo->det5}}
+                 
+                </td>
+            </tr>
+           
+        </thead>
+        <tbody>
+            <tr>
+                <td  class="estilo-celda"><strong>Esta orden está:</strong> <br> {{$ot->estado}}</td>
+                <td class="estilo-celda"> <strong>Código:</strong> <br> {{$equipo->codEquipo}}</td>
+            </tr>
+            <tr>
+                <td  class="estilo-celda"><strong>Solicitante:</strong> <br> {{$ot->solicitante}}</td>
+                <td class="estilo-celda">
+                    <strong>Sector:</strong> <br> {{$equipo->idSecc}}/{{$equipo->idSubSecc}}
+                </td>
+            </tr>
+            <tr>
+                <td  class="estilo-celda"><strong>Prioridad:</strong> <br> {{$ot->prioridad}}</td>
+                <td class="estilo-celda"><strong>Pedido Fecha/Hora:</strong> <br> {{$ot->created_at}}</td>
+            </tr>
+            <tr>
+                <td  class="estilo-celda"><strong>Trabajo asignado a:</strong> <br> {{$ot->asignadoA}}</td>
+                <td class="estilo-celda"><strong>Fecha necesidad:</strong><br> {{$ot->fechaNecesidad}}</td>
+            </tr>
+            <tr>
+                <td  class="estilo-celda"><strong>Realizada por:</strong> <br> {{$ot->realizadoPor}}</td>
+                <td class="estilo-celda"><strong>Fecha entrega:</strong><br> {{$ot->fechaEntrega}}</td>
+            </tr>
+            <tr>
+                <td  class="estilo-celda"><strong>Aprobada por:</strong> <br> {{$ot->aprobadoPor}}</td>
+                <td class="estilo-celda"><strong>Fecha cierre:</strong> <br> {{$ot->updated_at}}</td>
+            </tr>
+            <tr>
+                <td   class="estilo-celda1" colspan="2" class="estilo-celda"><strong>Descripción del pedido:</strong> {{$ot->det1}}</td>
+            </tr>
+            <tr>
+                <td  class="estilo-celda1"colspan="2" class="estilo-celda"><strong>Descripción del trabajo realizado:</strong> {{$ot->det2}}</td>
+            </tr>
+            <tr>
+                <td  class="estilo-celda1"colspan="2" class="estilo-celda"><strong>Detalle incompleto:</strong> {{$ot->det3}}</td>
+            </tr>
+        </tbody>
+        
+        
+    </table>
+    
+    
+    
+    
 
 </main>
 

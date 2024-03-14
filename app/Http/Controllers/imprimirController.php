@@ -70,12 +70,13 @@ $dompdf->stream(); */
             $ot=OrdenTrabajo::find($id);
             $equipo_id=$ot->equipo_id;    
             $equipo= Equipo::find($equipo_id); // Ver la linea de abajo alternativa
-
+            //return view('impresiones.ordenTrabajoImp', compact('equipo', 'ot')); 
             //$repuestos=$equipo->equiposRepuestos;
            // $plans=Equipo::find($id)->equiposPlans; 
             //$equiposB=Equipo::find($id)->equiposAEquiposB; 
             $pdf = PDF::loadView('impresiones.ordenTrabajoImp', compact('equipo', 'ot'));
             $variable="O.d.T-" . $ot->id .".pdf";
+           
             return $pdf->download($variable); 
             
            //return $equipo; 
