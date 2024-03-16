@@ -62,35 +62,37 @@ class EquipoController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function store(StoreEquipo $request) //esto funciona una vez creado StoreEquipo de Request
-    //public function store(Request $request) //Antes de usar archivo StoreEquipo en Request
-    {
-        //$request->validate(['codEquipo'=>'required|max:8', 'marca'=>'required|min:3', 'modelo'=>'required']);
-        //return $request->all();  //Para probar que recibo todos losregistros del formulario
-      
-        // las siguentes lineas seria en forma manual, 
-        $equipo= new Equipo();
-        $equipo->codEquipo=$request->codEquipo;
-        $equipo->marca=$request->marca;
-        $equipo->modelo=$request->modelo;
-        $equipo->idSecc=$request->idSecc;
-        $equipo->idSubSecc=$request->idSubSecc;
-        $equipo->det1=$request->det1;
-        $equipo->det2=$request->det2;
-        $equipo->det3=$request->det3;
-        $equipo->det4=$request->det4;
-        $equipo->det5=$request->det5;
-
-        $equipo->save();
-        
-        //Asi se realizará con Asignacion Masiva, es mas simple, pero se debe colocar 
-        //en el modelo Equipo "protected $fillable=[array que se desea]"
-        //esto asigna todo el formulario de una vez, y hace el save() automaticamente
-        //$equipo=Equipo::create($request->all());
-        return redirect()->route('equipos.show', $equipo->id); //se puede omitir ->id, igual funciona
-        //return view('Equipos.store');
-    }
-
+     public function store(StoreEquipo $request)
+     {
+         // Validar el campo codEquipo con una expresión regular
+         $request->validate([
+             'codEquipo' => ['required', 'regex:/^\d{2}-[A-Z]{3}-\d{5}$/'], // Formato esperado: "02-MOT-12345"
+             'marca' => 'required|min:3',
+             'modelo' => 'required',
+         ], [
+             'codEquipo.regex' => 'El código debe tener el formato adecuado Ej.:"01-ABC-12345".',
+         ]);
+     
+         // Crear un nuevo equipo y asignar los valores del formulario
+         $equipo = new Equipo();
+         $equipo->codEquipo = $request->codEquipo;
+         $equipo->marca = $request->marca;
+         $equipo->modelo = $request->modelo;
+         $equipo->idSecc = $request->idSecc;
+         $equipo->idSubSecc = $request->idSubSecc;
+         $equipo->det1 = $request->det1;
+         $equipo->det2 = $request->det2;
+         $equipo->det3 = $request->det3;
+         $equipo->det4 = $request->det4;
+         $equipo->det5 = $request->det5;
+     
+         // Guardar el equipo en la base de datos
+         $equipo->save();
+     
+         // Redirigir a la vista del equipo creado
+         return redirect()->route('equipos.show', $equipo->id);
+     }
+     
     /**
      * Display the specified resource.
      *
@@ -200,41 +202,57 @@ class EquipoController extends Controller
      * @return \Illuminate\Http\Response
      */
     //public function update(Request $request, Equipo $equipo) //En realidad se abre una instancia Equipo, de la cual se recupera el registro enviado en $equipo
-       public function update(Request $request, $id)
-    { //$request trae lo del formulario, $id el id de equipo, trae lo que tengo en el registro sin modificar  
-        
-        //dd(request()->all());
-        //return;
+    public function update(Request $request, $id)
+    {
+        // Validar los campos del formulario
+        $request->validate([
+            'codEquipo' => ['required', 'regex:/^\d{2}-[A-Z]{3}-\d{5}$/'], // Formato esperado: "02-MOT-12345"
+            'marca' => 'required|min:3',
+            'modelo' => 'required',
+        ], [
+            'codEquipo.regex' => 'El código debe tener el formato adecuado Ej.:"01-ABC-12345".',
+        ]);
+    
+        // Buscar el equipo por su ID
+        $equipo = Equipo::findOrFail($id);
 
-        $request->validate(['codEquipo'=>'required', 'marca'=>'required', 'modelo'=>'required']);
-        $equipo= Equipo::find($id);
-        $repuestos=$equipo->equiposRepuestos;
-        $plans=$equipo->equiposPlans;
-        $equiposB=$equipo->equiposAEquiposB;
-        $equipo->codEquipo=$request->codEquipo;
-        $equipo->marca=$request->marca;
-        $equipo->modelo=$request->modelo;
-        $equipo->idSecc=$request->idSecc;
-        $equipo->idSubSecc=$request->idSubSecc;
-        $equipo->det1=$request->det1;
-        $equipo->det2=$request->det2;
-        $equipo->det3=$request->det3;
-        $equipo->det4=$request->det4;
-        $equipo->det5=$request->det5;
-        $equipo->save();
-       
+        /*Forma tradicional!!!!!!!!!!!
 
-        //return $equipo->codEquipo;
-        //return view('Equipos.update');;
-        /************************************** */
-        //Asi se realizará con Asignacion Masiva, es mas simple, pero se debe colocar 
-        //en el modelo Equipo "protected $fillable=[array que se desea]"
-        //esto asigna todo el formulario de una vez, y hace el save() automaticamente
-       // $equipo->update($request->all()); //lo suspendi porque dejo de funcionar 
-       return view('equipos.show', compact('equipo','repuestos', 'plans','equiposB')); //Envío show todo el registro en cuestión, sin $
-       //return $repuestos;
+          // Crear un nuevo equipo y asignar los valores del formulario
+          $equipo = new Equipo();
+          $equipo->codEquipo = $request->codEquipo;
+          $equipo->marca = $request->marca;
+          $equipo->modelo = $request->modelo;
+          $equipo->idSecc = $request->idSecc;
+          $equipo->idSubSecc = $request->idSubSecc;
+          $equipo->det1 = $request->det1;
+          $equipo->det2 = $request->det2;
+          $equipo->det3 = $request->det3;
+          $equipo->det4 = $request->det4;
+          $equipo->det5 = $request->det5;
+      
+          // Guardar el equipo en la base de datos
+          $equipo->save();
+
+        */
+        // Forma elegante!!!  Actualizar los valores del equipo con los del formulario
+        $equipo->update([
+            'codEquipo' => $request->codEquipo,
+            'marca' => $request->marca,
+            'modelo' => $request->modelo,
+            'idSecc' => $request->idSecc,
+            'idSubSecc' => $request->idSubSecc,
+            'det1' => $request->det1,
+            'det2' => $request->det2,
+            'det3' => $request->det3,
+            'det4' => $request->det4,
+            'det5' => $request->det5,
+        ]);
+    
+        // Redirigir a la vista del equipo actualizado
+        return redirect()->route('equipos.show', $equipo->id);
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *

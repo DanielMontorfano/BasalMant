@@ -9,10 +9,49 @@
 <link rel="stylesheet" href="{{asset('jquery-ui/jquery-ui.min.css')}}"> 
 <script src="{{asset('jquery/dist/jquery.js')}}"></script>
 <script src="{{asset('jquery-ui/jquery-ui.min.js')}}"></script>
-@endsection
 
+@endsection
+@error('campo')
+<small class="error-message blinking">*{{ $message }}</small>
+@enderror
  
 @section('content')
+<style>
+  h6 {
+      text-align:center; font-size: 30px;
+                      background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
+                      -webkit-background-clip: text;
+                      -webkit-text-fill-color: transparent;
+
+  }
+
+  .input { color: #f2baa2;
+       font-family: Times New Roman;
+       font-size: 18px;
+       background: linear-gradient(to right,#030007, #495c5c);
+
+  }
+
+  .error-message {
+  color: rgb(60, 255, 0);
+}
+
+  @keyframes blinking {
+      0% {
+          opacity: 1;
+      }
+      50% {
+          opacity: 0;
+      }
+      100% {
+          opacity: 1;
+      }
+  }
+
+  .blinking {
+      animation: blinking 1.5s infinite;
+  }
+</style>
 <br>
 <h6 STYLE="text-align:center; font-size: 30px;
                   background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
@@ -48,7 +87,7 @@
                             <label class="control-label" for="marca">Marca:</label> 
                             <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="marca" value="{{old('marca', $equipo->marca)}}"> 
                             @error('marca')
-                            <small>*{{$message}}</small>
+                            <small class="error-message blinking">*{{$message}}</small>
                             @enderror
                           </div>
                         </div>
@@ -57,7 +96,7 @@
                             <label class="control-label " for="codEquipo">Código:</label>
                             <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="codEquipo" value="{{old('codEquipo', $equipo->codEquipo)}}" placeholder="Código de equipo"> {{-- old() mantiene en campo con el dato--}}
                             @error('codEquipo') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
-                            <small class="help-block">*{{$message}}</small>
+                            <small class="error-message blinking">*{{$message}}</small>
                             @enderror
                           </div>
                         </div>
@@ -67,7 +106,7 @@
                             <label class="control-label" for="modelo">Modelo:</label>  
                             <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="modelo" value="{{old('modelo', $equipo->modelo)}}">
                             @error('modelo') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
-                            <small class="help-block">*{{$message}}</small>
+                            <small class="error-message blinking">*{{$message}}</small>
                             @enderror
                           </div>    
                         </div>
@@ -79,7 +118,7 @@
                           <label class="control-label" for="idSecc">Sección:</label>  
                           <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"type="text" name="idSecc" value="{{old('idSecc', $equipo->idSecc)}}">  {{-- old() mantiene en campo con el dato--}}
                           @error('idSecc')
-                          <small>*{{$message}}</small>
+                          <small class="error-message blinking">*{{$message}}</small>
                           @enderror
                         </div>
                       </div>
@@ -89,7 +128,7 @@
                           <label class="control-label" for="idSubSecc">Subsección:</label> 
                           <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" class="form-control" name="idSubSecc" value="{{old('idSubSecc', $equipo->idSubSecc)}}">   {{-- old() mantiene en campo con el dato--}}
                           @error('idSubSecc') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
-                          <small class="help-block">*{{$message}}</small>
+                          <small class="error-message blinking">*{{$message}}</small>
                           @enderror
                           </div>
                       </div>
@@ -101,7 +140,7 @@
                           <label class="control-label" for="det1">Característica Nº1:</label> 
                           <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det1" value="{{old('det1', $equipo->det1)}}">   {{-- old() mantiene en campo con el dato--}}
                           @error('det1')
-                          <small>*{{$message}}</small>
+                          <small class="error-message blinking">*{{$message}}</small>
                           @enderror
                         </div>
                       </div>
@@ -111,7 +150,7 @@
                           <label class="control-label" for="det2">Característica Nº2:</label> 
                           <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det2" value="{{old('det2', $equipo->det2)}}">   {{-- old() mantiene en campo con el dato--}}
                           @error('det2') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
-                          <small class="help-block">*{{$message}}</small>
+                          <small class="error-message blinking">*{{$message}}</small>
                           @enderror
                           </div>
                       </div>
@@ -123,7 +162,7 @@
                           <label class="control-label" for="det3"> Característica Nº3:</label> 
                           <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det3" value="{{old('det3', $equipo->det3)}}">   {{-- old() mantiene en campo con el dato--}}
                           @error('det3')
-                          <small>*{{$message}}</small>
+                          <small class="error-message blinking">*{{$message}}</small>
                           @enderror
                         </div>
                       </div>
@@ -133,7 +172,7 @@
                           <label class="control-label" for="det4">   Característica Nº4:</label> 
                           <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det4" value="{{old('det4', $equipo->det4)}}">   {{-- old() mantiene en campo con el dato--}}
                           @error('det4') {{--el 2do parametro de old es para mantener la mificacion cuando la validacion falla--}}
-                          <small class="help-block">*{{$message}}</small>
+                          <small class="error-message blinking">*{{$message}}</small>
                           @enderror
                           </div>
                       </div>
@@ -146,7 +185,7 @@
                           <label class="control-label" for="det5"> Detalle:</label> 
                           <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="det5" value="{{old('det5', $equipo->det5)}}">   {{-- old() mantiene en campo con el dato--}}
                           @error('det5')
-                          <small>*{{$message}}</small>
+                          <small class="error-message blinking">*{{$message}}</small>
                           @enderror
                         </div>
                       </div>
