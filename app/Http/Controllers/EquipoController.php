@@ -64,14 +64,14 @@ class EquipoController extends Controller
 
      public function store(StoreEquipo $request)
      {
-         // Validar el campo codEquipo con una expresión regular
-         $request->validate([
-             'codEquipo' => ['required', 'regex:/^\d{2}-[A-Z]{3}-\d{5}$/'], // Formato esperado: "02-MOT-12345"
-             'marca' => 'required|min:3',
-             'modelo' => 'required',
-         ], [
-             'codEquipo.regex' => 'El código debe tener el formato adecuado Ej.:"01-ABC-12345".',
-         ]);
+         // Validar los campos del formulario
+        $request->validate([
+            'codEquipo' => ['required', 'regex:/^\d{2}-[A-Z]{3}-\d{2}[\w-]\d{2}$/'], // Modificado para permitir alfanumérico solo en el décimo carácter
+            'marca' => 'required|min:3',
+            'modelo' => 'required',
+        ], [
+            'codEquipo.regex' => 'El código debe tener el formato adecuado Ej.:"01-ABC-12345".',
+        ]);
      
          // Crear un nuevo equipo y asignar los valores del formulario
          $equipo = new Equipo();
@@ -206,7 +206,7 @@ class EquipoController extends Controller
     {
         // Validar los campos del formulario
         $request->validate([
-            'codEquipo' => ['required', 'regex:/^\d{2}-[A-Z]{3}-\d{5}$/'], // Formato esperado: "02-MOT-12345"
+            'codEquipo' => ['required', 'regex:/^\d{2}-[A-Z]{3}-\d{2}[\w-]\d{2}$/'], // Modificado para permitir alfanumérico solo en el décimo carácter
             'marca' => 'required|min:3',
             'modelo' => 'required',
         ], [
@@ -216,10 +216,10 @@ class EquipoController extends Controller
         // Buscar el equipo por su ID
         $equipo = Equipo::findOrFail($id);
 
-        /*Forma tradicional!!!!!!!!!!!
+        //Forma tradicional!!!!!!!!!!!
 
           // Crear un nuevo equipo y asignar los valores del formulario
-          $equipo = new Equipo();
+          //$equipo = new Equipo();
           $equipo->codEquipo = $request->codEquipo;
           $equipo->marca = $request->marca;
           $equipo->modelo = $request->modelo;
@@ -234,9 +234,9 @@ class EquipoController extends Controller
           // Guardar el equipo en la base de datos
           $equipo->save();
 
-        */
-        // Forma elegante!!!  Actualizar los valores del equipo con los del formulario
-        $equipo->update([
+        
+        // Forma elegante, NO FUNCIONA!!!  Actualizar los valores del equipo con los del formulario
+        /*$equipo->update([
             'codEquipo' => $request->codEquipo,
             'marca' => $request->marca,
             'modelo' => $request->modelo,
@@ -247,7 +247,7 @@ class EquipoController extends Controller
             'det3' => $request->det3,
             'det4' => $request->det4,
             'det5' => $request->det5,
-        ]);
+        ]);*/
     
         // Redirigir a la vista del equipo actualizado
         return redirect()->route('equipos.show', $equipo->id);
