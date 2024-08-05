@@ -38,8 +38,8 @@
         </div>
         <!-- Quinto integrante -->
         <div class="col-md-2 mb-4 text-center">
-            <img src="{{ asset('img/imagenes/Equipo/imagen5.jpg') }}" alt="Integrante 5" class="img-fluid rounded-circle equipo-img">
-            <p class="mt-2 nombre-cargo">Nombre del Integrante<br>Cargo</p>
+            <img src="{{ asset('img/imagenes/Equipo/marcianoApaza.JPEG') }}" alt="Integrante 5" class="img-fluid rounded-circle equipo-img">
+            <p class="mt-2 nombre-cargo">Apaza Marciano<br>Mecánico</p>
         </div>
     </div>
 
@@ -47,12 +47,13 @@
     <div class="row">
         <!-- Sexto integrante -->
         <div class="col-md-2 mb-4 text-center">
-            <img src="{{ asset('img/imagenes/Equipo/pabloMoreno.JPEG') }}" alt="Integrante 1" class="img-fluid rounded-circle equipo-img">
-            <p class="mt-2 nombre-cargo">Pablo Moreno<br>Calderas</p>
+            <img src="{{ asset('img/imagenes/Equipo/carlosAyarde.JPEG') }}" alt="Integrante 1" class="img-fluid rounded-circle equipo-img">
+            <p class="mt-2 nombre-cargo">Ayarde Carlos<br>Electricista</p>
         </div>
         <!-- Séptimo integrante -->
         <div class="col-md-2 mb-4 text-center">
-            <!-- Aquí va el código del integrante -->
+            <img src="{{ asset('img/imagenes/Equipo/ricardoLorente.JPEG') }}" alt="Integrante 1" class="img-fluid rounded-circle equipo-img">
+            <p class="mt-2 nombre-cargo">Lorente Ricardo<br>Salón de azúcar</p>
         </div>
         <!-- Octavo integrante -->
         <div class="col-md-2 mb-4 text-center">
