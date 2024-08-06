@@ -56,7 +56,7 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
         <td>Detalle</td>
         <td></td>
         <td></td>
-        <td></td> <!-- Nueva columna para el botón de eliminar -->
+        {{-- <td></td> <!-- Nueva columna para el botón de eliminar --> --}}
        
     <tbody>
       @foreach ($equipos as $equipo)
@@ -70,10 +70,8 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
         </td>
         <td>
           <a class="bi bi-eye" href="{{route('equipos.show', $equipo->id)}}"></a>
-        </td>
-        {{--  @if($role === 'admin') --}}
-                       @if($role === 'admin')
-                        <td>
+          @if($role === 'admin')
+                       
                             <form action="{{ route('equipos.destroy', $equipo->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este equipo?');">
                                 @csrf
                                 @method('DELETE')
@@ -81,9 +79,10 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                                     <i class="fas fa-trash-alt"></i> <!-- Ícono de tacho de basura -->
                                 </button>
                             </form>
-                        </td>
+                      
                         @endif
-                       {{--  @endif --}}
+        </td>
+        
       </tr>
         @endforeach
     </tbody>

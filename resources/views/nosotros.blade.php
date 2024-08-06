@@ -57,7 +57,8 @@
         </div>
         <!-- Octavo integrante -->
         <div class="col-md-2 mb-4 text-center">
-            <!-- Aquí va el código del integrante -->
+            <img src="{{ asset('img/imagenes/Equipo/miguelDiaz.JPEG') }}" alt="Integrante 1" class="img-fluid rounded-circle equipo-img">
+            <p class="mt-2 nombre-cargo">Díaz Miguel<br>Calderas</p>
         </div>
         <!-- Noveno integrante -->
         <div class="col-md-2 mb-4 text-center">
