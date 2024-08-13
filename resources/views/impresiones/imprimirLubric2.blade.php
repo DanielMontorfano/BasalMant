@@ -161,33 +161,20 @@
                 $lcheckCount = 0;
             @endphp
 
-@foreach ($lubricaciones as $lubricacion)
-@if ($lcheckCount % 15 === 0)
-    <tr>
-@endif
+            @foreach ($lubricaciones as $lubricacion)
+                @if ($lcheckCount % 15 === 0)
+                    <tr>
+                @endif
 
-<td style="background-color: #e4e1e1;"> <!-- Color gris claro aplicado al fondo -->
-    @if ($lubricacion['muestra'] === 'C')
-        <span style="color: green;">{{ $lubricacion['muestra'] }}</span>
-    @elseif ($lubricacion['muestra'] === 'E')
-        <span style="color: rgb(241, 158, 3);">{{ $lubricacion['muestra'] }}</span>
-    @elseif ($lubricacion['muestra'] === 'I')
-        <span style="color: red;">{{ $lubricacion['muestra'] }}</span>
-    @else
-        {{ $lubricacion['muestra'] }}
-    @endif
-</td>
+                <td>{{ $lubricacion['muestra'] }}</td>
+                @php
+                    $lcheckCount++;
+                @endphp
 
-@php
-    $lcheckCount++;
-@endphp
-
-@if ($lcheckCount % 15 === 0)
-    </tr>
-@endif
-@endforeach
-
-
+                @if ($lcheckCount % 15 === 0)
+                    </tr>
+                @endif
+            @endforeach
 
             @php
                 $remaining = 15 - ($lcheckCount % 15);
