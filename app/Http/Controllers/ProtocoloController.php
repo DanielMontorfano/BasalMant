@@ -104,24 +104,17 @@ class ProtocoloController extends Controller
      * @param  \App\Models\Protocolo  $protocolo
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+   public function edit($id)
     {   //$equipo=Equipo::find($id);
         $tareasTodos=Tarea::all();
         $protocolo=Protocolo::find($id);
         $tareas= Protocolo::find($id)->protocolosTareas; //"protocolosTareas" Metodo perteneciente al modelo Protocolo
-       // $fotosTodos=Equipo::find($id)->fotos; //Aqui hago referencia al Metodo fotos perteneciente al modelo Equipo que trae los registro del modelo fotos vinculados a este equipo
-        //$repuesto=$equipo->equiposRepuestos;
-        //foreach($repuestos as $repuesto){
-            //<p>factura: {{ $entrada->factura }}</p>
-            //<p>fecha entrada: {{ $entrada->fecha }}</p>
-            //if($repuesto->pivot->cant )
-           // if(!is_null($repuesto->pivot->cant)){
-            //echo  $repuesto->pivot->cant . '***' .$repuesto->codigo . '<br>';
-            //}
-      //  }
+       
         //return $tareas;
         return view('protocolos.edit', compact('protocolo','tareas', 'tareasTodos'));
     }
+
+    
 
 
     /**

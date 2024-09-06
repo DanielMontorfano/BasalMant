@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('tareas', function (Blueprint $table) {
             $table->id();
             $table->string('codigo')->nullable();
-            $table->string('descripcion')->nullable();
+            $table->string('descripcion', 500)->nullable(); // Limita a 500 caracteres
             $table->integer('duracion')->nullable();
             $table->string('unidad')->nullable();
             $table->timestamps();
