@@ -200,6 +200,7 @@ $dompdf->stream(); */
              $Tareas[] =array('tarea_id'=>$tarea->id, 'cod'=>$protocolosParciales->codigo, 'codigoTar' => $tarea->codigo, 'descripcion' => $tarea->descripcion, 'duracion' =>$tarea->duracion, 'unidad' =>$tarea->unidad, 'ejecucion'=>$formulario->ejecucion, 'numFormulario'=>$formulario->numFormulario, 'tcheck'=>$tcheck);
             }
      }  
+     
    //}
   
         $pdf = PDF::loadView('impresiones.imprimirFormulario', compact('equipo','PlanP', 'ProtocoloP','Tareas','formulario'));
