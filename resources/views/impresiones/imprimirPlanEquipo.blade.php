@@ -66,14 +66,14 @@ line-height: 0.5cm;
 
     <TD ROWSPAN=3 Width=20% valign= middle> <img src="storage/logoIngenio2.png"   height="100px" width="130px"/></TD>
         <TD ROWSPAN=3 Width=60%><h1>FICHA PLAN</h1></TD>
-	    <TD>GFRE11.V01</TD>
+	    <TD>GFRE11.V02</TD>
       
 	</TR>
 	<TR>
         <TD>Vigencia: 09/02/2023</TD>
     </TR>
     <TR>
-        <TD>Revisión: 09/02/2023</TD> <!-- Aqui Nº de pagina  -->
+        <TD>Revisión: 02/09/2024</TD> <!-- Aqui Nº de pagina  -->
     </TR>
     
     
