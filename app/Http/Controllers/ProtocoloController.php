@@ -64,7 +64,8 @@ class ProtocoloController extends Controller
         
         $tareasTodos=Tarea::all();
         $protocolo=Protocolo::find($protocolo->id);
-        $tareas= Protocolo::find($protocolo->id)->protocolosTareas;
+       // $tareas= Protocolo::find($protocolo->id)->protocolosTareas; // Modificado para que ordene por campo updated_at 2024
+        $tareas = $protocolo->protocolosTareas()->orderBy('prototarea.updated_at', 'asc')->get();
         return view('protocolos.edit', compact('protocolo','tareas', 'tareasTodos'));
      
        //Asi se realizará con Asignacion Masiva, es mas simple, pero se debe colocar 
@@ -83,21 +84,20 @@ class ProtocoloController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {  //******* $equipo=Equipo::find($id);
-       //******* $plan=$equipo->equiposPlans;
-        //$plans=Equipo::find($id)->equiposPlans;
-        $protocolo= Protocolo::find($id); // Ver la linea de abajo alternativa
-        $tareas=$protocolo->protocolosTareas; // otra alternativa: $repuestos= Equipo::find($id)->equiposRepuestos; en una sola linea. 
-        
-        //return $equipo;
-        //return 'hhhhhhhhhhhhhhhh' . $repuestos;
-        //return view('Equipos.show', ['variable'=>$equipo]); video anterior
-
-       return view('protocolos.show', compact('protocolo','tareas')); //Envío todo el registro en cuestión
-
-       // return view('Equipos.show');
+    {
+        // Obtiene el protocolo con el ID especificado.
+        // Usamos el método find($id) para recuperar el protocolo por su ID.
+        $protocolo = Protocolo::find($id);
+    
+        // Obtiene las tareas asociadas al protocolo, ordenadas por el campo 'updated_at' en la tabla pivote 'prototarea'.
+        // 'protocolosTareas()' es la relación de muchos a muchos entre Protocolo y Tarea.
+        // 'orderBy('prototarea.updated_at', 'asc')' ordena las tareas según el campo 'updated_at' de la tabla pivote 'prototarea'.
+        $tareas = $protocolo->protocolosTareas()->orderBy('prototarea.updated_at', 'asc')->get();
+    
+        // Retorna la vista 'protocolos.show' con el protocolo y las tareas ordenadas.
+        // 'compact' crea un array con las variables 'protocolo' y 'tareas', que se pasarán a la vista.
+        return view('protocolos.show', compact('protocolo', 'tareas'));
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -108,8 +108,8 @@ class ProtocoloController extends Controller
     {   //$equipo=Equipo::find($id);
         $tareasTodos=Tarea::all();
         $protocolo=Protocolo::find($id);
-        $tareas= Protocolo::find($id)->protocolosTareas; //"protocolosTareas" Metodo perteneciente al modelo Protocolo
-       
+        //$tareas= Protocolo::find($id)->protocolosTareas; //"protocolosTareas" Metodo perteneciente al modelo Protocolo
+        $tareas = $protocolo->protocolosTareas()->orderBy('prototarea.updated_at', 'asc')->get();
         //return $tareas;
         return view('protocolos.edit', compact('protocolo','tareas', 'tareasTodos'));
     }
@@ -130,7 +130,8 @@ class ProtocoloController extends Controller
         $protocolo= Protocolo::find($id);
         //$d=$request->descripcion;
         //return $request;
-        $tareas=$protocolo->protocolosTareas;
+       // $tareas=$protocolo->protocolosTareas;
+        $tareas = $protocolo->protocolosTareas()->orderBy('prototarea.updated_at', 'asc')->get();
         $protocolo->codigo=$request->codigo;
         $protocolo->descripcion=$request->descripcion;
         $protocolo->save();      

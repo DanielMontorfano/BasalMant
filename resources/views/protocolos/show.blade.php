@@ -66,7 +66,7 @@
                               <table class="table" STYLE="background: linear-gradient(to right,#495c5c,#030007);">
                                      <thead>
                                         <tr>
-                                          <th style="text-align: center; color: #ffffff;" scope="col">Código</th>
+                                          <th style="text-align: center; color: #ffffff;" scope="col">Códigos</th>
                                           <th style="text-align: center; color: #ffffff;" scope="col">Descripción</th>
                                           
                                           
