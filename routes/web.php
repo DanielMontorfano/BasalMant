@@ -37,6 +37,8 @@ use App\Http\Controllers\HistorialController;
 
 use App\Http\Controllers\LubricacionController;
 use App\Http\Controllers\EquipoLubricacionController;
+use App\Http\Controllers\AlarmaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -176,7 +178,24 @@ Route::get('/catchId', [RepuestoController::class, 'catchId'])->name('repuestos.
  //route::post('imagen/store', [ImagenController::class,'store'])->name('imagen.store');
  
  
+ /////******************************ALARMAS*********************************** */
 
+
+
+
+//Route::get('/chequear-alarmas', [AlarmaController::class, 'chequearAlarmas'])->name('chequear.alarmas');
+Route::get('/chequear-alarmas', [AlarmaController::class, 'mostrarAlarmas'])->name('mostrar.alarmas');
+Route::get('/planesVencidos', [AlarmaController::class, 'planesVencidos'])->name('planesVencidos');
+Route::get('/equiposSinRep', [AlarmaController::class, 'equiposSinRep'])->name('equiposSinRep');
+Route::get('/equiposSinPlanes', [AlarmaController::class, 'equiposSinPlanes'])->name('equiposSinPlanes');
+
+
+//Route::get('/verificar-ordenes-trabajo', [AlarmaController::class, 'verificarOrdenesTrabajo'])->name('app:verificar-ordenes-trabajo');
+
+
+/////******************************AVISOS*********************************** */
+
+//Route::get('/avisos', [AvisoController::class, 'index'])->name('avisos.index');
  //*********************Hasta Aqui ************************************************ */
  
 

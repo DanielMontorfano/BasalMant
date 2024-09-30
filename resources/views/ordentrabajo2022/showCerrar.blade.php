@@ -59,10 +59,7 @@
                                 <div class="form-group">
                                   <label class="control-label" for="aprobadoPor">Aprobado por:</label> 
                                   @if ($ot->estado=='Abierta')
-
-                                  {{-- <input   autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="aprobadoPor" value={{$ot->aprobadoPor}}>  --}}
-                                  <input id="aprobadoPor" name="aprobadoPor" value="{{ $aprobadoPor->name }}" style="color: #f2baa2; font-family: Times New Roman; font-size: 18px; background: linear-gradient(to right,#030007, #495c5c); border: 1px solid #f2baa2; border-radius: 4px; width: 100%; height: 39px;" readonly>
-                               
+                                  <input   autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="aprobadoPor" value={{$ot->aprobadoPor}}> 
                                   @else 
                                   <input   autocomplete="off" class="form-control" readonly disabled="true" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);"  type="text" name="aprobadoPor" value={{$ot->aprobadoPor}}> 
                                   @endif
@@ -112,18 +109,7 @@
                                     <div class="form-group">
                                       <label class="control-label" for="realizadoPor">Realizado por:</label> 
                                       @if ($ot->estado=='Abierta')
-                                      {{-- <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="realizadoPor" value={{$ot->realizadoPor}}>   {{-- old() mantiene en campo con el dato--}} 
-                                      <select id="realizadoPor" name="realizadoPor" style="background-color: #1b1b1b !important; color: #f2baa2; font-family: Times New Roman; font-size: 18px; border: 1px solid #f2baa2; border-radius: 4px; width: 100%; height: 38px;">
-                                        <option value="" id="defaultOption">Seleccione su opción</option>
-                                        @foreach($usuarios as $usuario)
-                                            <option value="{{ $usuario->name }}" @if(old('realizadoPor') == $usuario->name) selected @endif>{{ $usuario->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    
-                                    </select>
-                                      
-                                      
-                                      
+                                      <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="realizadoPor" value={{$ot->realizadoPor}}>   {{-- old() mantiene en campo con el dato--}}
                                       @else
                                       <input autocomplete="off" class="form-control" readonly disabled="true" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="realizadoPor" value={{$ot->realizadoPor}}>   {{-- old() mantiene en campo con el dato--}}
                                       @endif
@@ -248,7 +234,6 @@
 <div class="container"> 
   @include('layouts.partials.footer')
 </div>
-
 @endsection
 
 

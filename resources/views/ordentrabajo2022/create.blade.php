@@ -85,17 +85,7 @@
                               <div class="col col-md-6">
                                 <div class="form-group">
                                   <label class="control-label" for="solicitante">Solicitante:</label> 
-                                  <input 
-                                  autocomplete="off" 
-                                  class="form-control" 
-                                  style="color: #f2baa2; font-family: Times New Roman; font-size: 18px; background: linear-gradient(to right, #030007, #495c5c);" 
-                                  type="text" 
-                                  name="solicitante" 
-                                  value="{{ $solicitante->name }}" 
-                                  readonly
-                              >
-                              
-                                  
+                                  <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="solicitante" value={{old('solicitante')}}> 
                                   @error('solicitante')
                                   <small>*{{$message}}</small>
                                   @enderror
@@ -136,19 +126,7 @@
                                 <div class="col col-md-6">
                                     <div class="form-group">
                                       <label class="control-label" for="asignadoA">Trabajo asignado a:</label> 
-                                      <select 
-                                          class="form-control" 
-                                          style= "background-color: #1b1b1b !important; color: #f2baa2; font-family: Times New Roman; font-size: 18px; border: 1px solid #f2baa2; border-radius: 4px; width: 100%; height: 38px;" 
-                                          name="asignadoA">
-                                          <option value="" disabled selected>Elija su opción</option>
-                                          @foreach($usuarios as $usuario)
-                                              <option value="{{ $usuario->name }}" {{ old('asignadoA') == $usuario->id ? 'selected' : '' }}>
-                                                  {{ $usuario->name }}
-                                              </option>
-                                          @endforeach
-                                      </select>
-
-                                  
+                                      <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="asignadoA" value={{old('asignadoA')}}>   {{-- old() mantiene en campo con el dato--}}
                                       @error('asignadoA')
                                       <small>*{{$message}}</small>
                                       @enderror
@@ -168,13 +146,9 @@
                             <div class="row"> {{-- ****** div de la 4ta fila   --}}  
                               <div class="col col-md-6">
                                 <div class="form-group">
-                                  <label class="control-label" for="prioridad">Prioridad:</label> <br>
-                                    <select
-                                    class="form-control" 
-                                    style= "background-color: #1b1b1b !important; color: #f2baa2; font-family: Times New Roman; font-size: 18px; border: 1px solid #f2baa2; border-radius: 4px; width: 100%; height: 38px;" 
-                                    name="prioridad">
-                                    <option value="" disabled selected>Elija su opción</option>
-                                    <option value="Sin prioridad">Sin prioridad</option>
+                                  <label class="control-label" for="prioridad">Prioridad:</label> 
+                                    <select name="prioridad" class="form-select" aria-label="Default select example" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);">
+                                    <option selected>Sin prioridad</option>
                                     <option value="Alta">Alta</option>
                                     <option value="Muy alta">Muy alta</option>
                                     <option value="Baja">Baja</option>

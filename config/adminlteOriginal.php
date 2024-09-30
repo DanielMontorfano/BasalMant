@@ -69,7 +69,7 @@ return [
     */
 
     'logo' => '<b>Río Grande </b> S.A.',
-    'logo_img' => 'img/imagenes/LogoIngenio2.png',
+    'logo_img' => 'vendor/adminlte/dist/img/LogoIngenio.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -341,25 +341,13 @@ return [
              'route'       => 'repuestos.index',
             'topnav_right' => true,
         ],
-        /*
+
         [
             'text'         => 'Seguimientos',
              'route'       => 'menu_seguimientos.index',
             'topnav_right' => true,
         ],
-
-        [
-            'text'         => 'Estadisticas',
-             'route'       => 'Estadistica.index',
-            'topnav_right' => true,
-        ],
-
-        [
-            'text'         => 'gantt',
-             'route'       => 'gantt',
-            'topnav_right' => true,
-        ],
-        */
+        
         [
             'type'         => 'navbar-search',
             'text'         => 'search',
@@ -455,83 +443,6 @@ return [
                 ], FOTOS*/
             ],
         ],
-        [
-            'text'    => 'Alarmas',
-            'icon'    => 'fa fa-exclamation-triangle',
-            'icon_color' => 'cyan',
-            'submenu' => [
-                [
-                    'text' => 'O.d.T: Vencidas',
-                    'icon' => 'fa-solid fa-clipboard',
-                    'route'=> 'mostrar.alarmas',
-                ],
-                [
-                    'text' => 'Planes Vencidos',
-                    'icon' => 'fa-solid fa-clipboard',
-                    'route'=> 'planesVencidos',
-                ],
-                [
-                    'text' => 'Equipos sin repuestos',
-                    'icon' => 'fa-solid fa-clipboard',
-                    'route'=> 'equiposSinRep',
-                ],
-                [
-                    'text' => 'Equipos sin planes',
-                    'icon' => 'fa-solid fa-clipboard',
-                    'route'=> 'equiposSinPlanes',
-                ],
-                 
-        
-            ],
-        ],
-
-        /*
-        [
-            'text'    => 'Proyectos',
-            'icon'    => 'fa fa-exclamation-triangle',
-            'icon_color' => 'cyan',
-            'submenu' => [
-                [
-                    'text' => 'Nuevo',
-                    'icon' => 'fa-solid fa-clipboard',
-                    'route'=> 'proyectos.create',
-                ],
-                [
-                    'text' => 'Listar',
-                    'icon' => 'fa-solid fa-clipboard',
-                    'route'=> 'proyectos.index',
-                ],
-                              
-        
-            ],
-        ],
-        
-        [
-            'text'    => 'Estadisticas',
-            'icon'    => 'fa fa-exclamation-triangle',
-            'icon_color' => 'cyan',
-            'submenu' => [
-                [
-                    'text' => 'Diagramas',
-                    'icon' => 'fa-solid fa-clipboard',
-                    'route'=> 'menu_seguimientos.index',
-                ],
-                [
-                    'text' => 'Listar',
-                    'icon' => 'fa-solid fa-clipboard',
-                    'route'=> 'proyectos.index',
-                ],
-                              
-        
-            ],
-        ],*/
-
-
-
-
-
-
-
         ['header' => 'Acerca de:'],
         [
             'text'       => 'Nosotros',

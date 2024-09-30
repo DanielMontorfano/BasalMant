@@ -2,21 +2,33 @@
 @section('title', 'Ordenes de trabajo')
 @section('content')
 
+@section('css')
+{{--  EL MEJOR EJEMPLO DE LA PAGINA DE jquery-ui (https://jqueryui.com/autocomplete/) !!! --}}
+<link rel="stylesheet" href="{{asset('jquery-ui/jquery-ui.min.css')}}"> 
+<script src="{{asset('jquery/dist/jquery.js')}}"></script>
+<script src="{{asset('jquery-ui/jquery-ui.min.js')}}"></script>
+
+
+
+@endsection
+
+
+@section('content')
 <style>
-    h6 {
-        text-align:center; font-size: 30px;
-                        background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
-                        -webkit-background-clip: text;
-                        -webkit-text-fill-color: transparent;
+  h6 {
+      text-align:center; font-size: 30px;
+                      background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
+                      -webkit-background-clip: text;
+                      -webkit-text-fill-color: transparent;
 
-    }
+  }
 
-    .input { color: #f2baa2;
-         font-family: Times New Roman;
-         font-size: 18px;
-         background: linear-gradient(to right,#030007, #495c5c);
+  .input { color: #f2baa2;
+       font-family: Times New Roman;
+       font-size: 18px;
+       background: linear-gradient(to right,#030007, #495c5c);
 
-    }
+  }
 </style>
 <div class="card-header" STYLE="background: linear-gradient(to right,#201f1e,#030007);">
   <ul class="nav nav-tabs card-header-tabs">
@@ -85,22 +97,12 @@
                               <div class="col col-md-6">
                                 <div class="form-group">
                                   <label class="control-label" for="solicitante">Solicitante:</label> 
-                                  <input 
-                                  autocomplete="off" 
-                                  class="form-control" 
-                                  style="color: #f2baa2; font-family: Times New Roman; font-size: 18px; background: linear-gradient(to right, #030007, #495c5c);" 
-                                  type="text" 
-                                  name="solicitante" 
-                                  value="{{ $solicitante->name }}" 
-                                  readonly
-                              >
-                              
-                                  
+                                  <input id="BuscaUser" name="BuscaUser" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman; font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" value="{{ old('solicitante') }}"> 
                                   @error('solicitante')
-                                  <small>*{{$message}}</small>
+                                  <small>*{{ $message }}</small>
                                   @enderror
                                 </div>
-                              </div> 
+                              </div>
                               
                               <div class="col col-md-6">
                                 <div class="form-group">
@@ -136,19 +138,7 @@
                                 <div class="col col-md-6">
                                     <div class="form-group">
                                       <label class="control-label" for="asignadoA">Trabajo asignado a:</label> 
-                                      <select 
-                                          class="form-control" 
-                                          style= "background-color: #1b1b1b !important; color: #f2baa2; font-family: Times New Roman; font-size: 18px; border: 1px solid #f2baa2; border-radius: 4px; width: 100%; height: 38px;" 
-                                          name="asignadoA">
-                                          <option value="" disabled selected>Elija su opción</option>
-                                          @foreach($usuarios as $usuario)
-                                              <option value="{{ $usuario->name }}" {{ old('asignadoA') == $usuario->id ? 'selected' : '' }}>
-                                                  {{ $usuario->name }}
-                                              </option>
-                                          @endforeach
-                                      </select>
-
-                                  
+                                      <input autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);" type="text" name="asignadoA" value={{old('asignadoA')}}>   {{-- old() mantiene en campo con el dato--}}
                                       @error('asignadoA')
                                       <small>*{{$message}}</small>
                                       @enderror
@@ -168,13 +158,9 @@
                             <div class="row"> {{-- ****** div de la 4ta fila   --}}  
                               <div class="col col-md-6">
                                 <div class="form-group">
-                                  <label class="control-label" for="prioridad">Prioridad:</label> <br>
-                                    <select
-                                    class="form-control" 
-                                    style= "background-color: #1b1b1b !important; color: #f2baa2; font-family: Times New Roman; font-size: 18px; border: 1px solid #f2baa2; border-radius: 4px; width: 100%; height: 38px;" 
-                                    name="prioridad">
-                                    <option value="" disabled selected>Elija su opción</option>
-                                    <option value="Sin prioridad">Sin prioridad</option>
+                                  <label class="control-label" for="prioridad">Prioridad:</label> 
+                                    <select name="prioridad" class="form-select" aria-label="Default select example" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#030007, #495c5c);">
+                                    <option selected>Sin prioridad</option>
                                     <option value="Alta">Alta</option>
                                     <option value="Muy alta">Muy alta</option>
                                     <option value="Baja">Baja</option>
@@ -256,7 +242,35 @@
     </div>  {{-- div del row1 Principal --}}
 </div> {{-- div del container Principal--}}
 
+
+
+
+
+<script>
+   $( "#BuscaUser" ).autocomplete({
+      source: function(request, response){
+        
+              $.ajax({
+              url:"{{route('search.users')}}",
+               dataType: 'json',
+              data:{
+                     term: request.term
+                    },
+                    success: function(data) {
+                    response(data)  
+            }
+
+        });
+      }
+
+      
+
+    });
+</script>
+
 @endsection
+
+
 
 
 

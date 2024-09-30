@@ -88,6 +88,7 @@ class EquipoController extends Controller
          $equipo->det3 = $request->det3;
          $equipo->det4 = $request->det4;
          $equipo->det5 = $request->det5;
+         $equipo->creador = auth()->user()->name; // Asignar el ID del usuario autenticado
      
          // Guardar el equipo en la base de datos
          $equipo->save();

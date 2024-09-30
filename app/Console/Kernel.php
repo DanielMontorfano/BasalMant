@@ -29,4 +29,15 @@ class Kernel extends ConsoleKernel
 
         require base_path('routes/console.php');
     }
+
+    /**
+     * The Artisan commands provided by your application.
+     *
+     * @var array
+     */
+    protected $commands = [
+        \App\Console\Commands\GenerarAvisos::class,  // Registro del comando GenerarAvisos
+        \App\Console\Commands\ChequeoDiario::class,  // Registro del comando GenerarAvisos
+        \App\Console\Commands\CheckAlarms::class,  // Registro del comando GenerarAvisos
+    ];
 }
