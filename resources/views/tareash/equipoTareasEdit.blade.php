@@ -147,13 +147,28 @@
                                       </td>
                                       <td>
                                         <div class="form-group">
-                                              <label class="control-label" for="supervisor1"></label> 
-                                              <input placeholder="Supervisó" autocomplete="off" class="form-control" STYLE="color: #f2baa2; font-family: Times New Roman;  font-size: 18px; background: linear-gradient(to right,#243B55,#141E30);"  type="text" name="supervisor1[]" value={{old('supervisor1')}}> 
-                                              @error('supervisor1')
-                                              <small>*{{$message}}</small>
-                                              @enderror
+                                            <label class="control-label" for="supervisor1"></label>
+                                            
+                                            <!-- Campo select para elegir un supervisor -->
+                                            <select 
+                                            class="form-control" 
+                                            style= "background-color: #1b1b1b !important; color: #f2baa2; font-family: Times New Roman; font-size: 18px; border: 1px solid #f2baa2; border-radius: 4px; width: 100%; height: 38px;" 
+                                            name="supervisor1[]">
+                                                <option value="">Supervisor</option>
+                                                
+                                                <!-- Iterar sobre los usuarios y crear opciones para el select -->
+                                                @foreach($usuarios as $usuario)
+                                                    <option value="{{ $usuario->name }}" {{ old('supervisor1') == $usuario->name ? 'selected' : '' }}>
+                                                        {{ $usuario->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            
+                                            @error('supervisor1')
+                                                <small style="color: red;">*{{$message}}</small>
+                                            @enderror
                                         </div>
-                                     </td>
+                                    </td>
                                      <td style="padding-top: 50px;">
                                       <div class="form-group">
                                           <label class="control-label" for="ejecucion"></label> 

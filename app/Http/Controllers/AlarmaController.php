@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Artisan;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\OrdenTrabajo;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
+
 
 use App\Http\Controllers\OrdenTrabajoController;
 class AlarmaController extends Controller
@@ -37,11 +41,50 @@ class AlarmaController extends Controller
     return view('alarmas.show', compact('alarmas','usuario','ot'));
 }
 
+
+
 public function planesVencidos()
 {
-    
-    return view('alarmas.show1'); 
+    // Obtener la fecha de hoy
+    $hoy = Carbon::today();
+
+    // Consulta a la base de datos para obtener el formulario más alto por equipo
+    $planesVencidos = DB::table('equipoplansejecuts')
+        ->select('equipo_id', 'supervisor1', 'plan_id', 'codigoPlan', 'numFormulario', 'frecuenciaPlanEnDias', 'updated_at')
+        ->whereIn('numFormulario', function ($query) {
+            $query->select(DB::raw('MAX(numFormulario)'))
+                ->from('equipoplansejecuts')
+                ->groupBy('equipo_id');
+        })
+        ->get()
+        ->filter(function ($registro) use ($hoy) {
+            // Calcular la fecha de vencimiento sumando la frecuencia en días a la fecha de actualización
+            $fechaVencimiento = Carbon::parse($registro->updated_at)->addDays($registro->frecuenciaPlanEnDias);
+            // Comparar con la fecha de hoy para verificar si el plan ha vencido
+            return $hoy->greaterThan($fechaVencimiento);
+        });
+
+    // Agrupar los planes vencidos por supervisor (supervisor1)
+    foreach ($planesVencidos as $plan) {
+        // Convertimos cada resultado en un objeto anónimo para usar ->
+        $resultado[] = (object)[
+            'supervisor1' => $plan->supervisor1,
+            'equipo_id' => $plan->equipo_id,
+            'plan_id' => $plan->plan_id,
+            'codigoPlan' => $plan->codigoPlan,
+            'numFormulario' => $plan->numFormulario,
+            'frecuenciaPlanEnDias' => $plan->frecuenciaPlanEnDias,
+            'fechaVencimiento' => Carbon::parse($plan->updated_at)->addDays($plan->frecuenciaPlanEnDias)->toDateString(),
+        ];
+    }
+    // Convertir el array $resultado a una colección
+    $planesVencidos = collect($resultado);
+
+    // Enviar la colección $planesVencidos a la vista
+    return view('alarmas.formVencidoshow', compact('planesVencidos'));
 }
+
+
 
 public function equiposSinRep()
 {

@@ -1,0 +1,18 @@
+Intruccion para llenar los campos frecuencia y unidad:
+
+UPDATE equipoplansejecuts ep
+JOIN plans p ON ep.plan_id = p.id
+SET ep.frecuencia = p.frecuencia,
+    ep.unidad = p.unidad;
+
+Intruccion para llenar el campo frecuenciaPlanEnDias:
+
+
+UPDATE equipoplansejecuts ep
+JOIN plans p ON ep.plan_id = p.id
+SET ep.frecuenciaPlanEnDias = CASE
+    WHEN p.unidad = 'Días' THEN p.frecuencia
+    WHEN p.unidad = 'Meses' THEN p.frecuencia * 30
+    WHEN p.unidad = 'Años' THEN p.frecuencia * 365
+    ELSE NULL
+END;

@@ -10,6 +10,7 @@ use App\Models\Equipo;
 use App\Models\Protocolo;
 use App\Models\Plan;
 use App\Models\Equipoplansejecut;
+use App\Models\User;
 
 //ESTA ES LA TABLA PIVOT ENTRE EQUIPO Y TAREAS !!!!!!!!!!
 
@@ -78,6 +79,19 @@ class TareashController extends Controller
         $equipolansejecut->plan_id=$planId[$i];
         $equipolansejecut->equipo_id=$equipoId[$i];
         $equipolansejecut->codigoPlan=$plan->codigo;
+        $equipolansejecut->frecuencia=$plan->frecuencia; //Agregado 02/10/2024
+        $equipolansejecut->unidad=$plan->unidad; //Agregado 02/10/2024
+
+         // ***************** Calcular EnDias ***************** //Agregado 02/10/2024
+         if ($plan->unidad === 'Días') {
+            $equipolansejecut->frecuenciaPlanEnDias = $plan->frecuencia;
+        } elseif ($plan->unidad === 'Meses') {
+            $equipolansejecut->frecuenciaPlanEnDias = $plan->frecuencia * 30;
+        } elseif ($plan->unidad === 'Años') {
+            $equipolansejecut->frecuenciaPlanEnDias = $plan->frecuencia * 365;
+        }
+        // ***************************************************
+
         $equipolansejecut->save();
         $formulario= $equipolansejecut::latest()->first(); //para tomar el ultmo registro guardado
         $numFormulario=$formulario->id; // tomo el ultimo id para vincular cada formulario a las tareash
@@ -181,6 +195,7 @@ class TareashController extends Controller
      */
     public function edit($id)
     {
+        $usuarios=User::all();
         $equipo= Equipo::find($id); // Ver la linea de abajo alternativa
         $plans=Equipo::find($id)->equiposPlans; 
         $PlanP= [];
@@ -222,7 +237,7 @@ class TareashController extends Controller
 
 
    
-     return view('tareash.equipoTareasEdit', compact('equipo','PlanP', 'ProtocoloP','Tareas')); //Envío todo el registro en cuestión
+     return view('tareash.equipoTareasEdit', compact('equipo','PlanP', 'ProtocoloP','Tareas','usuarios')); //Envío todo el registro en cuestión
 
        // return view('Equipos.show');
       // return;

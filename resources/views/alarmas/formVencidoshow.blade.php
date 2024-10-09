@@ -61,7 +61,7 @@
 <h6 style="text-align:center; font-size: 30px;
 background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
 -webkit-background-clip: text;
--webkit-text-fill-color: transparent;">Alarmas de O.d.T</h6>
+-webkit-text-fill-color: transparent;">Alarmas planes vencidos</h6>
 @stop
 
 @section('content')
@@ -69,33 +69,36 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
 <div class="card border-primary" style="background: linear-gradient(to left,#495c5c,#030007)">
     <div class="card-body" style="max-width: 100%;">
         <div class="text-white card-body" style="max-width: 100%;">
-            
+           
 
             {{-- Tabla de alarmas --}}
             <table id="listado" class="table table-primary table-striped">
                 <thead class="table-dark">
                     <tr>
-                        <th>Orden de Trabajo</th>
-                        <th>Asignado A</th>
-                        <th>Solicitante</th>
-                        <th>Prioridad</th>
+                        <th>Nº formulario</th>
+                        <th>Supervisor</th>
+                        <th>Equipo</th>
+                        <th>Vencimiento</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($alarmas as $alarma)
-                    <tr class="priority-{{ strtolower($alarma->prioridad) }}">
-                        <td>O.d.T-{{ $alarma->orden_trabajo_id }}</td>
-                        <td>{{ $alarma->asignadoA }}</td>
-                        <td>{{ $alarma->solicitante }}</td>
-                        <td>{{ $alarma->prioridad }}</td>
+                    @foreach ($planesVencidos as $planVencido)
+                    <tr >
+                        <td> <a href="{{ route('formularioShow', $planVencido->numFormulario) }}">{{ $planVencido->numFormulario }}</a></td> 
+                        <td>{{  $planVencido->supervisor1 }}</td>
+                        <td>{{  $planVencido->equipo_id }}</td>
+                        <td>{{  $planVencido->fechaVencimiento }}</td>
                         <td>
-                            <button class="btn btn-success" data-toggle="modal" data-target="#modalDetalle{{ $alarma->orden_trabajo_id }}">Detalles</button>
-                        </td>
+                          <a class="btn btn-success" href="{{ route('historialPreventivoEjecut', $planVencido->equipo_id) }}">
+                              Ver
+                          </a>
+                      </td>
+                      
                     </tr>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="modalDetalle{{ $alarma->orden_trabajo_id }}" tabindex="-1" role="dialog" aria-labelledby="modalDetalleLabel{{ $alarma->orden_trabajo_id }}" aria-hidden="true">
+                    {{--     <div class="modal fade" id="modalDetalle{{ $alarma->orden_trabajo_id }}" tabindex="-1" role="dialog" aria-labelledby="modalDetalleLabel{{ $alarma->orden_trabajo_id }}" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -118,7 +121,7 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     @endforeach
                 </tbody>
             </table>
@@ -138,66 +141,6 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
 @endsection
 
 @section('js')
-<!-- Incluir JS de jQuery UI -->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-  $(document).ready(function() {
-    var datatable;
 
-    if ($.fn.DataTable.isDataTable('#listado')) {
-      datatable = $('#listado').DataTable();
-    } else {
-      datatable = $('#listado').DataTable({
-        // Configuración de DataTable
-      });
-    }
 
-    // Obtener el nombre del usuario autenticado desde Blade
-    var usuario = @json($usuario->name);
-
-    // Filtrar automáticamente por usuario al cargar la página
-    datatable.column(1).search(usuario).draw();
-
-    // Agregar botón de búsqueda general
-    var searchButton = $('<button/>', {
-      text: 'Buscar',
-      title: 'Buscar en toda la tabla',
-      class: 'custom-button', // Agregamos una clase personalizada
-      click: function() {
-        var searchInput = $('.dataTables_filter input').val();
-        datatable.search(searchInput).draw();
-      }
-    });
-
-    // Agregar botón "Todos" para mostrar la tabla completa sin filtros
-    var allButton = $('<button/>', {
-      text: 'Todos',
-      title: 'Mostrar todas las alarmas',
-      class: 'custom-button', // Agregamos una clase personalizada
-      click: function() {
-        // Limpiar todos los filtros
-        datatable.search('').columns().search('').draw();
-      }
-    });
-
-    // Agregar botón de filtrado "Mío"
-    var mioButton = $('<button/>', {
-      text: 'Míos',
-      title: 'Buscar alarmas asignadas al usuario',
-      class: 'custom-button', // Agregamos una clase personalizada
-      click: function() {
-        // Filtro en la columna "Asignado A"
-        datatable.column(1).search(usuario).draw();
-      }
-    });
-
-    // Agregar los botones al contenedor de filtro de DataTable en el orden deseado
-    $('.dataTables_filter').append(searchButton).append(allButton).append(mioButton);
-
-    // Hacer los modales arrastrables
-    $('.modal-dialog').draggable({
-      handle: ".modal-header"
-    });
-  });
-</script>
 @endsection

@@ -19,6 +19,9 @@ return new class extends Migration
             $table->unsignedBigInteger('plan_id')->nullable();
             $table->unsignedBigInteger('numFormulario')->nullable();
             $table->string('codigoPlan')->nullable();
+            $table->integer('frecuencia')->nullable(); //2024
+            $table->string('unidad')->nullable(); //2024
+            $table->integer('frecuenciaPlanEnDias')->nullable();//2024
             $table->string('ejecucion')->nullable(); //Indica que es un accesorio
             $table->string('supervisor1')->nullable(); //Indica que es un accesorio
             $table->string('tecnico')->nullable(); //Indica que es un accesorio

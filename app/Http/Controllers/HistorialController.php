@@ -196,6 +196,7 @@ class HistorialController extends Controller
         ->toArray();
 
     $datos = collect($datos)->sortByDesc('fecha')->toArray();
+    //return $datos;
     // dd($datos);
     return view('historial.preventivoEjecut', compact('datos', 'planes', 'equipo'));
 }
