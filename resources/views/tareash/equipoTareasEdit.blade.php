@@ -102,9 +102,8 @@
                                 <input type="hidden" name="protocolos[]" value="{{$protocolo->codProto}}" readonly >  
                                 <input type="hidden" name="tareas[]" value="{{$tarea->tarea_id}}" readonly > 
                                 <select name="estados[]" id="estado" class="form-select select-custom rounded border-radius-3 border border-dark">
-                                  <option value=""></option>
+                                  <option value="R">R</option> {{-- 2024 para simplificar --}}
                                   <option value="NR">NR</option>
-                                  <option value="R">R</option>
                                   <option value="INC">INC</option>
                                   <option value="OP">OP</option>
                                 </select>
@@ -243,6 +242,32 @@
 </div>
 </div>
 </form>
+@section('js')
+<script>
+document.getElementById('cargaPlan').addEventListener('submit', function(event) {
+   const tecnicos = document.querySelectorAll('input[name="tecnico[]"]');
+   const supervisores = document.querySelectorAll('select[name="supervisor1[]"]');
+
+   let hasErrors = false;
+
+   tecnicos.forEach((tecnico, index) => {
+       if (tecnico.value.trim() === '') {
+           alert("El campo 'Técnico que realizó' no puede estar vacío" );
+           hasErrors = true;
+       }
+
+       if (supervisores[index].value === '') {
+           alert("Debe seleccionar un supervisor");
+           hasErrors = true;
+       }
+   });
+
+   if (hasErrors) {
+       event.preventDefault();
+   }
+});
+</script>
+@endsection
 
 </div> {{-- Container --}}
 <div class="container"> 

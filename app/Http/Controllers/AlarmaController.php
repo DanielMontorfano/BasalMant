@@ -50,7 +50,7 @@ public function planesVencidos()
 
     // Consulta a la base de datos para obtener el formulario más alto por equipo
     $planesVencidos = DB::table('equipoplansejecuts')
-        ->select('equipo_id', 'supervisor1', 'plan_id', 'codigoPlan', 'numFormulario', 'frecuenciaPlanEnDias', 'updated_at')
+        ->select('equipo_id', 'supervisor1', 'plan_id', 'codigoPlan', 'numFormulario', 'frecuenciaPlanEnDias', 'created_at')
         ->whereIn('numFormulario', function ($query) {
             $query->select(DB::raw('MAX(numFormulario)'))
                 ->from('equipoplansejecuts')
@@ -59,11 +59,11 @@ public function planesVencidos()
         ->get()
         ->filter(function ($registro) use ($hoy) {
             // Calcular la fecha de vencimiento sumando la frecuencia en días a la fecha de actualización
-            $fechaVencimiento = Carbon::parse($registro->updated_at)->addDays($registro->frecuenciaPlanEnDias);
+            $fechaVencimiento = Carbon::parse($registro->created_at)->addDays($registro->frecuenciaPlanEnDias);
             // Comparar con la fecha de hoy para verificar si el plan ha vencido
             return $hoy->greaterThan($fechaVencimiento);
         });
-
+    // return $planesVencidos;
     // Agrupar los planes vencidos por supervisor (supervisor1)
     foreach ($planesVencidos as $plan) {
         // Convertimos cada resultado en un objeto anónimo para usar ->
@@ -74,9 +74,12 @@ public function planesVencidos()
             'codigoPlan' => $plan->codigoPlan,
             'numFormulario' => $plan->numFormulario,
             'frecuenciaPlanEnDias' => $plan->frecuenciaPlanEnDias,
-            'fechaVencimiento' => Carbon::parse($plan->updated_at)->addDays($plan->frecuenciaPlanEnDias)->toDateString(),
+            'fechaVencimiento' => Carbon::parse($plan->created_at)->addDays($plan->frecuenciaPlanEnDias)->toDateString(),
+            'created_at' => Carbon::parse($plan->created_at)->toDateString(),  // Solo la fecha
         ];
     }
+    
+    //return $planesVencidos;
     // Convertir el array $resultado a una colección
     $planesVencidos = collect($resultado);
 

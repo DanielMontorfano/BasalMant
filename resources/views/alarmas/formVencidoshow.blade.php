@@ -77,7 +77,7 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                     <tr>
                         <th>Nº formulario</th>
                         <th>Supervisor</th>
-                        <th>Equipo</th>
+                        <th>Creado</th>
                         <th>Vencimiento</th>
                         <th>Acciones</th>
                     </tr>
@@ -87,12 +87,15 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                     <tr >
                         <td> <a href="{{ route('formularioShow', $planVencido->numFormulario) }}">{{ $planVencido->numFormulario }}</a></td> 
                         <td>{{  $planVencido->supervisor1 }}</td>
-                        <td>{{  $planVencido->equipo_id }}</td>
+                        <td>{{  $planVencido->created_at }}</td>
                         <td>{{  $planVencido->fechaVencimiento }}</td>
                         <td>
-                          <a class="btn btn-success" href="{{ route('historialPreventivoEjecut', $planVencido->equipo_id) }}">
+                          <a class="btn btn-success" href="{{ route('historialPreventivoEjecut', $planVencido->equipo_id)}}">
                               Ver
                           </a>
+                          <a class="btn btn-success" href="{{route('equipoTareash.edit', $planVencido->equipo_id)}}">
+                            Actualizar
+                        </a>
                       </td>
                       
                     </tr>
