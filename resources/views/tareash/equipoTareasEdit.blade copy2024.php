@@ -245,24 +245,26 @@
 @section('js')
 <script>
 document.getElementById('cargaPlan').addEventListener('submit', function(event) {
-    const tecnicos = document.querySelectorAll('input[name="tecnico[]"]');
-    const supervisores = document.querySelectorAll('select[name="supervisor1[]"]');
+   const tecnicos = document.querySelectorAll('input[name="tecnico[]"]');
+   const supervisores = document.querySelectorAll('select[name="supervisor1[]"]');
 
-    let hasValidPair = false;
+   let hasErrors = false;
 
-    // Verifica cada par de técnico y supervisor
-    for (let i = 0; i < tecnicos.length; i++) {
-        if (tecnicos[i].value.trim() !== '' && supervisores[i].value !== '') {
-            hasValidPair = true; // Hay al menos un par completo
-            break; // Sale del bucle si se encuentra un par válido
-        }
-    }
+   tecnicos.forEach((tecnico, index) => {
+       if (tecnico.value.trim() === '') {
+           alert("El campo 'Técnico que realizó' no puede estar vacío" );
+           hasErrors = true;
+       }
 
-    // Si no se encuentra un par válido, muestra un mensaje y evita el envío
-    if (!hasValidPair) {
-        alert("Debe completar al menos un par de 'Técnico que realizó' y 'Supervisor'.");
-        event.preventDefault();
-    }
+       if (supervisores[index].value === '') {
+           alert("Debe seleccionar un supervisor");
+           hasErrors = true;
+       }
+   });
+
+   if (hasErrors) {
+       event.preventDefault();
+   }
 });
 </script>
 @endsection
@@ -272,7 +274,6 @@ document.getElementById('cargaPlan').addEventListener('submit', function(event) 
   @include('layouts.partials.footer')
 </div>
 @endsection
-
 
 
 

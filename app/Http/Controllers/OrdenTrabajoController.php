@@ -183,30 +183,43 @@ class OrdenTrabajoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(StoreOrdenCerrarRequest $request, $id)
-    {  
-       //dd($request->all());
-       //goto salir;
-       // $ot_id=$request->ot_id;
-       $ot= OrdenTrabajo::find($id);
-       $equipo_id=$ot->equipo_id;
-       $ot->aprobadoPor=$request->aprobadoPor;
-       $ot->realizadoPor=$request->realizadoPor;
-       $ot->fechaEntrega=$request->input('fechaEntrega');
-       $ot->fechaAprobado=$request->input('fechaAprobado');
-       $ot->det2=$request->det2;
-       $ot->det3=$request->det3;
+    {
+        
+      //dd($request);
+      // Buscar la orden de trabajo
+        $ot = OrdenTrabajo::find($id);
     
-      // $ot->estado=$request->estado;
-       $ot->estado="Cerrada"; //si viene de abrir siempre será abieta
-       $ot->save();
-       $equipo=Equipo::find($equipo_id);
-       $ots_e=Equipo::find($equipo_id)->ordentrabajo; 
-       return view('ordentrabajo.list',compact('ots_e','equipo'));
-       //return redirect()->route('ordentrabajo.list', $equipo->id);
-       salir:
-       return $ot;
+        // Verificar si la orden de trabajo existe
+        if (!$ot) {
+            return redirect()->back()->with('error', 'Orden de trabajo no encontrada.');
+        }
+    
+        // Validar todos los campos recibidos
+        $validatedData = $request->validated();
+        
+        // Actualizar los datos de la orden de trabajo
+        $ot->aprobadoPor = $validatedData['aprobadoPor'];
+        $ot->realizadoPor = $validatedData['realizadoPor'];
+        $ot->fechaEntrega = $request->fechaEntrega;
+        $ot->fechaAprobado = $request->fechaAprobado;
+        $ot->det2 = $validatedData['det2'];
+        // Asegurarse de que det3 está definido antes de asignarlo
+        if (isset($validatedData['det3'])) {
+            $ot->det3 = $validatedData['det3'];
+        }
+    
+        // Cambiar el estado a 'Cerrada'
+        $ot->estado = "Cerrada";
+        $ot->save();
+    
+        // Obtener el equipo y sus órdenes de trabajo
+        $equipo = Equipo::find($ot->equipo_id);
+        $ots_e = $equipo->ordentrabajo;
+    
+        // Redirigir a la vista de la lista de órdenes de trabajo
+        return view('ordentrabajo.list', compact('ots_e', 'equipo'));
     }
-
+    
 
     /**
      * Remove the specified resource from storage.

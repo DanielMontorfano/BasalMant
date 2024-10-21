@@ -46,15 +46,16 @@ class TareashController extends Controller
 {
     // Recuperar datos de la solicitud
     $equipo_id = $request->equipo_id;
-    $plans = $request->plans; // Código de plan
+    $plans = $request->plans;  // código de plan
+    $protocolos = $request->protocolos;
     $tareas = $request->tareas;
     $tcheck = $request->estados;
     $operario = $request->operario;
     $supervisor = $request->supervisor;
     $detalle = $request->detalle;
-    
+
     // Variables para la gestión de los planes
-    $contadorPlan = $request->contadorPlan;
+    $contadorPlan = $request->contadorPlan - 1;
     $pendiente = $request->pendiente;
     $observacion = $request->observacion;
     $tecnico = $request->tecnico;
@@ -63,53 +64,58 @@ class TareashController extends Controller
     $planId = $request->planId;
     $equipoId = $request->equipoId;
 
-    // Obtener nombres de supervisores a partir de los IDs
-    $supervisor1 = is_array($supervisor1Id) ? array_map(fn($id) => User::find($id)?->name, $supervisor1Id) : null;
+    // Verificar que la variable de supervisor1Id sea un array y obtener los nombres de los supervisores
+    if (is_array($supervisor1Id)) {
+        $supervisores = User::whereIn('id', $supervisor1Id)->get();
+        $supervisor1 = $supervisores->pluck('name')->toArray();
+    } else {
+        $supervisor1 = null; // Manejar caso donde no sea un array
+    }
 
     // Procesar cada plan ejecutado o pendiente
-    for ($i = 0; $i < $contadorPlan; $i++) {
-        // Crear un nuevo registro para Equipoplansejecut
+    for ($i = 0; $i <= $contadorPlan; $i++) {
         $equipolansejecut = new Equipoplansejecut();
 
-        // Verificar que el técnico y el supervisor estén definidos
-        if (isset($tecnico[$i], $supervisor1[$i]) && !empty($tecnico[$i]) && !empty($supervisor1[$i])) {
-            // Obtener el plan actual
+        // Verificar si el técnico y el supervisor están definidos antes de guardar
+        if (!empty($tecnico[$i]) && !empty($supervisor1[$i])) {
             $plan = Plan::find($planId[$i]);
 
             // Asignar datos al objeto Equipoplansejecut
             $equipolansejecut->pendiente = $pendiente[$i];
             $equipolansejecut->observacion = $observacion[$i];
             $equipolansejecut->tecnico = $tecnico[$i];
-            $equipolansejecut->user_id = $supervisor1Id[$i]; // ID del supervisor
-            $equipolansejecut->supervisor1 = $supervisor1[$i]; // Nombre del supervisor
+            $equipolansejecut->user_id = $supervisor1Id[$i];
+            $equipolansejecut->supervisor1 = $supervisor1[$i];
             $equipolansejecut->ejecucion = $ejecucion[$i];
             $equipolansejecut->plan_id = $planId[$i];
             $equipolansejecut->equipo_id = $equipoId[$i];
             $equipolansejecut->codigoPlan = $plan->codigo;
             $equipolansejecut->frecuencia = $plan->frecuencia;
+            $equipolansejecut->unidad = $plan->unidad;
 
             // Calcular la frecuencia en días según la unidad
-            $frecuenciaEnDias = match($plan->unidad) {
-                'Días' => $plan->frecuencia,
-                'Meses' => $plan->frecuencia * 30,
-                'Años' => $plan->frecuencia * 365,
-                default => 0,
-            };
-            $equipolansejecut->frecuenciaPlanEnDias = $frecuenciaEnDias;
+            if ($plan->unidad === 'Días') {
+                $equipolansejecut->frecuenciaPlanEnDias = $plan->frecuencia;
+            } elseif ($plan->unidad === 'Meses') {
+                $equipolansejecut->frecuenciaPlanEnDias = $plan->frecuencia * 30;
+            } elseif ($plan->unidad === 'Años') {
+                $equipolansejecut->frecuenciaPlanEnDias = $plan->frecuencia * 365;
+            }
 
             // Guardar el registro en Equipoplansejecut
             $equipolansejecut->save();
 
             // Obtener el último ID de formulario guardado para vincularlo con las tareas
-            $numFormulario = $equipolansejecut->id; // ID del registro guardado
-            $equipolansejecut->numFormulario = $numFormulario; // Almacenar en numFormulario
+            $numFormulario = $equipolansejecut->id;
+            $equipolansejecut->numFormulario = $numFormulario;
             $equipolansejecut->save(); // Actualizar con el número de formulario
 
             // Guardar las tareas asociadas a este formulario
-            foreach ($tareas as $j => $tarea) {
-                if (!empty($tcheck[$j])) { // Solo guardar si hay novedades en la tarea
+            $numero = count($tareas) - 1;
+            for ($j = 0; $j <= $numero; $j++) {
+                if ($tcheck[$j] != "") { // Solo guardar si hay novedades en la tarea
                     $tareash = new Tareash();
-                    $tareash->tarea_id = $tarea;
+                    $tareash->tarea_id = $tareas[$j];
                     $tareash->equipo_id = $equipo_id[$j];
                     $tareash->plan_id = $plans[$j]; // Código de plan en la tabla pivot
                     $tareash->numFormulario = $numFormulario; // Vincular al formulario actual
@@ -122,7 +128,7 @@ class TareashController extends Controller
             }
         }
     }
-    
+
     // Redirigir a la vista de historial de mantenimiento preventivo del equipo
     return redirect()->route('historialPreventivoEjecut', $request->equipo_id);
 }
@@ -137,71 +143,56 @@ class TareashController extends Controller
      */
     public function edit($id)
     {
-        $usuarios = User::all();
-        $equipo = Equipo::find($id);
-        $plans = $equipo->equiposPlans;
-        
-        $PlanP = [];
+        $usuarios=User::all();
+        $equipo= Equipo::find($id); // Ver la linea de abajo alternativa
+        $plans=Equipo::find($id)->equiposPlans; 
+        $PlanP= [];
         $ProtocoloP = [];
-        $Tareas = [];
-    
-        foreach ($plans as $plan) {
-            $plan_id = $plan->pivot->plan_id;
-            $planParciales = Plan::find($plan_id);
-    
-            $PlanP[] = array(
-                'id' => $planParciales->id,
-                'codigo' => $planParciales->codigo,
-                'nombre' => $planParciales->nombre,
-                'descripcion' => $planParciales->descripcion,
-                'frecuencia' => $planParciales->frecuencia,
-                'unidad' => $planParciales->unidad
-            );
-    
-            $protocolos = $planParciales->plansProtocolos;
-    
-            foreach ($protocolos as $protocolo) {
-                $proto_id = $protocolo->pivot->proto_id;
-                $protocolosParciales = Protocolo::find($proto_id);
-    
-                $ProtocoloP[] = array(
-                    'id' => $protocolosParciales->id,
-                    'codProto' => $protocolosParciales->codigo,
-                    'descripcion' => $protocolosParciales->descripcion,
-                    'plan_id' => $plan_id
-                );
-    
-                $tareas = $protocolosParciales->protocolosTareas;
-    
-                foreach ($tareas as $tarea) {
-                    $Tareas[] = array(
-                        'tarea_id' => $tarea->id,
-                        'cod' => $protocolosParciales->codigo,
-                        'codigoTar' => $tarea->codigo,
-                        'descripcion' => $tarea->descripcion,
-                        'duracion' => $tarea->duracion,
-                        'unidad' => $tarea->unidad,
-                        'proto_id' => $proto_id
-                    );
-                }
-            }
+        $Tareas=[];
+
+
+        foreach($plans as $plan){
+        $plan_id=$plan->pivot->plan_id;
+        $planParciales= Plan::find( $plan_id); 
+        $PlanP[]=array('id'=>$planParciales->id,'codigo'=>$planParciales->codigo, 'nombre'=> $planParciales->nombre, 'descripcion'=> $planParciales->descripcion, 'frecuencia'=> $planParciales->frecuencia, 'unidad'=> $planParciales->unidad);
+        $protocolos=$planParciales->plansProtocolos;
+
+        foreach($protocolos as $protocolo){
+            $proto_id= $protocolo->pivot->proto_id; //busco el id del protocolo relacionado
+            $protocolosParciales= Protocolo::find( $proto_id); // traigo la coleccion de ese protocolo
+            $ProtocoloP[]=array('id'=> $protocolosParciales->id,'codProto'=> $protocolosParciales->codigo, 'descripcion'=> $protocolosParciales->descripcion);
+            $tareas=$protocolosParciales->protocolosTareas; // traigo todas las tareas de ese protocolo
+        foreach($tareas as $tarea){
+            // echo $plan->id . "*" . $protocolo->codigo . "*" . $tarea->codigo .  "*" .  $tarea->descripcion . "<br>";
+                
+              $Tareas[] =array('tarea_id'=>$tarea->id, 'cod'=>$protocolosParciales->codigo, 'codigoTar' => $tarea->codigo, 'descripcion' => $tarea->descripcion, 'duracion' =>$tarea->duracion, 'unidad' =>$tarea->unidad);
+           
         }
-    
-        $PlanP = collect($PlanP)->map(function ($item) {
-            return (object) $item;
-        });
-    
-        $ProtocoloP = collect($ProtocoloP)->map(function ($item) {
-            return (object) $item;
-        });
-    
-        $Tareas = collect($Tareas)->map(function ($item) {
-            return (object) $item;
-        });
-    
-        return view('tareash.equipoTareasEdit', compact('equipo', 'PlanP', 'ProtocoloP', 'Tareas', 'usuarios'));
+      }  
     }
     
+    $PlanP = collect($PlanP)->map(function ($item) { //Conversión del array asociociativo, objetos
+        return (object) $item;
+    });
+    
+    $ProtocoloP = collect($ProtocoloP)->map(function ($item) { //Conversión del array asociociativo, objetos
+        return (object) $item;
+    });
+    
+    $Tareas = collect($Tareas)->map(function ($item) { //Conversión del array asociociativo, objetos
+        return (object) $item;
+    });
+
+
+   
+     return view('tareash.equipoTareasEdit', compact('equipo','PlanP', 'ProtocoloP','Tareas','usuarios')); //Envío todo el registro en cuestión
+
+       // return view('Equipos.show');
+      // return;
+    }
+
+
+
 
     /**
      * Update the specified resource in storage.

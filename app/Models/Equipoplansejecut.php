@@ -8,15 +8,29 @@ use Illuminate\Database\Eloquent\Model;
 class Equipoplansejecut extends Model
 {
     use HasFactory;
-    //Importantisimo personalisar el nombre de la tabla, sobre todo en tablas pivot!!!!!
+
+    // Es importante personalizar el nombre de la tabla si el nombre no sigue la convención de Laravel.
     protected $table = 'equipoplansejecuts';
-    protected $fillable =['equipo_id','plan_id'];
 
+    // Los campos que se pueden asignar de forma masiva.
+    protected $fillable = ['equipo_id', 'plan_id', 'user_id'];
 
-    public function plansejcutsEquipos(){
+    // Relación con el modelo Equipo
+    public function equipo()
+    {
         return $this->belongsTo('App\Models\Equipo');
     }
-    public function equiposPlansejecuts(){
+
+    // Relación con el modelo Plan
+    public function plan()
+    {
         return $this->belongsTo('App\Models\Plan');
     }
+
+    // Relación con el modelo User
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
+
