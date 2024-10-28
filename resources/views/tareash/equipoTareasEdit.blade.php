@@ -120,7 +120,22 @@
                          
                               {{-- Inicio  tabla de pie de plan --}} 
                                    <div>
-                                    <h1>{{$plan->codigo}}</h1> <h5> Frecuencia: {{$plan->frecuencia}} {{$plan->unidad}}</h5>
+                                    <h4>  <span style="float: right;">{{ now()->format('d/m/Y') }}</span></h4>
+                                    <h3>
+                                      Nuevo formulario: {{$plan->codigo}} 
+                                    
+                                    </h3>
+                                    <h5>
+                                      Frecuencia: {{$plan->frecuencia}} 
+                                      @if($plan->frecuencia == 1 && $plan->unidad == 'Años')
+                                          Año
+                                      @else
+                                          {{$plan->unidad}}
+                                      @endif
+                                  </h5>
+                                  
+                                  
+
                                     <table class="table mi-tabla table-borderless">
                                     
                                       <tr>

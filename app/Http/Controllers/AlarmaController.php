@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\OrdenTrabajo;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Models\Equipo;
+
 
 
 
@@ -88,12 +90,24 @@ public function planesVencidos()
 }
 
 
-
 public function equiposSinRep()
 {
-    
-    return view('alarmas.show1'); 
+    // Realizamos una consulta utilizando leftJoin entre equipos y equipo_repuesto.
+    // Esto permite traer todos los equipos, aunque no tengan repuestos asociados.
+    $equiposSinRepuestos = Equipo::leftJoin('equipo_repuesto', 'equipos.id', '=', 'equipo_repuesto.equipo_id')
+        ->whereNull('equipo_repuesto.equipo_id') // Filtramos los equipos que no tienen registros en equipo_repuesto.
+        ->select('equipos.id as equipoId', 
+                 'equipos.codEquipo as equipo', 
+                 'equipos.idSecc as seccion', 
+                 'equipos.idSubSecc as subSeccion', // Añadido idSubSecc
+                 'equipos.creador as creador')
+        ->get(); // Ejecutamos la consulta y obtenemos los resultados.
+
+    // Retornamos la vista con la variable que contiene la lista de equipos sin repuestos.
+    return view('alarmas.sinRepuestos', compact('equiposSinRepuestos'));
 }
+
+
 
 
 public function equiposSinPlanes()
