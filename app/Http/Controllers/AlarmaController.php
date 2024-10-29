@@ -112,8 +112,19 @@ public function equiposSinRep()
 
 public function equiposSinPlanes()
 {
-    
-    return view('alarmas.show1'); 
+    // Realizamos una consulta utilizando leftJoin entre equipos y equipoplans.
+    // Esto permite traer todos los equipos, aunque no tengan planes asociados.
+    $equiposSinPlanes = Equipo::leftJoin('equipoplans', 'equipos.id', '=', 'equipoplans.equipo_id')
+        ->whereNull('equipoplans.plan_id') // Filtramos los equipos que no tienen registros en equipoplans.
+        ->select('equipos.id as equipoId', 
+                 'equipos.codEquipo as equipo', 
+                 'equipos.idSecc as seccion', 
+                 'equipos.idSubSecc as subSeccion', // Añadido idSubSecc
+                 'equipos.creador as creador')
+        ->get(); // Ejecutamos la consulta y obtenemos los resultados.
+   // return $equiposSinPlanes;
+    // Retornamos la vista con la variable que contiene la lista de equipos sin planes.
+    return view('alarmas.equiposSinPlanes', compact('equiposSinPlanes'));
 }
 
 

@@ -62,7 +62,10 @@ class Equipo extends Model
         //->withTimestamps();
        // return $this->belongsToMany('App\Models\Repuesto', 'equipo_repuestos', 'equipo_id', 'repuesto_id');
     }
-    
+  
+
+
+
     public function equiposPlansejecut()
     {
         return $this->belongsToMany('App\Models\Plan', 'equipoplansejecuts','equipo_id','plan_id'); //Personalizo nombre la tabla  pivot  y el campo clave primaria
