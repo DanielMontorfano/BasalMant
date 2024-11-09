@@ -37,6 +37,9 @@ class FotoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
+    /* 
     public function store(Request $request) //esto funciona una vez creado StoreImagen de Request (Ver use arriba)
     {   
         $Selector=$request->get('Selector'); // toma del formulario
@@ -80,7 +83,54 @@ class FotoController extends Controller
                     //return ;
         return redirect()->route('equipos.edit', $equipo->id);
 
-        }
+        }*/
+// NUEVO CON NOMBRE 2024. PHP 8.3 
+
+public function store(Request $request)
+{
+    $Selector = $request->get('Selector');
+
+    if ($Selector == "BorrarFoto") {
+        $foto_id = $request->get('foto_id');
+        $foto = Foto::find($foto_id);
+        $foto->delete();
+        $id = $request->equipo_id;
+        $equipo = Equipo::find($id);
+        return redirect()->route('equipos.edit', $equipo->id);
+    } elseif ($Selector == "AgregarFoto") {
+        $id = $request->equipo_id;
+        $nombreFoto = $request->nombreFoto;
+
+        $request->validate(['file' => 'required|image|max:2048']);
+
+        // Generar un nombre único para la imagen
+        $nombreArchivo = $nombreFoto . '_'.$id. '_' . time() . '.' . $request->file('file')->getClientOriginalExtension();
+
+        // Guardar la imagen con el nombre específico
+        $imagenes = $request->file('file')->storeAs('public/fotos', $nombreArchivo);
+
+        // Obtener la URL de la imagen almacenada
+        $url = Storage::url($imagenes);
+
+        // Crear la entrada de la base de datos con el nombre específico de la imagen
+        Foto::create([
+            'equipo_id' => $id,
+            'nombreFoto' => $nombreFoto,
+            'rutaFoto' => $url
+        ]);
+
+        return redirect()->route('equipos.edit', $id);
+    }
+}
+
+
+
+
+
+
+
+
+
           
     /**
      * Display the specified resource.
