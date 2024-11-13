@@ -24,6 +24,31 @@
             </div>
 
             <div class="mt-4">
+                <x-jet-label for="area" value="{{ __('Área') }}" />
+                <select id="area" name="area" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" wire:model="state.area">
+                    <option value="" disabled selected>{{ __('Seleccione un área') }}</option>
+                    <option value="Fábrica">{{ __('Fábrica') }}</option>
+                    <option value="Calderas">{{ __('Calderas') }}</option>
+                    <option value="Trapiche">{{ __('Trapiche') }}</option>
+                    <option value="Eléctrica">{{ __('Eléctrica') }}</option>
+                    <option value="Instrumentos">{{ __('Instrumentos') }}</option>
+                    <option value="Mecánica">{{ __('Mecánica') }}</option>
+                    <option value="Laboratorio">{{ __('Laboratorio') }}</option>
+                    <option value="Calidad">{{ __('Calidad') }}</option>
+                    <option value="Destilería">{{ __('Destilería') }}</option>
+                    <option value="Serv. Generales">{{ __('Serv. Generales') }}</option>
+                    <option value="Depósitos">{{ __('Depósitos') }}</option>
+                    <option value="Salón de azúcar">{{ __('Salón de azúcar') }}</option>
+                    <option value="Taller de herrería">{{ __('Taller de herrería') }}</option>
+                    <option value="Of. técnica">{{ __('Of. técnica') }}</option>
+                </select>
+                <x-jet-input-error for="area" class="mt-2" />
+            </div>
+            
+
+            
+
+            <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Contraseña') }}" />
                 <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
             </div>

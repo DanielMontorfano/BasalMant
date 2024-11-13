@@ -110,7 +110,7 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                                     <p><strong>Asignado A:</strong> {{ $alarma->asignadoA }}</p>
                                     <p><strong>Solicitante:</strong> {{ $alarma->solicitante }}</p>
                                     <p><strong>Prioridad:</strong> {{ $alarma->prioridad }}</p>
-                                    <p><strong>Fecha de Creación:</strong> {{ $alarma->created_at }}</p>
+                                    <p><strong>Fecha de Creación:</strong> {{ $alarma->ordenTrabajo->updated_at->format('d/m/Y')}}</p>
                                     <p><strong>Trabajo no realizado:</strong> {{ $alarma->ordenTrabajo->det1 ?? 'N/A' }}</p>
                                 </div>
                                 <div class="modal-footer">

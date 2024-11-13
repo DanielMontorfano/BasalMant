@@ -39,6 +39,7 @@ class AlarmaController extends Controller
     $alarmas = Alarma::with('ordenTrabajo')->get();
     $usuario = Auth::user(); // Obtener el usuario autenticado// return $alarmas;
     $ot=OrdenTrabajo::all();
+    
     // Redirigir a la vista con las alarmas y las órdenes de trabajo relacionadas
     return view('alarmas.show', compact('alarmas','usuario','ot'));
 }
@@ -76,8 +77,8 @@ public function planesVencidos()
             'codigoPlan' => $plan->codigoPlan,
             'numFormulario' => $plan->numFormulario,
             'frecuenciaPlanEnDias' => $plan->frecuenciaPlanEnDias,
-            'fechaVencimiento' => Carbon::parse($plan->created_at)->addDays($plan->frecuenciaPlanEnDias)->toDateString(),
-            'created_at' => Carbon::parse($plan->created_at)->toDateString(),  // Solo la fecha
+            'fechaVencimiento' => Carbon::parse($plan->created_at)->addDays($plan->frecuenciaPlanEnDias),
+            'created_at' => Carbon::parse($plan->created_at),  // Solo la fecha
         ];
     }
     

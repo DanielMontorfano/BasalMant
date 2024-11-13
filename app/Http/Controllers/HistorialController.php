@@ -12,6 +12,8 @@ use App\Models\OrdenTrabajo;
 use App\Models\Equipoplan;
 use App\Models\Plan;
 use App\Models\Protocolo;
+use Carbon\Carbon;
+
 
 class HistorialController extends Controller
 {
@@ -28,27 +30,21 @@ class HistorialController extends Controller
 
     
 
-    public function historialPreventivo($id) //entro con id de Equipo
-    {   
-        $equipo=Equipo::find($id);
-        $tareas=Equipo::find($id)->equiposTareash; //Todas las tareas sobre este equipo
-        //$tareas = Equipo::find($id)->equiposTareash()->orderByDesc('created_at')->get();
-        // dd(Equipo::find($id)->equiposTareash()->orderByDesc('created_at')->get());
-        //$tareash=Tareash::all();
-        //$tareash=Equipo::find($id);
-       /*  foreach ($tareas as $tarea) {
-          
-                echo $tarea->pivot->updated_at;
-           
-            
-        } */
-        //dd(request()->all());
-       // echo $tareas;
-       // return;
-      return view('historial.preventivo',compact('tareas','equipo'));
-      // return  ;
+    public function historialPreventivo($id)
+{   
+    $equipo = Equipo::findOrFail($id); // Usamos findOrFail para manejar errores si no se encuentra el equipo.
 
-    }
+    // Formateamos las fechas en el controlador.
+    $tareas = Equipo::find($id)->equiposTareash->map(function ($tarea) {
+        $tarea->pivot->updated_at = $tarea->pivot->updated_at 
+            ? \Carbon\Carbon::parse($tarea->pivot->updated_at)->format('d/m/Y') 
+            : null;
+        return $tarea;
+    });
+
+    return view('historial.preventivo', compact('tareas', 'equipo'));
+}
+
     public function  historialCorrectivo($id) //entro con id de Equipo
     {   
         $equipo=Equipo::find($id);
@@ -91,7 +87,7 @@ class HistorialController extends Controller
           $descripcion= $tarea->descripcion;
           $tcheck= $tarea->pivot->tcheck;
           $fecha=  $tarea->updated_at;
-          $fecha= substr($tarea->updated_at, 0, 10); //Para tomar solo la fecha sin hora
+          $fecha = Carbon::parse($tarea->updated_at)->format('d-m-Y');
           $plan=$tarea->pivot->plan_id;
           $operario=$tarea->pivot->operario;
           $detalle=$descripcion . "(" . $tcheck . ") " ; 
@@ -191,7 +187,7 @@ class HistorialController extends Controller
         ->groupBy('numFormulario')
         ->map(function ($item) {
             $planData = $item->pluck('ejecucion', 'codigoPlan')->toArray();
-            return array_merge(['fecha' => $item[0]->created_at->format('Y-m-d'), 'tecnico' => $item[0]->tecnico, 'supervisor1' => $item[0]->supervisor1], $planData);
+            return array_merge(['fecha' => $item[0]->created_at->format('d-m-Y'), 'tecnico' => $item[0]->tecnico, 'supervisor1' => $item[0]->supervisor1], $planData);
         })
         ->toArray();
 

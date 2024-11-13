@@ -87,8 +87,8 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
                     <tr >
                         <td> <a href="{{ route('formularioShow', $planVencido->numFormulario) }}">{{ $planVencido->numFormulario }}</a></td> 
                         <td>{{  $planVencido->supervisor1 }}</td>
-                        <td>{{  $planVencido->created_at }}</td>
-                        <td>{{  $planVencido->fechaVencimiento }}</td>
+                        <td>{{  $planVencido->created_at->format('d/m/Y') }}</td>
+                        <td>{{  $planVencido->fechaVencimiento->format('d/m/Y') }}</td>
                         <td>
                           <a class="btn btn-success" href="{{ route('historialPreventivoEjecut', $planVencido->equipo_id)}}">
                               Ver
