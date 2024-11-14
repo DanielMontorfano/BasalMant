@@ -19,7 +19,7 @@ $(document).ready(function() {
         "ordering": true, 
         "columnDefs": [
             { "orderable": false, "targets": "_all" }, // desactiva botones de ordenar en todas las columnas
-            { "orderable": true, "targets": 2 }, // activa botones de ordenar solo en la columna 3
+           // { "orderable": true, "targets": 2 }, // activa botones de ordenar solo en la columna 3
 			
         ],
         "order": [[2, "desc"]], // ordena por la columna 3 en orden ascendente

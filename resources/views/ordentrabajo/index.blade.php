@@ -19,7 +19,7 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
 
    
 
-<table id="listado" class="table table-striped table-success  table-hover border-4" >
+<table id="listado1" class="table table-striped table-success  table-hover border-4" >
     <thead class="table-dark">
         <td style="width: 100px;">Nº de Orden</td>
         <td>Solicitante/Receptor</td>

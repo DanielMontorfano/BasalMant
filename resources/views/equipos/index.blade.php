@@ -51,9 +51,9 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
 <table id="listado" class="table table-striped table-success  table-hover border-4" >
     <thead class="table-dark" >
         
-        <td>Equipo</td>
-        <td>Modelo</td>
-        <td>Detalle</td>
+        <td style="width: 10%;">Equipo</td>
+        <td style="width: 30%;">Marca/Modelo</td>
+        <td style="width: 60%;">Detalle</td>
         <td></td>
         <td></td>
         {{-- <td></td> <!-- Nueva columna para el botón de eliminar --> --}}
@@ -62,14 +62,15 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
       @foreach ($equipos as $equipo)
       <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
         
-        <td STYLE="font-weight:bold; text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">{{$equipo->codEquipo }}</td>
-        <td>{{$equipo->Modelo}}</td>
-        <td>{{$equipo->det5}}</td>
+        <td data-sort="{{ substr($equipo->codEquipo, 1, 2) }}">{{ $equipo->codEquipo }}</td>
+        <td>{{$equipo->marca}}/{{$equipo->modelo}}/{{$equipo->det1}}</td>
+        <td>{{strtoupper($equipo->idSecc)}}:{{ucfirst(strtolower($equipo->det5))}}</td>
         <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">
-          <a class="bi bi-pencil-fill" href="{{route('equipos.edit', $equipo->id)}}"></a> 
+         
         </td>
         <td>
           <a class="bi bi-eye" href="{{route('equipos.show', $equipo->id)}}"></a>
+          <a class="bi bi-pencil-fill" href="{{route('equipos.edit', $equipo->id)}}"
           @if($role === 'admin')
                        
                             <form action="{{ route('equipos.destroy', $equipo->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este equipo?');">
