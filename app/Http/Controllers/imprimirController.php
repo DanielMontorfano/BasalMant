@@ -67,72 +67,83 @@ $dompdf->stream(); */
 
   }
     
-           public function imprimirOrden($id){
-        
-    
-            $ot=OrdenTrabajo::find($id);
-            $equipo_id=$ot->equipo_id;    
-            $equipo= Equipo::find($equipo_id); // Ver la linea de abajo alternativa
-            //return view('impresiones.ordenTrabajoImp', compact('equipo', 'ot')); 
-            //$repuestos=$equipo->equiposRepuestos;
-           // $plans=Equipo::find($id)->equiposPlans; 
-            //$equiposB=Equipo::find($id)->equiposAEquiposB; 
-            $pdf = PDF::loadView('impresiones.ordenTrabajoImp', compact('equipo', 'ot'));
-            $variable="O.d.T-" . $ot->id .".pdf";
-           
-            return $pdf->download($variable); 
-            
-           //return $equipo; 
-           //return view('imprimir'); 
-         //  return view('imprimir2', compact('equipo'));
-          // return  view('imprimir');
-    
+  public function imprimirPlan($id)
+{
+    $equipo = Equipo::find($id);
+    $plans = $equipo->equiposPlans; 
+    $PlanP = [];
+    $ProtocoloP = [];
+    $Tareas = [];
+    $totalDuracion = 0; // Inicializar la suma de duraciones
+
+    foreach ($plans as $plan) {
+        $plan_id = $plan->pivot->plan_id;
+        $planParciales = Plan::find($plan_id);
+        $PlanP[] = array(
+            'id' => $planParciales->id,
+            'codigo' => $planParciales->codigo,
+            'nombre' => $planParciales->nombre,
+            'descripcion' => $planParciales->descripcion,
+            'frecuencia' => $planParciales->frecuencia,
+            'unidad' => $planParciales->unidad
+        );
+        $protocolos = $planParciales->plansProtocolos;
+
+        foreach ($protocolos as $protocolo) {
+            $proto_id = $protocolo->pivot->proto_id;
+            $protocolosParciales = Protocolo::find($proto_id);
+            $ProtocoloP[] = array(
+                'id' => $protocolosParciales->id,
+                'codProto' => $protocolosParciales->codigo,
+                'descripcion' => $protocolosParciales->descripcion
+            );
+
+            $tareas = $protocolosParciales->protocolosTareas()->orderBy('prototarea.updated_at', 'asc')->get();
+
+            foreach ($tareas as $tarea) {
+                // Realizar la conversión de la duración si la unidad no es "Min"
+                $duracionEnMinutos = $tarea->duracion; // Valor por defecto (si la unidad ya es Min)
+
+                switch ($tarea->unidad) {
+                    case 'Hs':
+                        $duracionEnMinutos = $tarea->duracion * 60; // Convertir horas a minutos
+                        break;
+
+                    case 'Días':
+                        $duracionEnMinutos = $tarea->duracion * 1440; // Convertir días a minutos (1 día = 1440 minutos)
+                        break;
+
+                    case 'Meses':
+                        $duracionEnMinutos = $tarea->duracion * 43200; // Convertir meses a minutos (1 mes = 43200 minutos)
+                        break;
+                }
+
+                $Tareas[] = array(
+                    'tarea_id' => $tarea->id,
+                    'cod' => $protocolosParciales->codigo,
+                    'codigoTar' => $tarea->codigo,
+                    'descripcion' => $tarea->descripcion,
+                    'duracion' => $tarea->duracion,
+                    'unidad' => $tarea->unidad, 
+                );
+
+                // Acumular la duración total en minutos
+                $totalDuracion += $duracionEnMinutos;
+            }
         }
+    }
 
-        public function imprimirPlan($id){
-          $equipo= Equipo::find($id); // Ver la linea de abajo alternativa
-          $plans=Equipo::find($id)->equiposPlans; 
-          $PlanP= [];
-          $ProtocoloP = [];
-          $Tareas=[];
-  
-  
-          foreach($plans as $plan){
-          $plan_id=$plan->pivot->plan_id;
-          $planParciales= Plan::find( $plan_id); 
-          $PlanP[]=array('id'=>$planParciales->id, 'codigo'=>$planParciales->codigo, 'nombre'=> $planParciales->nombre, 'descripcion'=> $planParciales->descripcion, 'frecuencia'=> $planParciales->frecuencia, 'unidad'=> $planParciales->unidad);
-          $protocolos=$planParciales->plansProtocolos;
-  
-          foreach($protocolos as $protocolo){
-              $proto_id= $protocolo->pivot->proto_id; //busco el id del protocolo relacionado
-              $protocolosParciales= Protocolo::find( $proto_id); // traigo la coleccion de ese protocolo
-              $ProtocoloP[]=array('id'=>$protocolosParciales->id,'codProto'=> $protocolosParciales->codigo, 'descripcion'=> $protocolosParciales->descripcion);
-             // $tareas = $protocolo->protocolosTareas()->orderBy('prototarea.updated_at', 'asc')->get();
-              $tareas=$protocolosParciales->protocolosTareas()->orderBy('prototarea.updated_at', 'asc')->get(); // 2024 traigo todas las tareas de ese protocolo ordenadas
-          foreach($tareas as $tarea){
-              // echo $plan->id . "*" . $protocolo->codigo . "*" . $tarea->codigo .  "*" .  $tarea->descripcion . "<br>";
-                  
-                $Tareas[] =array('tarea_id'=>$tarea->id, 'cod'=>$protocolosParciales->codigo, 'codigoTar' => $tarea->codigo, 'descripcion' => $tarea->descripcion, 'duracion'=>$tarea->duracion, 'unidad'=>$tarea->unidad);
-               // echo "bb" . $protocolosParciales->codigo;
-          }
-        }  
-      }
-        
+    // Conversión del total en horas y minutos
+    $totalHoras = intdiv($totalDuracion, 60); // División entera
+    $totalMinutos = $totalDuracion % 60;     // Resto de la división 
 
-        $pdf = PDF::loadView('impresiones.imprimirPlanEquipo', compact('equipo','PlanP', 'ProtocoloP','Tareas'));
-        $variable="PLAN-" .$equipo->codEquipo.".pdf";
-        return $pdf->download($variable); 
+    // Incluir el total de duración en los datos enviados a la vista
+    $pdf = PDF::loadView('impresiones.imprimirPlanEquipo', compact('equipo', 'PlanP', 'ProtocoloP', 'Tareas', 'totalDuracion', 'totalHoras', 'totalMinutos'));
+    $variable = "PLAN-" . $equipo->codEquipo . ".pdf";
+    return $pdf->download($variable);
+}
 
-       // return view('tareash.equipoTareasShow', compact('equipo','PlanP', 'ProtocoloP','Tareas')); //Envío todo el registro en cuestión
-      
-       // echo "FIN";  
-        //   return;
-        
   
-  
-  
-         // return view('Equipos.show');
-      }
   
      // ************************************************************************************************
 

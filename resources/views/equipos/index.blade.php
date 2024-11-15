@@ -63,8 +63,9 @@ background: -webkit-linear-gradient(rgb(1, 103, 71), rgb(239, 236, 217));
       <tr STYLE="text-align:left; color: #090a0a; font-family: Times New Roman;  font-size: 14px; ">
         
         <td data-sort="{{ substr($equipo->codEquipo, 1, 2) }}">{{ $equipo->codEquipo }}</td>
-        <td>{{$equipo->marca}}/{{$equipo->modelo}}/{{$equipo->det1}}</td>
-        <td>{{strtoupper($equipo->idSecc)}}:{{ucfirst(strtolower($equipo->det5))}}</td>
+        <td>{{strtoupper($equipo->marca)}}/{{strtoupper($equipo->modelo)}}/{{strtoupper($equipo->det1)
+          }}</td>
+        <td><b>{{strtoupper($equipo->idSecc)}}</b>: {{strtoupper($equipo->det5)}}</td>
         <td STYLE="color: #ffffff; font-family: Times New Roman;  font-size: 14px; ">
          
         </td>
