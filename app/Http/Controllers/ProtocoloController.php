@@ -92,8 +92,9 @@ class ProtocoloController extends Controller
         // Obtiene las tareas asociadas al protocolo, ordenadas por el campo 'updated_at' en la tabla pivote 'prototarea'.
         // 'protocolosTareas()' es la relación de muchos a muchos entre Protocolo y Tarea.
         // 'orderBy('prototarea.updated_at', 'asc')' ordena las tareas según el campo 'updated_at' de la tabla pivote 'prototarea'.
-        $tareas = $protocolo->protocolosTareas()->orderBy('prototarea.updated_at', 'asc')->get();
-    
+       // $tareas = $protocolo->protocolosTareas()->orderBy('prototarea.updated_at', 'asc')->get();
+       // $tareas = $protocolo->protocolosTareas()->get(); //Ya vienen ordenada por id tabla pivote desde el modelo. 2024
+        $tareas = $protocolo->protocolosTareas()->orderBy('prototarea.id', 'asc')->get();
         // Retorna la vista 'protocolos.show' con el protocolo y las tareas ordenadas.
         // 'compact' crea un array con las variables 'protocolo' y 'tareas', que se pasarán a la vista.
         return view('protocolos.show', compact('protocolo', 'tareas'));
@@ -109,7 +110,8 @@ class ProtocoloController extends Controller
         $tareasTodos=Tarea::all();
         $protocolo=Protocolo::find($id);
         //$tareas= Protocolo::find($id)->protocolosTareas; //"protocolosTareas" Metodo perteneciente al modelo Protocolo
-        $tareas = $protocolo->protocolosTareas()->orderBy('prototarea.updated_at', 'asc')->get();
+        //$tareas = $protocolo->protocolosTareas()->orderBy('prototarea.updated_at', 'asc')->get();
+        $tareas = $protocolo->protocolosTareas()->orderBy('prototarea.id', 'asc')->get();
         //return $tareas;
         return view('protocolos.edit', compact('protocolo','tareas', 'tareasTodos'));
     }

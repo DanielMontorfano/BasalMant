@@ -171,8 +171,10 @@ class TareashController extends Controller
                     'plan_id' => $plan_id
                 );
     
-                $tareas = $protocolosParciales->protocolosTareas;
-    
+                //$tareas = $protocolosParciales->protocolosTareas;
+                $tareas = $protocolosParciales->protocolosTareas()->orderBy('prototarea.id', 'asc')->get(); //2024
+                //$tareas = $protocolosParciales->protocolosTareas()->get(); //Ya vienen ordenada por id tabla pivote desde el modelo. 2024
+
                 foreach ($tareas as $tarea) {
                     $Tareas[] = array(
                         'tarea_id' => $tarea->id,
@@ -181,7 +183,9 @@ class TareashController extends Controller
                         'descripcion' => $tarea->descripcion,
                         'duracion' => $tarea->duracion,
                         'unidad' => $tarea->unidad,
-                        'proto_id' => $proto_id
+                        'proto_id' => $proto_id,
+                        
+
                     );
                 }
             }
@@ -198,7 +202,7 @@ class TareashController extends Controller
         $Tareas = collect($Tareas)->map(function ($item) {
             return (object) $item;
         });
-    
+        //return $Tareas;
         return view('tareash.equipoTareasEdit', compact('equipo', 'PlanP', 'ProtocoloP', 'Tareas', 'usuarios'));
     }
     
