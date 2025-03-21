@@ -4,7 +4,7 @@
 <div> <br> </div> <!-- Espaciado superior -->
 
 <div class="frase-motivadora-container">
-    <h4 class="frase-motivadora-text">"En Ingenio Río Grande S.A., nuestra pasión por la tradición azucarera trasciende la mera producción; es un legado arraigado en la calidad, el compromiso social y la excelencia. Guiados por la innovación y una búsqueda incesante de la perfección, nuestro equipo trabaja incansablemente para asegurar la excelencia y la seguridad alimentaria en cada etapa del proceso. Más que un equipo, somos una familia unida por el bienestar de nuestros consumidores y comunidades, llevando el dulce sabor del progreso a cada hogar."</h4>
+    <h4 class="frase-motivadora-text">"En Ingenio Río Grande S.A., nuestra pasión por la tradición azucarera va más allá de la producción; es un legado profundamente arraigado en la calidad, el compromiso social y la excelencia. Con la innovación como guía y una búsqueda constante de la perfección, nuestro equipo trabaja con dedicación para garantizar la excelencia y la seguridad alimentaria en cada etapa del proceso. No somos simplemente un equipo; somos una familia unida por el bienestar de nuestros consumidores y comunidades, impulsando un futuro sostenible y de calidad para todos."</h4>
 </div>
 
 
@@ -74,8 +74,7 @@
     <div class="row">
         <!-- Undécimo integrante -->
         <div class="col-md-2 mb-4 text-center">
-            <img src="{{ asset('img/imagenes/Equipo/pabloMoreno.JPEG') }}" alt="Integrante 1" class="img-fluid rounded-circle equipo-img">
-            <p class="mt-2 nombre-cargo">Pablo Moreno<br>Calderas</p>
+           
         </div>
         <!-- Duodécimo integrante -->
         <div class="col-md-2 mb-4 text-center">
