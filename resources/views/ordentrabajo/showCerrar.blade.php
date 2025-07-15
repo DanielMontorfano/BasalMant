@@ -228,7 +228,7 @@
                                           <input type="hidden" name="ot_id" value={{$ot->id}} readonly >
                                           <input type="hidden" name="equipo_id" value={{$equipo->id}} readonly >
                                           @if ($ot->estado=='Abierta')
-                                          <button form="cerrarOrden" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">cerrar orden</button>
+                                          <button form="cerrarOrden" class="btn btn-primary" type="submit" STYLE="background: linear-gradient(to right,#495c5c,#030007);">Liberar orden</button>
                                           </button>
                                           @else
                                         

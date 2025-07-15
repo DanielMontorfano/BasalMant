@@ -31,7 +31,10 @@ return new class extends Migration
             $table->string('det2', 500)->nullable();
             $table->string('det3', 500)->nullable();
             $table->string('estado')->nullable();
-          
+            
+            $table->string('fechaVerificado')->nullable();
+            $table->string('VerificadaPor')->nullable();
+            
             $table->timestamps();
             $table->foreign('equipo_id')->references('id')->on('equipos')->onDelete('cascade');
         });

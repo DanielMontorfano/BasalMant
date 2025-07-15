@@ -1,6 +1,41 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 <html>
+<style>
+  /* Contenedor ajustado para PDF */
+  .contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0; /* Espacio vertical reducido */
+  }
+
+  /* Sello compacto para documentos PDF */
+  .sello {
+    padding: 5px 10px; /* Reducido a la mitad */
+    color: #d23;
+    border: 2px solid #d23; /* Borde más fino */
+    border-radius: 100%;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 10px; /* Tamaño fijo pequeño */
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.2;
+    transform: rotate(-15deg);
+    box-shadow: 0 0 0 2px #f8f8f8; /* Sombra más sutil */
+    background-color: white;
+    opacity: 0.8;
+    width: fit-content;
+    max-width: 120px; /* Ancho máximo controlado */
+  }
+
+  .sello h4 {
+    margin: 0;
+    font-size: 10px !important; /* Forzamos tamaño pequeño */
+    padding: 0;
+  }
+</style>
 <head>
   
 <style>
@@ -196,7 +231,7 @@ line-height: 0.5cm;
                 <td class="estilo-celda"><strong>Fecha entrega:</strong><br> {{$ot->fechaEntrega}}</td>
             </tr>
             <tr>
-                <td  class="estilo-celda"><strong>Aprobada por:</strong> <br> {{$ot->aprobadoPor}}</td>
+                <td  class="estilo-celda"><strong>Liberado por:</strong> <br> {{$ot->aprobadoPor}}</td>
                 <td class="estilo-celda"><strong>Fecha cierre:</strong> <br> {{$ot->updated_at}}</td>
             </tr>
             <tr>
@@ -212,7 +247,14 @@ line-height: 0.5cm;
         
         
     </table>
-    
+<div class="contenedor">
+  <div class="sello">
+    <h3>{{$ot->estado}}</h3>
+    <h5>APTO inocuidad</h5>
+    <h5>{{ $ot->VerificadaPor}} </h5>
+    <h5>{{ $ot->fechaVerificado}}</h5>
+  </div>
+</div>
     
     
     

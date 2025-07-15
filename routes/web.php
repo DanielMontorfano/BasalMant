@@ -198,5 +198,11 @@ Route::get('/equiposSinPlanes', [AlarmaController::class, 'equiposSinPlanes'])->
 //Route::get('/avisos', [AvisoController::class, 'index'])->name('avisos.index');
  //*********************Hasta Aqui ************************************************ */
  
+//*********************** Verificacion de ordene de trabajo*********************************** */
+
+
+Route::put('/ordentrabajo/{id}/verificar', [App\Http\Controllers\OrdenTrabajoController::class, 'verificar'])
+    ->name('ordentrabajo.verificar')
+    ->middleware('auth');
 
 });

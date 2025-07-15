@@ -209,7 +209,7 @@ class OrdenTrabajoController extends Controller
         }
     
         // Cambiar el estado a 'Cerrada'
-        $ot->estado = "Cerrada";
+        $ot->estado = "Liberada";  //**************CAMBIA en 2025 */
         $ot->save();
     
         // Obtener el equipo y sus órdenes de trabajo
@@ -219,6 +219,29 @@ class OrdenTrabajoController extends Controller
         // Redirigir a la vista de la lista de órdenes de trabajo
         return view('ordentrabajo.list', compact('ots_e', 'equipo'));
     }
+
+    public function verificar($id)
+{
+    $usuario = Auth::user();
+
+    // Solo usuarios con rol 'verificador' pueden hacer esto
+    if ($usuario->role !== 'verificador') {
+        return redirect()->back()->with('error', 'No tienes permiso para verificar esta orden.');
+    }
+
+    $ot = OrdenTrabajo::find($id);
+
+    if (!$ot) {
+        return redirect()->back()->with('error', 'Orden de trabajo no encontrada.');
+    }
+    $ot->estado = 'Verificada';
+    $ot->VerificadaPor = $usuario->name;
+    $ot->fechaVerificado = now()->format('d-m-Y'); // Ejemplo: "2023-12-25 14:30:00"
+    $ot->save();
+
+    return redirect()->back()->with('success', 'Orden de trabajo verificada correctamente.');
+}
+
     
 
     /**

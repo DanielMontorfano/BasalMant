@@ -32,12 +32,54 @@
                 <div class="col col-md-8">
                   <h6>O.d.T para:  {{$equipo->codEquipo}}</h6> 
                   
+<div id="boton" class="d-flex align-items-center justify-content-between mb-4">
+  <div class="d-flex">
+    <div style="margin-right: 30px;">
+      <a class="btn btn-success" href="{{ route('imprimirOrden', $ot->id) }}">
+        <i class="bi bi-printer"></i> Imprimir orden
+      </a>
+    </div>
 
-                  <div id="boton">
-                    <a class="btn btn-success" href="{{ route('imprimirOrden', $ot->id) }}">
-                      <i class="bi bi-printer"></i>  Imprimir orden
-                    </a>
-                  </div>
+    @if (Auth::user()->role === 'verificador' && $ot->estado === 'Liberada')
+      <div>
+        <form action="{{ route('ordentrabajo.verificar', $ot->id) }}" method="POST">
+          @csrf
+          @method('PUT')
+          <button type="submit" class="btn btn-warning">
+            <i class="bi bi-patch-check"></i> Verificar
+          </button>
+        </form>
+      </div>
+    @endif
+  </div>
+
+  {{-- Cartel de estado con fondo transparente e ícono --}}
+  <div class="ms-auto">
+    <span class="border d-flex align-items-center gap-2 px-3 py-2 rounded-pill
+        @if ($ot->estado === 'Verificada') border-success text-success
+        @elseif ($ot->estado === 'Liberada') border-primary text-primary
+        @elseif ($ot->estado === 'Cerrada') border-warning text-warning
+        @elseif ($ot->estado === 'Abierta') border-danger text-danger
+        @else border-secondary text-secondary
+        @endif"
+        style="font-size: 1.1rem; background-color: transparent;"
+    >
+      <i class="bi 
+        @if ($ot->estado === 'Verificada') bi-check-circle-fill
+        @elseif ($ot->estado === 'Liberada') bi-box-arrow-up
+        @elseif ($ot->estado === 'Cerrada') bi-lock-fill
+        @elseif ($ot->estado === 'Abierta') bi-wrench-adjustable-circle
+        @else bi-question-circle-fill
+        @endif"
+        style="font-size: 1.3rem;"></i>
+      <span>Estado: {{ strtoupper($ot->estado) }}</span>
+    </span>
+  </div>
+</div>
+
+
+
+
                   <br>
 
                   
@@ -203,14 +245,28 @@
 
                         </div>{{-- div del container dentro de columna 2 --}}    
                         </div>{{-- div del Letra blanca --}}
-                              
+                        
+                        
                     </form>
-                    
+                    <div class="text-center mt-4 mb-5"> {{-- ✅ Le damos margen inferior generoso --}}
+    <span class="badge 
+        @if ($ot->estado === 'Verificada') bg-success
+        @elseif ($ot->estado === 'Liberada') bg-primary
+        @elseif ($ot->estado === 'Cerrada') bg-warning text-dark
+        @elseif ($ot->estado === 'Abierta') bg-danger
+        @else bg-secondary
+        @endif"
+        style="font-size: 1.2rem; padding: 10px 20px; border-radius: 10px;"
+    >
+        Estado: {{ strtoupper($ot->estado) }}
+    </span>
+</div>
                     </div>
                 <div class="col col-md-2">
                     {{-- columna 3 --}}
                 </div>
     </div>  {{-- div del row1 Principal --}}
+    
 </div> {{-- div del container Principal--}}
 
 
