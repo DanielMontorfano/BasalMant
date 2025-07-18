@@ -142,7 +142,7 @@ line-height: 0.5cm;
 
     <TD ROWSPAN=3 Width=20% valign= middle> <img src="storage/logoIngenio2.png"   height="100px" width="130px"/></TD>
         <TD ROWSPAN=3 Width=60%><h1>Orden de trabajo</h1><h2>O.d.T-{{$ot->id}}</h2></TD>
-	    <TD>GFPO17.V01</TD>
+	    <TD>GFPO17.V02</TD>
       
 	</TR>
 	<TR>
